@@ -1,0 +1,63 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2023 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div class="my-challenges-container pt-0" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <DubaiPoliceLoader :is-loading="loading" />
+
+  <GenericDashboardHeaderView
+    :title-en="$t('myChallenges.title')"
+    :title-ar="$t('myChallenges.title')"
+    subtitle-en="Review your challenge portfolio, statuses, and quick actions from one table view."
+    subtitle-ar="راجع محفظة التحديات الخاصة بك والحالات والإجراءات السريعة من خلال عرض جدولي موحد."
+    icon="mdi-clipboard-text-search-outline"
+    :show-back-button="true"
+    back-fallback-route-name="ChallengeList"
+    :total-value="totalElements"
+  />
+
+  <!-- Enhanced Data Table -->
+  <EnhancedDataTable
+    :title="$t('myChallenges.title')"
+    :items="safeChallengeItems"
+    :headers="headers"
+    :total-items="totalElements"
+    :loading="loading"
+    :skeleton-loading="skeletonLoading"
+    :basic-search-fields="basicSearchFields"
+    :advanced-search-fields="advancedSearchFields"
+    :search-values="challengeSearchRequest"
+    :actions="tableActions"
+    :column-templates="columnTemplates"
+    :column-options="columnOptions"
+    :items-per-page="itemsPerPage"
+    :row-props="moderatorRowProps"
+    :show-stats-chip="false"
+    stats-icon="mdi-format-list-bulleted"
+    table-icon="mdi-table"
+    empty-state-icon="mdi-clipboard-text-outline"
+    :empty-state-message="$t('myChallenges.noChallengesFound')"
+    :loader-message="$t('common.loader.challengePortfolio')"
+    :loader-description="$t('common.loader.challengePortfolioDescription')"
+    :search-on-input="false"
+    @search="handleSearch"
+    @clear-search="clearSearch"
+    @refresh="refreshData"
+    @export="exportData"
+    @action="handleTableAction"
+    @table-update="handleTableUpdate"
+    @update:items-per-page="onItemsPerPageUpdate"
+  >
+    <!-- Custom table actions slot -->
+    <template #table-actions>
+      <v-btn color="#e0e0e0" variant="tonal" size="small" class="action-btn" @click="exportData">
+        <v-icon start>mdi-download</v-icon>
+        {{ $t('common.export') }}
+      </v-btn>
+    </template>
+  </EnhancedDataTable>
+</div>

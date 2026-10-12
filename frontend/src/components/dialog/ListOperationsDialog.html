@@ -1,0 +1,22 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-dialog v-model="internalShowDialog" max-width="600">
+  <v-card>
+    <v-card-title>
+      <h2 class="headline">{{ title }}</h2>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="closeDialog">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-card-title>
+    <v-card-text class="dialog-scrollable">
+      <slot></slot>
+    </v-card-text>
+  </v-card>
+</v-dialog>

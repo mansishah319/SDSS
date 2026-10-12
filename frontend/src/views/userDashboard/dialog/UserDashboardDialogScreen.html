@@ -1,0 +1,52 @@
+<!--
+  - * ***************************************************************
+  - * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  - * ——————————————————————————————————
+  - * NOTICE: All information contained herein is a property of DubaiPolice.
+  - * ***************************************************************
+  -->
+
+<template>
+  <v-dialog v-model="dialog" width="auto" @click:outside="emitCloseDialog">
+    <v-card>
+      <v-card-title>{{ title }}</v-card-title>
+      <v-card-text>
+        <v-table class="dp-primary-table modal-table1">
+          <thead>
+          <tr>
+            <th v-for="header in headers" :key="header" scope="col">{{ header }}</th>
+            <th v-if="isActionsNeeded" scope="col">Actions</th>
+            <!-- New column for actions -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in items" :key="item.name">
+            <td v-for="(value, key) in item" :key="key">{{ value }}</td>
+            <td v-if="isActionsNeeded">
+              <v-row>
+                <v-col cols="6">
+                  <v-btn density="compact" class="accept-icon" icon="mdi-check" @click="approveItem(item)"></v-btn>
+                </v-col>
+                <v-col cols="6">
+                  <v-btn density="compact" icon="mdi-close" class="cancel-icon" @click="rejectItem(item)"></v-btn>
+                </v-col>
+              </v-row>
+            </td>
+          </tr>
+          </tbody>
+        </v-table>
+      </v-card-text>
+      <template #actions>
+        <v-btn
+          class="ms-auto"
+          :text="$t('common.close')"
+          style="background-color: red"
+          color="white"
+          @click="emitCloseDialog"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-card>
+  </v-dialog>
+</template>

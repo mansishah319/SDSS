@@ -1,0 +1,119 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2023 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div>
+  <GenericDashboardHeaderView
+    :title-en="$t('side_bar.settings.expertise.title')"
+    :title-ar="$t('side_bar.settings.expertise.title')"
+    subtitle-en="Maintain expertise areas and keep selection data ready for users and challenges."
+    subtitle-ar="حافظ على مجالات الخبرة وجهز بيانات الاختيار للمستخدمين والتحديات."
+    icon="mdi-briefcase-search-outline"
+    :show-back-button="true"
+    back-route-name="home"
+    :total-value="expertiseResponse.length"
+  />
+  <v-card flat class="table-section-border">
+    <v-card-title class="d-flex align-center pe-2 table-heading-vcard">
+      <v-icon icon="mdi-video-input-component"></v-icon>
+      &nbsp; {{ $t('settings.expertise.find') }}
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        density="compact"
+        :label="$t('common.search')"
+        prepend-inner-icon="mdi-magnify"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn class="ml-2 oval-button" color="green" @click="createNewExpertise">
+        <v-icon left>mdi-plus</v-icon>
+        {{ $t('common.create') }}
+      </v-btn>
+    </v-card-title>
+
+    <template v-if="expertiseResponse.length > 0">
+      <v-data-table
+        :headers="headers"
+        :items="expertiseResponse"
+        :search="search"
+        :loading="isLoading"
+        :loading-text="$t('common.loading')"
+        item-value="name"
+        :items-per-page-text="$t('common.items_per_page')"
+        :items-per-page-options="[
+                                                  {value: 10, title: '10'},
+                                                  {value: 25, title: '25'},
+                                                  {value: 50, title: '50'},
+                                                  {value: 100, title: '100'},
+                                                  {value: -1, title: $t('common.allPages')}
+                                                ]"
+        class="elevation-0"
+      >
+        <template v-slot:item.actions="{ item }">
+          <v-btn class="me-1" density="default" color="yellow" variant="tonal" @click="openEditDialog(item.id)">
+            <i class="mdi mdi-pencil"></i>
+          </v-btn>
+          <v-btn class="me-1" density="default" color="red" variant="tonal" @click="openDeleteDialog(item.id)">
+            <i class="mdi mdi-trash-can"></i>
+          </v-btn>
+        </template>
+      </v-data-table>
+    </template>
+    <!-- Show empty table component when dtoResponse is empty -->
+    <template v-else>
+      <EmptyDataTable :imageSize="128" :message="$t('common.empty')"></EmptyDataTable>
+    </template>
+    <!-- CreateNewExpertise page -->
+    <AppDialogShell
+      :model-value="showCreateNewPage"
+      :title="$t('settings.expertise.add')"
+      subtitle="Add expertise records with the refreshed settings dialog layout."
+      icon="mdi-briefcase-plus-outline"
+      :max-width="760"
+      @update:modelValue="showCreateNewPage = $event"
+      @close="showCreateNewPage = false"
+    >
+      <CreateNewExpertise
+        @close="showCreateNewPage = false"
+        @templateUpdated="refreshTemplateList"
+      ></CreateNewExpertise>
+    </AppDialogShell>
+
+    <!-- Edit Expertise Dialog -->
+    <AppDialogShell
+      :model-value="showEditDialog"
+      :title="$t('settings.expertise.edit')"
+      subtitle="Update expertise naming using the same polished form treatment."
+      icon="mdi-briefcase-edit-outline"
+      :max-width="760"
+      @update:modelValue="showEditDialog = $event"
+      @close="showEditDialog = false"
+    >
+      <EditExpertise
+        :expertiseId="selectedExpertiseId"
+        @close="showEditDialog = false"
+        @templateUpdated="refreshTemplateList"
+      ></EditExpertise>
+    </AppDialogShell>
+
+    <ConfirmationDialog
+      v-if="deleteDialog"
+      :title="$t('common.deletionTitle')"
+      :message="$t('common.deleteConfirmation')"
+      icon="mdi-trash-can-outline"
+      icon-color="error"
+      confirm-button-color="error"
+      :confirm-text="$t('common.delete')"
+      @confirmed="confirmDeletion"
+      @cancel="cancelDeletion"
+    />
+  </v-card>
+</div>

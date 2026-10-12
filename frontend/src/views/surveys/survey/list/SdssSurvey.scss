@@ -1,0 +1,49 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2023 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.oval-button {
+  border-radius: 30px;
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.font-weight-bold {
+  font-weight: bold !important;
+}
+
+.table-btn-style {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+}
+
+.survey-table-2 {
+  table {
+    thead {
+      tr {
+        th {
+          .v-data-table-header__content {
+            span {
+              font-family: 'BukraBold', sans-serif !important;
+              font-size: 12px;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.table-heading-vcard {
+
+  &.v-card-title {
+    background-color: #0da06e;
+    color: #fff;
+  }
+}

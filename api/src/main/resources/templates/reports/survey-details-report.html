@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>تفاصيل جولة الاستبيان</title>
+    <style type="text/css">
+        /* Improved font declaration */
+        @font-face {
+            font-family: 'Arial';
+            src: local('Arial'),
+            local('Noto Naskh Arabic'),
+            local('Verdana'),
+            url('fonts/arial.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Base styling fixes */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', 'Noto Naskh Arabic', 'Verdana', sans-serif;
+            color: #000000;
+            background-color: #ffffff;
+            line-height: 1.5;
+        }
+
+        .logo {
+            display: inline-block;
+            height: 60px;
+            width: auto;
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: visible;
+            padding: 1.5cm 30px 0 30px;
+            min-height: 100vh;
+        }
+
+        /* Ensure all text is visible */
+        .ft0, .ft1, .ft2, .ft3, .ft4, .ft01,
+        .p0, .p1, .p9, .p10, .p11, .p12 {
+            color: #000000;
+        }
+
+        .ft0 {
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 15px;
+        }
+
+        .ft0-english {
+            font: 14px "Verdana", sans-serif;
+            line-height: 15px;
+        }
+
+        .ft1 {
+            font: bold 14px "NotoNaskhArabic", "Verdana", "DubaiBold", sans-serif;
+            text-decoration: underline;
+            line-height: 15px;
+        }
+
+        .ft2 {
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", "DubaiBold", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft2-english {
+            font: bold 14px "Verdana", sans-serif;
+            line-height: 20px;
+            direction: ltr;
+        }
+
+        .ft4-english {
+            font: normal 8px "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft3 {
+            font: 10px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft4 {
+            font: 8px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+            unicode-bidi: embed;
+        }
+
+        .ft01 {
+            font: bold 10px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        th.ft01 {
+            padding: 10px;
+            text-align: start;
+            border: 1px solid #ddd;
+            background-color: #065C4E;
+            color: white;
+        }
+
+        .bold-font {
+            font-weight: bold;
+        }
+
+        .p0 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 800;
+        }
+
+        .p1 {
+            margin-top: 1px;
+            margin-bottom: 0;
+            color: #375096;
+        }
+
+        .p9 {
+            margin-top: 21px;
+            margin-bottom: 0;
+        }
+
+        .p10 {
+            margin-top: 2px;
+            margin-bottom: 0;
+        }
+
+        .p11 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .p12 {
+            margin-top: 1px;
+            margin-bottom: 0;
+        }
+
+        .td0 {
+            border-left: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-right: #000000 1px solid;
+            margin-top: 5px;
+            width: 281px;
+            vertical-align: center;
+        }
+
+        .td1 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            border-top: #000000 1px solid;
+            padding: 0;
+            margin: 0;
+            width: 281px;
+            margin-top: 1px;
+            vertical-align: center;
+        }
+
+        .td2 {
+            border-left: #000000 1px solid;
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0;
+            margin-top: 1px;
+            width: 281px;
+            vertical-align: center;
+        }
+
+        .td3 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0;
+            margin: 0;
+            width: 281px;
+            margin-top: 1px;
+            vertical-align: center;
+        }
+
+        .t1 {
+            width: 100%;
+            margin-top: 14px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .survey-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .round-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .round-info h2 {
+            margin-top: 0;
+            color: #444;
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question h3 {
+            color: #333;
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question p {
+            color: #666;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .answer {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .answer p {
+            margin: 5px 0;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .stats-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        .stats-table td {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+            vertical-align: top;
+            width: 33.33%;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: transparent;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        th {
+            background-color: #065C4E;
+            color: white;
+            font: bold 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font: 12px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        @page {
+            margin-top: 4.3cm;
+            size: A4 portrait;
+        }
+
+        .main-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            border-left: 4px solid #375096;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: right !important;
+            direction: rtl !important;
+        }
+
+        .section-title {
+            color: #375096;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            padding-top: 8px;
+            margin-top: 15px;
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        /* Status Badges */
+        .status-answered {
+            background-color: #2e7d32;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .status-not-answered {
+            background-color: #c62828;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        /* Remove any potential white text */
+        * {
+            color: inherit;
+        }
+
+        /* Demographic cards */
+        .demographic-card {
+            background: #f5f7fa;
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .demographic-card h5 {
+            color: #375096;
+            margin: 0 0 10px 0;
+            font-family: 'Arial', 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .demographic-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .demographic-label {
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+    </style>
+</head>
+<body dir="rtl" lang='ar'>
+<div id="page_1">
+    <div class="header">
+        <img src="src/main/resources/templates/reports/images/dubai-police.png" class="logo" alt="Dubai Police Logo"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="src/main/resources/templates/reports/images/government-of-dubai.png" class="logo"
+             alt="Government of Dubai Logo"/>
+    </div>
+
+    <div class="survey-title" style="text-align: center;">
+        <h1 class="p0 ft2">[[${data.survey.titleAr}]]</h1>
+        <p class="p1 ft0">[[${data.survey.descriptionAr}]]</p>
+    </div>
+
+    <h2 class="section-title">تفاصيل الجولة</h2>
+
+    <div class="round-info">
+        <h2 class="p0 ft2"><span class="bold-font">اسم الجولة:</span> [[${data.roundDetails.titleAr}]]</h2>
+        <p><span class="bold-font">وصف الجولة:</span> [[${data.roundDetails.descriptionAr}]]</p>
+        <p><span class="bold-font">رقم الجولة:</span> [[${data.roundNumber}]]</p>
+        <p><span class="bold-font">الحالة:</span> [[${data.getLocalStatus()}]]</p>
+        <p><span class="bold-font">تاريخ الإنشاء:</span>
+            <span class="ft0-english">[[${#temporals.format(data.createdAt, 'dd/MM/yyyy HH:mm')}]]</span> |
+            <span class="bold-font">تاريخ التحديث:</span>
+            <span class="ft0-english">[[${#temporals.format(data.updatedAt, 'dd/MM/yyyy HH:mm')}]]</span>
+        </p>
+    </div>
+
+    <!-- Fixed Statistics Table -->
+    <table class="stats-table">
+        <thead>
+        <tr>
+            <th scope="col">الأسئلة</th>
+            <th scope="col">المشاركون</th>
+            <th scope="col">المشرف</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!-- Column 1 -->
+            <td>
+                <p>الإجمالي: [[${data.numberOfQuestionsForThisSurveyRound()}]]</p>
+                <p>نصية: [[${data.getTotalOfQuestionsTypeText()}]]</p>
+                <p>اختيار واحد: [[${data.getTotalOfQuestionsTypeSingleSelect()}]]</p>
+                <p>اختيار متعدد: [[${data.getTotalOfQuestionsTypeMultipleChoice()}]]</p>
+                <p>صحيح/خاطئ: [[${data.getTotalOfQuestionsTypeTrueFalse()}]]</p>
+            </td>
+            <!-- Column 2 -->
+            <td>
+                <p>مدعوون: [[${data.totalNumberOfInvitedUsers}]]</p>
+                <p>مستجيبون: [[${data.surveyUsers.?[hasAnswered == true].size()}]]</p>
+                <p>معدل الاستجابة:
+                    <span th:with="responseRate=${data.totalNumberOfInvitedUsers > 0 ?
+                        (data.surveyUsers.?[hasAnswered == true].size() * 100.0 / data.totalNumberOfInvitedUsers) : 0}">
+                        [[${T(java.lang.Math).round(responseRate)}]]%
+                    </span>
+                </p>
+            </td>
+            <!-- Column 3 -->
+            <td>
+                <p>[[${data.createdBy}]]</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Questions and Answers Card -->
+    <div class="main-card">
+        <h2 class="section-title">الأسئلة والإجابات</h2>
+
+        <!-- Questions Loop -->
+        <div th:each="question,iter : ${data.questions}" class="question-card">
+            <div class="question-header">
+                <h3 class="p0 ft2">[[${iter.index + 1}]]. [[${question.titleAr}]]</h3>
+                <p class="p1 ft0">[[${question.descriptionAr}]]</p>
+                <p class="p10 ft3"><span class="bold-font">النوع:</span> [[${question.localQuestionType()}]]</p>
+
+                <!-- Show averages if public questions -->
+                <div th:if="${question.showPublicQuestions}">
+                    <p>
+                        <strong class="bold-font p0 ft2">متوسط إحتمالية الحدوث:</strong>
+                        [[${question.userAnswersStatistics?.averageProbabilityOfOccurrence != null ?
+                        T(java.lang.String).format('%.2f%%',
+                        question.userAnswersStatistics.averageProbabilityOfOccurrence) : 'N/A'}]]
+                    </p>
+                    <p>
+                        <strong class="bold-font p0 ft2">متوسط شدة التأثير:</strong>
+                        [[${question.userAnswersStatistics?.averageImpactSeverity != null ?
+                        T(java.lang.String).format('%.2f%%', question.userAnswersStatistics.averageImpactSeverity) :
+                        'N/A'}]]
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-title">الإجابات</h3>
+            <div class="answers-table">
+                <table class="t1">
+                    <thead>
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">اسم الموظف</th>
+                        <th class="ft01">البريد الإلكتروني</th>
+                        <th class="ft01" style="text-align: start;">الإدارة</th>
+                        <th class="ft01" style="text-align: start;">الدرجة</th>
+                        <th class="ft01" style="text-align: start;">الإجابة</th>
+                        <th th:if="${question.showPublicQuestions}" class="ft01" style="text-align: start;">إحتمالية
+                            الحدوث(%)
+                        </th>
+                        <th th:if="${question.showPublicQuestions}" class="ft01" style="text-align: start;">شدة التأثير
+                            (%)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Answers Loop -->
+                    <tr th:each="userAnswer : ${question.usersSurveyAnswers.?[question.id == question.id]}">
+                        <td class="ft4-english" style="text-align: start;">[[${userAnswer.user.employeeGrpNumber}]]</td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${userAnswer.user.getEmployeeInfo().fullName}]]
+                        </td>
+                        <td class="ft4-english">[[${userAnswer.user.getEmployeeInfo().emailAddress}]]</td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${userAnswer.user.getEmployeeInfo().departmentName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${userAnswer.user.getEmployeeInfo().gradeName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            <!-- Handle different question types -->
+                            <th:block
+                                    th:if="${question.localQuestionType() == 'TEXT' || question.localQuestionType() == 'نص' || question.localQuestionType() == 'Text'}">
+                                [[${userAnswer.responseText}]]
+                            </th:block>
+                            <th:block
+                                    th:if="${question.localQuestionType() == 'TRUE_FALSE' || question.localQuestionType() == 'True/False' || question.localQuestionType() == 'صحيح/خاطئ'}">
+                                [[${userAnswer.correct} ? 'نعم' : 'لا']]
+                            </th:block>
+                            <th:block
+                                    th:if="${question.localQuestionType() == 'SINGLE_SELECT' || question.localQuestionType() == 'MULTI_SELECT' || question.localQuestionType() == 'Multiple Choice' || question.localQuestionType() == 'اختيارات متعددة' || question.localQuestionType() == 'Single Choice' || question.localQuestionType() == 'اختيار واحد'}">
+                                <div th:each="option : ${userAnswer.selectedOptions}">[[${option.localOption()}]]</div>
+                            </th:block>
+                        </td>
+                        <td th:if="${question.showPublicQuestions}" class="p10 ft4" style="text-align: start;">
+                            [[${userAnswer.probabilityOfOccurrence}]]%
+                        </td>
+                        <td th:if="${question.showPublicQuestions}" class="p10 ft4" style="text-align: start;">
+                            [[${userAnswer.impactSeverity}]]%
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Demographic Analysis Section -->
+            <div th:if="${question.questionAnalysis != null}" style="margin-top: 20px;">
+                <h4 class="section-title">تحليل البيانات</h4>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                    <!-- Qualification Card -->
+                    <div th:if="${question.questionAnalysis.userQualificationSpecificationAnalysis != null and not question.questionAnalysis.userQualificationSpecificationAnalysis.isEmpty()}"
+                         class="demographic-card" style="flex: 1; min-width: 200px;">
+                        <h5>المؤهل العلمي</h5>
+                        <div th:each="entry : ${question.questionAnalysis.userQualificationSpecificationAnalysis}"
+                             class="demographic-row">
+                            <span class="demographic-label">[[${entry.key}]]:</span>
+                            <span>[[${entry.value}]]</span>
+                        </div>
+                    </div>
+
+                    <!-- Nationality Card -->
+                    <div th:if="${question.questionAnalysis.userNationalityAnalysis != null and not question.questionAnalysis.userNationalityAnalysis.isEmpty()}"
+                         class="demographic-card" style="flex: 1; min-width: 200px;">
+                        <h5>الجنسية</h5>
+                        <div th:each="entry : ${question.questionAnalysis.userNationalityAnalysis}"
+                             class="demographic-row">
+                            <span class="demographic-label">[[${entry.key}]]:</span>
+                            <span>[[${entry.value}]]</span>
+                        </div>
+                    </div>
+
+                    <!-- Job Title Card -->
+                    <div th:if="${question.questionAnalysis.userJobAnalysis != null and not question.questionAnalysis.userJobAnalysis.isEmpty()}"
+                         class="demographic-card" style="flex: 1; min-width: 200px;">
+                        <h5>الوظيفة</h5>
+                        <div th:each="entry : ${question.questionAnalysis.userJobAnalysis}"
+                             class="demographic-row">
+                            <span class="demographic-label">[[${entry.key}]]:</span>
+                            <span>[[${entry.value}]]</span>
+                        </div>
+                    </div>
+
+                    <!-- Department Card -->
+                    <div th:if="${question.questionAnalysis.userDepartmentAnalysis != null and not question.questionAnalysis.userDepartmentAnalysis.isEmpty()}"
+                         class="demographic-card" style="flex: 1; min-width: 200px;">
+                        <h5>الإدارة</h5>
+                        <div th:each="entry : ${question.questionAnalysis.userDepartmentAnalysis}"
+                             class="demographic-row">
+                            <span class="demographic-label">[[${entry.key}]]:</span>
+                            <span>[[${entry.value}]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Participants Section -->
+    <div style="margin-top: 30px;">
+        <h2 class="section-title">المشاركون</h2>
+
+        <table class="t1">
+            <thead>
+            <tr>
+                <th class="ft01" style="text-align: start;width: 40%;">م</th>
+                <th class="ft01" style="text-align: start;width: 20%;">الاسم</th>
+                <th class="ft01" style="text-align: start;width: 20%;">المسمى الوظيفي</th>
+                <th class="ft01" style="text-align: start;width: 10%;">الإدارة</th>
+                <th class="ft01" style="text-align: start;width: 10%;">حالة الرد</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${data.surveyUsers}">
+                <td class="p10 ft4" style="text-align: start;width: 40%;">[[${user.reportUserResponse.id}]]</td>
+                <td class="p10 ft4" style="text-align: start;width: 20%;">
+                    [[${user.reportUserResponse.getEmployeeInfo().fullName}]]
+                </td>
+                <td class="p10 ft4" style="text-align: start;width: 20%;">
+                    [[${user.reportUserResponse.getEmployeeInfo().jobName}]]
+                </td>
+                <td class="p10 ft4" style="text-align: start;width: 10%;">
+                    [[${user.reportUserResponse.getEmployeeInfo().departmentName}]]
+                </td>
+                <td class="p10 ft4" style="text-align: start;width: 10%;">
+                        <span th:class="${user.hasAnswered ? 'status-answered' : 'status-not-answered'}">
+                            [[${user.hasAnswered ? 'مستجيب' : 'لم يجب'}]]
+                        </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p class="p9 ft3"><span class="copyright">© [[${data.getCurrentYear()}]] </span>جميع الحقوق محفوظة للقيادة
+            العامة لشرطة دبي</p>
+    </div>
+</div>
+</body>
+</html>

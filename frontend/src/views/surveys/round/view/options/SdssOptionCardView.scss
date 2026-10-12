@@ -1,0 +1,40 @@
+.option-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.option-card:hover {
+  border-color: #b0bec5;
+  background-color: #f1f1f1;
+}
+
+.option-true-false {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option-true-false:hover {
+  background-color: #e0f7fa;
+}
+
+.option-icon {
+  margin-right: 8px;
+  color: #00796b;
+}
+
+.option-text {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.edit-option-button-in-card {
+  color: orange;
+}

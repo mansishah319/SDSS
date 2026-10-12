@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: SDSS
+  profiles:
+    active: stg # Default to 'stg' if no profile is specified
+  #  main:
+  #    lazy-initialization: true
+  messages:
+    basename: i18n/messages
+    fallback-to-system-locale: false
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 0.1
+  aop:
+    proxy-target-class: true
+  jackson:
+    date-format: ${JACKSON_DATE_FORMAT:yyyy-MM-dd HH:mm:ss}
+    time-zone: ${JACKSON_TIME_ZONE:Asia/Dubai}
+  banner:
+    location: classpath:banner.txt
+  security:
+    filter:
+      order: 100
+  thymeleaf:
+    encoding: UTF-8
+    servlet:
+      content-type: text/html;charset=UTF-8
+
+server:
+  compression:
+    enabled: true
+    mime-types: application/json, application/xml, text/html, text/css, text/javascript, application/javascript
+    min-response-size: 1024
+  port: ${SERVER_PORT:8082}
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    max-swallow-size: 40MB    # 40MB
+    connection-timeout: 120000 # 40 seconds
+    keep-alive-timeout: 20000 # 20 seconds
+  servlet:
+    context-path: /sdss-service
+    session:
+      timeout: 120m # 2 hours for session timeout
+      persistent: ${SERVER_SERVLET_SESSION_PERSISTENT:false}
+info:
+  app:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    java:
+      version: @java.version@
+    build-timestamp: @maven.build.timestamp@

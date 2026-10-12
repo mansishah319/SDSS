@@ -1,0 +1,1576 @@
+{
+  "Messages": {
+    "challengeDashboard": {
+      "VotingEndSoon": "أسرع! التصويت سينتهي قريباً.",
+      "VotingTimeEnded": "وقت التصويت قد انتهى.",
+      "remainingTimeToFinishVotingMain": "التصويت جارٍ. الوقت المتبقي قبل انتهاء التصويت:",
+      "remainingTimeToFinishVotingNote": "يمكنك الآن تقديم صوتك وتقييمك قبل مراجعة المدقق.",
+      "remainingTimeToStartVotingMain": "التصويت سيبدأ قريباً. الوقت المتبقي قبل بدء التصويت:",
+      "remainingTimeToStartVotingNote": "يمكنك تقديم الحلول حتى هذا الوقت أو قد يبدأ التصويت يدوياً من قبل المشرف.",
+      "votingComingSoon": "استعد للمشاركة - التصويت سيبدأ قريباً.",
+      "votingTimeEndedManualControl": "يجب أن يكون قد انتهى وقت التصويت، لكنه ينتظر التحكم اليدوي من قبل المشرف."
+    },
+    "common": {
+      "created": "تم الإنشاء بنجاح",
+      "deleted": "تم الحذف بنجاح",
+      "downloaded": "تم تحميل الملف بنجاح",
+      "empty": {
+        "documents": "لم يتم إضافة أي مستندات بعد.",
+        "solutions": "لم يتم إضافة أي حلول بعد.",
+        "teamMembers": "لم يتم العثور على أعضاء فريق يطابقون معايير البحث الخاصة بك.",
+        "validators": "لم يتم العثور على محكمين يطابقون معايير البحث الخاصة بك.",
+        "validator": "لم يتم إضافة أي محكمين بعد."
+      },
+      "langUpdated": "تم تحديث لغة المستخدم بنجاح.",
+      "updated": "تم التحديث بنجاح",
+      "time": "الوقت",
+      "noData": "لا توجد بيانات متاحة",
+      "noDataToExport": "لا توجد بيانات متاحة للتصدير",
+      "loadFailed": "فشل تحميل البيانات. يرجى المحاولة مرة أخرى لاحقًا.",
+      "uploaded": "تم رفع المستندات بنجاح!",
+      "all": "الكل",
+      "clearAll": "مسح الكل"
+    },
+    "error": {
+      "challenge": {
+        "maxReminders": "يمكنك إضافة ما يصل إلى تذكيرين فقط."
+      },
+      "data": {
+        "refreshFailed": "فشل في تحديث البيانات",
+        "fetchFailed": "فشل في جلب البيانات"
+      },
+      "export": {
+        "failed": "فشل في تصدير البيانات"
+      },
+      "general": {
+        "serviceDown": "الخدمة معطلة حاليًا. يرجى التواصل مع الدعم للمساعدة.",
+        "networkError": "لا يمكن الاتصال بالخادم. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى. إذا استمرت المشكلة، يرجى التواصل مع الدعم."
+      },
+      "user": {
+        "created_frontend": "من فضلك قم بإدخال البيانات المطلوبة"
+      }
+    },
+    "messageForEmptyEmployeeList": "لا يوجد موظفين.",
+    "messageForEmptySurveyQuestionsIssue": "تم نشر استبيان بدون أسئلة. يرجى إغلاقه لتجنب المشاكل.",
+    "messageForEmptyUserQuestionAnswers": "لا توجد إجابات نصية حتى الآن.",
+    "success": {
+      "SurveyRoundQuestion": {
+        "created": "تم إنشاء سؤال جديد للجولة بنجاح",
+        "deleted": "تم حذف سؤال من الجولة بنجاح",
+        "updated": "تم تحديث سؤال الجولة بنجاح"
+      },
+      "challenge": {
+        "created": "تم إنشاء التحدي بنجاح",
+        "deleted": "تم حذف التحدي بنجاح",
+        "updated": "تم تحديث التحدي بنجاح"
+      },
+      "challengeSettings": {
+        "created": "تم إنشاء إعداد تحدي جديد بنجاح",
+        "deleted": "تم حذف إعداد التحدي بنجاح",
+        "updated": "تم تحديث إعداد التحدي بنجاح"
+      },
+      "data": {
+        "refreshed": "تم تحديث البيانات بنجاح",
+        "fetched": "تم جلب البيانات بنجاح",
+        "fetchFailed": "فشل في جلب البيانات"
+      },
+      "emailTemplate": {
+        "created": "تم إنشاء قالب البريد الإلكتروني بنجاح",
+        "deleted": "تم حذف قالب البريد الإلكتروني بنجاح",
+        "updated": "تم تحديث قالب البريد الإلكتروني بنجاح"
+      },
+      "export": {
+        "completed": "تم تصدير البيانات بنجاح"
+      },
+      "expertise": {
+        "created": "تم إنشاء مجال الخبرة جديد بنجاح",
+        "deleted": "تم حذف مجال الخبرة بنجاح",
+        "updated": "تم تحديث مجال الخبرة بنجاح"
+      },
+      "futureStrategicDirection": {
+        "created": "تم إنشاء الأولويات المستقبلية الجديدة بنجاح",
+        "deleted": "تم حذف الأولويات المستقبلية بنجاح",
+        "updated": "تم تحديث الأولويات المستقبلية بنجاح"
+      },
+      "futureStrategicGoals": {
+        "created": "تم إنشاء التحديات المستقبلية الجديدة بنجاح",
+        "deleted": "تم حذف التحديات المستقبلية بنجاح",
+        "updated": "تم تحديث التحديات المستقبلية بنجاح"
+      },
+      "questionOptions": {
+        "created": "تم إنشاء خيار جديد بنجاح",
+        "deleted": "تم حذف الخيار بنجاح",
+        "updated": "تم تحديث الخيار بنجاح"
+      },
+      "sdssSurvey": {
+        "created": "تم إنشاء إستطلاع الرأي الجديد بنجاح",
+        "deleted": "تم حذف إستطلاع الرأي بنجاح",
+        "updated": "تم تحديث إستطلاع الرأي بنجاح"
+      },
+      "sdssSurveyRound": {
+        "created": "تم إنشاء جولة جديدة بنجاح",
+        "deleted": "تم حذف الجولة بنجاح",
+        "published": "تم نشر جولة الاستبيان بنجاح.",
+        "updated": "تم تحديث الجولة بنجاح"
+      },
+      "solution": {
+        "Confirm": {
+          "DeleteMessage": "هل أنت متأكد أنك تريد حذف هذا الحل؟",
+          "DeleteTitle": "حذف الحل",
+          "No": "لا",
+          "Yes": "نعم"
+        },
+        "commentConfirm": {
+          "DeleteMessage": "هل أنت متأكد أنك تريد حذف هذا التعليق؟",
+          "DeleteTitle": "حذف التعليق",
+          "No": "لا",
+          "Yes": "نعم"
+        },
+        "created": "تم إنشاء الحل الجديد بنجاح",
+        "createdComment": "تم إنشاء التعليق الجديد بنجاح",
+        "deleted": "تم حذف الحل بنجاح",
+        "deletedComment": "تم حذف التعليق بنجاح",
+        "updated": "تم تحديث الحل بنجاح",
+        "updatedComment": "تم تحديث التعليق بنجاح"
+      },
+      "strategicDirection": {
+        "created": "تم إنشاء التوجة الإستراتيجي الجديد بنجاح",
+        "deleted": "تم حذف التوجة الإستراتيجي بنجاح",
+        "updated": "تم تحديث التوجة الإستراتيجي بنجاح"
+      },
+      "strategicGoals": {
+        "created": "تم إنشاء الهدف الإستراتيجي الجديد بنجاح",
+        "deleted": "تم حذف الهدف الإستراتيجي بنجاح",
+        "updated": "تم تحديث الهدف الإستراتيجي بنجاح"
+      },
+      "templateType": {
+        "created": "تم إنشاء نوع قالب جديد بنجاح",
+        "deleted": "تم حذف نوع القالب بنجاح",
+        "updated": "تم تحديث نوع القالب بنجاح"
+      },
+      "user": {
+        "created": "تم إنشاء المستخدم بنجاح",
+        "deleted": "تم حذف المستخدم بنجاح",
+        "statusUpdated": "تم تحديث حالة المستخدم بنجاح",
+        "updated": "تم تحديث المستخدم بنجاح"
+      }
+    }
+  },
+  "adminDashboard": {
+    "title": "لوحة تحكم المدير",
+    "userHeader": {
+      "titleEn": "User Dashboard",
+      "titleAr": "لوحة تحكم المستخدم",
+      "subtitleEn": "Track the latest indicators, action status, and department insights from one unified dashboard.",
+      "subtitleAr": "متابعة المؤشرات الحديثة وحالة الإجراءات وتحليلات الإدارات من خلال لوحة موحدة."
+    },
+    "totalChallenges": "إجمالي التحديات",
+    "recentOpen": "المفتوحة حديثاً",
+    "totalInternalUsers": "إجمالي المستخدمين الداخليين",
+    "totalUsers": "إجمالي المستخدمين",
+    "challengeStatusDistribution": "توزيع حالة التحديات",
+    "commanderDecisions": "قرارات القائد",
+    "strategicGoals": "الأهداف الاستراتيجية",
+    "strategicDirections": "الاتجاهات الاستراتيجية",
+    "challengeDepartmentHistory": "تاريخ تحديات الإدارات",
+    "challengeHistory": "تاريخ التحديات",
+    "decision": {
+      "completed": "مكتمل",
+      "revisedByValidator": "مراجعة من المدقق",
+      "closed": "مغلق"
+    },
+    "dialog": {
+      "challenge": {
+        "description": "الوصف",
+        "id": "رقم التحدي",
+        "status": "الحالة",
+        "title": "العنوان"
+      },
+      "users": {
+        "dialog": {
+          "active": "نشط",
+          "deleted": "محذوف",
+          "external": "خارجي",
+          "internal": "داخلي",
+          "notActive": "غير نشط"
+        },
+        "email": "البريد الإلكتروني",
+        "grpNumber": "الرقم الوظيفي",
+        "name": "الاسم الكامل"
+      }
+    }
+  },
+  "adminRequests": {
+    "approvedDialogDescription": "هل أنت متأكد من قبول كل القرارات على هذا التحدي؟",
+    "approvedDialogTitle": "الموافقة على القرار",
+    "challengeDescription": "وصف التحدي",
+    "challengeID": "الرقم التعريفي",
+    "challengeTitle": "عنوان التحدي",
+    "closedDialogDescription": "هل أنت متأكد من رفض كل القرارات على هذا التحدي؟",
+    "closedDialogTitle": "رفض القرار",
+    "dialog": {
+      "accept": {
+        "confirm": "إرسال إلى مراجعة الإدارة",
+        "message": "قم باعتماد هذه المراجعة لنقل التحدي إلى مرحلة مراجعة الإدارة.",
+        "note": "سيؤدي هذا التأكيد إلى تحديث مسار التحدي مباشرة وإتاحته لمرحلة المراجعة التالية.",
+        "title": "اعتماد قرار المراجعة"
+      },
+      "reject": {
+        "confirm": "إغلاق طلب التحدي",
+        "message": "ارفض هذه المراجعة لإغلاق طلب التحدي عند مرحلة المدقق.",
+        "note": "سيؤدي إغلاق الطلب إلى إنهاء مسار هذه المراجعة مع إبقاء القرار واضحًا لجميع متابعي التحدي.",
+        "title": "رفض قرار المراجعة"
+      }
+    },
+    "title": "طلبات تحديات قيد المراجعة"
+  },
+  "app": {
+    "title": "نظام دعم اتخاذ القرار الذكي",
+    "welcomeUser": "مرحبا"
+  },
+  "auth": {
+    "logout": "تسجيل الخروج"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "settingsTitle": "إعدادات الملف الشخصي",
+    "personalInfo": "المعلومات الشخصية",
+    "contactInfo": "معلومات الاتصال",
+    "fullName": "الاسم الكامل",
+    "grpNumber": "الرقم الوظيفي",
+    "nationality": "الجنسية",
+    "mobile": "الجوال",
+    "email": "البريد الإلكتروني",
+    "grade": "الرتبة",
+    "department": "الإدارة",
+    "invalidMobile": "رقم الجوال غير صالح",
+    "invalidEmail": "البريد الإلكتروني غير صالح",
+    "updateSuccess": "تم تحديث الملف الشخصي بنجاح!",
+    "updateFail": "فشل في تحديث الملف الشخصي."
+  },
+  "challenge": {
+    "add": "إضافة تحدي جديد",
+    "update": "تحديث التحدي",
+    "saving": "جاري حفظ التحدي...",
+    "updating": "جاري تحديث التحدي...",
+    "loading": "جاري تحميل بيانات التحدي...",
+    "challengeDashboard": "مركز التحديات",
+    "challengeDetails": "تفاصيل الجلسة",
+    "createdAt": "تاريخ الإنشاء",
+    "dashboard": {
+      "start": "بداية",
+      "challengeTitle": "عنوان التحدي",
+      "challengeDetails": "تفاصيل التحدي",
+      "finalStage": "الجولة الأخيرة",
+      "answerStage": "مرحلة تقديم الحلول",
+      "attendees": "الحضور",
+      "chatClosedMessage": "تم إغلاق الدردشة لأننا اتخذنا القرار النهائي لهذا التحدي. الحلول تحت المراجعة حاليًا.",
+      "close": "إغلاق",
+      "closedStage": "تم رفض نتيجة المناقشة",
+      "comment": "تعليق",
+      "completeStage": "تم قُبول نتيجة مناقشة التحدي",
+      "confirmVoteMessage": "هل أنت متأكد من أنك تريد تأكيد هذا الإجراء لهذا التحدي: [ {solutionText} ]؟",
+      "deleteSolution": "حذف",
+      "discussionChat": "الدردشة",
+      "endRound": "نهاية الجولة",
+      "endTime": "نهاية التصويت: ",
+      "enterSolutionText": "نص الحل",
+      "finalDecision": "خُذ القرار الأخير الآن للمراجعة",
+      "finalDecisionWarning": "إختيارك لهذا يعني أنك توافق على هذه الحلول كحلول نهائية للتحدي قبل المراجعة النهائية",
+      "google": "جوجل",
+      "internal": "داخلي",
+      "inviteUser": "دعوة عضو",
+      "merge": {
+        "mergeInstructions": "يرجى تقديم نص الحل الجديد للحلول المختارة ليتم دمجها.",
+        "newSolutionTitle": "الحل الجديد",
+        "title": "دمج الحلول"
+      },
+      "newSolution": "إضافة حل جديد",
+      "offline": "أوفلاين-",
+      "online": "أونلاين-",
+      "pause": "إيقاف مؤقت",
+      "remainingTime": "الوقت المتبقي ",
+      "research": "الأبحاث",
+      "researchText": "قم بالبحث",
+      "resume": "إعادة التشغيل",
+      "round": "جولة رقم ",
+      "roundMsg": {
+        "confirmationDialogTitle": "تأكيد الإجابات",
+        "submitAnswersDialogMsg": "هل أنت متأكد أنك تريد تأكيد هذه الإجابات؟"
+      },
+      "searchUser": "ابحث عن عضو",
+      "solutionActions": "أجراءات الحل",
+      "solutionMenu": "قائمة الحلول للتحدي",
+      "solutionsNextRound": "إختر الحلول للجولة القادمة",
+      "solutionsRateList": "الحلول",
+      "enterSolutionAndPressEnter": "اكتب الحل واضغط Enter لإضافة حل جديد",
+      "addedSolutions": "الحلول المضافة",
+      "noSolutionsAdded": "لم يتم إضافة أي حلول بعد",
+      "startAddingSolutions": "ابدأ في إضافة الحلول المقترحة للتحدي",
+      "startTime": "بداية التصويت",
+      "strategicDirection": "التوجه الاستراتيجي",
+      "stop": "إنهاء الجولة",
+      "title": "إتخاذ القرار",
+      "totalVotes": "عدد الأصوات: ",
+      "typeYourMessage": "اكتب رسالتك......",
+      "underAdminReviewStage": "مرحلة المراجعة من قِبل الأدمن",
+      "underValidatorReviewStage": "مرحلة المراجعة من قِبل المُدقِق",
+      "updateSolution": "تحديث",
+      "videoFeed": "فديو من اليوتيوب",
+      "voting": "التصويت",
+      "votingConfirmation": "تأكيد التصويت",
+      "votingStage": "مرحلة التصويت",
+      "yourAnswer": "قم بإقتراح حل جديد",
+      "youtube": "يوتيوب",
+      "finalSolutions": "الحلول النهائية"
+    },
+    "department": "الإدارة العامة",
+    "description": "الوصف",
+    "edit": "تحرير التحدي",
+    "finalSolutions": {
+      "closed": {
+        "endMessage": "شكراً لمشاركتك.",
+        "mainMessage": "لم تُعتبر أي من الحلول مناسبة لهذا التحدي. إذا كنت بحاجة إلى الاطلاع على التقرير الحالي، انقر هنا.",
+        "subMessage": "تم إغلاق العملية.",
+        "title": "مغلق"
+      },
+      "completed": {
+        "endMessage": "تهانينا للجميع على إتمام التحدي بنجاح! تم قبول حلولكم، وقد تم تقدير الجهود الكبيرة من الفريق بأكمله بشكل كبير. جودة عملكم تعكس المستوى العالي من الاحترافية والالتزام من جميع المشاركين. عمل رائع، فريق!",
+        "mainMessage": "تم إتمام التحدي بنجاح مع إيجاد حلول مناسبة. إذا كنت بحاجة إلى الاطلاع على التقرير الحالي، انقر هنا.",
+        "subMessage": "شكراً لمساهمتك.",
+        "title": "مكتمل"
+      },
+      "finalRateForInvitedUsers": "التقييم النهائي للمستخدمين المدعوين",
+      "finalRateForManager": "التقييم النهائي للمدير",
+      "finalRateForValidators": "التقييم النهائي للمراجعين",
+      "title": "الحلول النهائية",
+      "underManagerReview": {
+        "endMessage": "سيتم إشعارك عند اكتمال المراجعة.",
+        "mainMessage": "البيانات قيد المراجعة من قبل المدير. إذا كنت بحاجة إلى رؤية التقرير الحالي، انقر هنا.",
+        "subMessage": "يرجى الانتظار حتى يتم الانتهاء من المراجعة.",
+        "title": "تحت مراجعة المدير"
+      },
+      "underValidatorReview": {
+        "endMessage": "سيتم إشعارك عند اكتمال المراجعة.",
+        "mainMessage": "البيانات قيد المراجعة من قبل المدققين. إذا كنت بحاجة إلى رؤية التقرير الحالي، انقر هنا.",
+        "subMessage": "يرجى الانتظار حتى يتم الانتهاء من المراجعة.",
+        "title": "تحت مراجعة المراجعين"
+      },
+      "voteCount": "عدد الأصوات",
+      "votePercentage": "نسبة الأصوات"
+    },
+    "guestInvitation": "خبراء من خارج القوة",
+    "info": {
+      "addReminder": "إضافة تنبيه",
+      "allowImmediateAccess": "السماح بالوصول الفوري",
+      "assistantModerator": "مساعد منسق الجلسة",
+      "challengeDetails": "تفاصيل التحدي",
+      "challengeSettings": "إعدادات التحدي",
+      "committee": "الفرق واللجان",
+      "department": "الإدارة العامة",
+      "descriptionAr": "وصف التحدي ياللغة العربية",
+      "descriptionEn": "وصف التحدي ياللغة الإنجليزية",
+      "docsResources": "وثائق",
+      "documentsMax": "الوثائق - الحد الأقصى 5 وثائق",
+      "endTime": " تاريخ ووقت انتهاء الجلسة",
+      "field": "مجال الموضوع",
+      "fileUpload": "رفع الوثائق",
+      "futureStrategicGoal": "التحديات المستقبلية",
+      "hashTag": "الوسم",
+      "impact": "تأثير الموضوع",
+      "impactOfDecision": "أهمية القرار",
+      "isUrgent": "تحدي مهم (جاهز للنشر مباشرة)",
+      "levelOfDecision": "مستوى القرار",
+      "moderator": "منسق الجلسة",
+      "reminder": "التنبيهات",
+      "resources": "مصادر",
+      "sector": "القطاع",
+      "selectFromLib": "إختر من المكتبة/الأرشيف",
+      "solutionsRateList": "الحلول المقترحة",
+      "enterSolutionAndPressEnter": "اكتب الحل واضغط Enter لإضافة حل جديد",
+      "addedSolutions": "الحلول المضافة",
+      "noSolutionsAdded": "لم يتم إضافة أي حلول بعد",
+      "startAddingSolutions": "ابدأ بإضافة الحلول المقترحة للتحدي",
+      "startTime": " تاريخ ووقت بدء الجلسة",
+      "strategicDirection": " التوجهات الاستراتيجية",
+      "strategicGoal": " الأهداف الاستراتيجية",
+      "teamMember": "المشاركين",
+      "titleAr": "عنوان التحدي ياللغة العربية",
+      "titleEn": "عنوان التحدي ياللغة الإنجليزية",
+      "topicClassification": "تصنيف الموضوع",
+      "validators": "اختر أسماء المصادقيين للجلسة",
+      "visibility": " نوع الجلسة",
+      "youtubeLinks": "روابط يوتيوب",
+      "youtubeResources": "يوتيوب",
+      "youtubeUrl": "رابط يوتيوب",
+      "youtubeLinkAlreadyAdded": "تمت إضافة رابط يوتيوب هذا مسبقاً.",
+      "invalidYoutubeUrl": "يرجى إدخال رابط يوتيوب صالح.",
+      "reminderMustBeFuture": "يجب أن يكون تاريخ ووقت التذكير في المستقبل.",
+      "enterYoutubeUrl": "أدخل رابط يوتيوب واضغط Enter",
+      "addedYoutubeLinks": "الروابط المضافة",
+      "noYoutubeLinksAdded": "لم يتم إضافة روابط يوتيوب بعد",
+      "startUploadingFiles": "ابدأ برفع الملفات لإضافتها إلى تحديك",
+      "requiredTooltip": "هذا الحقل مطلوب",
+      "selectAll": "تحديد الكل",
+      "clearAll": "مسح الكل",
+      "addNew": "إضافة جديد",
+      "remove": "إزالة",
+      "delete": "حذف",
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "submit": "إرسال",
+      "next": "التالي",
+      "previous": "السابق",
+      "back": "رجوع",
+      "forward": "إلى الأمام",
+      "loading": "جاري التحميل...",
+      "error": "خطأ",
+      "success": "نجح",
+      "warning": "تحذير",
+      "info": "معلومات",
+      "basicInfo": "المعلومات الأساسية",
+      "departmentInfo": "بيانات الإدارة العامة / مراكز الشرطة / المجالس واللجان وفرق العمل",
+      "visibilityAndDates": "نوع وتاريخ الجلسة",
+      "strategicInfo": "الترابط الاستراتيجي والاستشرافي",
+      "moderatorsAndCommittee": "المشرفون",
+      "accessControl": "صلاحية الدخول",
+      "descriptions": "الوصف",
+      "futureStrategicDirection": "الأولويات المستقبلية",
+      "futureStrategicGoals": "التحديات المستقبلية",
+      "solutionText": "الحلول المقترحة",
+      "uploadDocuments": "تحميل المستندات",
+      "dragDropFiles": "اسحب الملفات هنا أو انقر للتحميل",
+      "supportedFormats": "الصيغ المدعومة: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, صور",
+      "maxFileSize": "الحد الأقصى لحجم الملف: 10 ميجابايت",
+      "chooseFilesNo": "اختر الملفات – لم يتم اختيار أي ملف",
+      "chooseFiles": "اختر الملفات",
+      "uploadedFiles": "الملفات المرفوعة",
+      "hashtags": "الهاشتاج",
+      "addHashtag": "إضافة هاشتاك",
+      "reminders": "التنبيهات",
+      "noFilesUploaded": "لم يتم رفع أي ملفات"
+    },
+    "invitationSection": "الدعوة لحضور الاجتماع الافتراضي",
+    "list": "التحديات",
+    "moderator": "منسق",
+    "name": "التحدي",
+    "solutionText": "نص الحل",
+    "solutionsPerStage": "القرارات النهائية في كل مرحلة",
+    "stageNumber": "مرحلة رقم: ",
+    "status": {
+      "active": "نشط",
+      "deleted": "محذوف",
+      "inactive": "غير نشط",
+      "completed": {
+        "description": "تم إكمال التحدي وتم اتخاذ القرار النهائي"
+      },
+      "open": {
+        "description": "التحدي مفتوح للحلول والمشاركة"
+      },
+      "closed": {
+        "description": "تم إغلاق التحدي ولم يعد يقبل التقديمات"
+      },
+      "voting": {
+        "description": "التحدي في مرحلة التصويت حالياً"
+      },
+      "revised": {
+        "description": "تم مراجعة التحدي وتحديثه"
+      },
+      "paused": {
+        "description": "تم إيقاف التحدي مؤقتاً"
+      },
+      "validator_review": {
+        "description": "التحدي قيد المراجعة من قبل المدققين"
+      },
+      "admin_review": {
+        "description": "التحدي قيد المراجعة الإدارية"
+      },
+      "new": {
+        "description": "تحدي جديد تم إنشاؤه في انتظار التفعيل"
+      },
+      "urgent": {
+        "description": "تحدي عاجل يتطلب اهتماماً فورياً"
+      }
+    },
+    "noChallengesFound": "لم يتم العثور على تحديات",
+    "title": "التحديات",
+    "view": "تفاصيل التحدي",
+    "viewInfo": {
+      "ValidatorUsers": "قائمة المدققين",
+      "actions": "الإجراءات",
+      "challengeDetails": "تفاصيل التحدي",
+      "chatHistory": "أرشيف الدردشة",
+      "department": "الإدارة",
+      "description": "تفاصيل",
+      "documentList": "قائمة الوثائق",
+      "documentName": "إسم الوثيقة",
+      "endTime": "وقت نهاية الجلسة",
+      "invitationAccepted": "الدعوة المقبولة",
+      "invitationPending": "الدعوة المعلقة",
+      "invitationRejected": "الدعوة المرفوضة",
+      "invitedGuestUsers": "قائمة الضيوف المدعوون",
+      "invitedInternalUsers": "قائمة المدعوون (داخلي)",
+      "invitedUsersCount": "الأشخاص المدعوون",
+      "moderator": "المُنسق",
+      "numberOfVotes": "عدد الأصوات",
+      "participantsInformation": "معلومات المشاركين",
+      "section": "القسم",
+      "solution": "الحل",
+      "solutionFrequency": "الرسم التوضيحي للحلول مع التصويت",
+      "solutionList": "قائمة الحلول",
+      "startTime": "وقت بدء الجلسة",
+      "subDepartment": "الإدارة الفرعية",
+      "title": "العنوان",
+      "visibility": "نوع الجلسة"
+    },
+    "visibility": "نوع الجلسة",
+    "votingTime": "وقت التصويت",
+    "startTime": "وقت البدء",
+    "strategicDirection": "التوجه الاستراتيجي",
+    "error": {
+      "startTimeMustBeAfterCurrent": "يجب أن يكون وقت البداية بعد الوقت الحالي",
+      "endTimeMustBeAfterCurrent": "يجب أن يكون وقت النهاية بعد الوقت الحالي",
+      "endTimeMustBeAfterStartTime": "يجب أن يكون وقت النهاية بعد وقت البداية"
+    }
+  },
+  "common": {
+    "editRound": "تعديل الجولة",
+    "deleteRound": "حذف الجولة",
+    "deleteSurvey": "حذف الاستبيان",
+    "editSurvey": "تعديل الاستبيان",
+    "viewSurveyDetails": "عرض تفاصيل الاستبيان",
+    "sendEmail": "إرسال البريد الإلكتروني",
+    "invitedUsers": "المدعوين",
+    "sent": "تم الإرسال",
+    "missed": "غير المرسل",
+    "sendAllMissedEmails":  "إرسال جميع الدعوات غير المرسلة",
+    "emailSentStatusTitle": "حالة إرسال الإيميل",
+    "delphiXEn": "Delphi X",
+    "delphiXAr": "برنامج دلفاي X",
+    "masterHomeMainTitleEn": "Smart Decision Support System",
+    "masterHomeMainTitleAr": "دعم اتخاذ القرار الذكي",
+    "home-main-title-en": "Smart Decision Support System",
+    "home-main-title-ar": "دعم اتخاذ القرار SDSS",
+    "myProfile": "ملفي الشخصي",
+    "profileSettings": "إعدادات الملف الشخصي",
+    "signOut": "تسجيل الخروج",
+    "all": "الكل",
+    "update": "تعديل",
+    "download": "تنزيل",
+    "preview": "معاينة",
+    "searchName": "بحث",
+    "collapse": "طي",
+    "total": "الإجمالي",
+    "refresh": "تحديث",
+    "expand": "توسيع",
+    "view": "عرض التفاصيل",
+    "next": "التالي",
+    "previous": "السابق",
+    "actions": "أجراءات",
+    "active": "نشط",
+    "add": "إضافة",
+    "allChallengesCount": "إجمالي تحديات SDSS",
+    "allExternalUsersCount": "المستخدمون الخارجيون",
+    "allInternalUsersCount": "المستخدمون الداخليون",
+    "allPages": "الكل",
+    "answer": "الإجابة",
+    "answered": "تم الإجابة",
+    "answeredStatus": "حالة الإستبيان",
+    "ar": "العربية",
+    "arabic": "العربية",
+    "attachmentPreview": "معاينة المرفق",
+    "auth": {
+      "accessDeniedMsg": "تم رفض الوصول: ليس لديك الصلاحيات اللازمة لعرض هذه الصفحة.",
+      "accessDeniedNote": "يرجى التواصل مع المسؤول إذا كنت تعتقد أن هناك خطأ."
+    },
+    "back": "رجوع",
+    "banner": "شعار التطبيق",
+    "bannerImage": "صورة خلفية الشعار",
+    "bannerShow": "عرض الشعار",
+    "cancel": "إلغاء",
+    "challengeTimeFromTo": "مدة التحدي [من - إلى]",
+    "clear": "مسح",
+    "clearAll": "مسح الكل",
+    "close": "إغلاق",
+    "comingSoon": "قريباً!",
+    "comingSoonText": "نحن نعمل بجد لتقديم هذه الميزة لكم. ترقبوا التحديثات!",
+    "confirm": "تأكيد",
+    "copywriter": "© 1956-2024 شرطة دبي. جميع الحقوق محفوظة.",
+    "create": "إضافة",
+    "createdAt": "تاريخ الإنشاء",
+    "createdBy": "تم الإنشاء بواسطة",
+    "dashboard": "شاشة التحكم الرئيسية",
+    "date": "التاريخ",
+    "days": "أيام",
+    "default": "اساسي",
+    "delete": "حذف",
+    "deleteConfirmation": "هل انت متأكد من الحذف؟",
+    "deletionTitle": "تأكيد الحذف",
+    "department": "الإدارة",
+    "downloadPdf": "قم بتنزيل نسخة PDF لتحليلها ومشاركتها.",
+    "edit": "تعديل",
+    "email": "البريد الإلكتروني",
+    "empty": "لايوجد بيانات",
+    "en": "الإنجليزية",
+    "endTime": "وقت نهاية التصويت",
+    "english": "الإنجليزية",
+    "expertLevels": {
+      "basic": "مبتدئ الخبرة",
+      "expert": "خبير",
+      "intermediate": "متوسط الخبرة",
+      "none": "بدون خبرة"
+    },
+    "expired": "إنتهى",
+    "export": "تصدير",
+    "exportToExcel": "تصدير بيانات التقرير إلى ملف Excel لتحليلها ومشاركتها.",
+    "exportToCSV": "تصدير بيانات التقرير إلى ملف CSV.",
+    "false": "خاطئ",
+    "fileName": "إسم الملف",
+    "fileSize": "حجم الملف",
+    "finalDecision": "القرار النهائي",
+    "footer": {
+      "aiDepMessage": "© 2024 جميع الحقوق محفوظة لـ قسم التصميم والتطوير & ادارة الذكاء الاصطناعي & شرطة دبي",
+      "copyright": "جميع الحقوق محفوظة للقيادة العامة لشرطة دبي",
+      "newHomeScreenCopyright": "جميع الحقوق محفوظة لـ قسم التصميم والتطوير & ادارة الذكاء الاصطناعي & شرطة دبي",
+      "note": "تنويه: جميع المعلومات الواردة هنا هي ملكية خاصة لشرطة دبي"
+    },
+    "fullName": "الاسم الكامل",
+    "grade": "الدرجة",
+    "grpNumber": "الرقم الوظيفي",
+    "hide": "إخفاء",
+    "hours": "ساعات",
+    "id": "#",
+    "impactSeverityPercentage": "نسبة شدة التأثير (%)",
+    "insertYourAnswer": "أدخل إجابتك...",
+    "items_per_page": "العناصر لكل صفحة",
+    "jobTitle": "المسمى الوظيفي",
+    "joinRequests": "طلبات الإنضمام [برنامج SDSS]",
+    "filters": "الفلاتر",
+    "labels": {
+      "closed": "مغلق",
+      "completed": "مكتمل",
+      "new": "جديد",
+      "open": "مفتوح",
+      "paused": "الإيقاف المؤقت",
+      "revised": "تم مراجعته",
+      "underReview": "مراجعة المُدقق",
+      "urgent": "مراجعة الأدمن",
+      "voting": "التصويت"
+    },
+    "loader": {
+      "content": "جاري تحميل المحتوى",
+      "sectionContent": "جاري تحميل محتوى القسم",
+      "listItems": "جاري تحميل عناصر القائمة",
+      "sectionDescription": "جاري تجهيز البطاقات والتفاصيل الداعمة لهذه الشاشة.",
+      "tableDescription": "جاري تجهيز عوامل التصفية والإجراءات وصفوف الجدول لهذه الصفحة.",
+      "challengeWorkspaceHeading": "مساحة عمل التحدي",
+      "challengeSetup": "جاري تحميل إعداد التحدي",
+      "challengeSetupDescription": "جاري تجهيز الخطوات والمشاركين والموارد وحقول النموذج لمسار عمل هذا التحدي.",
+      "surveyDashboardHeading": "لوحة الاستبيانات",
+      "surveyAnalytics": "جاري تحميل تحليلات الاستبيان",
+      "surveyAnalyticsDescription": "جاري تجهيز المؤشرات والرسوم واللوحات وآخر نشاطات الاستبيانات لهذه اللوحة.",
+      "surveyPortalHeading": "منصة الاستبيانات",
+      "surveyPortal": "جاري تحميل منصة الاستبيانات",
+      "surveyPortalDescription": "جاري تجهيز خدمات الاستبيانات والتصنيفات وإحصاءات المشاركة لهذه المنصة.",
+      "liveSurveysHeading": "الاستبيانات الجارية",
+      "liveSurveys": "جاري تحميل الاستبيانات الجارية",
+      "liveSurveysDescription": "جاري تجهيز جولات الاستبيان النشطة والعدادات الزمنية وتفاصيل المشاركة.",
+      "surveyReportsHeading": "تقارير الاستبيانات",
+      "surveyReports": "جاري تحميل تقارير الاستبيانات",
+      "surveyReportsDescription": "جاري تجهيز البحث وبطاقات التقارير ونتائج تقارير جولات الاستبيان.",
+      "surveyReportDetailsHeading": "تفاصيل تقرير الاستبيان",
+      "surveyReportDetails": "جاري تحميل تفاصيل تقرير الاستبيان",
+      "surveyReportDetailsDescription": "جاري تجهيز تفاصيل الجولة والإجابات والمشاركين وإجراءات التصدير لهذا التقرير.",
+      "surveyCreateHeading": "إنشاء استبيان",
+      "surveyCreate": "جاري تحميل مساحة إنشاء الاستبيان",
+      "surveyCreateDescription": "جاري تجهيز الإدارات والوظائف وإعدادات الجولات لاستبيان جديد.",
+      "surveyUpdateHeading": "تحديث الاستبيان",
+      "surveyUpdate": "جاري تحميل مساحة تحديث الاستبيان",
+      "surveyUpdateDescription": "جاري تجهيز بيانات الاستبيان الحالية والتعيينات وإعدادات الجولات للتعديل.",
+      "userRecord": "جاري تحميل سجل المستخدم",
+      "userProfileHeading": "ملف المستخدم",
+      "userUpdateForm": "جاري تحميل نموذج تحديث المستخدم",
+      "userUpdateFormDescription": "جاري تجهيز بيانات الملف الشخصي والأدوار والخبرات وإعدادات الحساب القابلة للتعديل.",
+      "challengePortfolio": "جاري تحميل محفظة التحديات الخاصة بك",
+      "challengePortfolioDescription": "جاري تجهيز الحالات وعوامل التصفية والإجراءات السريعة لسجلات التحديات الخاصة بك.",
+      "challengeRecords": "جاري تحميل سجلات التحديات",
+      "challengeRecordsDescription": "جاري تجهيز عوامل التصفية وإجراءات الإشراف وأحدث صفوف جدول التحديات.",
+      "userDirectory": "جاري تحميل دليل المستخدمين",
+      "userDirectoryDescription": "جاري تجهيز الأدوار والإدارات وإجراءات الحساب لجدول المستخدمين الإداري."
+    },
+    "language": {
+      "ar": "العربية",
+      "en": "الإنجليزية"
+    },
+    "loading": "جاري تحميل البيانات... الرجاء الإنتظار",
+    "logo": "شعار SDSS",
+    "merge": "دمج",
+    "new": "جديد",
+    "minutes": "دقائق",
+    "months": "شهور",
+    "myDashboard": "شاشة التحكم خاصتي",
+    "no": "لا",
+    "notActive": "غير نشط",
+    "notAnswered": "لم يتم الإجابة",
+    "notifyMe": "ذكرني",
+    "online": "متصل",
+    "pagination": {
+      "of": "من",
+      "page": "صفحة"
+    },
+    "platform": "منصة",
+    "position": "المنصب",
+    "primary": "الأساسي",
+    "probabilityOfOccurrencePercentage": "نسبة احتمالية الحدوث (%)",
+    "question": "السؤال",
+    "reason": "السبب (اختياري)",
+    "reasonHint": "قدم سببًا للرفض (اختياري)",
+    "reasonName": "السبب",
+    "reasonPlaceHolder": "أدخل سببك",
+    "reminderList": "قائمة التذكير المُختارة",
+    "requests": "طلبات",
+    "response": "استجابة",
+    "responseRate": "معدل الاستجابة",
+    "search": "بحث",
+    "seconds": "ثواني",
+    "selected": "محدد",
+    "send": "إرسال",
+    "saved": "محفوظ",
+    "show": "عرض",
+    "srNo": "م",
+    "srNo2": "رقم التسلسل",
+    "startTime": "بداية التصويت",
+    "status": {
+      "active": "نشط",
+      "deleted": "محذوف",
+      "inactive": "غير نشط",
+      "open": {
+        "description": "التحدي مفتوح لتقديم الحلول والمشاركة"
+      },
+      "closed": {
+        "description": "تم إغلاق التحدي ولم يعد يقبل أي مشاركات"
+      },
+      "voting": {
+        "description": "التحدي حالياً في مرحلة التصويت"
+      },
+      "paused": {
+        "description": "تم إيقاف التحدي مؤقتاً"
+      }
+    },
+    "statusName": "الحالة",
+    "submit": "حفظ",
+    "time": "الوقت",
+    "toWithSpace": " إلى ",
+    "totalSurveysCount": "إجمالي إستبيانات دلفي",
+    "totalUsersOnTheSystemCount": "إجمالي المستخدمين في النظام",
+    "true": "صحيح",
+    "updatedAt": "تاريخ اخر تعديل",
+    "updatedBy": "تم التعديل بواسطة",
+    "variety": {
+      "details": "Name",
+      "email": "البريد الإلكتروني",
+      "expertLevel": "مستوى الخبرة",
+      "expertisesTitle": "مجال الخبرةالأساسي",
+      "grpNumber": "الرقم الوظيفي",
+      "name": "الإسم",
+      "permissions": "الأذونات"
+    },
+    "viewDetails": "عرض التفاصيل",
+    "viewReport": "عرض التقرير",
+    "viewRequests": "إدارة الطلبات",
+    "visibility": {
+      "private": "خاص",
+      "public": "عام"
+    },
+    "vote": "تصويت",
+    "messages": "الرسائل",
+    "noMessages": "لا توجد رسائل بعد",
+    "startConversation": "ابدأ المحادثة بإرسال رسالة",
+    "attachFile": "إرفاق ملف",
+    "votingControl": "التحكم اليدوي في التصويت",
+    "waitingScreen": "شاشة الانتظار",
+    "years": "سنوات",
+    "yes": "نعم",
+    "select": "تحديد",
+    "selectedUsers": "المستخدمون المحددون",
+    "selectedValidators": "المدققون المحددون",
+    "validationErrors": "أخطاء التحقق",
+    "complete": "مكتمل",
+    "progress": "التقدم",
+    "noData": "لا توجد بيانات متاحة",
+    "noDataTitle": "لا توجد نتائج للعرض حالياً",
+    "noDataDescription": "لا توجد سجلات مطابقة للمعايير الحالية. يمكنك تعديل عوامل البحث أو التحديث لتحميل بيانات جديدة.",
+    "noDataToExport": "لا توجد بيانات متاحة للتصدير",
+    "statistics": "الإحصائيات",
+    "challenges": "التحديات",
+    "generatedOn": "تم إنشاؤه في",
+    "totalResults": "إجمالي النتائج",
+    "searchResults": "نتائج البحث",
+    "showing": "عرض",
+    "of": "من",
+    "showLess": "عرض أقل",
+    "showMore": "عرض المزيد",
+    "notAvailable": "غير متاح",
+    "unknown": "غير معروف",
+    "completed": "مكتمل",
+    "pending": "قيد الانتظار",
+    "responses": "الاستجابات",
+    "messageStatus": {
+      "sent": "تم الإرسال",
+      "delivered": "تم التسليم",
+      "read": "تم القراءة"
+    },
+    "typing": "يكتب...",
+    "messageReactions": "ردود فعل على الرسالة",
+    "save": "حفظ"
+  },
+  "error": {
+    "challengeChatAllowedFiles": "يسمح بتحميل ملف واحد فقط لكل رسالة.",
+    "chatMessageBlank": "يجب أن تكتب بعض الكلمات قبل الإرسال!",
+    "mandatory": "هذا الحقل اجباري",
+    "mandatoryFields": "من فضلك قم بملئ الحقول المطلوبة",
+    "roundsOfSurveyZero": "يرجى تحديد عدد صحيح من الجولات أكبر من 0.",
+    "submissionFailed": "تعذر حفظ التحدي. يرجى مراجعة البيانات والمحاولة مرة أخرى.",
+    "uploadFailed": "تعذر رفع الملفات المحددة. يرجى التحقق من الملفات والمحاولة مرة أخرى.",
+    "unknownError": "حدث خطأ غير معروف، يرجى الاتصال بفريق الأدمن أو فريق الدعم."
+  },
+  "fileUpload": {
+    "browse": "استعراض",
+    "clear": "مسح",
+    "completed": "مكتمل",
+    "pending": "قيد الانتظار",
+    "upload": "رفع"
+  },
+  "futurePoll": {
+    "main-title": "الإستطلاع المستقبلي"
+  },
+  "home": {
+    "backButton": "العودة إلى الصفحة الرئيسية",
+    "content": {
+      "details": "برنامج تابع لإستشراف المستقبل لربط القضايا بالمختصين للإطلاع عليها وعمل الجلسات",
+      "download-tooltip": "اضغط هنا لتنزيل دليل المستخدم واستكشاف معلومات تفصيلية عن نظامنا.",
+      "download-user-manual": "دليل المستخدم",
+      "home": "اﻟﺮﺋﻴﺴﻴﺔ",
+      "main-home-title": "نظام دعم اتخاذ القرار الذكي",
+      "main-page-description": "تمكين شرطة دبي من اتخاذ قرارات ذكية ومستنيرة من خلال تحليل بيانات الاستبيانات ووجهات نظر مختلف الأطراف المعنية. يضمن هذا النظام اتخاذ قرارات منظمة وفعالة لتعزيز الإنتاجية وتحسين الأداء المؤسسي.",
+      "main_title": "نظام إداري",
+      "system-title-shortcut": "SDSS",
+      "title": "نظام دعم اتخاذ القرار الذكي"
+    },
+    "mainTitles": {
+      "adminPanel": "لوحة التحكم الرئيسية",
+      "delphiSurvey": "برنامج دلفاي X",
+      "sdssSystem": "برنامج SDSS",
+      "futurePoll": "الإستطلاع المستقبلي",
+      "impact": "الأثر",
+      "invitationRequests": "طلبات الانضمام",
+      "myChallenges": "تحدياتي SDSS",
+      "myDashboardPage": "شاشتي التفاعليه"
+    },
+    "myServices": "خدماتي",
+    "servicesInfo": "معلومات عن الخدمات والميزات المتاحة",
+    "sid-bar-title": "نظام دعم اتخاذ القرار الذكي",
+    "statistics": "الإحصائيات",
+    "statisticsInfo": "نظرة عامة على إحصائيات ومقاييس النظام",
+    "surveyMainTitles": {
+      "activeSurveys": "الاستبيانات الجارية",
+      "archiveSurveys": "أرشيف الاستبيانات",
+      "dashboard": "شاشتي التفاعليه",
+      "surveysReports": "تقارير الاستبيانات"
+    }
+  },
+  "impactScreen": {
+    "main-title": "الأثر"
+  },
+  "login": {
+    "appName": "نظام دعم اتخاذ القرار الذكي",
+    "appShortcutName": "SDSS",
+    "grpNumber": "الرقم الوظيفي",
+    "login": "تسجيل الدخول",
+    "loginMsg": "دخول",
+    "loginSubMessage": "أدخل بيانات تسجيل الدخول الخاصة بك",
+    "password": "كلمة المرور",
+    "username": "اسم المستخدم"
+  },
+  "myChallenges": {
+    "title": "تحدياتي",
+    "noChallengesFound": "لم يتم العثور على تحديات"
+  },
+  "myDashboard": {
+    "acceptedInvitations": "الدعوات المقبولة",
+    "actions": {
+      "accept": "قبول الدعوة",
+      "reject": "رفض الدعوة",
+      "viewDashboard": "فتح لوحة التحدي"
+    },
+    "approvedDialogDescription": "هل أنت متأكد أنك تريد قبول هذه الدعوة؟",
+    "approvedDialogTitle": "قبول الدعوة",
+    "closedDialogDescription": "هل أنت متأكد أنك تريد رفض هذه الدعوة؟",
+    "closedDialogTitle": "رفض الدعوة",
+    "dialog": {
+      "accept": {
+        "confirm": "قبول الدعوة",
+        "message": "قم بتأكيد هذه الدعوة للانضمام إلى مسار عمل التحدي والمتابعة إلى الجولة التالية عند الحاجة.",
+        "note": "عند قبول الدعوة سيتم منحك الوصول إلى لوحة التحدي وخطوات المشاركة المرتبطة بها.",
+        "title": "قبول الدعوة"
+      },
+      "reject": {
+        "confirm": "رفض الدعوة",
+        "message": "ارفض هذه الدعوة إذا تعذر عليك المشاركة. يمكنك إضافة ملاحظة ليتم حفظها مع الرفض.",
+        "note": "سيتم حفظ هذه الملاحظة مع الرفض حتى يتمكن صاحب الطلب من معرفة سبب عدم قبول الدعوة.",
+        "reasonHint": "أضف ملاحظة توضح سبب الرفض إذا رغبت بذلك.",
+        "reasonLabel": "ملاحظة الرفض",
+        "reasonPlaceholder": "اكتب ملاحظة قصيرة لهذا الرفض",
+        "title": "رفض الدعوة"
+      }
+    },
+    "pendingInvitations": "الدعوات المعلقة",
+    "rejectedInvitations": "الدعوات المرفوضة",
+    "table": {
+      "actions": "الإجراءات",
+      "endDate": "تاريخ الانتهاء",
+      "finalDecision": "القرار النهائي",
+      "name": "اسم التحدي",
+      "sr": "رقم التسلسل",
+      "startDate": "تاريخ البدء"
+    },
+    "totalAcceptedInvitations": "إجمالي المقبولة",
+    "totalInvitations": "إجمالي الدعوات",
+    "totalPendingInvitations": "إجمالي المعلقة",
+    "totalRejectedInvitations": "إجمالي المرفوضة",
+    "totalVotingNotParticipated": "عدم المشاركة في التصويت",
+    "totalVotingParticipated": "المشاركة في التصويت",
+    "validatorDashboardDescription": "يعرض هذا القسم معلومات خاصة بالمدققين.",
+    "validatorDashboardTitle": "إدارة طلبات تحديات SDSS",
+    "votingCompleted": "اكتمل التصويت",
+    "votingNotParticipated": "عدم المشاركة في التصويت",
+    "votingParticipated": "المشاركة في التصويت"
+  },
+  "nav": {
+    "about": "نبذة عنا",
+    "home": "الرئيسية",
+    "search": "ﺑﺈﻣﻜﺎﻧﻚ اﻟكتﺎﺑﺔ ﻟﺒﺪء اﻟﺒﺤﺚ"
+  },
+  "rating": {
+    "applicableMsg": "قابل للتطبيق",
+    "challengeIdMsg": "تحت التحدي رقم:",
+    "commentMsg": "ما هي الأسباب التي دفعتك لتقديم هذا التقييم؟",
+    "howToApply": "كيف يمكن تطبيق هذا الحل في الواقع؟ (اقتراحات)",
+    "moderatorRatingView": {
+      "rates": "ملاحظات مستخدمي الحل",
+      "title": "تفاصيل ملاحظات الحل"
+    },
+    "noFeedbackOrRatings": "لم يتم تقديم أي تقييمات أو آراء لهذا الحل.",
+    "noSolutionExistsMsg": "لا يتوفر حل حالياً.",
+    "rate": "التقييم",
+    "solutionAllRates": "كل التقييمات الخاصة بهذا الحل",
+    "solutionIdMsg": "التقييمات للحل رقم:",
+    "solutionText": "مع نص الحل التالي:",
+    "title": "تقييم الحل"
+  },
+  "sdssSurvey": {
+    "accessKeyRequired": "مفتاح الوصول مطلوب.",
+    "add": "إضافة استبيان جديد",
+    "automatic": {
+      "endTime": "وقت الانتهاء",
+      "roundCreationFirstHint": "هذه العملية آلية وسيتم التعامل معها من قبل النظام.",
+      "roundCreationSecondHint": "سيتم بدء جولات استبيان جديدة تلقائيًا بناءً على المعلومات المُعدة مسبقًا أعلاه.",
+      "roundDescriptionAr": "الوصف (بالعربية)",
+      "roundDescriptionEn": "الوصف (بالإنجليزية)",
+      "roundTitleAr": "عنوان الجولة (بالعربية)",
+      "roundTitleEn": "عنوان الجولة (بالإنجليزية)",
+      "startTime": "وقت البدء",
+      "title": "معلومات الجولة الآلية للاستبيان"
+    },
+    "backButton": "العودة إلى صفحة الإستبيان الرئيسية",
+    "bothAccessAndGrpRequired": "الرقم الوظيفي ومفتاح الوصول كلاهما مطلوبان.",
+    "createNewRound": "إنشاء جولة جديدة",
+    "currentSurveyDescription": "وصف الإستبيان الحالي",
+    "description": "الوصف",
+    "descriptionAr": "وصف الإستبيان (عربي)",
+    "descriptionEn": "وصف الإستبيان (أنجليزي)",
+    "edit": "تعديل الإستبيان",
+    "endTime": "نهاية التصويت",
+    "endUserMessage": "ساعدنا في تحسين خدمات شرطة دبي بالإجابة على هذا الاستبيان السريع. رأيك يهمنا. شكراً لك!",
+    "errorAccessLoginHint": "يرجى التحقق من الرقم الوظيفي أو مفتاح الوصول والمحاولة مرة أخرى.",
+    "find": "البحث عن استبيان",
+    "grpNumberRequired": "الرقم الوظيفي مطلوب.",
+    "history": {
+      "main-title": "سجل الإستبيانات",
+      "noHistoryTillNow": "ليس لديك أي إإستبيان مكتمل حتي الآن",
+      "surveyDetails": {
+        "currentUserGrpNumber": "رقمك الوظيفي",
+        "currentUserName": "اسمك",
+        "main-title": "تفاصيل الإستبيان وإجاباتك",
+        "roundDescription": "وصف الجولة",
+        "roundTitle": "عنوان الجولة",
+        "surveyDescription": "وصف الاستبيان",
+        "surveyTitle": "عنوان الاستبيان",
+        "title": "تفاصيلك وتفاصيل الاستبيان",
+        "yourPrimaryEmail": "بريدك الإلكتروني الأساسي",
+        "yourPrimaryPhoneNumber": "رقم هاتفك الأساسي"
+      }
+    },
+    "id": "الرقم التعريفي",
+    "invitationsWarning": "إذا لم تقم بتحديد وظائف أو أقسام معينة، سيتم إرسال الدعوات إلى جميع المستخدمين المسجلين في النظام.",
+    "live": {
+      "backButton": "العودة إلي إستبياناتك الحالية",
+      "mainTitle": "الإستبيانات الحالية",
+      "noActiveSurveys": "لا توجد استبيانات نشطة خاصة بك في الوقت الحالي.",
+      "takeSurvey": "بدأ الإستبيان",
+      "timeBoard": {
+        "subTitleInCaseDynamicSurvey": "شارك الآن! لديك حتى انتهاء العد التنازلي لتقديم إجاباتك وإيصال صوتك.",
+        "subTitleInCaseManualSurvey": "هذا الاستبيان قيد المراجعة اليدوية من قبل المشرف. يرجى إكماله في أقرب وقت ممكن قبل أن يتخذ المشرف قراراً بإغلاقه. ملاحظاتك تهمنا وتساعدنا على تحسين خدماتنا.",
+        "titleInCaseDynamicSurvey": "أكمل الاستبيان قبل انتهاء الوقت!",
+        "titleInCaseManualSurvey": "بانتظار ملاحظاتك!"
+      }
+    },
+    "mainTitle": "معلومات برنامج دلفاي X",
+    "manualHandle": "إدارة يدوية",
+    "mode": "الوضع",
+    "name": "العنوان",
+    "nameAr": "عنوان الإستبيان (عربي)",
+    "nameEn": "عنوان الإستبيان (أنجليزي)",
+    "noQuestionsExistForLive": "لا توجد أسئلة متاحة. يرجى التواصل مع المشرف أو انتظار إغلاق هذه الجولة.",
+    "numberOfRounds": "عدد الجولات",
+    "report": {
+      "additionQuestionAnalysis": "تحليل الأسئلة الإضافية",
+      "employeeDetails": "تفاصيل الموظفين",
+      "impactMainTitle": "تحليل شدة التأثير (لكل مستخدم)",
+      "impactTitle": "متوسط شدة التأثير",
+      "impactTooltip": "اضغط لعرض تفاصيل شدة التأثير",
+      "main-title": "تقارير الإستبيانات",
+      "noReportTillNow": "لا توجد لديك أي تقارير استبيان حتى الآن.",
+      "participantsPercentageAnalysis": "تحليل نسبة الاستجابة",
+      "percentageTitle": "معدل المشاركة في الاستبيان",
+      "probabilityMainTitle": "تحليل احتمالية الحدوث (لكل مستخدم)",
+      "probabilityTitle": "متوسط احتمالية الحدوث",
+      "probabilityTooltip": "اضغط لعرض تفاصيل احتمال الحدوث",
+      "totalEmployeesTooltip": "إجمالي عدد الموظفين المدعوين.",
+      "answeredCountTooltip": "عدد الموظفين الذين أجابوا.",
+      "pendingCountTooltip": "عدد الموظفين الذين لم يجيبوا بعد.",
+      "questionAnalysis": {
+        "title": "تقرير تحليل السؤال",
+        "subtitle": "تحليل شامل ورؤى لأسئلة الاستبيان",
+        "questionOverview": "نظرة عامة على السؤال",
+        "totalResponses": "إجمالي الاستجابات",
+        "questionType": "نوع السؤال",
+        "responseDistribution": "توزيع الاستجابات",
+        "responseDistributionSubtitle": "تحليل مرئي لاستجابات المشاركين",
+        "averageMetricsSubtitle": "مقاييس تحليل الاحتمالية والتأثير",
+        "additionalAverageQuestions": "مقياس إحتمالية الحدوث وشدة التأثير",
+        "answersCount": "إجمالي عدد الإجابات",
+        "averageImpact": "متوسط شدة التأثير",
+        "averageProbability": "متوسط احتمالية الحدوث",
+        "textAnswers": "الإجابات النصية للمشاركين",
+        "viewAllAnswers": "عرض جميع الإجابات النصية",
+        "responseRate": {
+          "countJobTitles": "عدد المسميات الوظيفية",
+          "departmentsCount": "عدد الإدارات",
+          "nationalitiesCount": "عدد الجنسيات",
+          "qualificationsCount": "عدد المؤهلات",
+          "responseRateAnalysisBasedOnDepartment": "تحليل معدل الاستجابة بناءً على الإدارة",
+          "responseRateAnalysisBasedOnJob": "تحليل معدل الاستجابة بناءً على المسمى الوظيفي",
+          "responseRateAnalysisBasedOnNationality": "تحليل معدل الاستجابة بناءً على البلد",
+          "responseRateAnalysisBasedOnQualification": "تحليل معدل الاستجابة بناءً على المؤهل العلمي",
+          "responseRateAnalysisBasedOnMaritalStatus": "تحليل معدل الاستجابة بناءً على الحالة الاجتماعية",
+          "responseRateAnalysisBasedOnGender": "تحليل معدل الاستجابة بناءً على الجنس"
+        }
+      },
+      "questionAnswersAnalysis": "تحليل الإجابات المتوفرة لهذا السؤال",
+      "questionDetails": "تحليل الأسئلة وبياناتها",
+      "roundDescription": "وصف الجولة",
+      "surveyDescription": "وصف الاستبيان",
+      "surveyDetails": {
+        "currentUserGrpNumber": "رقمك الوظيفي",
+        "currentUserName": "اسمك",
+        "main-title": "التقرير النهائي للإستبيان",
+        "questionDetails": "تفاصيل أسئلة الاستبيان",
+        "roundDescription": "وصف الجولة",
+        "roundTitle": "عنوان الجولة",
+        "surveyDescription": "وصف الاستبيان",
+        "surveyTitle": "عنوان الاستبيان",
+        "title": "تفاصيل الاستبيان",
+        "totalMultiSelectQuestions": "إجمالي أسئلة الاختيار المتعدد",
+        "totalQuestions": "إجمالي الأسئلة",
+        "totalSingleSelectQuestions": "إجمالي أسئلة الاختيار الفردي",
+        "totalTextQuestions": "إجمالي الأسئلة النصية",
+        "totalTrueFalseQuestions": "إجمالي أسئلة صح أو خطأ",
+        "yourPrimaryEmail": "بريدك الإلكتروني الأساسي",
+        "yourPrimaryPhoneNumber": "رقم هاتفك الأساسي"
+      },
+      "totalNumbersTitle": "عدد المشاركين",
+      "userPercentageMessage": "نسبة المستخدمين الذين شاركوا في الاستبيان لهذا السؤال",
+      "userQuestionAnswer": "إجابات السؤال النصي",
+      "userQuestionAnswers": "إجابات المستخدم على الأسئلة النصية مع التفاصيل",
+      "userTotalNumbersMessage": "عدد المستخدمين الذين شاركوا في الاستبيان  لهذا السؤال",
+      "viewQuestionAnalysisDetailsTooltip": "اضغط لعرض التحليل التفصيلي لهذا السؤال"
+    },
+    "round": "جولة: ",
+    "roundNumber": "رقم الجولة",
+    "roundNumberHint": "تحقق من الجولة الأخيرة وأدخل الرقم التالي لأخر جولة.",
+    "roundNumberUpdateRoundHint": "رقم الجولة غير قابل للتحديث في عملية التحديث للجولة",
+    "selectDepartment": "اختر الإدارة",
+    "selectJobs": "اختر الوظائف",
+    "selectSubDepartment": "اختر القسم الفرعي",
+    "showPublicQuestions": "عرض الأسئلة العامة",
+    "startTime": "بداية التصويت",
+    "status": "الحالة",
+    "surveyDashboardTitle": "لوحة تحكم الاستبيانات الخاصة بي",
+    "surveyRounds": {
+      "currentRoundDescription": "وصف حالة جولة الإستبيان الحالية",
+      "description": "الوصف",
+      "endRound": "إنهاء جولة برنامج دلفاي X",
+      "mainTitle": "جولات برنامج دلفاي X",
+      "publish": "نشر",
+      "questions": {
+        "add": "إضافة سؤال جديد",
+        "delete": "حذف سؤال",
+        "descriptionAr": "وصف السؤال (بالعربية)",
+        "descriptionEn": "وصف السؤال (بالإنجليزية)",
+        "edit": "تعديل سؤال",
+        "publicQuestions": {
+          "impactSeverity": "شدة التأثير",
+          "mainTitle": "أسئلة إضافية ذات صلة",
+          "probabilityOfOccurrenceQuestion": "إحتمالية الحدوث"
+        },
+        "questionOptions": {
+          "create": "إنشاء خيار جديد",
+          "delete": "حذف الخيار الحالي",
+          "title": "خيارات السؤال",
+          "titleAr": "نص الخيار (بالعربية)",
+          "titleEn": "نص الخيار (بالإنجليزية)",
+          "update": "تحديث الخيار الحالي"
+        },
+        "section-title": "أسئلة الجولة",
+        "selectQuestionType": "اختر نوع السؤال",
+        "titleAr": "نص السؤال (بالعربية)",
+        "titleEn": "نص السؤال (بالإنجليزية)",
+        "type-hint-primary": "لقد اخترت --> ",
+        "type-hint-secondary": "اختر نوع السؤال الخاص بك"
+      }
+    },
+    "updateRound": "تعديل جولة الإستبيان",
+    "userAnswers": {
+      "goToHome": "العودة إلى الصفحة الرئيسية للإستبيان",
+      "snackbarMessage": "تم إرسال الاستبيان بنجاح!",
+      "surveyMessage": "تم إرسال استبيانك بنجاح. شكرًا على ملاحظاتك!",
+      "surveySubmitted": "تم إرسال الاستبيان!",
+      "updateHint": "يمكنك تحديث استبيانك حتى يغلقه المشرف."
+    },
+    "userInvitations": "دعوات المستخدمين",
+    "userView": {
+      "accessHint": "يرجى التحقق من بريد دعوة الاستبيان الخاص بك للعثور على مفتاح الوصول، والذي يلزم للدخول إلى الاستبيان.",
+      "accessKey": "مفتاح الوصول",
+      "accessPlaceHolder": "أدخل مفتاح الوصول الخاص بك",
+      "accessTitle": "التحقق من أحقيتك للإستبيان",
+      "grpHint": "يرجى إدخال الرقم الوظيفي الخاص بك.",
+      "grpNumber": "الرقم الوظيفي",
+      "grpPlaceHolder": "أدخل الرقم الوظيفي"
+    },
+    "enterSolutionAndPressEnter": "اكتب الحل واضغط Enter لإضافة حل جديد",
+    "addedSolutions": "الحلول المضافة",
+    "noSolutionsAdded": "لم يتم إضافة أي حلول بعد",
+    "startAddingSolutions": "ابدأ بإضافة الحلول المقترحة للتحدي"
+  },
+  "settings": {
+    "challengeSettings": {
+      "add": "إضافة إعداد تحدي",
+      "challengeSettingsType": "نوع إعداد التحدي",
+      "edit": "تعديل إعداد تحدي",
+      "find": "البحث عن إعداد تحدي",
+      "id": "#",
+      "name": "العنوان",
+      "nameAr": "العنوان (عربي)",
+      "nameEn": "العنوان (أنجليزي)",
+      "settingsType": {
+        "field": "مجال الموضوع",
+        "impact": "تأثير الموضوع",
+        "importanceOfDecision": "أهمية القرار",
+        "levelOfDecision": "مستوى القرار",
+        "topicClassification": "تصنيف الموضوع"
+      }
+    },
+    "emailTemplate": {
+      "add": "أضف قالب بريد إلكتروني جديد",
+      "contentAr": "المحتوى (عربي)",
+      "contentEn": "المحتوى (إنجليزي)",
+      "contentTitle": "محتوى القالب",
+      "default": "تعيين كقالب افتراضي",
+      "edit": "تعديل قالب البريد الإلكتروني",
+      "find": "ابحث عن قالب البريد الإلكتروني المحدد",
+      "id": "الرقم التعريفي لقالب البريد الإلكتروني: ",
+      "localContent": "المحتوى",
+      "localSubject": "الموضوع",
+      "snippetsAr": "مقاطع المحتوى (عربي)",
+      "snippetsEn": "مقاطع المحتوى (إنجليزي)",
+      "snippetsNote": "ملاحظة: هذه المقاطع إلزامية لمحتواك بناءً على نوع القالب الذي اخترته.",
+      "snippetsTitle": "مقاطع محتوى البريد الإلكتروني",
+      "subjectAr": "الموضوع (عربي)",
+      "subjectEn": "الموضوع (إنجليزي)",
+      "subjectTitle": "موضوع القالب",
+      "templateTypeLabel": "اختر نوع القالب الخاص بك",
+      "templateTypeTitle": "نوع القالب"
+    },
+    "expertise": {
+      "add": "إضافة مجال خبرة جديد",
+      "edit": "تعديل مجال الخبرة",
+      "find": "البحث عن مجال الخبرة",
+      "id": "الرقم التعريفي",
+      "name": "مجال الخبرة",
+      "nameAr": "مجال الخبرة (عربي)",
+      "nameEn": "مجال الخبرة (أنجليزي)"
+    },
+    "futureStrategicDirection": {
+      "add": "إضافة أولويات مستقبلية جديدة",
+      "edit": "تعديل الأولويات المستقبلية",
+      "find": "البحث عن أولويات مستقبلية محددة",
+      "id": "معرف الأولويات المستقبلية",
+      "name": "اسم الأولويات المستقبلية",
+      "nameAr": "اسم الأولويات المستقبلية (عربي)",
+      "nameEn": "اسم الأولويات المستقبلية (إنجليزي)"
+    },
+    "futureStrategicGoals": {
+      "add": "إضافة تحديات مستقبلية جديدة",
+      "edit": "تعديل التحديات المستقبلية",
+      "find": "البحث عن تحدي مستقبلي محدد",
+      "id": "معرف التحديات المستقبلية",
+      "name": "اسم التحديات المستقبلية",
+      "nameAr": "اسم التحديات المستقبلية (عربي)",
+      "nameEn": "اسم التحديات المستقبلية (إنجليزي)"
+    },
+    "strategicDirection": {
+      "add": "إضافة توجه إستراتيجي جديد",
+      "edit": "تعديل التوجة الإستراتيجي",
+      "find": "البحث عن توجه إستراتيجي",
+      "id": "الرقم التعريفي للتوجة الإستراتيجي ",
+      "name": "التوجة الإستراتيجي",
+      "nameAr": "التوجة الإستراتيجي (عربي)",
+      "nameEn": "التوجة الإستراتيجي (أنجليزي)"
+    },
+    "strategicGoals": {
+      "add": "إضافة هدف إستراتيجي جديد",
+      "edit": "تعديل الهدف الإستراتيجي",
+      "find": "البحث عن الهدف إستراتيجي",
+      "id": "الرقم التعريفي للهدف الإستراتيجي ",
+      "name": "الهدف الإستراتيجي",
+      "nameAr": "الهدف الإستراتيجي (عربي)",
+      "nameEn": "الهدف الإستراتيجي (أنجليزي)"
+    },
+    "templateType": {
+      "add": "أضف نوع قالب جديد",
+      "default": "تعيين كقالب افتراضي",
+      "edit": "تعديل نوع القالب",
+      "find": "ابحث عن نوع القالب المحدد",
+      "id": "الرقم التعريفي: ",
+      "snippetsAr": "مقاطع المحتوى (عربي)",
+      "snippetsEn": "مقاطع المحتوى (إنجليزي)",
+      "snippetsNote": "ملاحظة: هذه المقاطع إلزامية لمحتواك بناءً على نوع القالب الذي اخترته.",
+      "snippetsTitle": "مقاطع محتوى البريد الإلكتروني",
+      "templateTypeKey": "مفتاح القالب",
+      "templateTypeKeyLabel": "اختر مفتاح القالب المراد",
+      "title": "عنوان نوع القالب",
+      "titleAr": "عنوان القالب (عربي)",
+      "titleEn": "عنوان القالب (إنجليزي)"
+    }
+  },
+  "side_bar": {
+    "controlPanel": {
+      "title": "لوحة التحكم الرئيسية"
+    },
+    "adminRequests": {
+      "title": "شاشة تحكم الأدمن"
+    },
+    "challenges": {
+      "child": {
+        "add_challenge": "إضافة تحدي جديد",
+        "list": "قائمة التحديات"
+      },
+      "title": "التحديات"
+    },
+    "myChallenges": {
+      "title": "تحدياتي"
+    },
+    "sdssSurvey": {
+      "controlTitle": "برنامج دلفاي X",
+      "title": "برنامج دلفاي X"
+    },
+    "settings": {
+      "challengeSettings": {
+        "title": "إعداد التحدي"
+      },
+      "emailTemplate": {
+        "emailSettings": "إعدادات البريد الإلكتروني",
+        "title": "إعدادات القوالب"
+      },
+      "expertise": {
+        "title": "مجالات الخبرة"
+      },
+      "futureStrategicDirection": {
+        "title": "الأولويات المستقبلية"
+      },
+      "futureStrategicGoals": {
+        "title": "التحديات المستقبلية"
+      },
+      "strategicDirection": {
+        "title": "التوجهات الاستراتيجية"
+      },
+      "strategicGoals": {
+        "title": "الأهداف الاستراتيجية"
+      },
+      "templateType": {
+        "settings": "إعدادات نوع القالب",
+        "title": "أنواع القوالب"
+      },
+      "title": "الضبط"
+    },
+    "users": {
+      "child": {
+        "add": "إضافة مستخدم جديد",
+        "all": "قائمة المستخدمين"
+      },
+      "title": "المستخدمين"
+    },
+    "validatorRequests": {
+      "title": "شاشة تحكم المدقق"
+    }
+  },
+  "surveyHome": {
+    "content": {
+      "main-description": "ملاحظاتكم تساعدنا في تحسين منظمة شرطة دبي. شاركوا أفكاركم عبر هذه المنصة للمساهمة في نمو وتطور المنظمة.",
+      "main-title": "مرحبًا بكم في منصة برنامج دلفاي X الخاصة بنا"
+    }
+  },
+  "user": {
+    "noUsersFound": "لم يتم العثور على مستخدمين",
+    "add": {
+      "Submit": "حفظ",
+      "alternativeEmail": "بريد إلكتروني البديل",
+      "alternativeMobile": "الهاتف المحمول البديل",
+      "basicInformation": "المعلومات الأساسية",
+      "chatContents": "محتويات الدردشة",
+      "contactInformation": "معلومات الاتصال",
+      "decision": "القرار",
+      "defaultExpertises": "الأساسية",
+      "department": "الإدارة",
+      "expertLevel": "مستوى الخبرة",
+      "expertisesMainTitle": "الخبرة",
+      "expertisesTitle": "مجالات الخبرة",
+      "expertiseAlreadyExists": "تم إضافة هذه الخبرة مسبقاً.",
+      "expertiseAdded": "تم إضافة الخبرة بنجاح",
+      "expertiseRemoved": "تم إزالة الخبرة بنجاح",
+      "fillRequiredExpertiseFields": "يرجى ملء الحقول المطلوبة (مجال الخبرة ومستوى الخبرة)",
+      "primaryExpertiseRequired": "يجب تحديد خبرة واحدة على الأقل كخبرة أساسية عند اختيار الخبرات",
+      "firstName": "الاسم الأول",
+      "fullName": "الإسم بالكامل",
+      "gradeName": "الدرجة الوظيفية",
+      "internalDocuments": "وثائق داخلية",
+      "isDelphiModerator": "مشرف دلفي",
+      "jobName": "الوظيفية",
+      "language": "اللغة",
+      "lastName": "اللقب",
+      "middleName": "الاسم الأوسط",
+      "permissionDetails": "تفاصيل الصلاحيات",
+      "userGroups": "مجموعات المستخدمين",
+      "questionView": "عرض السؤال",
+      "requiredFields": "الحقول المطلوبة",
+      "scrollingText": "توجيهات القائد/مساعد القائد",
+      "selectAll": "عرض الكل",
+      "settings": "الإعدادات",
+      "socialMediaFeeds": "تغذية شبكات التواصل الاجتماعي",
+      "title": "إضافة مستخدم جديد"
+    },
+    "createdAt": "مسجل",
+    "departmentType": "نوع الإدارة",
+    "grade": "درجة",
+    "profileImage": "صورة البروفايل",
+    "search": {
+      "email": "البريد الإلكتروني",
+      "expert_level": "الخبرة",
+      "fullName": "الإسم",
+      "grpNumber": "الرقم الوظيفي",
+      "jobName": "الوظيفية",
+      "list": {
+        "SrNo": "م",
+        "action": "الاجراء",
+        "departmentName": "الإدارة",
+        "email": "البريد الإلكتروني",
+        "expert_level": "الخبرة",
+        "full_name": "الإسم كامل",
+        "grpNumber": "الرقم الوظيفي",
+        "language": "اللغة",
+        "mobile": "الهاتف المحمول",
+        "role": "الدور",
+        "sector": "القطاع",
+        "status": "الحالة",
+        "title": "اللقب",
+        "user_type": "نوع المستخدم"
+      },
+      "main-title": "المستخدمين",
+      "mobile": "الهاتف المحمول",
+      "role": "الدور",
+      "grpNumberSearchHint": "أدخل رقم الموظف (GRP) للبحث عنه وإضافته إلى النظام."
+    },
+    "sector": "قطاع",
+    "sectorShortName": "الاسم المختصر للقطاع",
+    "update": {
+      "title": "تحرير المستخدم"
+    },
+    "userDetails": "تفاصيل المستخدم",
+    "creation": {
+      "resetAndSearch": "إعادة التعيين والبحث عن مستخدم آخر"
+    }
+  },
+  "validation": {
+    "percentageRange": "يجب أن تكون النسبة بين 0 و100",
+    "email": "الرجاء إدخال بريد إلكتروني صحيح",
+    "password": "كلمة المرور مطلوبة",
+    "required": "هذا الحقل مطلوب",
+    "maxLength": "يجب ألا تتجاوز الإجابة {max} حرف",
+    "username": "اسم المستخدم مطلوب",
+    "dangerousContent": "المدخل يحتوي على محتوى خطير من البرامج النصية أو الأوامر",
+    "htmlNotAllowed": "المدخل يحتوي على HTML أو أحرف خاصة غير مسموحة"
+  },
+  "validatorDashboard": {
+    "accepted": "طلبات الإلتحاق بالتحدي (المقبولة)",
+    "closedChallenges": "التحديات المغلقة",
+    "completedChallenges": "التحديات المنتهية",
+    "pending": "طلبات الإلتحاق بالتحدي (المعلقة)",
+    "rejected": "طلبات الإلتحاق بالتحدي (المرفوضة)",
+    "reviewedByMe": "طلبات التحديات (تمت المراجعة)",
+    "underReview": "طلبات التحديات (قيد مراجعتي)"
+  },
+  "العناصر لكل صفحة": "العناصر لكل صفحة",
+  "الكل": "الكل",
+  "جاري تحميل البيانات... الرجاء الإنتظار": "جاري تحميل البيانات... الرجاء الإنتظار",
+  "All": "الكل",
+  "selectedUsers": "المستخدمون المحددون",
+  "select": "تحديد",
+  "selectedValidators": "المدققون المحددون",
+  "validationErrors": "أخطاء التحقق",
+  "complete": "مكتمل",
+  "progress": "التقدم",
+  "noData": "لا توجد بيانات متاحة",
+  "noDataTitle": "لا توجد نتائج للعرض حالياً",
+  "noDataDescription": "لا توجد سجلات مطابقة للمعايير الحالية. يمكنك تعديل عوامل البحث أو التحديث لتحميل بيانات جديدة.",
+  "noDataToExport": "لا توجد بيانات متاحة للتصدير",
+  "notActive": "غير نشط",
+  "statistics": "الإحصائيات",
+  "challenges": "التحديات",
+  "generatedOn": "تم إنشاؤه في",
+  "totalResults": "إجمالي النتائج",
+  "searchResults": "نتائج البحث",
+  "showing": "عرض",
+  "of": "من",
+  "showLess": "عرض أقل",
+  "showMore": "عرض المزيد",
+  "notAvailable": "غير متاح",
+  "unknown": "غير معروف",
+  "completed": "مكتمل",
+  "pending": "قيد الانتظار",
+  "responses": "الاستجابات",
+  "messageStatus": {
+    "sent": "تم الإرسال",
+    "delivered": "تم التسليم",
+    "read": "تم القراءة"
+  },
+  "typing": "يكتب...",
+  "time": "الوقت",
+  "messageReactions": "ردود فعل على الرسالة",
+  "$vuetify": {
+    "badge": "شارة",
+    "close": "إغلاق",
+    "dataIterator": {
+      "noResultsText": "لا توجد سجلات مطابقة",
+      "loadingText": "جاري تحميل العناصر..."
+    },
+    "dataTable": {
+      "itemsPerPageText": "صفوف لكل صفحة:",
+      "ariaLabel": {
+        "sortDescending": "مرتب تنازلياً",
+        "sortAscending": "مرتب تصاعدياً",
+        "sortNone": "غير مرتب",
+        "activateNone": "تفعيل لإزالة الترتيب"
+      },
+      "sortBy": "ترتيب حسب"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "عناصر لكل صفحة:",
+      "itemsPerPageAll": "الكل",
+      "nextPage": "الصفحة التالية",
+      "prevPage": "الصفحة السابقة",
+      "firstPage": "الصفحة الأولى",
+      "lastPage": "الصفحة الأخيرة",
+      "pageText": "{0}-{1} من {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "تم اختيار {0}",
+      "nextMonthAriaLabel": "الشهر القادم",
+      "nextYearAriaLabel": "السنة القادمة",
+      "prevMonthAriaLabel": "الشهر السابق",
+      "prevYearAriaLabel": "السنة السابقة"
+    },
+    "noDataText": "لا توجد بيانات متاحة",
+    "carousel": {
+      "prev": "السابق",
+      "next": "التالي",
+      "ariaLabel": {
+        "delimiter": "شريحة {0} من {1}"
+      }
+    },
+    "calendar": {
+      "moreEvents": "المزيد {0}"
+    },
+    "fileInput": {
+      "counter": "{0} ملفات",
+      "counterSize": "{0} ملفات ({1} في المجموع)"
+    },
+    "timePicker": {
+      "am": "ص",
+      "pm": "م"
+    },
+    "pagination": {
+      "of": "من",
+      "ariaLabel": {
+        "wrapper": "تنقل الصفحات",
+        "next": "الصفحة التالية",
+        "previous": "الصفحة السابقة",
+        "page": "انتقل إلى الصفحة {0}",
+        "currentPage": "الصفحة {0}, الصفحة الحالية"
+      }
+    },
+    "rating": {
+      "ariaLabel": {
+        "item": "تقييم {0} من {1}"
+      }
+    }
+  },
+  "admin": {
+    "welcome": {
+      "title": "لوحة تحكم الأدمن",
+      "subtitle": "إدارة وتحكم في جميع خدمات النظام من مكان واحد. اختر وحدة أدناه للبدء."
+    },
+    "modules": {
+      "users": "إدارة المستخدمين",
+      "challenges": "التحكم في التحديات",
+      "surveys": "إدارة الاستبيانات",
+      "reports": "التحليلات والتقارير",
+      "settings": "إعدادات النظام",
+      "notifications": "الإشعارات",
+      "explore": "استكشاف الوحدة"
+    },
+    "moduleDescriptions": {
+      "users": "إدارة حسابات المستخدمين والأدوار والصلاحيات",
+      "challenges": "إنشاء ومراقبة التحديات والمسابقات",
+      "surveys": "إنشاء وتحليل الاستبيانات والملاحظات",
+      "reports": "عرض التحليلات التفصيلية وإنشاء التقارير",
+      "settings": "تكوين إعدادات وتفضيلات النظام",
+      "notifications": "إدارة إشعارات وتنبيهات النظام"
+    },
+    "stats": {
+      "totalUsers": "إجمالي المستخدمين",
+      "activeChallenge": "التحديات النشطة",
+      "satisfaction": "رضا المستخدمين"
+    }
+  }
+}

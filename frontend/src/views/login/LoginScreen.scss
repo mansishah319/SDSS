@@ -1,0 +1,352 @@
+@use '../../assets/css/_variables' as *;
+
+.v-main {
+  margin-top: top 0 !important;
+}
+
+.login-block {
+  background-color: white;
+  border-radius: 60px;
+  width: 55%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 20px 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+  left: 0;
+  right: 0;
+}
+
+// Portal name card styles
+.login-portal-name-card {
+  flex: 1;
+  max-width: 500px;
+  //background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 24px;
+  //padding: 48px 32px;
+  // box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  // border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    //  background: linear-gradient(90deg, #19844e, #00b894, #19844e);
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+.login-logo-container {
+  margin-bottom: 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #19844e, transparent);
+    border-radius: 1px;
+    display: none;
+  }
+}
+
+.login-logo {
+  width: 80px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(25, 132, 78, 0.3));
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &:hover {
+    //transform: scale(1.05) rotateY(5deg);
+    filter: drop-shadow(0 12px 32px rgba(25, 132, 78, 0.4));
+  }
+}
+
+.login-portal-names-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 80%;
+}
+
+.login-portal-name-arabic {
+  font-family: BukraBold, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #0da06e;
+  // text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(25, 132, 78, 0.2);
+  // background: linear-gradient(135deg, #19844e 0%, #00b894 50%, #19844e 100%);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.02em;
+  // animation: glowText 3s ease-in-out infinite alternate;
+}
+
+.login-portal-name-english {
+  font-family: BukraBold, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #121212;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(25, 132, 78, 0.15);
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes glowText {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(25, 132, 78, 0.3));
+  }
+  100% {
+    filter: brightness(1.1) drop-shadow(0 0 15px rgba(25, 132, 78, 0.5));
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+// Form card styles
+.login-form-card {
+  flex: 1;
+  max-width: 450px;
+  //background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 10px;
+  //box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  //border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    // background: linear-gradient(90deg, #19844e, #00b894, #19844e);
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+.login-form-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  color: #121212;
+
+  .login-form-title {
+    font-family: BukraBold, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    color: #121212;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .login-form-subtitle {
+    color: #666666;
+    font-family: BukraRegular, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .login-form-button {
+    gap: 12px;
+    background: #008755;
+    color: #ffffff;
+    font-family: BukraBold, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    //padding: 16px 32px;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 16px rgba(25, 132, 78, 0.3), 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    min-height: 55px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    &:hover {
+      //transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(25, 132, 78, 0.4), 0 6px 12px rgba(0, 0, 0, 0.15);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    img {
+      margin-inline-start: 8px;
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .login-block {
+    width: 90%;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .login-portal-name-card,
+  .login-form-card {
+    max-width: 90%;
+    width: 90%;
+    height: fit-content;
+    max-height: fit-content;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-block {
+    width: 95%;
+    padding: 20px 10px;
+  }
+
+  .login-portal-name-card {
+    padding: 32px 24px;
+  }
+
+  .login-form-card {
+    padding: 32px 24px;
+  }
+
+  .login-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .login-portal-name-arabic {
+    font-size: 2rem;
+  }
+
+  .login-portal-name-english {
+    font-size: 1.4rem;
+  }
+}
+
+.login-footer {
+  // position: absolute
+  // bottom: 20px
+  // left: 50% !important
+  // transform: translateX(-50%) !important
+  text-align: center;
+  margin-top: 50px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .login-copyright {
+    font-family: DubaiRegular, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    color: $white-color;
+  }
+}
+
+.custom-login-page-language {
+  justify-self: center;
+}
+
+.custom-login-footer-style {
+  border-radius: 30px;
+}
+
+
+.dp-input {
+  .v-field {
+    border-radius: 12px !important;
+  }
+}
+
+.dp-select {
+
+  .v-field {
+    border-radius: 12px !important;
+
+    .v-field__field {
+      .v-field__input {
+        .v-select__selection {
+          span {
+            font-family: 'bukrabold' !important;
+            font-size: 10px !important;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.app-select-menu {
+  .v-list-item__content {
+    .v-list-item-title {
+      font-family: 'bukraregular' !important;
+    }
+  }
+
+}

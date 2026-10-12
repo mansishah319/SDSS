@@ -1,0 +1,36 @@
+# Archives and binaries
+*.zip
+*.rar
+*.jar
+*.war
+*.ear
+*.class
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.apt_generated_tests/
+
+# Backend (api/)
+api/target/
+api/logs/
+
+# Frontend (frontend/)
+frontend/node_modules/
+frontend/dist/
+frontend/.cache/
+frontend/tsconfig.node.tsbuildinfo
+
+# Docs and resource archives (not source)
+Docs/
+Archive.zip
+sdss-database.rar
+sdss-resources.rar
+sdss-ui-config.rar
+sdss-ui.zip
+sdss.zip

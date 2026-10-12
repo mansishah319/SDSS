@@ -1,0 +1,130 @@
+<div class="question-form">
+  <v-form @submit.prevent="handleSubmit" class="question-form__inner">
+    <section class="question-form__section question-form__section--accent">
+      <div class="question-form__head">
+        <div>
+          <p class="question-form__eyebrow">Question Type</p>
+          <h4 class="question-form__title">{{ cardTitle }}</h4>
+          <p class="question-form__copy">
+            Select the answer type first so the form can prepare the correct option behavior for this question.
+          </p>
+        </div>
+        <v-chip :color="isEditing ? 'warning' : 'primary'" variant="tonal" rounded="pill">
+          {{ isEditing ? $t('sdssSurvey.surveyRounds.questions.edit') : $t('sdssSurvey.surveyRounds.questions.add') }}
+        </v-chip>
+      </div>
+
+      <v-select
+        v-model="selectedQuestionType"
+        :items="questionTypes"
+        :hint="selectedQuestionType ? `${$t('sdssSurvey.surveyRounds.questions.type-hint-primary')} ${selectedQuestionType}` : $t('sdssSurvey.surveyRounds.questions.type-hint-secondary')"
+        item-title="value"
+        item-value="key"
+        variant="outlined"
+        density="comfortable"
+        class="question-form-dropdown-list font-dubai-regular"
+        persistent-hint
+        @change="handleQuestionTypeChange"
+      >
+        <template #label>
+          <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.selectQuestionType')"
+                           :mandatory="true" />
+        </template>
+      </v-select>
+    </section>
+
+    <section class="question-form__section">
+      <div class="question-form__head">
+        <div>
+          <p class="question-form__eyebrow">Content</p>
+          <h4 class="question-form__title">{{ $t('sdssSurvey.surveyRounds.questions.section-title') }}</h4>
+          <p class="question-form__copy">
+            Write the question in both languages and decide whether it should appear in the public questions area.
+          </p>
+        </div>
+      </div>
+
+      <div class="question-form__grid question-form__grid--two">
+        <v-text-field variant="outlined" density="comfortable" v-model="formData.titleEn"
+                      class="font-dubai-regular common-en-text-field" required>
+          <template #label>
+            <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.titleEn')" :mandatory="true" />
+          </template>
+        </v-text-field>
+
+        <v-text-field variant="outlined" density="comfortable" v-model="formData.titleAr"
+                      class="font-dubai-regular common-ar-text-field" required>
+          <template #label>
+            <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.titleAr')" :mandatory="true" />
+          </template>
+        </v-text-field>
+
+        <v-textarea variant="outlined" density="comfortable" rows="4" auto-grow v-model="formData.descriptionEn"
+                    class="font-dubai-regular common-en-text-field">
+          <template #label>
+            <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.descriptionEn')" :mandatory="false" />
+          </template>
+        </v-textarea>
+
+        <v-textarea variant="outlined" density="comfortable" rows="4" auto-grow v-model="formData.descriptionAr"
+                    class="font-dubai-regular common-ar-text-field">
+          <template #label>
+            <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.descriptionAr')" :mandatory="false" />
+          </template>
+        </v-textarea>
+      </div>
+
+      <v-checkbox v-model="formData.showPublicQuestions" :label="$t('sdssSurvey.showPublicQuestions')" color="primary"
+                  hide-details />
+    </section>
+
+    <section v-if="showOptions && !isEditing" class="question-form__section">
+      <div class="question-form__head">
+        <div>
+          <p class="question-form__eyebrow">Options</p>
+          <h4 class="question-form__title">{{ $t('sdssSurvey.surveyRounds.questions.questionOptions.title') }}</h4>
+          <p class="question-form__copy">
+            Define the visible options that respondents can choose from for this question type.
+          </p>
+        </div>
+        <v-btn color="primary" variant="tonal" rounded="pill" prepend-icon="mdi-plus" @click="addOption">
+          {{ $t('sdssSurvey.surveyRounds.questions.questionOptions.create') }}
+        </v-btn>
+      </div>
+
+      <div class="question-form__option-list">
+        <article v-for="(option, index) in options" :key="index" class="question-form__option-card">
+          <div class="question-form__grid question-form__grid--two">
+            <v-text-field variant="outlined" density="comfortable" v-model="option.optionEn" class="font-dubai-regular">
+              <template #label>
+                <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.questionOptions.titleEn')"
+                                 :mandatory="true" />
+              </template>
+            </v-text-field>
+
+            <div class="question-form__option-actions">
+              <v-text-field variant="outlined" density="comfortable" v-model="option.optionAr"
+                            class="font-dubai-regular">
+                <template #label>
+                  <CustomFormLabel :label-value="$t('sdssSurvey.surveyRounds.questions.questionOptions.titleAr')"
+                                   :mandatory="true" />
+                </template>
+              </v-text-field>
+
+              <v-btn icon="mdi-delete-outline" color="error" variant="text" @click="removeOption(index)" />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="question-form__actions">
+      <v-btn class="handle-cancel-button-question-form-view" color="error" variant="text" @click="handleCancel">
+        {{ $t('common.cancel') }}
+      </v-btn>
+      <v-btn :disabled="!isValidForm" type="submit" color="primary" variant="flat" rounded="pill">
+        {{ isEditing ? $t('common.update') : $t('common.submit') }}
+      </v-btn>
+    </div>
+  </v-form>
+</div>

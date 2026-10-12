@@ -1,0 +1,441 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-container fluid>
+  <!-- Survey Information Card -->
+  <v-row>
+    <v-col cols="12">
+      <v-card class="mb-4">
+        <v-card-title
+          class="text-h5 custom-survey-information-view-card-title d-flex align-center justify-space-between">
+          {{ $t('sdssSurvey.mainTitle') }}
+          <CustomGoBackButton :is-arabic="isLanguageAr()" class="custom-generic-go-back-button" route-to="SdssSurvey">
+          </CustomGoBackButton>
+        </v-card-title>
+        <v-card-text class="justify-space-between">
+          <v-row>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.name') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.localTitle }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3" v-show="survey.localDescription">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.description') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.localDescription }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.mode') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.mode }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('sdssSurvey.status') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <v-chip v-if="!survey.active" v-show="!survey.active" color="red">
+                  <span class="font-dubai-regular">{{ $t('common.notActive') }}</span>
+                </v-chip>
+                <v-chip v-else color="green">
+                  <span class="font-dubai-regular">{{ $t('common.active') }}</span>
+                </v-chip>
+              </v-col>
+            </v-col>
+          </v-row>
+          <v-divider :thickness="2" color="info"></v-divider>
+          <v-row>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('common.createdBy') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.createdBy }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.createdAt') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.createdAt }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.updatedBy') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.updatedBy }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.updatedAt') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ survey.updatedAt }}</span>
+              </v-col>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <v-card class="survey-invites-card mb-4" elevation="0">
+    <v-card-title class="survey-invites-card__header">
+      <div class="survey-invites-card__title-group">
+        <v-icon icon="mdi-email-multiple-outline" size="28"></v-icon>
+        <div>
+          <h3>{{ $t('sdssSurvey.userInvitations') }}</h3>
+          <p>{{ invitedUsers.length }} {{ $t('common.invitedUsers') }} </p>
+        </div>
+      </div>
+      <div class="survey-invites-card__actions">
+        <v-chip color="success" variant="tonal" rounded="pill">
+          {{ invitedUsers.length - missedInvitationsCount }} {{ $t('common.sent') }}
+        </v-chip>
+        <v-chip :color="missedInvitationsCount > 0 ? 'warning' : 'success'" variant="tonal" rounded="pill">
+          {{ missedInvitationsCount }} {{ $t('common.missed') }}
+        </v-chip>
+        <v-btn
+          color="primary"
+          variant="flat"
+          prepend-icon="mdi mdi-email-outline"
+          :loading="resendAllLoading"
+          :disabled="missedInvitationsCount === 0"
+          @click="resendMissingInvitationEmails"
+        >
+          {{ $t('common.sendAllMissedEmails') }}
+        </v-btn>
+      </div>
+    </v-card-title>
+
+    <v-card-text>
+      <div class="survey-invites-card__toolbar">
+        <v-text-field
+          v-model="invitedUsersSearch"
+          density="compact"
+          :label="$t('common.search')"
+          prepend-inner-icon="mdi-magnify"
+          variant="outlined"
+          hide-details
+          clearable
+        />
+      </div>
+
+      <v-data-table
+        :headers="invitedUsersHeaders"
+        :items="invitedUsers"
+        :search="invitedUsersSearch"
+        :loading="invitedUsersLoading"
+        :loading-text="$t('common.loading')"
+        item-value="employeeGrpNumber"
+        class="survey-invites-card__table"
+        :items-per-page-text="$t('common.items_per_page')"
+        :items-per-page-options="[
+          { value: 10, title: '10' },
+          { value: 25, title: '25' },
+          { value: 50, title: '50' },
+          { value: -1, title: $t('common.allPages') }
+        ]"
+      >
+        <template v-slot:item.fullName="{ item }">
+          <div class="survey-invites-card__user">
+            <v-avatar size="34" color="primary" variant="tonal">
+              {{ (item.fullName || item.employeeGrpNumber || '-').toString().charAt(0) }}
+            </v-avatar>
+            <div>
+              <strong>{{ item.fullName || '-' }}</strong>
+              <span>{{ item.employeeGrpNumber }}</span>
+            </div>
+          </div>
+        </template>
+
+        <template v-slot:item.sent="{ item }">
+          <v-chip
+            :color="item.sent ? 'success' : 'warning'"
+            variant="tonal"
+            rounded="pill"
+            size="small"
+          >
+            <v-icon :icon="item.sent ? 'mdi-check-circle-outline' : 'mdi-alert-circle-outline'" start></v-icon>
+            {{ item.sent ? 'True' : 'False' }}
+          </v-chip>
+        </template>
+
+        <template v-slot:item.actions="{ item }">
+          <v-btn
+            v-if="!item.sent"
+            color="error"
+            variant="tonal"
+            size="small"
+            :loading="Boolean(resendLoadingByGrp[item.employeeGrpNumber])"
+            @click="resendInvitationEmail(item)"
+          >
+            <v-icon>mdi-email-sync</v-icon>
+            <v-tooltip activator="parent" location="top">
+              {{ $t('common.sendEmail') }}
+            </v-tooltip>
+          </v-btn>
+          <v-icon v-else color="success" icon="mdi mdi-email-check-outline"></v-icon>
+        </template>
+
+        <template v-slot:no-data>
+          <div class="survey-invites-card__empty">
+            <v-icon icon="mdi-account-search-outline" size="42"></v-icon>
+            <span>{{ $t('common.empty') }}</span>
+          </div>
+        </template>
+      </v-data-table>
+    </v-card-text>
+  </v-card>
+
+  <!-- Survey Rounds List -->
+  <v-card>
+    <v-card-title class="rounds-list-survey-rounds-header text-h5">
+      <span>{{ $t('sdssSurvey.surveyRounds.mainTitle') }}</span>
+      <v-spacer></v-spacer>
+      <div class="rounds-list-header-actions">
+        <v-btn density="compact" color="primary" icon @click="openCreateNewRound()"
+               class="rounds-list-create-round-btn">
+          <v-icon size="large">mdi-plus</v-icon>
+          <v-tooltip activator="parent" location="top"> {{ $t('common.create') }}</v-tooltip>
+        </v-btn>
+      </div>
+    </v-card-title>
+    <v-card-text>
+      <v-col v-for="round in survey.rounds" class="sdss-survey-rounds-column" :key="round.id" cols="12">
+        <v-card class="rounded-lg elevation-2 sdss-survey-rounds-card" variant="outlined">
+          <v-card-title class="sdss-view-screen-round-list-card-title">
+            <v-row class="text-center-view" align="center" justify="center" no-gutters>
+              <!-- Avatar Section -->
+              <v-col class="d-flex align-center justify-center" cols="auto">
+                <v-avatar size="50" class="avatar-survey-round-number">
+                  {{ $t('sdssSurvey.round') }} {{ round.roundNumber }}
+                </v-avatar>
+              </v-col>
+
+              <!-- Icon Section -->
+              <v-col class="d-flex align-center justify-center" cols="auto">
+                <v-icon :color="iconColor(round.status)" class="mx-2"> {{ icon(round.status) }}</v-icon>
+              </v-col>
+
+              <!-- Spinner Section -->
+              <v-col class="d-flex align-center justify-center" cols="auto"
+                     v-if="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.IN_PROGRESS"
+                     v-show="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.IN_PROGRESS">
+                <AppActivityIndicator
+                  :color="getRoundActivityColor(round.status)"
+                  :size="30"
+                  aria-label="Round in progress"
+                />
+              </v-col>
+              <v-col class="text-center-view">
+                <h3 class="text-h6 focus-in-contract-bck sdss-survey-main-title font-dubai-bold">
+                  {{ round.localTitle }}
+                </h3>
+              </v-col>
+
+
+            </v-row>
+
+
+            <div>
+              <v-card-subtitle class="sdss-survey-round-card-subtitle">
+                <span class="font-dubai-bold">
+                  <p class="text-sm font-dubai-bold">{{ round.localStatus }}</p>
+                </span>
+                <v-col v-if="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.PENDING"
+                       v-show="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.PENDING"
+                       class="dss-survey-round-list-card-action-column">
+                  <v-btn class="sdss-survey-round-list-card-action-btn " density="compact" icon
+                         @click="publishRoundIfStatusPending(round)">
+                    <v-btn color="green" size="small" icon="mdi-cloud-upload" class="publish-round-btn"></v-btn>
+                    <v-tooltip activator="parent" :location="isRtl ? 'left' : 'right'">
+                      {{ $t('sdssSurvey.surveyRounds.publish') }}
+                    </v-tooltip>
+                  </v-btn>
+                </v-col>
+                <v-col v-if="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.IN_PROGRESS"
+                       v-show="sdssRoundStatusFromString(round.localStatus) === SdssRoundStatus.IN_PROGRESS"
+                       class="dss-survey-round-list-card-action-column">
+                  <v-btn class="sdss-survey-round-list-card-action-btn" density="compact" icon
+                         @click="publishRoundIfStatusInProgress(round)">
+                    <v-icon color="blue">{{ 'mdi mdi-check-circle' }}</v-icon>
+                    <v-tooltip activator="parent" :location="isRtl ? 'left' : 'right'">
+                      {{ $t('sdssSurvey.surveyRounds.endRound') }}
+                    </v-tooltip>
+                  </v-btn>
+                </v-col>
+              </v-card-subtitle>
+            </div>
+
+          </v-card-title>
+
+          <v-card-text class="sdss-survey-round-card-text">
+            <v-row>
+              <v-col cols="9">
+                <v-row>
+                  <v-col cols="2">
+                    <v-col cols="12">
+                      <span class="font-dubai-bold">{{ $t('common.createdBy') }}</span>
+                    </v-col>
+                    <v-col cols="12">
+                      <span class="font-dubai-regular">{{ round.createdBy }}</span>
+                    </v-col>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-col cols="12">
+                      <span class="font-dubai-bold">{{ $t('common.createdAt') }}</span>
+                    </v-col>
+                    <v-col cols="12">
+                      <span class="font-dubai-regular">{{ round.createdAt }}</span>
+                    </v-col>
+                  </v-col>
+                  <v-col cols="2" v-if="!round.manualHandle" v-show="!round.manualHandle">
+                    <v-col cols="12">
+                      <span class="font-dubai-bold">{{ $t('sdssSurvey.startTime') }}</span>
+                    </v-col>
+                    <v-col cols="12">
+                      <span class="font-dubai-regular">{{ round.startTime }}</span>
+                    </v-col>
+                  </v-col>
+                  <v-col cols="2" v-if="!round.manualHandle" v-show="!round.manualHandle">
+                    <v-col cols="12">
+                      <span class="font-dubai-bold">{{ $t('sdssSurvey.endTime') }}</span>
+                    </v-col>
+                    <v-col cols="12">
+                      <span class="font-dubai-regular">{{ round.endTime }}</span>
+                    </v-col>
+                  </v-col>
+                  <v-col :cols="round.manualHandle ? 7 : 3">
+                    <v-col cols="12">
+                      <span class="font-dubai-bold">{{ $t('sdssSurvey.surveyRounds.description') }}</span>
+                    </v-col>
+                    <v-col cols="12">
+                      <span class="font-dubai-regular">
+                        <p>{{ round.localDescription }}</p>
+                      </span>
+                    </v-col>
+                  </v-col>
+                </v-row>
+              </v-col>
+
+              <!-- Adjusted Card Actions for Horizontal Alignment -->
+              <v-col cols="3" class="d-flex align-center sdss-survey-round-list-card-actions justify-end">
+                <div class="d-flex ga-3">
+
+                  <v-tooltip :text="$t('common.viewDetails')" location="top">
+                    <template v-slot:activator="{ props }">
+                      <v-btn v-bind="props" class="sdss-survey-round-list-card-action-btn" density="compact" icon
+                             @click="viewDetails(round)">
+                        <v-icon color="primary">mdi-eye</v-icon>
+                      </v-btn>
+                    </template>
+                  </v-tooltip>
+
+                  <v-tooltip :text="$t('common.editRound')" location="top">
+                    <template v-slot:activator="{ props }">
+                      <v-btn v-bind="props" class="sdss-survey-round-list-card-action-btn" density="compact" icon
+                             v-show="isModeratorAndAllowedToUpdateOrDelete(round)"
+                             @click="openUpdateRoundScreen(round)">
+                        <v-icon color="yellow">mdi-pencil</v-icon>
+                      </v-btn>
+                    </template>
+                  </v-tooltip>
+
+                  <v-tooltip :text="$t('common.deleteRound')" location="top">
+                    <template v-slot:activator="{ props }">
+                      <v-btn v-bind="props" class="sdss-survey-round-list-card-action-btn" density="compact" icon
+                             v-show="isModeratorAndAllowedToUpdateOrDelete(round)" @click="openDeleteDialog(round.id)">
+                        <v-icon color="red">mdi-trash-can</v-icon>
+                      </v-btn>
+                    </template>
+                  </v-tooltip>
+
+                </div>
+              </v-col>
+
+              <AppDialogShell
+                :model-value="isCreateRoundDialogOpen"
+                :title="$t('sdssSurvey.createNewRound')"
+                subtitle="Create the next survey round with bilingual details and the correct execution mode."
+                icon="mdi-timeline-plus-outline"
+                :max-width="1080"
+                content-class="pt-0"
+                @update:modelValue="isCreateRoundDialogOpen = $event"
+                @close="closeCreateRoundDialog"
+              >
+                <CreateSingleRound @onCreate="submitCreateRound" @onClose="closeCreateRoundDialog" />
+              </AppDialogShell>
+
+              <AppDialogShell
+                :model-value="isUpdateRoundDialogOpen"
+                :title="$t('sdssSurvey.updateRound')"
+                subtitle="Refine the selected round while preserving its current numbering and moderator workflow."
+                icon="mdi-timeline-clock-outline"
+                :max-width="1080"
+                content-class="pt-0"
+                @update:modelValue="isUpdateRoundDialogOpen = $event"
+                @close="closeUpdateRoundDialog"
+              >
+                <template #meta>
+                  <v-chip color="white" variant="flat" size="small">{{ $t('common.id') }}: {{ selectedRoundForUpdate.id
+                    }}
+                  </v-chip>
+                </template>
+
+                <CreateSingleRound @onCreate="submitUpdateRound" @onClose="closeUpdateRoundDialog"
+                                   :round="selectedRoundForUpdate" :show-update-manual-info="true"
+                                   :isUpdate="true" />
+              </AppDialogShell>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-card-text>
+    <ConfirmationDialog
+      v-if="deleteRoundDialog"
+      :title="$t('common.deletionTitle')"
+      :message="$t('common.deleteConfirmation')"
+      icon="mdi-trash-can-outline"
+      icon-color="error"
+      confirm-button-color="error"
+      :confirm-text="$t('common.delete')"
+      @confirmed="confirmRoundDeletion"
+      @cancel="cancelRoundDeletion"
+    />
+  </v-card>
+</v-container>

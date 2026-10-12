@@ -1,0 +1,75 @@
+<LoginHeader></LoginHeader>
+<LoginBanner></LoginBanner>
+<div class="login-block">
+  <div class="login-portal-name-card">
+    <div class="login-logo-container">
+      <img src="@/assets/images/logo/sdss-logo.png" alt="SDSS Logo" class="login-logo" />
+    </div>
+    <div class="login-portal-names-container">
+      <div class="login-portal-name-arabic">{{ $t('login.appName') }}</div>
+    </div>
+  </div>
+  <div class="login-form-card">
+    <div class="login-form-block">
+      <div class="login-form-title">{{ $t('login.login') }}</div>
+      <div class="login-form-subtitle mb-4">{{ $t('login.loginSubMessage') }}</div>
+      <v-text-field
+        :label="$t('common.grpNumber')"
+        type="number"
+        v-model="grpNumber"
+        variant="outlined"
+        class="mt-5 mb-1 dp-input"
+      >
+        <template v-slot:prepend-inner>
+          <img src="@/assets/images/login/user-icon.svg" alt="user-icon" />
+        </template>
+      </v-text-field>
+      <v-text-field
+        :label="$t('login.username')"
+        type="text"
+        v-model="username"
+        variant="outlined"
+        class="mt-1 mb-1 dp-input"
+        :rules="[required]"
+        :error-messages="usernameError"
+      >
+        <template v-slot:prepend-inner>
+          <img src="@/assets/images/login/user-icon.svg" alt="user-icon" />
+        </template>
+      </v-text-field>
+      <v-text-field
+        :label="$t('login.password')"
+        v-model="password"
+        :type="showPassword ? 'text' : 'password'"
+        variant="outlined"
+        :rules="[required]"
+        class="mt-1 mb-1 dp-input"
+        :error-messages="passwordError"
+      >
+        <template v-slot:prepend-inner>
+          <img src="@/assets/images/login/key-icon.svg" alt="Key-Icon" />
+        </template>
+        <template v-slot:append-inner>
+          <img src="@/assets/images/login/eye-icon.svg" alt="Eye-Icon" />
+        </template>
+      </v-text-field>
+      <v-select
+        v-if="isLocalEnvironment"
+        v-model="selectedSystemRoles"
+        :items="systemRoleItems"
+        item-title="title"
+        item-value="value"
+        :label="systemRolesLabel"
+        variant="outlined"
+        class="mt-1  mb-1 dp-select"
+        multiple
+        chips
+      ></v-select>
+      <v-btn size="large" rounded="lg" class="login-form-button mt-1" @click="login">
+        {{ $t('login.loginMsg') }}
+        <img src="@/assets/images/login/lock-icon.svg" alt="Lock-Icon" />
+      </v-btn>
+    </div>
+  </div>
+</div>
+<FooterComponent class="custom-login-footer-style" />

@@ -1,0 +1,40 @@
+<div class="question-option-form">
+  <section class="question-option-form__section">
+    <div class="question-option-form__head">
+      <div>
+        <p class="question-option-form__eyebrow">Option Content</p>
+        <h4 class="question-option-form__title">{{ title }}</h4>
+        <p class="question-option-form__copy">
+          Add or revise the visible answer text in Arabic and English for this question option.
+        </p>
+      </div>
+    </div>
+
+    <div class="question-option-form__grid">
+      <v-text-field v-model="formData.optionEn" variant="outlined" density="comfortable" required>
+        <template #label>
+          <CustomFormLabel
+            :label-value="$t('sdssSurvey.surveyRounds.questions.questionOptions.titleEn')"
+            :mandatory="true"
+          />
+        </template>
+      </v-text-field>
+
+      <v-text-field v-model="formData.optionAr" variant="outlined" density="comfortable" required>
+        <template #label>
+          <CustomFormLabel
+            :label-value="$t('sdssSurvey.surveyRounds.questions.questionOptions.titleAr')"
+            :mandatory="true"
+          />
+        </template>
+      </v-text-field>
+    </div>
+  </section>
+
+  <div class="question-option-form__actions">
+    <v-btn color="error" variant="text" @click="cancel">{{ $t('common.cancel') }}</v-btn>
+    <v-btn color="success" variant="flat" rounded="pill" :disabled="!isFormValid" @click="save">
+      {{ $t('common.submit') }}
+    </v-btn>
+  </div>
+</div>

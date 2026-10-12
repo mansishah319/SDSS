@@ -1,0 +1,33 @@
+export interface SdssLoginUserResponse {
+  token: string
+  fullName: string
+  language: string
+  grpNumber: number
+  email: string
+  languageCode: string
+  guid: string
+  iat: number
+  exp: number
+  departmentId: number
+  departmentName: string
+  sectorId: number
+  sectorName: string
+  gender: string
+  empType: number
+  sub: string
+  userName: string
+  employeeName: string
+  internalDocuments: boolean
+  socialMediaFeeds: boolean
+  scrollingText: boolean
+  chatContents: boolean
+  questionView: boolean
+  isDelphiModerator: boolean
+  decision: boolean
+  ratings: boolean
+  roles: string[]
+  gradeName: string
+  iss: string
+  phoneNumber: string
+  userPhoto: Uint8Array
+}

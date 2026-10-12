@@ -1,0 +1,52 @@
+<div class="challenges-container" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <DubaiPoliceLoader :is-loading="loading" />
+
+  <GenericDashboardHeaderView
+    :title-en="$t('challenge.list')"
+    :title-ar="$t('challenge.list')"
+    subtitle-en="Manage challenge records, filtering, and actions from the admin control panel."
+    subtitle-ar="أدر سجلات التحديات وعمليات التصفية والإجراءات من لوحة التحكم الإدارية."
+    icon="mdi-format-list-bulleted-square"
+    :show-back-button="true"
+    back-route-name="home"
+    :total-value="theTotalElements"
+  />
+
+  <!-- Enhanced Data Table -->
+  <EnhancedDataTable :title="$t('challenge.list')" :items="safeChallengeItems" :headers="headers"
+                     class="challenge-list-table"
+                     :total-items="theTotalElements" :loading="loading" :skeleton-loading="skeletonLoading"
+                     :basic-search-fields="basicSearchFields" :advanced-search-fields="advancedSearchFields"
+                     :search-values="challengeSearchRequest" :actions="tableActions" :column-templates="columnTemplates"
+                     :column-options="columnOptions" :items-per-page="itemsPerPage"
+                     :show-stats-chip="false"
+                     stats-icon="mdi-format-list-bulleted"
+                     table-icon="mdi-table" empty-state-icon="mdi-clipboard-text-outline"
+                     :empty-state-message="$t('challenge.noChallengesFound')" :search-on-input="false"
+                     :loader-message="$t('common.loader.challengeRecords')"
+                     :loader-description="$t('common.loader.challengeRecordsDescription')"
+                     @search="handleSearch"
+                     @clear-search="clearSearch" @refresh="refreshData" @export="exportData" @action="handleTableAction"
+                     @table-update="handleTableUpdate" @update:items-per-page="onItemsPerPageUpdate">
+    <!-- Custom table actions slot -->
+    <template #table-actions>
+      <v-btn variant="tonal" size="small" class="action-btn" @click="exportData">
+        <v-icon start>mdi-download</v-icon>
+        {{ $t('common.export') }}
+      </v-btn>
+    </template>
+  </EnhancedDataTable>
+
+  <!-- Delete Confirmation Dialog -->
+  <ConfirmationDialog
+    v-if="deleteDialog"
+    :title="$t('common.deletionTitle')"
+    :message="$t('common.deleteConfirmation')"
+    icon="mdi-trash-can-outline"
+    icon-color="error"
+    confirm-button-color="error"
+    :confirm-text="$t('common.delete')"
+    @confirmed="confirmDeletion"
+    @cancel="cancelDeletion"
+  ></ConfirmationDialog>
+</div>

@@ -1,0 +1,266 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.v-progress-circular {
+  margin: 1rem;
+}
+
+.dp-card {
+  width: 100%;
+  position: relative;
+  padding: 10px;
+  height: 400px;
+
+  &.card-height {
+    height: 355px;
+  }
+
+  .apexcharts-canvas {
+    margin: 0 auto;
+  }
+}
+
+.cancel-icon {
+  color: #d92d20;
+}
+
+.accept-icon {
+  color: #008755;
+}
+
+.center-content-div {
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  transform: translate(0%, -50%);
+  width: 100%;
+  left: 0;
+  right: 0;
+
+  .heading-1 {
+    font-size: 21px;
+    font-weight: bold;
+  }
+
+  .value-txt {
+    font-size: 60px;
+    font-weight: bold;
+    color: #2e263de6;
+  }
+}
+
+.list-card-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .dp-card {
+    padding: 0 24px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    height: 105px;
+
+    .left-div {
+      display: flex;
+      gap: 11px;
+      align-items: baseline;
+      width: 50%;
+
+      p {
+        &:nth-child(1) {
+          font-size: 22px;
+          font-weight: 900;
+        }
+
+        &:nth-child(2) {
+          font-size: 17px;
+          font-weight: 900;
+          color: #008759;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          font-family: 'bukrabold', serif;
+        }
+      }
+    }
+
+    .right-div {
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      p {
+        font-size: 25px;
+      }
+
+      .v-progress-circular__content {
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .icon-btn-2 {
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.v-heading {
+  font-size: 18px;
+  border-radius: 100px;
+  font-weight: 900;
+  font-family: 'bukrabold', serif;
+  color: #008759;
+}
+
+.dp-primary-table {
+  border: 1px solid #dadada;
+  border-radius: 15px;
+  width: 100%;
+
+  &.modal-table1 {
+    width: 800px;
+    height: 800px;
+  }
+
+  table {
+    thead {
+      tr {
+        th {
+          background-color: #008658;
+          color: #fff;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          .icon-btn-2 {
+            cursor: pointer;
+            font-size: 15px;
+          }
+
+          .table-user-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-status-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d0d0d0;
+  height: 40px;
+  margin-bottom: 19px;
+
+  h3 {
+    font-size: 18px;
+    border-radius: 100px;
+    font-weight: 900;
+    font-family: 'bukrabold', serif;
+    color: #008759;
+  }
+
+  p {
+    font-size: 28px;
+    border-radius: 100px;
+    font-weight: 900;
+    font-family: 'bukrabold', serif;
+    color: #008759;
+  }
+}
+
+/* UserStatus list date styles */
+.status-list-date {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0);
+}
+
+.status-list-date .list-date {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 0;
+  padding-left: 21px;
+  position: relative;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.status-list-date .list-date:last-child {
+  border: none;
+}
+
+.status-list-date .list-date .left-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-list-date .list-date .left-div p {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.status-list-date .list-date .left-div p:nth-child(2) {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.status-list-date .list-date .right-div span {
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  color: #171717;
+  font-weight: 900;
+}
+
+.status-list-date .list-date .right-div span.opened {
+  background-color: #93e8be;
+}
+
+.status-list-date .list-date .right-div span.closed {
+  background-color: #f4c0bc;
+}
+
+.status-list-date::-webkit-scrollbar {
+  display: none;
+}
+
+.status-list-date:hover {
+  scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0);
+}
+
+.search-list-div {
+  margin-top: 10px;
+}
+
+.apexcharts-legend-text {
+  color: inherit !important;
+}
+
+@media (max-width: 960px) {
+  .dp-card {
+    height: auto;
+  }
+}

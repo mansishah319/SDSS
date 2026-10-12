@@ -1,0 +1,354 @@
+<!--
+~ * ***************************************************************
+~ * Copyright ©1956-2023 DubaiPolice. All rights reserved
+~ * ——————————————————————————————————
+~ * NOTICE: All information contained herein is a property of DubaiPolice.
+~ * ***************************************************************
+-->
+
+<v-card class="custom-user-creation-screen-card-style">
+  <v-card-title class="custom-user-creation-headline-title">
+    <h2>{{ $t('user.update.title') }}</h2>
+  </v-card-title>
+  <v-card-text class="custom-user-creation-body-card-text">
+    <v-sheet class="d-flex justify-space-between pa-5" rounded="lg">
+      <v-row>
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.search.list.grpNumber')"
+            prepend-icon="mdi mdi-identifier"
+            :label="$t('user.search.list.grpNumber')"
+            v-model="formData.grpNumber"
+            density="default"
+            variant="outlined"
+            :readonly="true"
+          >
+            <template #label>
+              <div>
+                {{ $t('user.search.list.grpNumber') }}
+                <span style="color: red">*</span>
+              </div>
+            </template>
+          </v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <v-select
+            v-model="selectedRoles"
+            :items="availableRoles"
+            prepend-icon="mdi mdi-security"
+            item-value="id"
+            item-title="localName"
+            @change="moveRolesToSelected"
+            :label="$t('user.search.list.role')"
+            variant="outlined"
+            :rules="[validateMandatoryArrayField(selectedRolesAsStrings)]"
+            clearable
+            multiple
+            chips
+            dense
+          >
+            <template #label>
+              <div>
+                {{ $t('user.search.list.role') }}
+                <span style="color: red">*</span>
+              </div>
+            </template>
+          </v-select>
+        </v-col>
+        <v-col cols="4">
+          <v-autocomplete
+            :placeholder="$t('user.add.language')"
+            clearable
+            prepend-icon="mdi mdi-web-box"
+            :label="$t('user.add.language')"
+            v-model="formData.language"
+            :items="['EN','AR',]"
+            variant="outlined"
+            density="default"
+            :rules="[validateMandatoryField(formData.language)]"
+            required
+          >
+            <template #label>
+              <div>
+                {{ $t('user.add.language') }}
+                <span style="color: red">*</span>
+              </div>
+            </template>
+          </v-autocomplete>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.add.fullName')"
+            :label="$t('user.add.fullName')"
+            v-model="formData.fullName"
+            :readonly="true"
+            prepend-icon="mdi mdi-pen"
+            density="default"
+            variant="outlined"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.add.department')"
+            :label="$t('user.add.department')"
+            v-model="formData.shortDepartmentName"
+            :readonly="true"
+            prepend-icon="mdi mdi-bank"
+            density="default"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.add.gradeName')"
+            :label="$t('user.add.gradeName')"
+            v-model="formData.gradeName"
+            prepend-icon="mdi mdi-account-school-outline"
+            density="default"
+            variant="outlined"
+            :readonly="true"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.search.jobName')"
+            :label="$t('user.add.jobName')"
+            v-model="formData.jobName"
+            prepend-icon="mdi mdi-briefcase-outline"
+            density="default"
+            variant="outlined"
+            :readonly="true"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.search.email')"
+            v-model="formData.email"
+            :label="$t('user.search.email')"
+            prepend-icon="mdi mdi-email-edit-outline"
+            density="default"
+            variant="outlined"
+            :readonly="true"
+            :rules="[validateMandatoryField(formData.email)]"
+            required
+          >
+            <template #label>
+              <div>
+                {{ $t('user.search.email') }}
+                <span style="color: red">*</span>
+              </div>
+            </template>
+          </v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.add.alternativeEmail')"
+            :label="$t('user.add.alternativeEmail')"
+            v-model="formData.alternativeEmail"
+            prepend-icon="mdi mdi-email-plus-outline"
+            density="default"
+            variant="outlined"
+            clearable
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.search.mobile')"
+            :label="$t('user.search.mobile')"
+            v-model="formData.mobile"
+            prepend-icon="mdi mdi-cellphone-basic"
+            density="default"
+            variant="outlined"
+            :readonly="true"
+            :rules="[validateMandatoryField(formData.mobile)]"
+            required
+          >
+            <template #label>
+              <div>
+                {{ $t('user.search.mobile') }}
+                <span style="color: red">*</span>
+              </div>
+            </template>
+          </v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+            :placeholder="$t('user.add.alternativeMobile')"
+            :label="$t('user.add.alternativeMobile')"
+            v-model="formData.alternativeMobile"
+            prepend-icon="mdi mdi-phone-plus"
+            clearable
+            density="default"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12">
+          <v-card class="custom-expert-user-creation-screen-card-style">
+            <v-card-title class="custom-expert-user-creation-card-title">
+              <h2>{{ $t('user.add.expertisesMainTitle') }}</h2>
+            </v-card-title>
+            <v-card-text class="custom-user-creation-body-card-text">
+              <form>
+                <v-row>
+                  <v-col cols="3">
+                    <v-select
+                      v-model="usersExpertisesData.areaOfExpertisesId"
+                      :items="localizedAvailableExpertises"
+                      item-value="id"
+                      item-title="name"
+                      @change="moveRolesToSelected"
+                      :label="$t('user.add.expertisesTitle')"
+                      prepend-icon="mdi mdi-head-snowflake-outline"
+                      variant="outlined"
+                      clearable
+                      dense
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-autocomplete
+                      :placeholder="$t('user.add.expertLevel')"
+                      clearable
+                      prepend-icon="mdi mdi-head-snowflake"
+                      :label="$t('user.add.expertLevel')"
+                      v-model="usersExpertisesData.expertLevel"
+                      :items="expertiseLevels"
+                      item-title="value"
+                      item-value="id"
+                      variant="outlined"
+                      density="default"
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col cols="2">
+                    <v-checkbox
+                      v-model="usersExpertisesData.isPrimary"
+                      prepend-icon="mdi mdi-key-star"
+                      :disabled="selectedUsersExpertisesList.some(expertise => expertise.isPrimary)"
+                      value="true"
+                      :label="$t('common.default')"
+                      type="checkbox"
+                    ></v-checkbox>
+                  </v-col>
+                  <v-col cols="1">
+                    <v-btn class="me-4" type="submit" @click="submit($event)">{{ $t('common.submit') }}</v-btn>
+                  </v-col>
+                </v-row>
+              </form>
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12">
+
+          <v-data-table-server
+            v-model:items-per-page="itemsPerPage"
+            :headers="expertisesHeaders"
+            :items="localizedSlicedData"
+            :items-length="viewUsersExpertisesList.length"
+            class="elevation-1"
+            item-value="name"
+            v-if="viewUsersExpertisesList.length > 0"
+          >
+            <template v-slot:item.actions="{ item }">
+              <v-btn class="me-1" density="default" color="red" variant="tonal" @click="removeExpertise(item)">
+                <i class="mdi mdi-trash-can"></i>
+              </v-btn>
+            </template>
+          </v-data-table-server>
+
+          <v-pagination
+            v-model="currentPage"
+            :length="Math.ceil(viewUsersExpertisesList.length / itemsPerPage)"
+          ></v-pagination>
+        </v-col>
+
+        <v-row class="custom-permissions-user-creation-screen-card-style-row">
+          <v-card class="custom-permissions-user-creation-screen-card-style">
+            <v-card-title class="custom-permissions-user-creation-screen-card-style-title">
+              <h3>{{ $t('user.add.permissionDetails') }}</h3>
+            </v-card-title>
+            <v-card-text>
+              <v-container fluid>
+                <v-row>
+                  <v-checkbox
+                    v-model="selectAll"
+                    :label="$t('user.add.selectAll')"
+                    hide-details
+                    @change="toggleAllPermissions"
+                  ></v-checkbox>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" sm="4" md="4">
+                    <v-checkbox
+                      v-model="formData.chatContents"
+                      :label="$t('user.add.chatContents')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                    <v-checkbox
+                      v-model="formData.decision"
+                      :label="$t('user.add.decision')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                  </v-col>
+                  <v-col cols="12" sm="4" md="4">
+                    <v-checkbox
+                      v-model="formData.internalDocuments"
+                      :label="$t('user.add.internalDocuments')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                    <v-checkbox
+                      v-model="formData.questionView"
+                      :label="$t('user.add.questionView')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                  </v-col>
+                  <v-col cols="12" sm="4" md="4">
+                    <v-checkbox
+                      v-model="formData.scrollingText"
+                      :label="$t('user.add.scrollingText')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                    <v-checkbox
+                      v-model="formData.socialMediaFeeds"
+                      :label="$t('user.add.socialMediaFeeds')"
+                      hide-details
+                      @change="updateSelectAll"
+                    ></v-checkbox>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-row>
+
+        <v-col cols="12"></v-col>
+      </v-row>
+    </v-sheet>
+  </v-card-text>
+  <v-row>
+    <v-col cols="2"></v-col>
+    <v-col cols="3">
+      <v-btn @click="submitForm" color="primary" prepend-icon="mdi mdi-check" large width="100%">
+        {{ $t('common.submit') }}
+      </v-btn>
+    </v-col>
+    <v-col cols="2"></v-col>
+    <v-col cols="3">
+      <v-btn @click="cancelForm" color="error" prepend-icon="mdi mdi-close" width="100%" large>
+        {{ $t('common.cancel') }}
+      </v-btn>
+    </v-col>
+  </v-row>
+</v-card>

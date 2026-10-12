@@ -1,0 +1,116 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-dialog
+  v-model="showInvitePopup"
+  max-width="600px"
+  @click:outside="closeDialog"
+  transition="dialog-transition"
+  class="invite-user-dialog"
+>
+  <v-card class="invite-dialog-card">
+    <v-card-title class="invite-dialog-title">
+      <div class="d-flex justify-space-between align-center w-100">
+        <span class="headline">
+          <v-icon icon="mdi-account-plus custom-invite-user-icon" class="mr-2"></v-icon>
+          <span class="custom-invite-user-text-title-header-name"> {{ $t('challenge.dashboard.inviteUser') }} </span>
+        </span>
+        <img src="@/assets/images/logo/dp-logo.svg" alt="Logo" class="dialog-logo" width="50" height="50" />
+      </div>
+    </v-card-title>
+
+    <v-card-text class="invite-dialog-content">
+      <!-- Search User Input -->
+      <div class="search-field-container">
+        <v-text-field
+          :label="$t('challenge.dashboard.searchUser')"
+          v-model="searchQuery"
+          @input="fetchUserSuggestions"
+          :loading="loading"
+          clearable
+          variant="outlined"
+          class="search-input"
+          prepend-inner-icon="mdi-magnify"
+        >
+          <template v-slot:loader>
+            <v-progress-circular indeterminate color="primary" size="20"></v-progress-circular>
+          </template>
+        </v-text-field>
+      </div>
+
+      <!-- Selected Users Chips -->
+      <transition-group name="chip-transition" tag="div" class="selected-users-container">
+        <v-chip
+          v-for="user in selectedUsers"
+          :key="user.grpNumber"
+          @click="removeUser(user)"
+          close
+          class="user-chip ma-1"
+          color="primary"
+          text-color="white"
+          variant="elevated"
+        >
+          <v-icon start icon="mdi-account" size="small"></v-icon>
+          {{ user.fullName }}
+          <span class="user-id">({{ user.grpNumber }})</span>
+        </v-chip>
+      </transition-group>
+
+      <!-- Suggested Users List with Enhanced Cards -->
+      <transition name="list-transition">
+        <v-list v-if="searchQuery && userSuggestions.length > 0" class="invite-user-scrollable-list" elevation="0">
+          <transition-group name="list-item-transition">
+            <v-list-item
+              v-for="(user, index) in userSuggestions"
+              :key="index"
+              @click="selectUser(user)"
+              class="user-suggestion-item mb-2"
+            >
+              <v-card class="suggestion-card" elevation="2" :ripple="true">
+                <v-card-text class="d-flex align-center">
+                  <v-avatar color="primary" class="mr-3">
+                    <span class="text-h6 white--text">{{ user.fullName.charAt(0) }}</span>
+                  </v-avatar>
+                  <div class="user-info">
+                    <div class="text-subtitle-1 font-weight-medium">{{ user.fullName }}</div>
+                    <div class="text-caption text--secondary">
+                      <v-icon size="small" class="mr-1">mdi-badge-account</v-icon>
+                      {{ $t('common.variety.grpNumber') }}: <strong>{{ user.grpNumber }}</strong>
+                      <v-divider vertical class="mx-2"></v-divider>
+                      <v-icon size="small" class="mr-1">mdi-email</v-icon>
+                      {{ user.email }}
+                    </div>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-list-item>
+          </transition-group>
+        </v-list>
+      </transition>
+    </v-card-text>
+
+    <!-- Dialog Actions -->
+    <v-card-actions class="invite-dialog-actions">
+      <v-spacer></v-spacer>
+      <v-btn color="secondary" variant="outlined" @click="closeDialog" class="action-btn">
+        <v-icon start>mdi-close</v-icon>
+        {{ $t('common.cancel') }}
+      </v-btn>
+      <v-btn
+        color="primary"
+        @click="sendInvitations"
+        class="action-btn"
+        :loading="loading"
+        :disabled="selectedUsers.length === 0"
+      >
+        <v-icon start class="custom-send-icon">mdi-send</v-icon>
+        {{ $t('common.send') }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>

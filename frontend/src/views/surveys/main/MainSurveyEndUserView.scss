@@ -1,0 +1,66 @@
+@use '../../../assets/css/_variables' as *;
+
+.mb-5 {
+  margin-bottom: 20px;
+}
+
+
+.main-user-survey-access-key-title-style {
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.main-user-survey-access-key-title-style,
+.custom-user-survey-title-style {
+  background-color: #0da06e;
+  color: $white-color;
+  border-radius: 12px;
+}
+
+.custom-survey-end-user-card-title-view {
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'BukraBold', sans-serif;
+  padding-bottom: 0;
+
+
+}
+
+.custom-survey-end-user-card-subtitle-view {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.custom-end-user-survey-subtitle-style {
+  margin: 1%;
+}
+
+.custom-questions-and-options-card-back-button {
+  justify-items: center;
+}
+
+
+.font-dubai-regular {
+  font-family: 'BukraRegular', sans-serif !important;
+  color: #000;
+  font-size: 16px;
+}
+
+
+.custom-survey-user-content-style {
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  .custom-main-survey-questions-view-container {
+    padding: 0;
+  }
+
+}
+
+.custom-v-card-main-survey-end-user-view {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}

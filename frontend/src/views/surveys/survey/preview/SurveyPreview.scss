@@ -1,0 +1,28 @@
+@use '../../../../assets/css/_variables' as *;
+
+.mb-5 {
+  margin-bottom: 20px;
+}
+
+.custom-survey-preview-content-title-style {
+  background-color: $sdss-primary-color;
+  color: $white-color;
+}
+
+.custom-survey-preview-card-title-view {
+  font-size: 2rem !important;
+  text-align: center;
+}
+
+.custom-survey-preview-card-subtitle-view {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.custom-survey-preview-content-subtitle-style {
+  margin: 1%;
+}
+
+.custom-questions-and-options-card-back-button {
+  justify-items: center;
+}

@@ -1,0 +1,107 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-sheet class="dp-modal-2" style="max-width: 100%;width: 100%;">
+  <v-card class="mb-4">
+    <!-- Title -->
+    <v-card-title class="text-h6">
+
+      {{ $t('challenge.dashboard.solutionActions') }}
+      <v-btn icon @click="modifySolution = false" aria-label="Close dialog" class="modal-close-btn">
+        <span class="mdi mdi-close"></span>
+      </v-btn>
+    </v-card-title>
+
+
+    <!-- Text Area -->
+    <v-card-text class="mt-5">
+      <v-row dense>
+        <v-col cols="12">
+          <v-textarea v-model="selectedSolution.solutionText" variant="outlined" outlined rows="2" dense class=""
+                      :label="$t('challenge.dashboard.enterSolutionText')"></v-textarea>
+        </v-col>
+      </v-row>
+    </v-card-text>
+
+    <!-- Action Buttons -->
+    <v-card-actions class="justify-end">
+      <v-btn color="primary" class="mr-2 modal-primary-btn" @click="updateSolution">
+        <v-icon left>mdi-content-save</v-icon>
+        {{ $t('challenge.dashboard.updateSolution') }}
+      </v-btn>
+      <v-btn color="error" class="mr-2 modal-danger-btn" @click="showDeleteSolutionDialog">
+        <v-icon left>mdi-delete</v-icon>
+        {{ $t('challenge.dashboard.deleteSolution') }}
+      </v-btn>
+      <v-btn color="warning" @click="cancel" class="modal-border-primary-btn">
+        <v-icon left>mdi-close</v-icon>
+        {{ $t('challenge.dashboard.close') }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+  <!-- Comments Section -->
+  <v-card flat class="comment-section-div">
+    <!-- Add Comment -->
+    <v-card-actions class="d-flex justify-space-between align-center mb-2">
+      <v-text-field v-model="newComment" variant="outlined" density="compact" hide-details="auto" clearable
+                    class="challenge-text-field mr-2" :label="$t('challenge.dashboard.comment')" :disabled="!canComment"
+                    @keyup.enter="submitComment"></v-text-field>
+      <v-btn v-if="phase === 'answering'" icon color="green" :disabled="!canComment" @click="submitComment"
+             class=" voting-send-btn">
+        <v-icon class="icon-flip-horizontal">mdi-send</v-icon>
+      </v-btn>
+    </v-card-actions>
+
+    <!-- Reply List -->
+    <v-list-item v-for="comment in comments" :key="comment.id" class="comment-item">
+      <v-row class="v-list-item-content-solution-details-view">
+        <!-- Avatar and Author Info -->
+        <v-col cols="1" class="d-flex align-center">
+          <v-icon large>mdi-account-circle</v-icon>
+        </v-col>
+
+        <!-- Comment Text and Date -->
+        <v-col cols="9">
+          <v-list-item-title class="comment-author">{{ comment.createdBy }}</v-list-item-title>
+
+          <!-- Conditionally render either the comment text or a text field -->
+          <v-list-item-subtitle v-if="!inUpdateProgress" class="comment-text">
+            {{ comment.solComment }}
+          </v-list-item-subtitle>
+          <v-text-field v-else v-model="comment.solComment" variant="outlined" class="comment-text-field"
+                        hide-details></v-text-field>
+
+          <v-list-item-subtitle class="comment-date">{{ comment.createdAt }}</v-list-item-subtitle>
+        </v-col>
+
+        <!-- Action Buttons -->
+        <v-col cols="2" class="d-flex  align-center justify-center action-buttons">
+          <!-- Edit Button -->
+          <v-btn v-if="userAbleToEdit && !inUpdateProgress" icon @click="editComment(comment)" class="small-btn">
+            <v-icon color="grey">mdi-pencil</v-icon>
+          </v-btn>
+
+          <!-- Save Button -->
+          <v-btn v-if="inUpdateProgress" icon="mdi-check" color="green" density="compact"
+                 @click="submitUpdatedComment(comment)" class="small-btn accept-icon"></v-btn>
+          <v-btn v-if="inUpdateProgress" icon="mdi-close" color="red" density="compact"
+                 @click="closeUpdatedComment(comment)" class="small-btn cancel-icon"></v-btn>
+
+          <!-- Delete Button -->
+          <v-btn icon v-if="!inUpdateProgress" @click="showDeleteCommentDialog(comment)" class="small-btn">
+            <v-icon color="red">mdi-delete</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-list-item>
+  </v-card>
+
+  <ConfirmationDialog v-if="isConfirmationDialogVisible" :title="deleteDialogTitle" :message="deleteDialogMsg"
+                      @confirmed="handleConfirmation" @cancel="handleCancelConfirmation"></ConfirmationDialog>
+</v-sheet>

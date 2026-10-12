@@ -1,0 +1,138 @@
+<!--
+  - * ***************************************************************
+  - * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  - * ——————————————————————————————————
+  - * NOTICE: All information contained herein is a property of DubaiPolice.
+  - * ***************************************************************
+  -->
+
+<div class="email-template-dialog">
+  <v-form ref="form" v-model="valid" class="email-template-dialog__layout">
+    <aside class="email-template-dialog__sidebar dialog-section">
+      <div class="dialog-section__head">
+        <h4 class="dialog-section__title">{{ $t('settings.emailTemplate.snippetsTitle') }}</h4>
+        <p class="dialog-section__copy">Reference fields update live when you switch the template type.</p>
+      </div>
+
+      <div class="dialog-meta">
+        <span class="dialog-meta__label">{{ $t('settings.emailTemplate.id') }}</span>
+        <strong class="dialog-meta__value">{{ selectedId }}</strong>
+      </div>
+
+      <section class="snippet-panel">
+        <h5 class="snippet-panel__title">{{ $t('settings.emailTemplate.snippetsAr') }}</h5>
+        <div class="snippet-panel__chips">
+          <v-chip v-for="snippet in emailSnippetsAr" :key="snippet" color="success" variant="tonal" label>
+            {{ snippet }}
+          </v-chip>
+          <p v-if="!emailSnippetsAr.length" class="snippet-panel__empty">{{ $t('common.empty') }}</p>
+        </div>
+      </section>
+
+      <section class="snippet-panel">
+        <h5 class="snippet-panel__title">{{ $t('settings.emailTemplate.snippetsEn') }}</h5>
+        <div class="snippet-panel__chips">
+          <v-chip v-for="snippet in emailSnippetsEn" :key="snippet" color="primary" variant="tonal" label>
+            {{ snippet }}
+          </v-chip>
+          <p v-if="!emailSnippetsEn.length" class="snippet-panel__empty">{{ $t('common.empty') }}</p>
+        </div>
+      </section>
+
+      <p class="snippet-panel__note">{{ $t('settings.emailTemplate.snippetsNote') }}</p>
+    </aside>
+
+    <div class="email-template-dialog__main">
+      <section class="dialog-section">
+        <div class="dialog-section__head">
+          <h4 class="dialog-section__title">{{ $t('settings.emailTemplate.templateTypeTitle') }}</h4>
+          <p class="dialog-section__copy">Change the template category when needed and keep the related snippets in
+            sync.</p>
+        </div>
+
+        <v-select
+          v-model="templateType"
+          :items="emailTypes"
+          item-title="localTitle"
+          item-value="id"
+          :rules="[rules.required]"
+          variant="outlined"
+          density="comfortable"
+          return-object
+          @update:modelValue="onTemplateTypeChange"
+        >
+          <template #label>
+            <div>
+              {{ $t('settings.emailTemplate.templateTypeLabel') }}
+              <span class="dialog-required">*</span>
+            </div>
+          </template>
+        </v-select>
+      </section>
+
+      <section class="dialog-section">
+        <div class="dialog-section__head">
+          <h4 class="dialog-section__title">{{ $t('settings.emailTemplate.localSubject') }}</h4>
+          <p class="dialog-section__copy">Update the localized subjects so the email remains coherent across both
+            languages.</p>
+        </div>
+
+        <div class="dialog-grid">
+          <v-text-field v-model="formData.subjectAr" :rules="[rules.required]" variant="outlined" density="comfortable">
+            <template #label>
+              <div>
+                {{ $t('settings.emailTemplate.subjectAr') }}
+                <span class="dialog-required">*</span>
+              </div>
+            </template>
+          </v-text-field>
+
+          <v-text-field v-model="formData.subjectEn" :rules="[rules.required]" variant="outlined" density="comfortable">
+            <template #label>
+              <div>
+                {{ $t('settings.emailTemplate.subjectEn') }}
+                <span class="dialog-required">*</span>
+              </div>
+            </template>
+          </v-text-field>
+        </div>
+      </section>
+
+      <section class="dialog-section">
+        <div class="dialog-section__head">
+          <h4 class="dialog-section__title">{{ $t('settings.emailTemplate.contentTitle') }}</h4>
+          <p class="dialog-section__copy">Refine the email body in Arabic and English using the same upgraded editor
+            layout.</p>
+        </div>
+
+        <div class="editor-stack">
+          <div class="editor-stack__item">
+            <h5 class="editor-stack__title">{{ $t('settings.emailTemplate.contentAr') }}</h5>
+            <div class="scrollable-content">
+              <AppRichTextEditor v-model="formData.contentAr" :placeholder="$t('settings.emailTemplate.contentAr')"
+                                 :rtl="true"></AppRichTextEditor>
+            </div>
+          </div>
+
+          <div class="editor-stack__item">
+            <h5 class="editor-stack__title">{{ $t('settings.emailTemplate.contentEn') }}</h5>
+            <div class="scrollable-content">
+              <AppRichTextEditor v-model="formData.contentEn"
+                                 :placeholder="$t('settings.emailTemplate.contentEn')"></AppRichTextEditor>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dialog-section dialog-section--compact">
+        <v-checkbox v-model="formData.isDefault" :label="$t('settings.emailTemplate.default')" color="success"
+                    hide-details></v-checkbox>
+      </section>
+
+      <div class="dialog-actions">
+        <v-btn color="error" variant="text" @click="cancel">{{ $t('common.cancel') }}</v-btn>
+        <v-btn color="success" variant="flat" rounded="pill" @click="saveTemplate">{{ $t('common.edit') }}</v-btn>
+      </div>
+    </div>
+  </v-form>
+</div>

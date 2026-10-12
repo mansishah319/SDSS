@@ -1,0 +1,133 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-card class="mx-auto card-container" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="scrollable-container">
+    <div class="fixed-header pa-4 voting-round-header-fixed">
+      <div class="round-dialog-header">
+        <div class="round-dialog-copy">
+          <h2 class="round-dialog-title">{{ $t('challenge.dashboard.endRound') }}</h2>
+          <h3 class="sub-heading">{{ $t('challenge.dashboard.solutionsNextRound') }}</h3>
+          <p class="round-dialog-description">
+            {{ $i18n.locale === 'ar' ? 'اختر الحلول الأنسب لنقلها إلى الجولة القادمة أو حدد القرار النهائي للمراجعة.' : 'Select the best solutions to move forward to the next round, or mark the final decision for review.'
+            }}
+          </p>
+        </div>
+        <div class="round-dialog-side">
+          <button type="button" class="round-dialog-close" :aria-label="$t('challenge.dashboard.close')" @click="cancel">
+            <i class="mdi mdi-close"></i>
+          </button>
+          <div class="round-dialog-stats">
+            <div class="round-stat-card">
+              <span>{{ $i18n.locale === 'ar' ? 'عدد الحلول' : 'Solutions' }}</span>
+              <strong>{{ answers.length }}</strong>
+            </div>
+            <div class="round-stat-card">
+              <span>{{ $i18n.locale === 'ar' ? 'المحدد' : 'Selected' }}</span>
+              <strong>{{ selectedAnswers.length }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrollable-list">
+      <v-list lines="three" select-strategy="classic" class="pa-0">
+        <v-list-item v-for="(answer, index) in answers" :key="index" :value="answer" @click="toggleSelection(answer.id)"
+                     class="clickable-list-item">
+          <template #prepend="{ isActive }">
+            <v-list-item-action start>
+              <v-checkbox-btn v-model="selectedAnswers" :value="answer.id" @click.stop></v-checkbox-btn>
+            </v-list-item-action>
+          </template>
+          <v-list-item-title class="solution-item-title">{{ answer.solutionText }}</v-list-item-title>
+          <v-list-item-subtitle>
+            <div class="solution-item-meta">
+              <span class="solution-votes-chip">
+                {{ $t('challenge.dashboard.totalVotes') }}: {{ answer.voteCount }}
+              </span>
+              <span class="solution-level-chip">
+                {{ $i18n.locale === 'ar' ? 'الجولة' : 'Round' }} {{ answer.queLevel }}
+              </span>
+            </div>
+          </v-list-item-subtitle>
+        </v-list-item>
+      </v-list>
+    </div>
+
+    <!-- Merge Solutions Button -->
+    <div v-if="showMergeButton" class="merge-solutions-section pa-3">
+      <v-btn color="secondary" variant="text" class="solution-merge-btn bg-primary" @click="openMergePopup"
+             prepend-icon="mdi mdi-call-merge">
+        {{ $t('common.merge') }}
+
+      </v-btn>
+    </div>
+
+
+  </div>
+  <v-card-actions class="card-actions pa-5 d-flex flex-column voting-round-footer-fixed">
+    <div class="final-decision-section w-full">
+      <p class="final-decision-message">{{ $t('challenge.dashboard.finalDecision') }}</p>
+      <p class="final-decision-subtext">
+        {{ $i18n.locale === 'ar' ? 'فعّل هذا الخيار إذا كانت الحلول المختارة جاهزة للقرار النهائي.' : 'Enable this option when the selected solutions are ready for final review.'
+        }}
+      </p>
+      <v-checkbox v-model="isFinalDecision" color="primary" :label="$t('common.finalDecision')"
+                  @change="openFinalDecisionDialog" class="voting-round-checkbox"></v-checkbox>
+      <v-alert border="top" type="warning" variant="outlined" prominent class="final-decision-alert"
+               v-if="isFinalDecision">
+        {{ $t('challenge.dashboard.finalDecisionWarning') }}
+      </v-alert>
+    </div>
+
+    <div class="d-flex voting-round-footer-buttons">
+      <v-btn color="primary" @click="openUpdateDialog" class="modal-primary-btn"
+             prepend-icon="mdi mdi-content-save-outline">
+
+        {{ $t('challenge.dashboard.updateSolution') }}
+
+      </v-btn>
+      <v-btn color="warning" @click="cancel" class="modal-border-primary-btn" prepend-icon="mdi mdi-close">
+        {{ $t('challenge.dashboard.close') }}
+      </v-btn>
+    </div>
+  </v-card-actions>
+
+  <!-- Merge Solutions Popup -->
+  <v-dialog v-model="mergePopupVisible" max-width="700px" class="dp-modal">
+    <v-card>
+      <!-- Enhanced Title -->
+      <v-card-title class="headline primary--text text-center">
+        {{ $t('challenge.dashboard.merge.title') }}
+      </v-card-title>
+
+      <!-- Enhanced Subtitle -->
+      <v-card-subtitle class="text-center">{{ $t('challenge.dashboard.merge.mergeInstructions') }}</v-card-subtitle>
+
+      <!-- Enhanced Text Field -->
+      <v-card-text class="pt-4 pb-0">
+        <v-text-field v-model="mergedSolutionTitle" :label="$t('challenge.dashboard.merge.newSolutionTitle')"
+                      variant="outlined" dense hide-details></v-text-field>
+      </v-card-text>
+
+      <!-- Card Actions with Enhanced Buttons -->
+      <v-card-actions class="card-actions merge-solutions-section mt-4">
+        <v-btn density="compact" icon="mdi-close" class="cancel-icon modal-border-primary-btn"
+               @click="cancelMerge"></v-btn>
+        <v-btn density="compact" class="accept-icon modal-primary-btn" icon="mdi-check" @click="confirmMerge"></v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <ConfirmationDialog v-if="isConfirmationDialogVisible" :title="dialogTitle" :message="dialogMsg"
+                      @confirmed="updateSolution" @cancel="handleCloseConfirmation"></ConfirmationDialog>
+
+  <ConfirmationDialog v-if="isFinalConfirmationDialogVisible" :title="finalDialogTitle" :message="finalDialogMsg"
+                      @confirmed="confirmFinalDecision"
+                      @cancel="handleCloseFinalDialogConfirmation"></ConfirmationDialog>
+</v-card>

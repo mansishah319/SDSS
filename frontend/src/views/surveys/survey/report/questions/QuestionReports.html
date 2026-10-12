@@ -1,0 +1,306 @@
+<div class="question-report-list">
+  <article v-for="(question, index) in questionList" :key="question.id" class="question-report-card">
+    <header class="question-report-card__header">
+      <div class="question-report-card__copy">
+        <div class="question-report-card__eyebrow-row">
+          <span class="question-report-card__eyebrow">
+            {{ $t('common.question') }} {{ String(index + 1).padStart(2, '0') }}
+          </span>
+          <v-chip size="small" variant="flat" class="question-report-card__type-chip">
+            {{ question.questionTypeKey }}
+          </v-chip>
+        </div>
+        <h3 class="question-report-card__title font-bukra-bold">{{ question.localTitle }}</h3>
+        <p v-if="question.localDescription" class="question-report-card__subtitle font-bukra-regular">
+          {{ question.localDescription }}
+        </p>
+      </div>
+
+      <div class="question-report-card__header-side">
+        <div class="question-report-card__meta-list">
+          <div class="question-meta-pill">
+            <span class="question-meta-pill__label">{{ $t('sdssSurvey.report.totalNumbersTitle') }}</span>
+            <strong class="question-meta-pill__value">
+              {{ question.userAnswersStatistics.totalCount || 0 }} / {{ countAllInvitedUsers }}
+            </strong>
+          </div>
+          <div class="question-meta-pill">
+            <span class="question-meta-pill__label">{{ $t('sdssSurvey.report.percentageTitle') }}</span>
+            <strong class="question-meta-pill__value">
+              {{ getPercentageDirectly(question.userAnswersStatistics.totalCount || 0, countAllInvitedUsers || 1) }}%
+            </strong>
+          </div>
+        </div>
+
+        <div class="question-report-card__header-actions">
+          <v-chip
+            size="small"
+            variant="outlined"
+            class="question-report-card__status-chip"
+          >
+            {{ question.showPublicQuestions ? $t('sdssSurvey.report.questionAnalysis.additionalAverageQuestions') : $t('sdssSurvey.report.questionAnswersAnalysis')
+            }}
+          </v-chip>
+
+          <v-tooltip location="top">
+            <template #activator="{ props }">
+              <v-btn
+                v-bind="props"
+                icon
+                size="x-small"
+                class="question-report-card__action"
+                :loading="isAnalysisLoading"
+                :disabled="isAnalysisLoading || !questionDetailsMap[question.id]"
+                @click="toggleQuestionInsights(question.id)"
+              >
+                <v-icon size="16">{{ isQuestionExpanded(question.id) ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ isAnalysisLoading ? $t('common.loading') : isQuestionExpanded(question.id) ? $t('common.hide') : $t('common.viewDetails')
+              }}</span>
+          </v-tooltip>
+        </div>
+      </div>
+    </header>
+
+    <div class="question-report-card__content">
+      <section class="question-panel question-panel--analysis">
+        <div class="question-panel__header">
+          <div>
+            <p class="question-panel__eyebrow">{{ $t('sdssSurvey.report.questionDetails') }}</p>
+            <h4 class="question-panel__title">{{ $t('sdssSurvey.report.questionAnswersAnalysis') }}</h4>
+          </div>
+          <v-chip color="primary" size="small" variant="flat">
+            {{ $t('sdssSurvey.report.questionAnalysis.answersCount') }}:
+            {{ question.userAnswersStatistics.totalCount || 0 }}
+          </v-chip>
+        </div>
+
+        <div class="question-panel__body">
+          <template
+            v-if="question?.questionTypeKey.trim().toLowerCase() === 'multiple-choice' ||
+                        question?.questionTypeKey.trim().toLowerCase() === 'single-choice'"
+          >
+            <div class="answer-bars">
+              <v-tooltip v-for="option in question.options" :key="option.id" location="top">
+                <template #activator="{ props }">
+                  <div v-bind="props" class="answer-bar">
+                    <div class="answer-bar__top">
+                      <span class="answer-bar__label">{{ option.localOption }}</span>
+                      <span class="answer-bar__value">{{ getPercentage(option, question.userAnswersStatistics, question)
+                        }}%</span>
+                    </div>
+                    <v-progress-linear
+                      :model-value="getPercentage(option, question.userAnswersStatistics, question)"
+                      color="#008755"
+                      bg-color="#e4e7ec"
+                      rounded
+                      height="10"
+                    />
+                  </div>
+                </template>
+                <span>{{ getOptionTooltip(option, question) }}</span>
+              </v-tooltip>
+            </div>
+          </template>
+
+          <template v-else-if="question?.questionTypeKey.trim().toLowerCase() === 'true-false'">
+            <div class="answer-bars">
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <div v-bind="props" class="answer-bar">
+                    <div class="answer-bar__top">
+                      <span class="answer-bar__label">{{ $t('common.true') }}</span>
+                      <span class="answer-bar__value">
+                        {{ getPercentageDirectly(question.userAnswersStatistics.trueCount, question.userAnswersStatistics.totalCount || 1)
+                        }}%
+                      </span>
+                    </div>
+                    <v-progress-linear
+                      :model-value="getPercentageDirectly(question.userAnswersStatistics.trueCount, question.userAnswersStatistics.totalCount || 1)"
+                      color="#008755"
+                      bg-color="#e4e7ec"
+                      rounded
+                      height="10"
+                    />
+                  </div>
+                </template>
+                <span>{{ $t('common.true') }}: {{ question.userAnswersStatistics.trueCount || 0 }}</span>
+              </v-tooltip>
+
+              <v-tooltip location="top">
+                <template #activator="{ props }">
+                  <div v-bind="props" class="answer-bar">
+                    <div class="answer-bar__top">
+                      <span class="answer-bar__label">{{ $t('common.false') }}</span>
+                      <span class="answer-bar__value">
+                        {{ getPercentageDirectly(question.userAnswersStatistics.falseCount, question.userAnswersStatistics.totalCount || 1)
+                        }}%
+                      </span>
+                    </div>
+                    <v-progress-linear
+                      :model-value="getPercentageDirectly(question.userAnswersStatistics.falseCount, question.userAnswersStatistics.totalCount || 1)"
+                      color="#d92d20"
+                      bg-color="#e4e7ec"
+                      rounded
+                      height="10"
+                    />
+                  </div>
+                </template>
+                <span>{{ $t('common.false') }}: {{ question.userAnswersStatistics.falseCount || 0 }}</span>
+              </v-tooltip>
+            </div>
+          </template>
+
+          <template v-else-if="question?.questionTypeKey.trim().toLowerCase() === 'text'">
+            <div class="text-answer-list">
+              <article
+                v-for="(answer, index) in getTextPreviewAnswers(question)"
+                :key="`${question.id}-${index}`"
+                class="text-answer-list__item"
+              >
+                <span class="text-answer-list__question">{{ answer.question }}</span>
+                <p class="text-answer-list__value">{{ answer.answer }}</p>
+              </article>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <div class="question-report-card__sidebar">
+        <section class="question-panel question-panel--compact question-panel--metrics">
+          <div class="question-panel__header">
+            <div>
+              <p class="question-panel__eyebrow">{{ $t('sdssSurvey.report.employeeDetails') }}</p>
+              <h4 class="question-panel__title">{{ $t('sdssSurvey.report.participantsPercentageAnalysis') }}</h4>
+            </div>
+          </div>
+
+          <div class="question-panel__body metric-stack">
+            <v-tooltip location="top">
+              <template #activator="{ props }">
+                <div v-bind="props" class="metric-row metric-row--accent">
+                  <div class="metric-row__top">
+                    <span class="metric-row__label">{{ $t('sdssSurvey.report.percentageTitle') }}</span>
+                    <strong class="metric-row__value">
+                      {{ getPercentageDirectly(question.userAnswersStatistics.totalCount || 0, countAllInvitedUsers || 1)
+                      }}%
+                    </strong>
+                  </div>
+                  <v-progress-linear
+                    :model-value="getPercentageDirectly(question.userAnswersStatistics.totalCount || 0, countAllInvitedUsers || 1)"
+                    color="#154360"
+                    bg-color="#dce6f1"
+                    rounded
+                    height="10"
+                  />
+                </div>
+              </template>
+              <span>{{ $t('sdssSurvey.report.userPercentageMessage') }}</span>
+            </v-tooltip>
+
+            <v-tooltip location="top">
+              <template #activator="{ props }">
+                <div v-bind="props" class="metric-row metric-row--neutral">
+                  <div class="metric-row__top">
+                    <span class="metric-row__label">{{ $t('sdssSurvey.report.totalNumbersTitle') }}</span>
+                    <strong class="metric-row__value">{{ question.userAnswersStatistics.totalCount || 0 }} /
+                      {{ countAllInvitedUsers }}</strong>
+                  </div>
+                  <v-progress-linear
+                    :model-value="countAllInvitedUsers ? ((question.userAnswersStatistics.totalCount || 0) / countAllInvitedUsers) * 100 : 0"
+                    color="#98a2b3"
+                    bg-color="#eaecf0"
+                    rounded
+                    height="8"
+                  />
+                </div>
+              </template>
+              <span>{{ $t('sdssSurvey.report.userTotalNumbersMessage') }}</span>
+            </v-tooltip>
+          </div>
+        </section>
+
+        <section v-if="question.showPublicQuestions"
+                 class="question-panel question-panel--compact question-panel--metrics">
+          <div class="question-panel__header">
+            <div>
+              <p class="question-panel__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.additionalAverageQuestions')
+                }}</p>
+              <h4 class="question-panel__title">{{ $t('sdssSurvey.report.questionAnalysis.additionalAverageQuestions')
+                }}</h4>
+            </div>
+          </div>
+
+          <div class="question-panel__body metric-stack">
+            <v-tooltip location="top">
+              <template #activator="{ props }">
+                <div v-bind="props" class="metric-row metric-row--clickable metric-row--info"
+                     @click="handleProbabilityClick(question)">
+                  <div class="metric-row__top">
+                    <span class="metric-row__label">{{ $t('sdssSurvey.report.probabilityTitle') }}</span>
+                    <strong
+                      class="metric-row__value">{{ Math.round(question.userAnswersStatistics.averageProbabilityOfOccurrence || 0)
+                      }}%</strong>
+                  </div>
+                  <v-progress-linear
+                    :model-value="question.userAnswersStatistics.averageProbabilityOfOccurrence || 0"
+                    color="#1570ef"
+                    bg-color="#dbeafe"
+                    rounded
+                    height="10"
+                  />
+                </div>
+              </template>
+              <span>{{ $t('sdssSurvey.report.probabilityTooltip') }}</span>
+            </v-tooltip>
+
+            <v-tooltip location="top">
+              <template #activator="{ props }">
+                <div v-bind="props" class="metric-row metric-row--clickable metric-row--impact"
+                     @click="handleImpactClick(question)">
+                  <div class="metric-row__top">
+                    <span class="metric-row__label">{{ $t('sdssSurvey.report.impactTitle') }}</span>
+                    <strong
+                      class="metric-row__value">{{ Math.round(question.userAnswersStatistics.averageImpactSeverity || 0)
+                      }}%</strong>
+                  </div>
+                  <v-progress-linear
+                    :model-value="question.userAnswersStatistics.averageImpactSeverity || 0"
+                    color="#7a2e92"
+                    bg-color="#f1e4f6"
+                    rounded
+                    height="10"
+                  />
+                </div>
+              </template>
+              <span>{{ $t('sdssSurvey.report.impactTooltip') }}</span>
+            </v-tooltip>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section
+      v-if="shouldRenderWithoutTransition && isQuestionExpanded(question.id) && !isAnalysisLoading && questionDetailsMap[question.id]"
+      class="question-report-card__insights"
+    >
+      <QuestionDetailsReport :question-data="questionDetailsMap[question.id]" />
+    </section>
+
+    <v-expand-transition v-else>
+      <section v-if="isQuestionExpanded(question.id) && !isAnalysisLoading && questionDetailsMap[question.id]"
+               class="question-report-card__insights">
+        <QuestionDetailsReport :question-data="questionDetailsMap[question.id]" />
+      </section>
+    </v-expand-transition>
+  </article>
+
+  <DialogDashboardScreen
+    :main-title="mainDialogTitle"
+    :dialogValue="detailsDialog"
+    :items="dialogItems"
+    :headers="dialogHeaders"
+    @closeDialog="handleCloseDialog"
+  ></DialogDashboardScreen>
+</div>

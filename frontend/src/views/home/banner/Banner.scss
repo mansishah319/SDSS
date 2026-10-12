@@ -1,0 +1,517 @@
+.application-banner-div {
+  min-height: 351px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  max-width: 1312px;
+  margin: 0 auto 0 auto;
+  padding: 0 20px;
+
+  // Responsive breakpoints
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 280px;
+    padding: 0 12px;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 240px;
+    padding: 0 8px;
+  }
+
+  &.hide-banner {
+    opacity: 0;
+    min-height: 0;
+    transition: all 0.3s ease;
+  }
+
+  &.banner-show {
+    opacity: 1;
+    min-height: 351px;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      min-height: 280px;
+    }
+
+    @media (max-width: 480px) {
+      min-height: 240px;
+    }
+  }
+
+  .banner-bottom-bg {
+    background: linear-gradient(180deg, rgba(1, 88, 69, 0) 0%, #015845 94.79%);
+    min-height: 110px;
+    width: 100%;
+    position: absolute;
+    bottom: -65px;
+    border-radius: 0 0 24px 24px;
+
+    @media (max-width: 768px) {
+      min-height: 80px;
+      bottom: -50px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    @media (max-width: 480px) {
+      min-height: 60px;
+      bottom: -40px;
+      border-radius: 0 0 16px 16px;
+    }
+  }
+
+  .bg-img {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    top: 0;
+    border-radius: 24px;
+    box-shadow: none;
+    object-fit: contain;
+    height: 416px;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      max-width: 40rem;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 20px;
+    }
+
+    @media (max-width: 480px) {
+      border-radius: 16px;
+    }
+  }
+
+  .application-banner-content {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex-direction: row;
+
+    @media (max-width: 768px) {
+      gap: 1.2rem;
+      flex-direction: row;
+      text-align: center;
+
+      .left,
+      .center,
+      .right {
+        width: 33.3%;
+        min-width: 0;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      .application-logo-div {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 1rem;
+
+      .left,
+      .center,
+      .right {
+        width: 100%;
+      }
+
+      .center {
+        margin: 0 0 8px 0;
+      }
+
+      .application-logo-div {
+        margin: 0 auto 8px auto;
+      }
+    }
+
+    .left {
+      position: relative;
+      width: 33.3%;
+      top: 50%;
+      transform: translate(0%, 30%);
+
+      @media (max-width: 768px) {
+        width: 100%;
+        top: 0;
+        transform: none;
+        order: 2;
+      }
+
+      .banner-txt {
+        font-size: 1.192rem;
+        color: #ffffff;
+        font-weight: normal;
+        font-family: BukraBold, sans-serif;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          font-size: 1rem;
+          justify-content: center;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 0.9rem;
+        }
+
+        .line-style {
+          display: flex;
+          align-items: end;
+          gap: 0.3rem;
+          margin-right: 11px;
+          bottom: 9px;
+          position: relative;
+
+          @media (max-width: 768px) {
+            margin-right: 8px;
+            bottom: 6px;
+          }
+
+          @media (max-width: 480px) {
+            margin-right: 6px;
+            bottom: 4px;
+            gap: 0.2rem;
+          }
+
+          span {
+            &:nth-child(1) {
+              background-color: #26d07c;
+              width: 14px;
+              height: 4px;
+              border-radius: 2px;
+
+              @media (max-width: 480px) {
+                width: 12px;
+                height: 3px;
+              }
+            }
+
+            &:nth-child(2) {
+              width: 4px;
+              height: 4px;
+              background-color: #009c62;
+              border-radius: 50%;
+
+              @media (max-width: 480px) {
+                width: 3px;
+                height: 3px;
+              }
+            }
+
+            &:nth-child(3) {
+              width: 4px;
+              height: 4px;
+              border-radius: 50%;
+              background-color: #0da06e;
+
+              @media (max-width: 480px) {
+                width: 3px;
+                height: 3px;
+              }
+            }
+          }
+        }
+      }
+
+      .app-name-ar {
+        font-size: 1.986rem;
+        color: #ffffff;
+        font-weight: 700;
+        font-family: BukraBold, sans-serif;
+        margin-bottom: 6px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        @media (max-width: 768px) {
+          font-size: 1.75rem;
+          margin-bottom: 4px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 1.5rem;
+        }
+      }
+
+      .app-name-en {
+        font-size: 0.695rem;
+        color: #ffffff;
+        font-weight: normal;
+        font-family: BukraBold, sans-serif;
+        opacity: 0.9;
+
+        @media (max-width: 768px) {
+          font-size: 0.65rem;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 0.6rem;
+        }
+      }
+    }
+
+    .center {
+      width: 33.3%;
+      display: flex;
+      justify-content: center;
+      top: 50%;
+      transform: translate(-1%, 45%);
+      position: relative;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        top: 0;
+        transform: none;
+        order: 1;
+      }
+
+      .application-logo-div {
+        width: 132px;
+        height: 132px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 36px;
+        box-shadow: 0 28.0702px 44.4444px rgba(0, 0, 0, 0.14), 0 10.5263px 53.8012px rgba(0, 0, 0, 0.12),
+        0 12.8655px 17.5439px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        margin-top: 35px;
+        margin-left: 15px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 32px 48px rgba(0, 0, 0, 0.18);
+        }
+
+        @media (max-width: 768px) {
+          width: 100px;
+          height: 100px;
+          border-radius: 28px;
+          margin: 0;
+        }
+
+        @media (max-width: 480px) {
+          width: 80px;
+          height: 80px;
+          border-radius: 24px;
+        }
+
+        img {
+          width: auto;
+          height: 80px;
+          transition: all 0.3s ease;
+
+          @media (max-width: 768px) {
+            height: 60px;
+          }
+
+          @media (max-width: 480px) {
+            height: 50px;
+          }
+        }
+      }
+    }
+
+    .right {
+      width: 33.3%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      position: relative;
+      top: 6.7rem;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        top: 0;
+        justify-content: center;
+        order: 3;
+        margin-top: 1rem;
+      }
+
+      @media (max-width: 480px) {
+        margin-top: 0.5rem;
+      }
+
+      .hide-btn {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        font-size: 0.75rem;
+        border-radius: 24px;
+        padding: 8px 20px;
+        display: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+
+        &:hover {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+          font-size: 0.7rem;
+          padding: 6px 16px;
+          border-radius: 20px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 0.65rem;
+          padding: 5px 14px;
+          border-radius: 18px;
+        }
+      }
+    }
+  }
+}
+
+.show-btn {
+  /* Layout */
+  padding: 10px 20px;
+  margin: 8px;
+
+  /* Visual */
+  background: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+  outline: none;
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+
+.show-btn:hover {
+  background: linear-gradient(135deg, #3a5ce4 0%, #1a3499 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.show-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.show-btn:focus {
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.3);
+}
+
+// RTL Support
+[dir='rtl'] {
+  .application-banner-div {
+    .application-banner-content {
+      .left {
+        .banner-txt {
+          .line-style {
+            margin-right: 0;
+            margin-left: 11px;
+
+            @media (max-width: 768px) {
+              margin-left: 8px;
+            }
+
+            @media (max-width: 480px) {
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+
+      .center {
+        .application-logo-div {
+          margin-left: 0;
+          margin-right: 0;
+          margin-top: 40px;
+
+          @media (max-width: 768px) {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dark theme support
+.v-theme--dark {
+  .application-banner-div {
+    .application-banner-content {
+      .center {
+        .application-logo-div {
+          background: linear-gradient(135deg, #2d2d2d 0%, #1e1e1e 100%);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.ltr .app-name-en {
+  direction: rtl;
+  justify-self: self-end;
+}
+
+// Animation for banner entrance
+@keyframes bannerSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.application-banner-div {
+  animation: bannerSlideIn 0.6s ease-out;
+}

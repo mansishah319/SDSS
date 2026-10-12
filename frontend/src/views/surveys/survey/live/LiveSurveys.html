@@ -1,0 +1,159 @@
+<DubaiPoliceLoader
+  :is-loading="isLoading"
+  variant="badge"
+  :heading="$t('common.loader.liveSurveysHeading')"
+  :message="$t('common.loader.liveSurveys')"
+  :description="$t('common.loader.liveSurveysDescription')"
+/>
+<v-container v-if="isAuthorized" class="live-surveys-container pt-0" fluid>
+  <!-- Enhanced Header Section -->
+  <v-row class="header-section">
+    <v-col cols="auto" class="back-button-col">
+      <CustomGoBackButton :is-arabic="isLanguageAr()" route-to="MainUsersSurveyHomeScreen"></CustomGoBackButton>
+    </v-col>
+    <v-col class="title-col">
+      <div class="title-container">
+        <h1 class="main-title">
+            <span class="title-icon">
+              <img :src="liveSurveysIconUrl" class="img-1" alt="auto_graph-icon"
+              /></span>
+          <span class="title-text">{{ $t('sdssSurvey.live.mainTitle') }}</span>
+        </h1>
+      </div>
+    </v-col>
+  </v-row>
+
+  <!-- Enhanced Survey List -->
+  <div v-if="surveys.length > 0" class="surveys-grid">
+    <div
+      v-for="(survey, index) in surveys"
+      :key="survey.id"
+      class="survey-card-wrapper"
+      :style="{ animationDelay: `${index * 0.1}s` }"
+    >
+      <v-card class="survey-card enhanced-card" elevation="0">
+        <!-- Enhanced Card Header -->
+        <div class="card-header">
+          <div class="header-content">
+            <div class="title-section">
+              <div class="icon-container">
+                <v-icon class="survey-icon">mdi-clipboard-text</v-icon>
+              </div>
+              <h3 class="survey-title">{{ survey.localTitle }}</h3>
+            </div>
+            <div class="status-section">
+              <v-chip color="success" class="round-chip" variant="elevated">
+                {{ survey.activeRoundResponse.localTitle }}
+              </v-chip>
+              <v-chip color="green" class="status-chip" variant="elevated">
+                <v-icon start size="small">mdi-check-circle</v-icon>
+                {{ $t('common.active') }}
+              </v-chip>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhanced Card Content -->
+        <div class="card-content">
+          <div class="description-grid">
+            <div class="description-item">
+              <div class="description-header">
+                <v-icon color="warning" size="small">mdi-information-variant-circle</v-icon>
+                <span class="description-label">{{ $t('sdssSurvey.currentSurveyDescription') }}</span>
+              </div>
+              <p class="description-text">{{ survey.localDescription }}</p>
+            </div>
+            <div class="description-item">
+              <div class="description-header">
+                <v-icon color="warning" size="small">mdi-information</v-icon>
+                <span class="description-label">{{ $t('sdssSurvey.surveyRounds.currentRoundDescription') }}</span>
+              </div>
+              <p class="description-text">{{ survey.activeRoundResponse.localDescription }}</p>
+            </div>
+          </div>
+
+          <!-- Enhanced Timer Section -->
+          <div class="timer-section">
+            <v-card class="timer-card" elevation="0">
+              <div class="timer-header">
+                <div v-if="!survey.activeRoundResponse.manualHandle" class="timer-title-section">
+                  <div class="timer-icon-container">
+                    <v-icon color="success" size="large">mdi-clock-outline</v-icon>
+                  </div>
+                  <div class="timer-text">
+                    <h4 class="timer-title">{{ $t('sdssSurvey.live.timeBoard.titleInCaseDynamicSurvey') }}</h4>
+                    <p class="timer-subtitle">{{ $t('sdssSurvey.live.timeBoard.subTitleInCaseDynamicSurvey') }}</p>
+                  </div>
+                </div>
+                <div v-else class="timer-title-section">
+                  <div class="timer-icon-container">
+                    <v-icon color="success" size="large">mdi-text-box-edit</v-icon>
+                  </div>
+                  <div class="timer-text">
+                    <h4 class="timer-title">{{ $t('sdssSurvey.live.timeBoard.titleInCaseManualSurvey') }}</h4>
+                    <p class="timer-subtitle">{{ $t('sdssSurvey.live.timeBoard.subTitleInCaseManualSurvey') }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timer-content">
+                <div v-if="!survey.activeRoundResponse.manualHandle" class="countdown-container">
+                  <CustomCountdown :deadline-end-time="survey.activeRoundResponse.endTime"></CustomCountdown>
+                </div>
+                <div v-else class="dynamic-counter-container">
+                  <CustomDynamicTimeCounter
+                    :created-date="survey.activeRoundResponse.updatedAt"
+                  ></CustomDynamicTimeCounter>
+                </div>
+              </div>
+            </v-card>
+          </div>
+        </div>
+
+        <!-- Enhanced Card Actions -->
+        <div class="card-actions">
+          <v-btn
+            color="primary"
+            target="_blank"
+            class="action-button"
+            :block="true"
+            size="large"
+            variant="elevated"
+            aria-label="Open survey: {{ survey.title }}"
+            @click="openSurveyScreen(survey.id)"
+          >
+            <v-icon start>mdi-pencil-outline</v-icon>
+            {{ $t('sdssSurvey.live.takeSurvey') }}
+          </v-btn>
+        </div>
+      </v-card>
+    </div>
+  </div>
+
+  <!-- Enhanced Empty State -->
+  <div v-else class="empty-state">
+    <EmptyDataTable :image-size="128" :message="$t('sdssSurvey.live.noActiveSurveys')"></EmptyDataTable>
+  </div>
+
+  <!-- Enhanced Back Button Section -->
+  <div class="back-button-section">
+    <BackButton
+      :redirect-path="redirectToSurveyHomePage"
+      :title="backButtonTitle"
+      :icon="backButtonIcon"
+      :color="backButtonColor"
+    />
+  </div>
+</v-container>
+
+<!-- Access Denied View -->
+<AccessDeniedView
+  v-else-if="!isAuthorized"
+  :back-icon="backButtonIcon"
+  :back-title="backButtonTitle"
+  :back-color="backButtonColor"
+  :back-redirect-path="redirectToSurveyHomePage"
+></AccessDeniedView>
+
+<!-- Footer -->
+<FooterComponent :justify-content="'justify-content-start'"></FooterComponent>

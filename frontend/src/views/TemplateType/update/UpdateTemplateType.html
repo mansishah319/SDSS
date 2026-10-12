@@ -1,0 +1,74 @@
+<!--
+  - * ***************************************************************
+  - * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  - * ——————————————————————————————————
+  - * NOTICE: All information contained herein is a property of DubaiPolice.
+  - * ***************************************************************
+  -->
+
+<div class="template-type-dialog">
+  <v-form ref="form" v-model="valid" class="dialog-form">
+    <div class="dialog-form__meta">
+      <span class="dialog-form__meta-label">{{ $t('settings.emailTemplate.id') }}</span>
+      <strong class="dialog-form__meta-value">{{ selectedId }}</strong>
+    </div>
+
+    <section class="dialog-form__section">
+      <div class="dialog-form__section-head">
+        <h4 class="dialog-form__section-title">{{ $t('settings.templateType.templateTypeKey') }}</h4>
+        <p class="dialog-form__section-copy">Refine the system key mapping if the template type needs to move to another
+          category.</p>
+      </div>
+
+      <v-select
+        v-model="formData.templateTypeKey"
+        :items="templateTypeKeyList"
+        item-title="localTemplateKey"
+        item-value="templateTypeKey"
+        :rules="[rules.required]"
+        variant="outlined"
+        density="comfortable"
+        class="dialog-form__field"
+      >
+        <template #label>
+          <div>
+            {{ $t('settings.emailTemplate.templateTypeLabel') }}
+            <span class="dialog-required">*</span>
+          </div>
+        </template>
+      </v-select>
+    </section>
+
+    <section class="dialog-form__section">
+      <div class="dialog-form__section-head">
+        <h4 class="dialog-form__section-title">{{ $t('settings.templateType.title') }}</h4>
+        <p class="dialog-form__section-copy">Update both localized titles so the type stays clear across interfaces.</p>
+      </div>
+
+      <div class="dialog-form__grid">
+        <v-text-field v-model="formData.titleAr" :rules="[rules.required]" variant="outlined" density="comfortable">
+          <template #label>
+            <div>
+              {{ $t('settings.templateType.titleAr') }}
+              <span class="dialog-required">*</span>
+            </div>
+          </template>
+        </v-text-field>
+
+        <v-text-field v-model="formData.titleEn" :rules="[rules.required]" variant="outlined" density="comfortable">
+          <template #label>
+            <div>
+              {{ $t('settings.templateType.titleEn') }}
+              <span class="dialog-required">*</span>
+            </div>
+          </template>
+        </v-text-field>
+      </div>
+    </section>
+
+    <div class="dialog-form__actions">
+      <v-btn color="error" variant="text" @click="cancel">{{ $t('common.cancel') }}</v-btn>
+      <v-btn color="success" variant="flat" rounded="pill" @click="saveTemplate">{{ $t('common.edit') }}</v-btn>
+    </div>
+  </v-form>
+</div>

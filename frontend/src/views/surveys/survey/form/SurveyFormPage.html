@@ -1,0 +1,260 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2026 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div class="survey-form-page">
+  <GenericDashboardHeaderView
+    :title-en="pageTitle"
+    :title-ar="pageTitle"
+    subtitle-en="Select the invitation audience, review employees, and configure survey content."
+    subtitle-ar="حدد جمهور الدعوات وراجع الموظفين واضبط محتوى الاستبيان."
+    :icon="isEditMode ? 'mdi-pencil-box-outline' : 'mdi-poll-box-outline'"
+    :show-back-button="true"
+    back-route-name="SdssSurvey"
+    :total-value="selectedEmployeesCount"
+  />
+
+  <div class="survey-dialog-form survey-dialog-form--page">
+    <ContentLoader
+      v-if="isPageLoading || isEmployeesLoading"
+      class="survey-dialog-form__loader"
+      variant="badge"
+      overlay
+      compact-badge
+      :heading="$t('common.loader.surveyCreateHeading')"
+      :message="$t('common.loader.surveyCreate')"
+      :description="$t('common.loader.surveyCreateDescription')"
+    />
+
+    <section class="survey-dialog-form__section survey-dialog-form__section--accent">
+      <div class="survey-dialog-form__section-head">
+        <div>
+          <p class="survey-dialog-form__eyebrow">Audience</p>
+          <h4 class="survey-dialog-form__title">{{ $t('sdssSurvey.userInvitations') }}</h4>
+          <p class="survey-dialog-form__copy">
+            اختر الإدارة والوظائف لعرض الموظفين المطابقين، ثم راجع قائمة الدعوات قبل حفظ الاستبيان.
+          </p>
+        </div>
+        <div class="survey-dialog-form__meta-group">
+          <v-chip color="primary" variant="tonal" rounded="pill">
+            {{ selectedEmployeesCount }} / {{ totalEmployees }}
+          </v-chip>
+          <v-chip :color="isEditMode ? 'warning' : 'success'" variant="tonal" rounded="pill">
+            {{ isEditMode ? $t('sdssSurvey.edit') : $t('sdssSurvey.add') }}
+          </v-chip>
+        </div>
+      </div>
+
+      <div class="survey-dialog-form__grid survey-dialog-form__grid--two">
+        <v-select
+          class="survey-dialog-form__field"
+          v-model="departmentIds"
+          :items="allDepartmentList"
+          prepend-inner-icon="mdi-domain"
+          :label="$t('sdssSurvey.selectDepartment')"
+          item-value="id"
+          item-title="shortName"
+          variant="outlined"
+          density="comfortable"
+          multiple
+          chips
+          closable-chips
+          clearable
+          :hide-no-data="true"
+        />
+
+        <v-autocomplete
+          class="survey-dialog-form__field"
+          v-model="jobIds"
+          v-model:search="search"
+          :items="jobs"
+          prepend-inner-icon="mdi-briefcase-outline"
+          item-value="id"
+          item-title="name"
+          :label="$t('sdssSurvey.selectJobs')"
+          variant="outlined"
+          density="comfortable"
+          multiple
+          chips
+          closable-chips
+          hide-selected
+          clearable
+          :loading="isJobsLoading"
+          :hide-no-data="true"
+          :menu-props="{ closeOnContentClick: false, maxHeight: 320 }"
+          @update:menu="onDropdownOpen"
+        />
+      </div>
+
+      <div class="survey-dialog-form__audience-toolbar">
+        <v-text-field
+          v-model="employeeSearch"
+          density="compact"
+          :label="$t('common.search')"
+          prepend-inner-icon="mdi-magnify"
+          variant="outlined"
+          hide-details
+          clearable
+        />
+      </div>
+
+      <v-data-table-server
+        v-model="selectedEmployeeIds"
+        v-model:page="employeePage"
+        v-model:items-per-page="employeeItemsPerPage"
+        :headers="employeeHeaders"
+        :items="employeeRows"
+        :items-length="totalEmployees"
+        :loading="isEmployeesLoading"
+        :loading-text="$t('common.loading')"
+        item-value="id"
+        show-select
+        class="survey-dialog-form__employee-table"
+        :items-per-page-text="$t('common.items_per_page')"
+        :items-per-page-options="[
+          { value: 10, title: '10' },
+          { value: 25, title: '25' },
+          { value: 50, title: '50' }
+        ]"
+      >
+        <template v-slot:no-data>
+          <div class="survey-dialog-form__empty">
+            <v-icon icon="mdi-account-search-outline" size="42"></v-icon>
+            <span>{{ $t('sdssSurvey.invitationsWarning') }}</span>
+          </div>
+        </template>
+      </v-data-table-server>
+    </section>
+
+    <section class="survey-dialog-form__section">
+      <div class="survey-dialog-form__section-head">
+        <div>
+          <p class="survey-dialog-form__eyebrow">Content</p>
+          <h4 class="survey-dialog-form__title">{{ $t('sdssSurvey.mainTitle') }}</h4>
+          <p class="survey-dialog-form__copy">
+            Define the bilingual title, summary, and round mode so the survey is ready for delivery.
+          </p>
+        </div>
+        <div class="survey-dialog-form__meta-group">
+          <v-chip :color="creationRequest.manualHandle ? 'warning' : 'success'" variant="tonal" rounded="pill">
+            {{ creationRequest.manualHandle ? $t('sdssSurvey.manualHandle') : $t('sdssSurvey.automatic.title') }}
+          </v-chip>
+        </div>
+      </div>
+
+      <div class="survey-dialog-form__grid survey-dialog-form__grid--two">
+        <v-text-field class="common-en-text-field" v-model="creationRequest.titleEn" variant="outlined"
+                      density="comfortable" required>
+          <template #label>
+            <div>
+              {{ $t('sdssSurvey.nameEn') }}
+              <span class="survey-dialog-form__required">*</span>
+            </div>
+          </template>
+        </v-text-field>
+
+        <v-text-field class="common-ar-text-field" v-model="creationRequest.titleAr" variant="outlined"
+                      density="comfortable" required>
+          <template #label>
+            <div>
+              {{ $t('sdssSurvey.nameAr') }}
+              <span class="survey-dialog-form__required">*</span>
+            </div>
+          </template>
+        </v-text-field>
+
+        <v-textarea
+          class="common-en-text-field"
+          v-model="creationRequest.descriptionEn"
+          :label="$t('sdssSurvey.descriptionEn')"
+          variant="outlined"
+          density="comfortable"
+          rows="4"
+          auto-grow
+        />
+
+        <v-textarea
+          class="common-ar-text-field"
+          v-model="creationRequest.descriptionAr"
+          :label="$t('sdssSurvey.descriptionAr')"
+          variant="outlined"
+          density="comfortable"
+          rows="4"
+          auto-grow
+        />
+      </div>
+
+      <div class="survey-dialog-form__controls">
+        <v-text-field
+          v-model="creationRequest.numberOfRounds"
+          :label="$t('sdssSurvey.numberOfRounds')"
+          variant="outlined"
+          density="comfortable"
+          type="number"
+          @change="generateRounds"
+          required
+          :readonly="isEditMode"
+        />
+
+        <v-checkbox
+          v-model="creationRequest.manualHandle"
+          :label="$t('sdssSurvey.manualHandle')"
+          color="primary"
+          hide-details
+          :readonly="isEditMode"
+        />
+      </div>
+    </section>
+
+    <section
+      v-if="!creationRequest.manualHandle && creationRequest.numberOfRounds > 0"
+      class="survey-dialog-form__section"
+    >
+      <div class="survey-dialog-form__section-head">
+        <div>
+          <p class="survey-dialog-form__eyebrow">Automation</p>
+          <h4 class="survey-dialog-form__title">{{ $t('sdssSurvey.automatic.title') }}</h4>
+          <p class="survey-dialog-form__copy">
+            Prepare each automatic round with clear titles, descriptions, and timing windows before publishing.
+          </p>
+        </div>
+      </div>
+
+      <div class="survey-dialog-form__rounds">
+        <article v-for="(round, index) in creationRequest.roundRequestList" :key="index"
+                 class="survey-dialog-form__round-card">
+          <div class="survey-dialog-form__round-head">
+            <h5>{{ $t('sdssSurvey.round') }} {{ index + 1 }}</h5>
+            <v-chip color="success" variant="tonal" rounded="pill">#{{ round.roundNumber }}</v-chip>
+          </div>
+
+          <div class="survey-dialog-form__grid survey-dialog-form__grid--two">
+            <v-text-field v-model="round.titleEn" :label="$t('sdssSurvey.automatic.roundTitleEn')"
+                          variant="outlined" density="comfortable" :readonly="isEditMode" />
+            <v-text-field v-model="round.titleAr" :label="$t('sdssSurvey.automatic.roundTitleAr')"
+                          variant="outlined" density="comfortable" :readonly="isEditMode" />
+            <v-text-field v-model="round.descriptionEn" :label="$t('sdssSurvey.automatic.roundDescriptionEn')"
+                          variant="outlined" density="comfortable" :readonly="isEditMode" />
+            <v-text-field v-model="round.descriptionAr" :label="$t('sdssSurvey.automatic.roundDescriptionAr')"
+                          variant="outlined" density="comfortable" :readonly="isEditMode" />
+            <v-text-field v-model="round.startTime" :label="$t('sdssSurvey.automatic.startTime')"
+                          type="datetime-local" variant="outlined" density="comfortable" :readonly="isEditMode" />
+            <v-text-field v-model="round.endTime" :label="$t('sdssSurvey.automatic.endTime')"
+                          type="datetime-local" variant="outlined" density="comfortable" :readonly="isEditMode" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="survey-dialog-form__actions">
+      <v-btn color="error" variant="text" @click="cancel">{{ $t('common.cancel') }}</v-btn>
+      <v-btn color="success" variant="flat" rounded="pill" @click="save">
+        {{ isEditMode ? $t('common.update') : $t('common.create') }}
+      </v-btn>
+    </div>
+  </div>
+</div>

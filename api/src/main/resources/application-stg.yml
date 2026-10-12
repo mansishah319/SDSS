@@ -1,0 +1,232 @@
+spring:
+  config:
+    activate:
+      on-profile: stg
+  jmx:
+    enabled: ${JMX_ENABLED:false}
+  datasource:
+    hikari:
+      max-lifetime: 120000        # 30 seconds
+      idle-timeout: 120000        # 20 seconds
+      connection-timeout: 120000  # 30 seconds
+      minimum-idle: 5
+      maximum-pool-size: 10
+    continue-on-error: false
+    primary:
+      jndi-name: ${JNDI_NAME:jdbc/sdss}
+      driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME:oracle.jdbc.OracleDriver}
+    secondary:
+      jndi-name: jdbc/weblisher
+      driver-class-name: oracle.jdbc.OracleDriver
+    tertiary:
+      jndi-name: jdbc/committees
+      driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    show-sql: ${JPA_SHOW_SQL:false}
+    open-in-view: ${OPEN_IN_VIEW:false}
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    properties:
+      org:
+        hibernate:
+          envers:
+            store_data_at_delete: ${ENVERS_STORE_DATA_AT_DELETE:true}
+      hibernate:
+        properties:
+          oracle:
+            jdbc:
+              readTimeout: 120000
+              statementTimeout: 120000
+        dialect: org.hibernate.dialect.Oracle12cDialect
+        integration:
+          envers:
+            enabled: ${ENVERS_ENABLED:true}
+        listeners:
+          envers:
+            autoRegister: ${ENVERS_AUTO_REGISTER:true}
+        hbm2ddl:
+          auto: ${HBM2DDL_AUTO:update}
+      javax:
+        persistence:
+          query:
+            timeout: 120000 # 2 minutes
+          validation:
+            mode: ${PERSISTENCE_VALIDATION_MODE:none}
+    hibernate:
+      connection:
+        timeout: 120 # seconds
+      naming:
+        physical-strategy: ${HIBERNATE_NAMING_PHYSICAL_STRATEGY:org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy}
+      dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.Oracle12cDialect}
+      generate_statistics: ${HIBERNATE_GENERATE_STATISTICS:false}
+      ddl-auto: ${HIBERNATE_DDL_AUTO:update}
+  data:
+    web:
+      pageable:
+        default-page-size: ${PAGINATION_DEFAULT_PAGE_SIZE:20}
+        max-page-size: ${PAGINATION_MAX_PAGE_SIZE:2000}
+        one-indexed-parameters: ${PAGINATION_ONE_INDEXED_PARAMETERS:true}
+  servlet:
+    multipart:
+      max-file-size: ${MULTIPART_MAX_FILE_SIZE:1000MB}
+      max-request-size: ${MULTIPART_MAX_REQUEST_SIZE:1000MB}
+      resolve-lazily: ${MULTIPART_RESOLVE_LAZILY:true}
+  freemarker:
+    template-loader-path: ${FREEMARKER_TEMPLATE_LOADER_PATH:classpath:/templates/}
+    prefer-file-system-access: ${FREEMARKER_PREFER_FILE_SYSTEM_ACCESS:false}
+  quartz:
+    job-store-type: jdbc
+    #    jdbc:
+    #      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            misfireThreshold: 120000
+            instanceId: AUTO
+          threadPool:
+            threadCount: 20
+  mail:
+    from: do-not-reply@dubaipolice.gov.ae
+    default-encoding: ${MAIL_DEFAULT_ENCODING:UTF-8}
+    host: ${MAIL_HOST:10.1.65.55}
+    username: ${MAIL_USERNAME:INTERACTIVE@dubaipolice.gov.ae}
+    password: ${MAIL_PASSWORD:ora9ias1}
+    port: ${MAIL_PORT:25}
+    properties:
+      mail:
+        debug: ${MAIL_DEBUG:false}
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:true}
+          timeout: ${MAIL_SMTP_TIMEOUT:5000}
+          connectiontimeout: ${MAIL_SMTP_CONNECTION_TIMEOUT:5000}
+          writetimeout: ${MAIL_SMTP_WRITE_TIMEOUT:5000}
+          socketFactory:
+            port: ${MAIL_SMTP_SOCKET_FACTORY_PORT:465}
+            class: ${MAIL_SMTP_SOCKET_FACTORY_CLASS:javax.net.ssl.SSLSocketFactory}
+          starttls:
+            required: ${MAIL_SMTP_STARTTLS_REQUIRED:true}
+            enable: ${MAIL_SMTP_STARTTLS_ENABLE:true}
+        transport:
+          protocol: ${MAIL_TRANSPORT_PROTOCOL:smtp}
+
+# Open API
+springdoc:
+  show-actuator: ${SPRINGDOC_SHOW_ACTUATOR:false}
+  use-management-port: ${SPRINGDOC_USE_MANAGEMENT_PORT:false}
+  api-docs:
+    enabled: false
+    path: ${SPRINGDOC_API_DOCS_PATH:/DubaiPolice/api-docs}
+  swagger-ui:
+    path: ${SWAGGER_UI_PATH:/DubaiPolice/swagger-ui.html}
+    tags-sorter: ${SWAGGER_UI_TAGS_SORTER:alpha}
+    operations-sorter: ${SWAGGER_UI_OPERATIONS_SORTER:method}
+    enabled: ${SWAGGER_UI_ENABLED:false}
+    csrf:
+      enabled: ${SWAGGER_UI_CSRF_ENABLED:true}
+
+management:
+  endpoints:
+    web:
+      base-path: ${MANAGEMENT_ENDPOINTS_WEB_BASE_PATH:/actuator}
+      exposure:
+        include: ${MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE:*}
+  endpoint:
+    health:
+      show-details: ${MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS:always}
+    info:
+      enabled: ${MANAGEMENT_ENDPOINT_INFO_ENABLED:true}
+
+logging:
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${LOGGING_ROLLING_FILE_NAME_PATTERN:logs/sdss-%d{yyyy-MM-dd}.%i.log}
+      max-file-size: 100K
+  file:
+    name: ${LOGGING_FILE_NAME:/u01/app/logs/sdss-service/${spring.application.name}.log}
+    path: ${LOGGING_FILE_PATH:.}
+    max-history: ${MAX_HISTORY:30}
+    max-size: ${LOGGING_MAX_FILE_SIZE:10MB}
+    total-size-cap: ${LOGGING_TOTAL_SIZE_CAP:10MB}
+    clean-history-on-start: ${LOGGING_clean_history_on_start:false}
+  pattern:
+    rolling-file-name: ${LOGGING_ROLLING_FILE_NAME:/u01/app/logs/sdss-service/sdss-%d{yyyy-MM-dd}.%i.log}
+    console: ${LOGGING_PATTERN_CONSOLE:%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %magenta([%thread]) %green(%logger{15}) [%highlight(TraceId)=%yellow(%X{traceId}) %highlight(spanId)=%red(%X{spanId}) %highlight(UserGrpNumber)=%blue(%X{userId})] - %msg %n%throwable}
+    file: ${LOGGING_PATTERN_FILE:%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %magenta([%thread]) %green(%logger{15}) [%highlight(TraceId)=%yellow(%X{traceId}) %highlight(spanId)=%red(%X{spanId}) %highlight(UserGrpNumber)=%blue(%X{userId})] - %msg %n%throwable}
+  level:
+    root: ${LOGGING_ROOT:DEBUG}
+    web: ${LOGGING_LEVEL_WEB:DEBUG}
+    com:
+      zaxxer:
+        hikari: ERROR
+      mgdsw:
+        sdss: ${LOGGING_LEVEL_FOR_OUR_PROJECT:DEBUG}
+      springdoc: ${LOGGING_LEVEL_SPRINGDOC:ERROR}
+      security:
+        reactive: ${LOGGING_LEVEL_REACTIVE_SECURITY_AUTO_CONFIGURATION:ERROR}
+    org:
+      hibernate:
+        SQL: ${LOGGING_LEVEL_HIBERNATE_SQL:ERROR}
+        type:
+          descriptor:
+            sql:
+              BasicBinder: ${LOGGING_LEVEL_HIBERNATE_BASIC_BINDER:ERROR}
+
+security:
+  aesEncryptionKey: ${SECURITY_AES_ENCRYPTION_KEY:Mon1Amour3Donnez4Moi5Tes8BellesS}
+  jwt:
+    secret: ${SECURITY_JWT_SECRET:bXktc2VjcmV0LWtleS13aGljaC1zaG91bGQtYmUtY2hhbmdlZC1pbi1wcm9kdWN0aW9uLWFuZC1iZS1iYXNlNjQtZW5jb2RlZAo=}
+    expirationInMs: ${SECURITY_JWT_EXPIRATION_IN_MS:604800000}
+  encryption:
+    key: ${SECURITY_ENCRYPTION_KEY:dubaipolice16408}
+    iv: ${SECURITY_ENCRYPTION_IV:newintranet42370}
+  cipher:
+    key: ${SECURITY_CIPHER_KEY:dubaipolice16408}
+    instance: ${SECURITY_CIPHER_INSTANCE:AES/CBC/PKCS5PADDING}
+    initVector: ${SECURITY_INIT_VECTOR:newintranet42370}
+  crypto:
+    staticSecretKey: ${CRYPTO_STATIC_SECRET_KEY:B2R1mGFnxZj1WoqjDFlV+YnK/7RkkT5n72FGBuxyJFA=}
+
+app:
+  mail:
+    ssl:
+      port: 465
+    url: "https://webmail.tst.dubaipolice.gov.ae/EWS/Exchange.asmx"
+    username: "eng.mo.abdu@gmail.com"
+    password: "vxepwxxdveurmtgw"
+    authentication: false
+  userDashboardUrl: ${USER_DASHBOARD_URL:sdss/MyDashboard}
+  mySurveyCheckURI: ${MY_SURVEY_URI:sdss/surveys/form/}
+  challengeDashboardUri: ${CHALLENGE_DASHBOARD_URI:sdss/challenge/dashboard/}
+  validatorRequestsToValidate: ${VALIDATOR_REQUESTS_TO_VALIDATE_URI:sdss/MyDashboard/four/}
+  timeZone: ${TIME_ZONE:Asia/Dubai}
+  loginServiceName: SDSS_PORTAL
+  logo: ${APP_LOGO:classpath:/images/favicon.ico}
+  serverMainContext: ${APP_SERVER_MAIN_CONTEXT:sdss-service}
+
+openapi:
+  server:
+    url: ${OPENAPI_SERVER_URL:/sdss-service}
+    description: ${OPENAPI_SERVER_DESCRIPTION:AbduServer}
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+        logger-level: BASIC
+  httpclient:
+    connection-timeout: 5000
+
+services:
+  core:
+    urls:
+      #      core-service: https://intsappsstg.dubaipolice.com/core  # STG
+      core-service: http://10.1.82.184:7777/core  # STG
+    uris:
+      login_uri: /dummy/getToken/SMART_TRAFFIC_PORTAL
+

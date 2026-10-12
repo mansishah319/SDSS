@@ -1,0 +1,121 @@
+<div class="survey-round-form">
+  <section class="survey-round-form__section survey-round-form__section--accent">
+    <div class="survey-round-form__head">
+      <div>
+        <p class="survey-round-form__eyebrow">Round Setup</p>
+        <h4 class="survey-round-form__title">{{ $t('sdssSurvey.roundNumber') }}</h4>
+        <p class="survey-round-form__copy">
+          Configure the round number and handling mode before defining the bilingual content and timing.
+        </p>
+      </div>
+      <v-chip :color="isUpdateProcess ? 'warning' : 'primary'" variant="tonal" rounded="pill">
+        {{ isUpdateProcess ? $t('sdssSurvey.updateRound') : $t('sdssSurvey.createNewRound') }}
+      </v-chip>
+    </div>
+
+    <div class="survey-round-form__controls">
+      <v-text-field
+        v-model="localRound.roundNumber"
+        :label="$t('sdssSurvey.roundNumber')"
+        variant="outlined"
+        density="comfortable"
+        type="number"
+        required
+        :readonly="isUpdateProcess"
+        class="round-number-and-hint-same-height"
+      />
+
+      <v-alert
+        type="info"
+        variant="tonal"
+        class="round-number-and-hint-same-height"
+      >
+        <span>{{ isUpdateProcess ? $t('sdssSurvey.roundNumberUpdateRoundHint') : $t('sdssSurvey.roundNumberHint')
+          }}</span>
+      </v-alert>
+    </div>
+
+    <v-checkbox v-model="localRound.manualHandle" :label="$t('sdssSurvey.manualHandle')" color="primary" hide-details />
+  </section>
+
+  <section v-show="!localRound.manualHandle || showUpdateManualInfo" class="survey-round-form__section">
+    <div class="survey-round-form__head">
+      <div>
+        <p class="survey-round-form__eyebrow">Round Content</p>
+        <h4 class="survey-round-form__title">{{ $t('sdssSurvey.automatic.title') }}</h4>
+        <p class="survey-round-form__copy">
+          Fill the round headline, summary, and schedule so participants receive a clear, localized experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="survey-round-form__grid survey-round-form__grid--two">
+      <v-text-field
+        class="common-en-text-field"
+        v-model="localRound.titleEn"
+        :label="$t('sdssSurvey.automatic.roundTitleEn')"
+        variant="outlined"
+        density="comfortable"
+        required
+      />
+
+      <v-text-field
+        class="common-ar-text-field"
+        v-model="localRound.titleAr"
+        :label="$t('sdssSurvey.automatic.roundTitleAr')"
+        variant="outlined"
+        density="comfortable"
+        required
+      />
+
+      <v-textarea
+        class="common-en-text-field"
+        v-model="localRound.descriptionEn"
+        :label="$t('sdssSurvey.descriptionEn')"
+        variant="outlined"
+        density="comfortable"
+        rows="4"
+        auto-grow
+        required
+      />
+
+      <v-textarea
+        class="common-ar-text-field"
+        v-model="localRound.descriptionAr"
+        :label="$t('sdssSurvey.descriptionAr')"
+        variant="outlined"
+        density="comfortable"
+        rows="4"
+        auto-grow
+        required
+      />
+
+      <v-text-field
+        v-show="!showUpdateManualInfo"
+        v-model="localRound.startTime"
+        :label="$t('sdssSurvey.automatic.startTime')"
+        type="datetime-local"
+        variant="outlined"
+        density="comfortable"
+        required
+      />
+
+      <v-text-field
+        v-show="!showUpdateManualInfo"
+        v-model="localRound.endTime"
+        :label="$t('sdssSurvey.automatic.endTime')"
+        type="datetime-local"
+        variant="outlined"
+        density="comfortable"
+        required
+      />
+    </div>
+  </section>
+
+  <div class="survey-round-form__actions">
+    <v-btn color="error" variant="text" @click="cancel">{{ $t('common.cancel') }}</v-btn>
+    <v-btn color="success" variant="flat" rounded="pill" @click="submitRound">
+      {{ isUpdateProcess ? $t('common.update') : $t('common.create') }}
+    </v-btn>
+  </div>
+</div>

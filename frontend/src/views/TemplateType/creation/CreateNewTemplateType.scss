@@ -1,0 +1,74 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.template-type-dialog {
+  width: 100%;
+}
+
+.dialog-form {
+  display: grid;
+  gap: 18px;
+}
+
+.dialog-form__section {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+  border: 1px solid rgba(13, 82, 62, 0.12);
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.dialog-form__section-head {
+  margin-bottom: 14px;
+}
+
+.dialog-form__section-title {
+  color: #16392f;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dialog-form__section-copy {
+  color: #667d75;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 6px 0 0;
+}
+
+.dialog-form__grid {
+  display: grid;
+  gap: 12px;
+}
+
+.dialog-form__field {
+  margin-bottom: 0;
+}
+
+.dialog-required {
+  color: #dc2626;
+}
+
+.dialog-form__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .dialog-form__section {
+    padding: 16px;
+  }
+
+  .dialog-form__actions {
+    flex-direction: column-reverse;
+  }
+
+  .dialog-form__actions :deep(.v-btn) {
+    width: 100%;
+  }
+}

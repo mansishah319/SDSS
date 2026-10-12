@@ -1,0 +1,154 @@
+<v-sheet class="users-view-container" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <!-- Header -->
+  <v-row class="user-header-row" align="center" no-gutters>
+    <v-col cols="12" class="user-header-title">
+      <v-icon color="primary" size="36" class="me-2">mdi-account-group</v-icon>
+      <span>{{ $t('user.userDetails') }}</span>
+      <v-spacer />
+      <v-btn v-if="showCloseButton"
+             v-show="showCloseButton"
+             icon
+             class="close-btn"
+             variant="text"
+             @click="$emit('close')"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-col>
+  </v-row>
+
+  <!-- Main Content -->
+  <v-row class="user-main-row" align="stretch" no-gutters>
+    <!-- Avatar & Status -->
+    <v-col cols="12" md="3" class="user-avatar-col d-flex align-center justify-center" :style="avatarColStyle">
+      <v-card class="user-avatar-card fade-in-card d-flex align-center justify-center" elevation="2">
+        <div class="avatar-wrapper d-flex align-center justify-center flex-column" style="flex: 1">
+          <v-avatar size="120" class="avatar-img-wrapper mx-auto mb-3">
+            <v-img :src="imageUrl || defaultAvatar" cover class="fade-in-avatar" />
+          </v-avatar>
+          <v-chip
+            :color="
+                currentUser?.status === 'ACTIVE' || currentUser.status === 'نشط'
+                  ? 'success'
+                  : currentUser?.status === 'DELETED' || currentUser.status === 'محذوف'
+                  ? 'error'
+                  : 'grey'
+              "
+            :class="[
+                'status-chip',
+                'mb-2',
+                currentUser?.status === 'ACTIVE' || currentUser.status === 'نشط'
+                  ? 'status-chip-active'
+                  : currentUser?.status === 'DELETED' || currentUser.status === 'محذوف'
+                  ? 'status-chip-deleted'
+                  : 'status-chip-inactive',
+              ]"
+            size="small"
+            label
+          >
+            <v-icon start size="18">
+              {{
+                currentUser?.status === 'ACTIVE' || currentUser.status === 'نشط'
+                  ? 'mdi-check-circle'
+                  : currentUser?.status === 'DELETED' || currentUser.status === 'محذوف'
+                    ? 'mdi-delete-circle'
+                    : 'mdi-cancel'
+              }}
+            </v-icon>
+            {{
+              $t(
+                currentUser?.status === 'ACTIVE' || currentUser.status === 'نشط'
+                  ? 'common.status.active'
+                  : currentUser?.status === 'DELETED' || currentUser.status === 'محذوف'
+                    ? 'common.status.deleted'
+                    : 'common.status.inactive'
+              )
+            }}
+          </v-chip>
+          <span class="user-role mb-2">{{ currentUser?.mainExpertLevel }}</span>
+        </div>
+      </v-card>
+    </v-col>
+
+    <!-- Divider for desktop -->
+    <v-col cols="12" md="1" class="d-none d-md-flex align-center justify-center">
+      <v-divider vertical class="mx-2" style="height: 80%"></v-divider>
+    </v-col>
+
+    <!-- User Info & Table -->
+    <v-col cols="12" md="8" class="user-info-col">
+      <v-card class="user-info-card pa-6">
+        <div class="user-name-row mb-2">
+          <v-icon color="primary" size="28" class="me-2">mdi-account</v-icon>
+          <span class="user-name">{{ currentUser?.fullName || '-' }}</span>
+          <span v-if="currentUser?.mainExpertLevel" class="user-subtitle ms-3">{{
+              currentUser?.mainExpertLevel
+            }}</span>
+        </div>
+        <v-row class="user-info-grid mt-2">
+          <v-col v-for="field in enhancedUserFields" :key="field.key" cols="12" sm="6" class="mb-3">
+            <div class="field-label d-flex align-center mb-1">
+              <v-icon
+                v-if="field.icon"
+                :icon="field.icon"
+                size="18"
+                class="me-1"
+                :class="{ 'ms-1': $i18n.locale === 'ar' }"
+                color="primary"
+              />
+              <span>{{ $t(field.label) }}</span>
+            </div>
+            <div class="field-value" :title="currentUser?.[field.key]">
+              <v-tooltip
+                v-if="currentUser?.[field.key] && currentUser?.[field.key].length > 18"
+                :text="currentUser?.[field.key]"
+              >
+                <template #activator="{ props }">
+                  <span class="truncate" v-bind="props">{{ currentUser?.[field.key] || '-' }}</span>
+                </template>
+              </v-tooltip>
+              <span v-else class="truncate">{{ currentUser?.[field.key] || '-' }}</span>
+            </div>
+          </v-col>
+        </v-row>
+      </v-card>
+
+      <!-- Expertises Table -->
+      <v-card
+        v-if="currentUser && currentUser.usersExpertisesResponses && currentUser.usersExpertisesResponses.length > 0"
+        class="expertises-table-card mt-4"
+        elevation="1"
+      >
+        <v-card-title>
+          <v-icon start>mdi-head-snowflake-outline</v-icon>
+          {{ $t('user.add.expertisesMainTitle') }}
+        </v-card-title>
+        <v-data-table
+          :headers="expertisesHeaders"
+          :items="currentUser.usersExpertisesResponses"
+          class="expertises-table"
+          density="compact"
+          hide-default-footer
+          :mobile-breakpoint="0"
+        >
+          <template #item.expertisesName="{ item }">
+            <v-tooltip :text="item.expertisesName">
+              <template #activator="{ props }">
+                <span class="truncate" v-bind="props">{{ item.expertisesName }}</span>
+              </template>
+            </v-tooltip>
+          </template>
+          <template #item.expertLevel="{ item }">
+            <span>{{ item.expertLevel }}</span>
+          </template>
+          <template #item.isPrimary="{ item }">
+            <v-chip :color="item.isPrimary ? 'primary' : 'grey'" size="small" label class="primary-chip">
+              <v-icon start size="16">mdi-star</v-icon>
+              {{ item.isPrimary ? $t('common.yes') : $t('common.no') }}
+            </v-chip>
+          </template>
+        </v-data-table>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-sheet>

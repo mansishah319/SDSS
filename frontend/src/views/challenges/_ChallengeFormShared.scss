@@ -1,0 +1,78 @@
+.challenge-form-shell {
+  --challenge-form-page-gap: clamp(16px, 2vw, 28px);
+  --challenge-form-card-padding: clamp(16px, 2vw, 26px);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--challenge-form-page-gap);
+  padding-block-end: 32px;
+  direction: inherit;
+
+  .form-content {
+    width: min(100%, 1480px);
+    margin-inline: auto;
+    padding-inline: clamp(12px, 2vw, 28px);
+  }
+
+  .challenge-form-card {
+    position: relative;
+    overflow: visible;
+    padding: var(--challenge-form-card-padding);
+    border-radius: 8px;
+  }
+
+  .v-window {
+    overflow: visible;
+  }
+
+  .v-window-item {
+    padding-block: 4px;
+  }
+
+  .v-row {
+    margin: 0 !important;
+  }
+
+  .tab-title,
+  .resource-section {
+    margin: 0;
+  }
+
+  .resource-section,
+  .youtube_urls,
+  .resources,
+  .doc_files {
+    padding-inline: 0;
+  }
+
+  .resource-section {
+    padding: 2%;
+  }
+
+  .v-field,
+  .v-input,
+  .v-selection-control,
+  .v-chip {
+    direction: inherit;
+  }
+
+  &[dir='rtl'] {
+    text-align: right;
+  }
+
+  &[dir='ltr'] {
+    text-align: left;
+  }
+}
+
+@media (max-width: 960px) {
+  .challenge-form-shell {
+    .form-content {
+      padding-inline: 10px;
+    }
+
+    .challenge-form-card {
+      padding: 14px;
+    }
+  }
+}

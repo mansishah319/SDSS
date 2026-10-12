@@ -1,0 +1,236 @@
+<!--
+ ~ * ***************************************************************
+ ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+ ~ * ——————————————————————————————————
+ ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+ ~ * ***************************************************************
+ -->
+
+<v-app v-if="!isFullPage">
+  <v-app-bar v-if="!isFullScreenPage" v-show="!isFullScreenPage" class="header-block" :class="{ rtl: isRtl, ltr: !isRtl }"
+             height="80" app flat>
+    <v-toolbar-title>
+      <div class="header-brand-lockup">
+        <img
+          :src="futureForesightLogoUrl"
+          class="future-foresight-header-logo"
+          alt="Future Foresight"
+        />
+        <span class="header-brand-divider" aria-hidden="true"></span>
+        <img class="header-logo" alt="DP logo" src="@/assets/images/logo/dp-logo.png" />
+      </div>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+
+    <div class="app-lang">
+      <LocaleSwitcher></LocaleSwitcher>
+    </div>
+    <div class="fullscreen-switch" @click="makeFullScreen()">
+      <a v-if="!isFullScreen" id="fs-doc-button">
+        <i class="mdi mdi-crop-free animated zoomIn"></i>
+      </a>
+      <a v-if="isFullScreen" id="fs-exit-doc-button">
+        <i class="mdi mdi-fullscreen-exit animated zoomIn"></i>
+      </a>
+    </div>
+    <div class="user-profile" v-show="isHasAnyRole()">
+      <UserProfileDropdown :employee="employee" :rtl="isRtl" />
+    </div>
+  </v-app-bar>
+  <v-main>
+    <v-container fluid class="main-container">
+      <div id="sidebar-right" v-show="sidebarStore.isVisible && isHasAnyRole() && !isFullScreenPage"
+           class="sidebar-right" :class="{'sidebar-sm': isRightSidebar,}" v-if="!isFullScreenPage">
+        <div class="main-logo">
+          <a href="/">
+            <img src="@/assets/images/logo/AppLogo.png" loading="eager" alt="Logo of the application" />
+            <span>{{ $t('home.sid-bar-title') }}</span>
+          </a>
+        </div>
+        <!-- Contented -->
+        <div class="scroll-inside">
+          <div id="accordian" class="accordian">
+            <v-expansion-panels v-model="openedSidebarPanel" variant="accordion"
+                                :class="!isRightSidebar ? 'enhanced-expansion-panel' : ''">
+
+              <v-list :class="!isRightSidebar ? 'menu-list-2' : 'menu-list-2-right-sidebar-closed'">
+                <!-- Multi Survey -->
+                <v-list-item key="multiSurvey" to="/admin" link>
+                  <v-list-item-title>
+                    <div class="icon custom-icon-style-v-list-item-title mdi mdi-monitor-dashboard"></div>
+                    <span v-if="!isRightSidebar" v-show="!isRightSidebar"
+                          style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">
+                      {{ $t('side_bar.controlPanel.title') }}
+                    </span>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+              <v-list :class="!isRightSidebar ? 'menu-list-2' : 'menu-list-2-right-sidebar-closed'">
+                <!-- Multi Survey -->
+                <v-list-item v-if="employee && employee.isDelphiModerator"
+                             v-show="employee && employee.isDelphiModerator" key="multiSurvey" to="/surveys" link>
+                  <v-list-item-title>
+                    <div class="icon custom-icon-style-v-list-item-title mdi mdi-order-bool-ascending-variant"></div>
+                    <span v-if="!isRightSidebar" v-show="!isRightSidebar"
+                          style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">
+                      {{ $t('side_bar.sdssSurvey.controlTitle') }}
+                    </span>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+              <!-- Users Expansion Panel -->
+              <v-expansion-panel v-show="isAdmin()" :key="'users_panel'" value="users_panel">
+                <v-expansion-panel-title>
+                  <div class="icon mdi mdi-account-group"></div>
+                  <span style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">{{
+                      $t('side_bar.users.title') }}</span>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                  <div class="right_child_menu">
+                    <div>
+                      <router-link to="/users" class="app-child-sid_bar-items" exact>
+                        <i class="ico-squares mdi mdi-account-group-outline"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.users.child.all') }}</div>
+                      </router-link>
+                      <router-link to="/users/registration" class="app-child-sid_bar-items" exact>
+                        <i class="ico-squares mdi mdi-account-multiple-plus-outline"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.users.child.add') }}</div>
+                      </router-link>
+                    </div>
+                  </div>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+              <!-- Challenges Expansion Panel -->
+              <v-expansion-panel v-show="isAdminOrModerator()" :key="'challenges_panel'" value="challenges_panel">
+                <v-expansion-panel-title>
+                  <div class="icon mdi mdi-alpha-c-circle"></div>
+                  <span style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">{{
+                      $t('side_bar.challenges.title') }}</span>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                  <div class="right_child_menu">
+                    <div>
+                      <router-link to="/challenge/list" class="app-child-sid_bar-items" exact>
+                        <i class="ico-squares mdi mdi-beaker-question"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.challenges.child.list') }}</div>
+                      </router-link>
+                      <router-link to="/challenge/registration" class="app-child-sid_bar-items" exact>
+                        <i class="ico-squares mdi mdi-plus-circle-multiple"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.challenges.child.add_challenge') }}</div>
+                      </router-link>
+                    </div>
+                  </div>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+              <!-- Settings Expansion Panel -->
+              <v-expansion-panel v-show="isAdminOrModerator()" :key="'settings_panel'" value="settings_panel">
+                <v-expansion-panel-title>
+                  <div class="icon mdi mdi mdi-cog-outline"></div>
+                  <span style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">{{
+                      $t('side_bar.settings.title') }}</span>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                  <div class="right_child_menu">
+                    <div>
+                      <!-- Area Of Expertise -->
+                      <router-link to="/settings/areaExpertises" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-head-snowflake-outline"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.expertise.title') }}</div>
+                      </router-link>
+                      <!-- Strategic Direction -->
+                      <router-link to="/settings/strategicDirection" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-directions-fork"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.strategicDirection.title') }}</div>
+                      </router-link>
+                      <!-- Future Strategic Direction -->
+                      <router-link to="/settings/futureStrategicDirection" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-arrow-decision"></i>
+                        <div class="right_child_menu_text">
+                          {{ $t('side_bar.settings.futureStrategicDirection.title') }}
+                        </div>
+                      </router-link>
+                      <!-- Strategic Goals -->
+                      <router-link to="/settings/strategicGoals" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-bullseye-arrow"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.strategicGoals.title') }}</div>
+                      </router-link>
+                      <!-- Future Strategic Goals -->
+                      <router-link to="/settings/futureStrategicGoals" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-star-settings"></i>
+                        <div class="right_child_menu_text">
+                          {{ $t('side_bar.settings.futureStrategicGoals.title') }}
+                        </div>
+                      </router-link>
+                      <!-- Challenge Settings -->
+                      <router-link to="/settings/challengeSetting" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-wrench-cog-outline"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.challengeSettings.title') }}</div>
+                      </router-link>
+                    </div>
+                  </div>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+              <!-- Email Settings Expansion Panel -->
+              <v-expansion-panel v-show="isAdminOrModerator()" :key="'emailSettings_panel'"
+                                 value="emailSettings_panel">
+                <v-expansion-panel-title>
+                  <div class="icon mdi mdi-email-multiple"></div>
+                  <span style="line-height: 1.3em; font-family: BukraRegular, sans-serif !important">
+                    {{ $t('side_bar.settings.emailTemplate.emailSettings') }}</span>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                  <div class="right_child_menu">
+                    <div>
+                      <!-- Template Type -->
+                      <router-link to="/emailSettings/template/types" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-key"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.templateType.title') }}</div>
+                      </router-link>
+                      <!-- Email Template (EmailTemplateList) -->
+                      <router-link to="/emailSettings/emailTemplate" class="app-child-sid_bar-items" exact>
+                        <i class="mdi mdi-email-sync"></i>
+                        <div class="right_child_menu_text">{{ $t('side_bar.settings.emailTemplate.title') }}</div>
+                      </router-link>
+                    </div>
+                  </div>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </div>
+        </div>
+      </div>
+      <div id="content" class="content-main"
+           :class="{ 'custom-login-content': isFullScreenPage, 'box-border': !(sidebarStore.isVisible && isHasAnyRole() && !isFullScreenPage) }">
+        <!-- Breadcrumb Starts -->
+        <div class="content-header position-relative" v-show="isHasAnyRole() && !isFullScreenPage"
+             v-if="!isFullScreenPage">
+          <button v-show="sidebarStore.isVisible" type="button" class="collapse-right-btn"
+                  @click.prevent="isRightSidebar = !isRightSidebar">
+            <i v-if="!isRightSidebar" class="mdi mdi-chevron-right nav-close"></i>
+            <i v-if="isRightSidebar" class="mdi mdi-menu nav-open"></i>
+          </button>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mr-3">
+              <li class="breadcrumb-item" @click="goToHome">
+                <span class="font-dubai-bold" @click="goToHome" style="cursor: pointer"> {{ $t('nav.home') }} </span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <!-- Breadcrumb Ends -->
+        <div class="scroll-content" :class="{ 'custom-login-content': isFullScreenPage }">
+          <v-progress-linear :indeterminate="true" :active="false" color="primary" height="4"></v-progress-linear>
+          <div class="contenet-area">
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </v-container>
+    <notifications classes="sdss-notification" position="top right"></notifications>
+    <vue-snotify></vue-snotify>
+  </v-main>
+</v-app>
+
+<v-app v-else>
+  <router-view />
+</v-app>

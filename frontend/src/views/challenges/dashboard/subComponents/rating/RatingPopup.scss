@@ -1,0 +1,290 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.rating-popup {
+  .v-dialog {
+    &-transition-enter-active {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &-transition-leave-active {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &-transition-enter-from,
+    &-transition-leave-to {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+  }
+
+  .rating-card {
+    padding: 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    animation: cardEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    border: 1px solid rgba(0, 108, 68, 0.1);
+
+    .rating-card-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      color: #006c44;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      .v-icon {
+        animation: rotateIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    }
+
+    .rating-card-subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 16px;
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+      padding: 8px 12px;
+      background: rgba(0, 108, 68, 0.04);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 108, 68, 0.1);
+      font-family: bukrabold, serif;
+
+      strong {
+        color: #006c44;
+        margin: 0 4px;
+      }
+    }
+
+    .rating-card-text {
+      padding: 16px;
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+    }
+
+    .rating-container {
+      margin-bottom: 16px;
+      animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+
+      .v-rating {
+        .v-rating__wrapper {
+          gap: 8px;
+        }
+
+        .v-rating__item {
+          transform-origin: center;
+          transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+          &:hover {
+            transform: scale(1.2);
+          }
+
+
+        }
+      }
+    }
+
+    .checkbox-padding {
+      margin-bottom: 16px;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+
+      .v-checkbox {
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateX(4px);
+        }
+      }
+    }
+
+    .textarea-padding {
+      margin-bottom: 16px;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+
+      .v-field {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        &--focused {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .content-title-container {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+    }
+
+    .content-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #006c44;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rich-text-editor {
+      margin-top: 16px;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .card-actions {
+      padding: 16px;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+
+      .v-btn {
+        min-width: 120px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes cardEnter {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-180deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .rating-popup {
+    .rating-card {
+      margin: 16px;
+      padding: 12px;
+
+      .rating-card-title {
+        font-size: 1.1rem;
+      }
+
+      .rating-card-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .rating-card-text {
+        padding: 12px;
+      }
+
+      .card-actions {
+        padding: 12px;
+        flex-direction: column-reverse;
+        gap: 8px;
+
+        .v-btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.rating-card-subtitle {
+
+  font-family: bukrabold, serif;
+  font-size: 15px;
+  margin-top: 20px;
+  opacity: 1;
+
+}
+
+.v-rating__item .v-btn .v-icon {
+  color: #F09D0D;
+}

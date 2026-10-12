@@ -1,0 +1,311 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div class="admin-dashboard-container">
+  <GenericDashboardHeaderView
+    :title-en="$t('adminDashboard.userHeader.titleEn')"
+    :title-ar="$t('adminDashboard.userHeader.titleAr')"
+    :subtitle-en="$t('adminDashboard.userHeader.subtitleEn')"
+    :subtitle-ar="$t('adminDashboard.userHeader.subtitleAr')"
+    icon="mdi-view-dashboard-outline"
+  />
+
+  <!-- Loading State with Skeleton Loaders -->
+  <DubaiPoliceLoader :is-loading="isLoading" variant="badge" :message="$t('common.loading')" />
+  <div v-if="isLoading" class="dashboard-loading-state">
+    <ContentLoader
+      variant="dashboard"
+      :heading="$t('adminDashboard.userHeader.titleEn')"
+      :message="$t('common.loading')"
+      :description="$t('adminDashboard.userHeader.subtitleEn')"
+    />
+  </div>
+
+  <!-- Actual Dashboard Content -->
+  <div v-else class="dashboard-content">
+    <v-row class="dashboard-row">
+      <v-col cols="12" md="6" xl="4">
+        <v-card class="dp-card custom-admin-dashboard-card dashboard-card chart-card-div2 chart-card-div2--large">
+          <div class="custom-admin-dashboard-content-div dashboard-card-body">
+            <div class="top-status-div">
+              <h3 class="heading-1"> {{ $t('adminDashboard.totalChallenges') }} </h3>
+              <p>{{ totalChallenges }}</p>
+            </div>
+            <div v-if="hasChallengesChartData" id="chart3"
+                 class="chart-div-admin-dashboard chart-shell chart-shell--large fixed-donut-shell">
+              <apexchart
+                type="donut"
+                :options="chartOptions"
+                :series="series"
+                :rotate="360"
+                width="460"
+                height="430"
+                @data-point-selection="handleChallengeDataPointSelection"
+              ></apexchart>
+            </div>
+            <div v-else class="dashboard-empty-state">
+              <span class="mdi mdi-chart-donut dashboard-empty-icon"></span>
+              <h4>{{ $t('noData') }}</h4>
+              <p>{{ $t('adminDashboard.totalChallenges') }}</p>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6" xl="4">
+        <v-card class="dp-card dashboard-card chart-card-div2 chart-card-div2--large recent-open-card">
+          <div class="dashboard-card-body recent-open-layout">
+            <div>
+              <h3 class="heading-1 v-heading">{{ $t('adminDashboard.recentOpen') }}</h3>
+            </div>
+            <div v-if="hasRecentOpenData" class="recent-open-content">
+              <div class="text-center recent-open-shell">
+                <v-progress-circular :model-value="recentOpenPercentage" :rotate="360" :size="300" :width="44"
+                                     color="#008755">
+                  <template #default>{{ recentOpenPercentage }}%</template>
+                </v-progress-circular>
+              </div>
+            </div>
+            <div v-else>
+              <div class="dashboard-empty-state dashboard-empty-state--compact">
+                <span class="mdi mdi-chart-arc dashboard-empty-icon"></span>
+                <h4>{{ $t('noData') }}</h4>
+                <p>{{ $t('adminDashboard.recentOpen') }}</p>
+              </div>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col v-if="mainDashboardFullResponse.isCommander" cols="12" md="6" xl="4">
+        <div class="list-card-div">
+          <v-card
+            class="dp-card dashboard-card manager-summary-panel"
+            :class="isLanguageAr() ? 'manager-summary-panel--rtl' : 'manager-summary-panel--ltr'"
+          >
+            <div class="manager-summary-card">
+              <div class="manager-summary-card__meta">
+                <div class="icon mdi mdi-eye icon-btn-2" @click="handleCompletedDecisionsData"></div>
+                <v-progress-circular :model-value="completedDecision" :rotate="360" :size="70" :width="9"
+                                     color="#388E3C">
+                  <template #default>{{ completedDecision }}%</template>
+                </v-progress-circular>
+              </div>
+              <div class="manager-summary-card__text">
+                <p class="manager-summary-card__value">{{ completedDecisionValue }}</p>
+                <p class="manager-summary-card__label">{{ $t('adminDashboard.decision.completed') }}</p>
+              </div>
+            </div>
+
+            <div class="manager-summary-card">
+              <div class="manager-summary-card__meta">
+                <div class="icon mdi mdi-eye icon-btn-2" @click="handleValidatorRevisedDecisionsData"></div>
+                <v-progress-circular :model-value="validatorRevisedDecision" :rotate="360" :size="70" :width="9"
+                                     color="#512DA8">
+                  <template #default>{{ validatorRevisedDecision }}%</template>
+                </v-progress-circular>
+              </div>
+              <div class="manager-summary-card__text">
+                <p class="manager-summary-card__value">{{ validatorRevisedDecisionValue }}</p>
+                <p class="manager-summary-card__label">{{ $t('adminDashboard.decision.revisedByValidator') }}</p>
+              </div>
+            </div>
+
+            <div class="manager-summary-card">
+              <div class="manager-summary-card__meta">
+                <div class="icon mdi mdi-eye icon-btn-2" @click="handleClosedDecisionsData"></div>
+                <v-progress-circular :model-value="closedDecision" :rotate="360" :size="70" :width="9"
+                                     color="#E53935">
+                  <template #default>{{ closedDecision }}%</template>
+                </v-progress-circular>
+              </div>
+              <div class="manager-summary-card__text">
+                <p class="manager-summary-card__value">{{ closedDecisionValue }}</p>
+                <p class="manager-summary-card__label">{{ $t('adminDashboard.decision.closed') }}</p>
+              </div>
+            </div>
+          </v-card>
+        </div>
+      </v-col>
+
+      <v-col v-if="hasUserInvitationsData" cols="12" md="6" xl="4">
+        <UserInvitationsDashboardCard v-if="mainDashboardFullResponse.userDashboardResponse"
+                                      :user-dashboard-response="mainDashboardFullResponse.userDashboardResponse"
+                                      @show-details="handleShowUserInvitationsDetails" />
+      </v-col>
+
+      <v-col v-if="mainDashboardFullResponse.isModeratorOrAdminOrCommander" cols="12" md="6" xl="4">
+        <v-card class="dp-card dashboard-card test dp-chart-card">
+          <div class="top-status-div">
+            <h3 class="heading-1">{{ $t('adminDashboard.totalInternalUsers') }}</h3>
+            <p>{{ totalInternalUsers }}</p>
+          </div>
+          <div v-if="hasInternalUsersChartData" id="chart" class="chart-shell chart-shell--large fixed-donut-shell">
+            <apexchart
+              type="donut"
+              :options="chartOptions2"
+              :series="internalUsersSeries"
+              :rotate="360"
+              width="460"
+              height="430"
+              @data-point-selection="handleInternalUsersData"
+              class="chart"
+            ></apexchart>
+          </div>
+          <div v-else class="dashboard-empty-state">
+            <span class="mdi mdi-account-group dashboard-empty-icon"></span>
+            <h4>{{ $t('noData') }}</h4>
+            <p>{{ $t('adminDashboard.totalInternalUsers') }}</p>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col v-if="mainDashboardFullResponse.isModeratorOrAdminOrCommander" cols="12" md="6" xl="4">
+        <v-card class="dp-card dashboard-card dp-chart-card">
+          <div class="top-status-div">
+            <h3 class="heading-1">{{ $t('adminDashboard.totalUsers') }}</h3>
+            <p>{{ totalUsers }}</p>
+          </div>
+          <div v-if="hasUsersTypesChartData" id="chart2" class="chart-shell chart-shell--large fixed-donut-shell">
+            <apexchart
+              type="donut"
+              :options="chartOptions3"
+              :series="allUsersTypesSeries"
+              width="460"
+              height="430"
+              @data-point-selection="handleUsersTypesData"
+            ></apexchart>
+          </div>
+          <div v-else class="dashboard-empty-state">
+            <span class="mdi mdi-account-multiple dashboard-empty-icon"></span>
+            <h4>{{ $t('noData') }}</h4>
+            <p>{{ $t('adminDashboard.totalUsers') }}</p>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="12" lg="6" xl="6">
+        <ChallengeStrategicDashboardChart v-if="hasStrategicGoalsData"
+                                          :goals-data="mainDashboardFullResponse.futureStrategicGoalsResponseList"
+                                          :card-title="$t('adminDashboard.strategicGoals')"
+                                          large />
+        <v-card v-else class="dp-card dashboard-card dashboard-empty-card">
+          <div class="dashboard-empty-state">
+            <span class="mdi mdi-target dashboard-empty-icon"></span>
+            <h4>{{ $t('noData') }}</h4>
+            <p>{{ $t('adminDashboard.strategicGoals') }}</p>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="12" lg="6" xl="6">
+        <ChallengeStrategicDashboardChart v-if="hasStrategicDirectionsData"
+                                          :goals-data="mainDashboardFullResponse.futureStrategicDirectionsResponseList"
+                                          :card-title="$t('adminDashboard.strategicDirections')"
+                                          large />
+        <v-card v-else class="dp-card dashboard-card dashboard-empty-card">
+          <div class="dashboard-empty-state">
+            <span class="mdi mdi-compass-outline dashboard-empty-icon"></span>
+            <h4>{{ $t('noData') }}</h4>
+            <p>{{ $t('adminDashboard.strategicDirections') }}</p>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col
+        v-if="mainDashboardFullResponse.isModeratorOrAdminOrCommander && hasDepartmentStatsData"
+        cols="12" md="12" lg="6" xl="6">
+        <DepartmentDashboard :data="departmentChallengeStatsResponseList"
+                             title="adminDashboard.challengeDepartmentHistory" />
+      </v-col>
+
+      <v-col
+        v-else-if="mainDashboardFullResponse.isModeratorOrAdminOrCommander"
+        cols="12" md="12" lg="6" xl="6">
+        <v-card class="dp-card dashboard-card dashboard-empty-card">
+          <div class="dashboard-empty-state">
+            <span class="mdi mdi-domain dashboard-empty-icon"></span>
+            <h4>{{ $t('noData') }}</h4>
+            <p>{{ $t('adminDashboard.challengeDepartmentHistory') }}</p>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-col v-if="mainDashboardFullResponse.isModeratorOrAdminOrCommander" cols="12" md="12" lg="6" xl="6">
+        <v-card class="dp-card dashboard-card dashboard-history-card">
+          <div class="top-status-div">
+            <h3 class="heading-1">{{ $t('adminDashboard.challengeHistory') }}</h3>
+            <p></p>
+          </div>
+          <div>
+            <div class="search-list-div">
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-select ref="statusSelect" v-model="selectedStatus" density="compact"
+                            :label="$t('adminDashboard.dialog.challenge.status')" :items="[
+                      $t('common.labels.completed'),
+                      $t('common.labels.open'),
+                      $t('common.labels.closed'),
+                      $t('common.labels.voting'),
+                      $t('common.labels.revised'),
+                      $t('common.labels.paused'),
+                      $t('common.labels.underReview'),
+                      $t('common.labels.new'),
+                      $t('common.labels.urgent'),
+                    ]" variant="outlined" :clearable="true" />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <DPDatePicker v-model="selectedDate" :label="$t('common.createdAt')" :clearable="true"
+                                date-format="DD/MM/YYYY" />
+                </v-col>
+              </v-row>
+            </div>
+            <div v-if="filteredStatusList.length > 0" class="status-list-date">
+              <div v-for="(item, index) in filteredStatusList" :key="index" class="list-date"
+                   @click="handleRowClick(item)">
+                <div class="left-div">
+                  <p>{{ item.localTitle }}</p>
+                  <p>
+                    <span class="mdi mdi-calendar-range"></span>
+                    {{ formatCreatedAt(item.createdAt) }}
+                  </p>
+                </div>
+                <div class="right-div">
+                  <span :style="{ color: getStatusColor(item.statusLocal) }">{{ item.statusLocal }}</span>
+                </div>
+              </div>
+            </div>
+            <div v-else class="dashboard-empty-state dashboard-empty-state--history">
+              <span class="mdi mdi-format-list-bulleted dashboard-empty-icon"></span>
+              <h4>{{ $t('noData') }}</h4>
+              <p>{{ $t('adminDashboard.challengeHistory') }}</p>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+
+      <v-dialog v-model="dialog2" width="auto">
+        <v-card max-width="400" :title="dialogTitle" :text="dialogDescription">
+          <template #actions>
+            <v-spacer></v-spacer>
+
+            <v-btn class="yes-btn" @click="performAction">{{ $t('common.confirm') }}</v-btn>
+
+            <v-btn class="no-btn" @click="dialog2 = false">{{ $t('common.cancel') }}</v-btn>
+          </template>
+        </v-card>
+      </v-dialog>
+
+      <DialogDashboardScreen :dialogValue="dialog" :items="dialogItems" :headers="dialogHeaders"
+                             :main-title="listDialogTitle"
+                             :appear-actions="appearAllActions" :appearJustViewActions="appearViewActions"
+                             @closeDialog="handleCloseDialog"
+                             @approve="approveChallengeUnderReview" @reject="rejectChallengeUnderReview"
+                             @view="viewChallengeUnderReview" />
+    </v-row>
+  </div>
+</div>

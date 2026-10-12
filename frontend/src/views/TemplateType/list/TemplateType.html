@@ -1,0 +1,104 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div class="template-type-view">
+  <GenericDashboardHeaderView
+    :title-en="$t('side_bar.settings.templateType.title')"
+    :title-ar="$t('side_bar.settings.templateType.title')"
+    subtitle-en="Organize template categories and keep email composition rules structured."
+    subtitle-ar="نظم فئات القوالب وحافظ على هيكلة قواعد تكوين البريد الإلكتروني بوضوح."
+    icon="mdi-shape-outline"
+    :show-back-button="true"
+    back-route-name="home"
+    :total-value="dtoListResponse.length"
+  />
+  <v-card flat class="table-section-border">
+    <v-card-title class="d-flex align-center pe-2 table-heading-vcard">
+      <v-icon icon="mdi-video-input-component"></v-icon>
+      &nbsp; {{ $t('settings.templateType.find') }}
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        density="compact"
+        :label="$t('common.search')"
+        prepend-inner-icon="mdi-magnify"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn class="ml-2 oval-button" color="green" @click="createNew">
+        <v-icon left>mdi-plus</v-icon>
+        {{ $t('common.create') }}
+      </v-btn>
+    </v-card-title>
+
+    <template v-if="dtoListResponse.length > 0">
+      <GenericTable
+        title="Email Templates"
+        :headers="headers"
+        :items="dtoListResponse"
+        :search="search"
+        searchLabel="Search"
+        loadingText="Loading"
+        itemValue="name"
+        :items-per-page-text="$t('common.items_per_page')"
+        :items-per-page-options="[ {value: 10, title: '10'}, {value: 25, title: '25'}, {value: 50, title: '50'}, {value: 100, title: '100'}, {value: -1, title: $t('common.allPages')} ]"
+        createButtonText="Create"
+        createButtonColor="green"
+        editButtonColor="yellow"
+        deleteButtonColor="red"
+        createDialogTitle="Create New Email Template"
+        editDialogTitle="Edit Email Template"
+        emptyMessage="No email templates available"
+        :show-delete-button="false"
+        :onEdit="openEditItemDialog"
+      ></GenericTable>
+    </template>
+    <!-- Show empty table component when dtoResponse is empty -->
+    <template v-else>
+      <EmptyDataTable :imageSize="128" :message="$t('common.empty')"></EmptyDataTable>
+    </template>
+
+    <!-- CreateNew Email Template Dialog -->
+    <AppDialogShell
+      :model-value="showCreateNewPage"
+      :title="$t('settings.templateType.add')"
+      subtitle="Create a clean template type definition with the right key and bilingual title."
+      icon="mdi-shape-plus-outline"
+      :max-width="860"
+      persistent
+      @update:modelValue="showCreateNewPage = $event"
+      @close="showCreateNewPage = false"
+    >
+      <CreateNewTemplateType
+        @close="showCreateNewPage = false"
+        @template-updated="refreshTemplateList"
+      ></CreateNewTemplateType>
+    </AppDialogShell>
+
+    <!-- Update Email Template Dialog -->
+    <AppDialogShell
+      :model-value="showUpdateDialog"
+      :title="$t('settings.templateType.edit')"
+      subtitle="Update the selected template type using the same refined settings dialog pattern."
+      icon="mdi-shape-outline"
+      :max-width="860"
+      persistent
+      @update:modelValue="showUpdateDialog = $event"
+      @close="showUpdateDialog = false"
+    >
+      <UpdateTemplateType
+        :gId="selectedId"
+        @close="showUpdateDialog = false"
+        @templateUpdated="refreshTemplateList"
+      ></UpdateTemplateType>
+    </AppDialogShell>
+  </v-card>
+</div>

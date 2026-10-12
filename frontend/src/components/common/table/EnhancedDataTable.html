@@ -1,0 +1,226 @@
+<div class="enhanced-data-table-container p-0" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <!-- Header Section -->
+  <div class="table-header mb-0 pt-0">
+    <div v-if="showStatsChip" class="table-stats">
+      <v-chip color="primary" variant="tonal" class="stat-chip dp-chip">
+        <v-icon start>{{ statsIcon }}</v-icon>
+        {{ totalItems }} {{ $t('common.total') }}
+      </v-chip>
+    </div>
+  </div>
+
+  <!-- Skeleton Loader -->
+  <ContentLoader
+    v-if="skeletonLoading"
+    :variant="loaderVariant"
+    :heading="title"
+    :message="loadingMessage"
+    :description="loadingDescription"
+  />
+
+  <!-- Main Content -->
+  <div v-if="!skeletonLoading" class="table-content">
+    <!-- Enhanced Search Section -->
+    <v-card class="search-card mb-4">
+      <v-card-title class="search-title">
+        <div class="search-title-content">
+          <v-icon class="me-2">mdi-magnify</v-icon>
+          {{ $t('common.search') }}
+          <v-spacer></v-spacer>
+          <v-btn variant="text" size="large" class="toggle-search-btn" @click="toggleSearchExpanded">
+            <v-icon size="24">{{ searchExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+          </v-btn>
+        </div>
+      </v-card-title>
+
+      <v-card-text class="search-content">
+        <!-- Basic Search Fields (Always Visible) -->
+        <v-row class="basic-search-fields mb-0">
+          <v-col
+            v-for="field in basicSearchFields"
+            :key="field.key"
+            :cols="field.cols || 12"
+            :sm="field.sm || 6"
+            :md="field.md || 3"
+          >
+            <component
+              :is="field.component"
+              v-model="searchValues[field.key]"
+              :label="field.label"
+              :items="field.items"
+              :item-title="field.itemTitle"
+              :item-value="field.itemValue"
+              :variant="field.variant || 'outlined'"
+              :density="field.density || 'comfortable'"
+              :clearable="field.clearable !== false"
+              :prepend-inner-icon="field.icon"
+              :loading="field.loading"
+              :disabled="field.disabled"
+              class="search-field"
+              @update:model-value="handleSearchChange"
+            />
+          </v-col>
+        </v-row>
+
+        <!-- Advanced Search Fields (Expandable) -->
+        <v-expand-transition>
+          <div v-show="searchExpanded" class="advanced-search-fields">
+            <v-row>
+              <v-col
+                v-for="field in advancedSearchFields"
+                :key="field.key"
+                :cols="field.cols || 12"
+                :sm="field.sm || 6"
+                :md="field.md || 3"
+              >
+                <component
+                  :is="field.component"
+                  v-model="searchValues[field.key]"
+                  :label="field.label"
+                  :items="field.items"
+                  :item-title="field.itemTitle"
+                  :item-value="field.itemValue"
+                  :variant="field.variant || 'outlined'"
+                  :density="field.density || 'comfortable'"
+                  :clearable="field.clearable !== false"
+                  :prepend-inner-icon="field.icon"
+                  :loading="field.loading"
+                  :disabled="field.disabled"
+                  class="search-field"
+                  @update:model-value="handleSearchChange"
+                />
+              </v-col>
+            </v-row>
+          </div>
+        </v-expand-transition>
+
+        <!-- Search Actions -->
+        <div class="search-actions justify-start mt-0">
+          <v-btn
+            color="primary"
+            variant="elevated"
+            class="search-btn"
+            :loading="loading"
+            @click="handleSearch"
+            :disabled="loading"
+            :aria-label="$t('common.search')"
+            elevation="4"
+          >
+            <v-icon start>mdi-magnify</v-icon>
+            {{ $t('common.search') }}
+          </v-btn>
+          <v-btn
+            variant="elevated"
+            class="clear-btn"
+            @click="handleClearSearch"
+            :disabled="loading"
+            :aria-label="$t('common.clear')"
+            elevation="4"
+          >
+            <v-icon start>mdi-refresh</v-icon>
+            {{ $t('common.clear') }}
+          </v-btn>
+          <v-btn
+            v-if="showExport"
+            variant="elevated"
+            class="export-btn"
+            :loading="exportLoading"
+            @click="handleExport"
+            :disabled="exportLoading"
+            :aria-label="$t('common.export')"
+            elevation="4"
+          >
+            <v-icon start>mdi-microsoft-excel</v-icon>
+            {{ $t('common.export') }}
+          </v-btn>
+        </div>
+      </v-card-text>
+    </v-card>
+
+    <!-- Enhanced Data Table -->
+    <v-card class="table-card">
+      <v-card-title class="table-title">
+        <div class="title-section">
+          <v-icon class="me-2">{{ tableIcon }}</v-icon>
+          <span>{{ title }}</span>
+        </div>
+        <v-spacer></v-spacer>
+        <div class="table-actions">
+          <v-btn color="info" variant="tonal" size="small" class="action-btn" @click="handleRefresh">
+            <v-icon start>mdi-refresh</v-icon>
+            {{ $t('common.refresh') }}
+          </v-btn>
+          <slot name="table-actions"></slot>
+        </div>
+      </v-card-title>
+
+      <v-card-text class="table-content">
+        <div class="table-scroll-region">
+          <v-data-table-server
+            v-model:items-per-page="itemsPerPageComputed"
+            :headers="headers"
+            :loading="loading"
+            :loading-text="$t('common.loading')"
+            :items-per-page-text="$t('common.items_per_page')"
+            :items="items"
+            :items-length="totalItems"
+            :items-per-page-options="itemsPerPageOptions"
+            :item-value="itemValue"
+            :row-props="rowProps"
+            class="enhanced-data-table"
+            @update:options="handleTableUpdate"
+          >
+            <!-- In the template section, modify the dynamic column templates part -->
+            <template v-for="(_, key) in columnTemplates" #[`item.${key}`]="{ item, value }">
+              <component
+                :is="columnTemplates[key].component"
+                :item="item"
+                :value="value"
+                :column="key"
+                :options="columnOptions[key] || columnTemplates[key].options"
+                @action="handleColumnAction"
+              />
+            </template>
+
+            <!-- Actions Column Template -->
+            <template #item.actions="{ item }">
+              <div
+                :class="['actions-cell', actionsOrientation === 'vertical' ? 'actions-cell-vertical' : 'actions-cell-horizontal'] "
+              >
+                <v-tooltip
+                  v-for="action in (typeof actions === 'function' ? actions(item) : actions)"
+                  :key="action.key"
+                  :text="action.tooltip || action.label"
+                  location="top"
+                >
+                  <template #activator="{ props }">
+                    <v-btn
+                      v-bind="props"
+                      :icon="action.icon"
+                      variant="text"
+                      :color="action.color"
+                      size="small"
+                      class="action-icon-btn"
+                      @click="handleAction(action.key, item)"
+                    ></v-btn>
+                  </template>
+                </v-tooltip>
+              </div>
+            </template>
+
+            <!-- Empty State -->
+            <template #no-data>
+              <div class="empty-state">
+                <div class="empty-state-icon-wrapper">
+                  <v-icon size="56" class="empty-state-icon">{{ emptyStateIcon }}</v-icon>
+                </div>
+                <h3 class="empty-title">{{ emptyStateTitle }}</h3>
+                <p class="empty-description">{{ emptyStateDescription }}</p>
+              </div>
+            </template>
+          </v-data-table-server>
+        </div>
+      </v-card-text>
+    </v-card>
+  </div>
+</div>

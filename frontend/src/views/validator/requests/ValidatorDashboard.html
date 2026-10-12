@@ -1,0 +1,512 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <v-container fluid>
+    <!-- Stats cards section -->
+    <v-row>
+      <v-col cols="12" md="3">
+        <StatCardOverview :title="$t('myDashboard.totalInvitations')" :value="totalInvitationsCount"
+                          icon="mdi mdi-email-sync-outline" backgroundColor="#DDF2FD" fontColor="black"
+                          iconColor="black">
+        </StatCardOverview>
+      </v-col>
+      <v-col cols="12" md="3">
+        <StatCardOverview :title="$t('myDashboard.totalAcceptedInvitations')" :value="totalAcceptedCount"
+                          icon="mdi mdi-email-check" backgroundColor="#CEE5D0" fontColor="black"
+                          iconColor="black"></StatCardOverview>
+      </v-col>
+      <v-col cols="12" md="3">
+        <StatCardOverview :title="$t('myDashboard.totalPendingInvitations')" :value="totalPendingCount"
+                          icon="mdi mdi-email-alert" backgroundColor="#F0EABE" fontColor="black"
+                          iconColor="black"></StatCardOverview>
+      </v-col>
+      <v-col cols="12" md="3">
+        <StatCardOverview :title="$t('myDashboard.totalRejectedInvitations')" :value="totalRejectedCount"
+                          icon="mdi mdi-email-remove" backgroundColor="#FF7777" fontColor="black"
+                          iconColor="black"></StatCardOverview>
+      </v-col>
+    </v-row>
+    <v-col cols="12"></v-col>
+    <v-col cols="12"></v-col>
+
+    <!-- Tabs section -->
+    <v-row>
+      <v-col cols="12" md="12 ">
+        <v-card class="dp-card">
+          <v-tabs bg-color="rgb(var(--v-theme-green))" center-active v-model="tab" @click="updateRoute(tab)"
+                  class="dp-tab-head " :prev-icon="$i18n.locale === 'ar' ? 'mdi-chevron-right' : 'mdi-chevron-left'"
+                  :next-icon="$i18n.locale === 'ar' ? 'mdi-chevron-left' : 'mdi-chevron-right'"
+                  :class="{'rtl-tabs': $i18n.locale === 'ar', 'ltr-tabs': $i18n.locale !== 'ar'}">
+            <v-tab value="one" @click="setCurrentTab('one')">{{ $t('validatorDashboard.pending') }}</v-tab>
+
+            <v-tab value="two" @click="setCurrentTab('two')">{{ $t('validatorDashboard.accepted') }}</v-tab>
+
+            <v-tab value="three" @click="setCurrentTab('three')">{{ $t('validatorDashboard.rejected') }}</v-tab>
+
+            <v-tab value="four" @click="setCurrentTab('four')">{{ $t('validatorDashboard.underReview') }}</v-tab>
+
+            <v-tab value="five" @click="setCurrentTab('five')">{{ $t('validatorDashboard.reviewedByMe') }}</v-tab>
+
+            <v-tab value="six" @click="setCurrentTab('six')">{{ $t('validatorDashboard.completedChallenges') }}</v-tab>
+
+            <v-tab value="seven" @click="setCurrentTab('seven')">{{ $t('validatorDashboard.closedChallenges') }}</v-tab>
+          </v-tabs>
+
+          <!-- Tab content -->
+          <v-card-text class="dp-tab-content">
+            <v-window v-model="tab">
+              <!-- Tab one -->
+              <v-window-item value="one">
+                <template v-if="pendingInvitationList && pendingInvitationList?.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="column-name custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.name') }}
+                      </th>
+                      <th class="column-start-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.startDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.endDate') }}
+                      </th>
+                      <th class="column-actions custom-header-dubai-font" scope="col">{{ $t('common.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in pendingInvitationList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.startTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.endTime }}</td>
+                      <td>
+                        <v-row>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" class="accept-icon" icon="mdi-check"
+                                       :aria-label="$t('myDashboard.actions.accept')"
+                                       @click="openApprovedConfirmationDialog(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('myDashboard.actions.accept') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" icon="mdi-close" class="cancel-icon"
+                                       :aria-label="$t('myDashboard.actions.reject')"
+                                       @click="openCanceledConfirmationDialog(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('myDashboard.actions.reject') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab two -->
+              <v-window-item value="two">
+                <template v-if="acceptedInvitationList && acceptedInvitationList.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="column-name custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.name') }}
+                      </th>
+                      <th class="column-start-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.startDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.endDate') }}
+                      </th>
+                      <th class="column-actions custom-header-dubai-font" scope="col">{{ $t('common.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in acceptedInvitationList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.startTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.endTime }}</td>
+                      <td>
+                        <v-row>
+                          <v-tooltip location="top">
+                            <template #activator="{ props }">
+                              <v-btn v-bind="props" class="me-1" density="default" color="blue" variant="tonal"
+                                     :aria-label="$t('myDashboard.actions.viewDashboard')"
+                                     @click="viewChallengeDashboard(item.id)">
+                                <i class="mdi mdi-monitor-dashboard"></i>
+                              </v-btn>
+                            </template>
+                            <span>{{ $t('myDashboard.actions.viewDashboard') }}</span>
+                          </v-tooltip>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab three -->
+              <v-window-item value="three">
+                <template v-if="rejectedInvitationsList && rejectedInvitationsList.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="column-name custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.name') }}
+                      </th>
+                      <th class="column-start-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.startDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.endDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('common.reasonName') }}
+                      </th>
+                      <th class="column-actions custom-header-dubai-font" scope="col">{{ $t('common.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in rejectedInvitationsList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.startTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.endTime }}</td>
+                      <td pendeingListResponse>{{ item.userInvitations.reason }}</td>
+                      <td>
+                        <v-row>
+                          <v-tooltip location="top">
+                            <template #activator="{ props }">
+                              <v-btn v-bind="props" class="me-1" density="default" color="blue" variant="tonal"
+                                     :aria-label="$t('myDashboard.actions.viewDashboard')"
+                                     @click="viewChallengeDashboard(item.id)">
+                                <i class="mdi mdi-monitor-dashboard"></i>
+                              </v-btn>
+                            </template>
+                            <span>{{ $t('myDashboard.actions.viewDashboard') }}</span>
+                          </v-tooltip>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab four -->
+              <v-window-item value="four">
+                <template v-if="requestsUnderReview && requestsUnderReview.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="text-start column-id custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeID') }}
+                      </th>
+                      <th class="text-start column-name custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeTitle') }}
+                      </th>
+                      <th class="text-start final-description custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeDescription') }}
+                      </th>
+                      <th class="text-start column-actions custom-header-dubai-font" scope="col">
+                        {{ $t('common.actions') }}
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in requestsUnderReview" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.id }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localDescription }}</td>
+                      <td>
+                        <v-row>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" class="accept-icon" icon="mdi-check"
+                                       :aria-label="$t('adminRequests.dialog.accept.confirm')"
+                                       @click="openApprovedConfirmationDialogForChangeChallengeStatus(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('adminRequests.dialog.accept.confirm') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" icon="mdi-close" class="cancel-icon"
+                                       :aria-label="$t('adminRequests.dialog.reject.confirm')"
+                                       @click="openCanceledConfirmationDialogForChangeChallengeStatus(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('adminRequests.dialog.reject.confirm') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab Five -->
+              <v-window-item value="five">
+                <template v-if="reviewedChallengesList && reviewedChallengesList.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="column-name custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.name') }}
+                      </th>
+                      <th class="column-start-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.startDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.endDate') }}
+                      </th>
+                      <th class="column-actions custom-header-dubai-font" scope="col">{{ $t('common.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in reviewedChallengesList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.startTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.endTime }}</td>
+                      <td>
+                        <v-row>
+                          <v-tooltip location="top">
+                            <template #activator="{ props }">
+                              <v-btn v-bind="props" class="me-1" density="default" color="blue" variant="tonal"
+                                     :aria-label="$t('myDashboard.actions.viewDashboard')"
+                                     @click="viewChallengeDashboard(item.id)">
+                                <i class="mdi mdi-monitor-dashboard"></i>
+                              </v-btn>
+                            </template>
+                            <span>{{ $t('myDashboard.actions.viewDashboard') }}</span>
+                          </v-tooltip>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab Six -->
+              <v-window-item value="six">
+                <template v-if="completedInvitationsList && completedInvitationsList.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="column-name custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.name') }}
+                      </th>
+                      <th class="column-start-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.startDate') }}
+                      </th>
+                      <th class="column-end-date custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.endDate') }}
+                      </th>
+                      <th class="final-decision custom-header-dubai-font" scope="col">
+                        {{ $t('myDashboard.table.finalDecision') }}
+                      </th>
+                      <th class="column-actions custom-header-dubai-font" scope="col">{{ $t('common.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in completedInvitationsList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.startTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.endTime }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">
+                        <ul>
+                          <li v-for="decision in item.finalDecisions" :key="decision.id">
+                            {{ decision.solutionText }}
+                          </li>
+                        </ul>
+                      </td>
+                      <td>
+                        <v-row>
+                          <v-tooltip location="top">
+                            <template #activator="{ props }">
+                              <v-btn v-bind="props" class="me-1" density="default" color="blue" variant="tonal"
+                                     :aria-label="$t('myDashboard.actions.viewDashboard')"
+                                     @click="viewChallengeDashboard(item.id)">
+                                <i class="mdi mdi-monitor-dashboard"></i>
+                              </v-btn>
+                            </template>
+                            <span>{{ $t('myDashboard.actions.viewDashboard') }}</span>
+                          </v-tooltip>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+
+              <!-- Tab Seven -->
+              <v-window-item value="seven">
+                <template v-if="closedChallengesList && closedChallengesList.length">
+                  <v-table class="dp-primary-table table-style-2" height="300px" hide-default-footer disable-pagination
+                           fixed-header>
+                    <thead>
+                    <tr>
+                      <th class="column-sr custom-header-dubai-font" scope="col">{{ $t('myDashboard.table.sr') }}</th>
+                      <th class="text-start column-id custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeID') }}
+                      </th>
+                      <th class="text-start column-name custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeTitle') }}
+                      </th>
+                      <th class="text-start final-description custom-header-dubai-font" scope="col">
+                        {{ $t('adminRequests.challengeDescription') }}
+                      </th>
+                      <th class="text-start column-actions custom-header-dubai-font" scope="col">
+                        {{ $t('common.actions') }}
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in closedChallengesList" :key="item.id">
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ index + 1 }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.id }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localTitle }}</td>
+                      <td class="td-click" @click="handleAdminRequestRowClick(item)">{{ item.localDescription }}</td>
+                      <td>
+                        <v-row>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" class="accept-icon" icon="mdi-check"
+                                       :aria-label="$t('myDashboard.actions.accept')"
+                                       @click="openApprovedConfirmationDialog(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('myDashboard.actions.accept') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                          <v-col cols="6">
+                            <v-tooltip location="top">
+                              <template #activator="{ props }">
+                                <v-btn v-bind="props" density="compact" icon="mdi-close" class="cancel-icon"
+                                       :aria-label="$t('myDashboard.actions.reject')"
+                                       @click="openCanceledConfirmationDialog(item.id)"></v-btn>
+                              </template>
+                              <span>{{ $t('myDashboard.actions.reject') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                        </v-row>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </v-table>
+                </template>
+                <template v-else>
+                  <EmptyDataTable :imageSize="200" :message="$t('common.empty')"></EmptyDataTable>
+                </template>
+              </v-window-item>
+            </v-window>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+
+  <ConfirmationDialog
+    v-if="isActionDialogVisible"
+    :title="actionDialogTitle"
+    :message="actionDialogMessage"
+    :icon="actionDialogIcon"
+    :icon-color="actionDialogColor"
+    :confirm-button-color="actionDialogColor"
+    :confirm-text="actionConfirmText"
+    :loading="isActionSubmitting"
+    :persistent="true"
+    :max-width="640"
+    content-class="user-request-confirmation-content"
+    @confirmed="activeDialog === 'review' ? performActionForChangeChallengeStatus() : performAction()"
+    @cancel="closeActionDialog"
+  >
+    <div class="user-request-dialog-body">
+      <div
+        class="user-request-dialog-note"
+        :class="{ 'user-request-dialog-note--reject': actionType === 'REJECTED' || actionType === 'CLOSED' }"
+      >
+        <v-icon :color="actionType === 'REJECTED' || actionType === 'CLOSED' ? 'error' : 'success'">
+          {{ actionType === 'REJECTED' || actionType === 'CLOSED' ? 'mdi-note-text-outline' : 'mdi-information-outline'
+          }}
+        </v-icon>
+        <span>
+          {{
+            activeDialog === 'review'
+              ? actionType === 'CLOSED'
+                ? $t('adminRequests.dialog.reject.note')
+                : $t('adminRequests.dialog.accept.note')
+              : actionType === 'REJECTED'
+                ? $t('myDashboard.dialog.reject.note')
+                : $t('myDashboard.dialog.accept.note')
+          }}
+        </span>
+      </div>
+
+      <v-textarea
+        v-if="activeDialog === 'invitation' && actionType === 'REJECTED'"
+        v-model="cancelReason"
+        :label="$t('myDashboard.dialog.reject.reasonLabel')"
+        :hint="$t('myDashboard.dialog.reject.reasonHint')"
+        :placeholder="$t('myDashboard.dialog.reject.reasonPlaceholder')"
+        persistent-hint
+        auto-grow
+        rows="3"
+        variant="outlined"
+        class="user-request-dialog-textarea"
+      ></v-textarea>
+    </div>
+  </ConfirmationDialog>
+</div>

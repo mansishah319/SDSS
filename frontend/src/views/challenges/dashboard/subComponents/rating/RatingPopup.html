@@ -1,0 +1,63 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-dialog :model-value="isOpen" width="800" @click:outside="handleOutsideClick" persistent
+          class="all-solutions-rate-dialog solution-rate-details-popup dp-modal">
+  <v-card class="rating-card">
+    <v-card-title class="rating-card-title">
+      {{ $t('rating.title') }}
+
+      <v-btn icon @click="closePopup" aria-label="Close dialog" class="modal-close-btn">
+        <span class="mdi mdi-close"></span>
+      </v-btn>
+    </v-card-title>
+    <v-card-subtitle class="rating-card-subtitle">
+      <v-icon size="small" class="me-1">mdi-identifier</v-icon>
+      {{ $t('rating.solutionIdMsg') }}
+      <strong>{{ solutionId }}</strong>
+      <v-icon size="small" class="me-1 ms-2">mdi-flag-variant</v-icon>
+      {{ $t('rating.challengeIdMsg') }}
+      <strong>{{ challengeId }}</strong>
+    </v-card-subtitle>
+    <v-card-text class="rating-card-text">
+      <div class=" rating-container">
+        <v-rating v-model="rating" size="large" active-color="blue" color="orange-lighten-1" hover></v-rating>
+      </div>
+
+      <v-checkbox v-model="isApplicable" :label="$t('rating.applicableMsg')" class="checkbox-padding" color="success"
+                  prepend-icon="mdi-check-circle-outline"></v-checkbox>
+      <v-textarea v-model="feedback" :label="$t('rating.commentMsg')" rows="3" auto-grow clearable
+                  style="min-height: 96px" variant="outlined" class="textarea-padding" :label-class="'custom-label'"
+                  prepend-icon="mdi-comment-text-outline"></v-textarea>
+
+      <v-col v-if="isApplicable" cols="12" class="content-title-container">
+        <h3 class="content-title">
+          <v-icon class="me-2">mdi-lightbulb-outline</v-icon>
+          {{ $t('rating.howToApply') }}
+        </h3>
+      </v-col>
+      <AppRichTextEditor
+        v-if="isApplicable"
+        v-model="applicationInstructions"
+        :placeholder="$t('rating.howToApply')"
+        :rtl="$i18n.locale === 'ar'"
+        class="rich-text-editor"
+      ></AppRichTextEditor>
+    </v-card-text>
+    <v-card-actions class="card-actions modal-footer">
+
+      <v-btn color="primary" @click="submitRating" prepend-icon="mdi-check" :loading="loading"
+             class="modal-primary-btn">
+        {{ $t('common.submit') }}
+      </v-btn>
+      <v-btn text @click="closePopup" prepend-icon="mdi-close" class="modal-border-primary-btn"> {{ $t('common.cancel')
+        }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>

@@ -1,0 +1,499 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<!-- Modern Main Header and Stepper -->
+<GenericDashboardHeaderView
+  title-en="SDSS Decision Support System"
+  title-ar="نظام دعم اتخاذ القرار الذكي"
+  subtitle-en="Collaborative challenge review, discussion, and voting workspace."
+  subtitle-ar="مساحة عمل موحدة لمراجعة التحديات والنقاش والتصويت التشاركي."
+  icon="mdi-chart-timeline-variant"
+  :show-back-button="true"
+  back-fallback-route-name="MyChallenges"
+/>
+<v-row class="challenge-dashboard-main-header-row">
+  <v-col cols="12">
+    <!-- Enhanced Stepper -->
+    <div class="challenge-dashboard-stepper">
+      <div class="stepper-track">
+        <template v-for="(step, idx) in stepperSteps" :key="idx">
+          <div class="stepper-step-wrapper">
+            <div class="stepper-step-circle" :class="{
+                'active': currentStep === idx + 1,
+                'complete': currentStep > idx + 1,
+                'final': isFinalStage && idx + 1 === stepperSteps.length
+              }">
+              <template v-if="currentStep > idx + 1">
+                <v-icon color="success">mdi-check</v-icon>
+              </template>
+              <template v-else-if="isFinalStage && idx + 1 === stepperSteps.length">
+                <v-icon color="amber">mdi-trophy</v-icon>
+              </template>
+              <template v-else> {{ idx + 1 }}</template>
+            </div>
+            <div class="stepper-step-label">
+              {{ step }}
+              <span v-if="isFinalStage && idx + 1 === stepperSteps.length" class="final-label">
+                ({{ $t('challenge.dashboard.finalStage') }})
+              </span>
+            </div>
+          </div>
+          <div v-if="idx < stepperSteps.length - 1" class="stepper-connector" :class="{
+              'complete': currentStep > idx + 1
+            }"></div>
+        </template>
+      </div>
+    </div>
+  </v-col>
+</v-row>
+
+<!-- Loading State -->
+<v-container v-if="!dataLoaded" class="challenge-dashboard">
+  <DubaiPoliceLoader :is-loading="!dataLoaded" />
+</v-container>
+
+<!-- Main Dashboard Content -->
+<v-container v-else class="challenge-dashboard">
+
+  <div class="challenge-info-and-state-row">
+    <!-- Main Content Row -->
+    <div class="d-flex">
+      <!-- Left Side: Challenge Info -->
+      <v-col cols="12" :lg="challengeDashboardResponse.isFinal ? 12 : 8">
+        <v-card class="dp-card enhanced-card challenge-header-card main-section-height p-5" elevation="4">
+          <div class="card-heading-div">
+            <v-card-title class="enhanced-title challenge-header-title">
+              <div class="challenge-header-title__content">
+                <div class="challenge-header-title__main">
+                  <v-icon class="challenge-header-title__icon">mdi-lightbulb-on</v-icon>
+                  <div class="challenge-header-title__copy">
+                    <div class="challenge-header-title__eyebrow">{{ $t('challenge.dashboard.challengeTitle') }}</div>
+                    <div class="challenge-header-title__text">{{ challengeTitleDisplay }}</div>
+                  </div>
+                </div>
+
+                <div class="challenge-header-title__actions">
+                  <v-btn v-if="canViewFinalSolutionsButton"
+                         @click="openFinalSolutionsDialog"
+                         class="enhanced-btn bg-primary challange-btn2 challenge-header-title__button"
+                         variant="elevated"><span class="mdi mdi-trophy"></span>
+                    {{ $t('challenge.dashboard.finalSolutions') }}
+                  </v-btn>
+
+                  <v-chip class="challenge-status-chip" :style="challengeStatusChipStyle">
+                    <v-icon start :icon="challengeStatusIcon" size="16"></v-icon>
+                    <span class="challenge-status-chip__text">{{ titleBasedOnStatus }}</span>
+                  </v-chip>
+
+                  <v-chip v-if="isVotingBoardVisible" class="round-chip challenge-round-chip">
+                    {{ $t('challenge.dashboard.round') }} {{ challengeDashboardResponse.queLevel }}
+                  </v-chip>
+                </div>
+              </div>
+            </v-card-title>
+
+          </div>
+
+          <v-card-subtitle :disabled="challengeDashboardResponse.isFinal"
+                           class="start-time-end-time-div enhanced-subtitle">
+            <div class="challenge-meta-grid">
+              <div class="subheading2 time-info info-preview-card">
+                <div class="info-preview-label">
+                  {{ isLanguageAr() ? 'بداية التصويت' : 'Voting starts' }}
+                </div>
+                <v-icon large left color="success">mdi-timer</v-icon>
+                <div class="info-preview-value">
+                  <strong>{{ challengeDashboardResponse.startTime }}</strong>
+                </div>
+              </div>
+              <div class="subheading time-info info-preview-card">
+                <div class="info-preview-label">
+                  {{ isLanguageAr() ? 'نهاية التصويت' : 'Voting ends' }}
+                </div>
+                <v-icon large left color="error">mdi-timer-off</v-icon>
+                <div class="info-preview-value">
+                  <strong>{{ challengeDashboardResponse.endTime }}</strong>
+                </div>
+              </div>
+            </div>
+          </v-card-subtitle>
+
+          <v-card-text class="spacing-side content-scroll challenge-info-content">
+            <div class="challenge-info-section">
+              <!-- Challenge Details Section -->
+              <div class="challenge-details-section challenge-details-section--full info-preview-card">
+                <div class="section-label">
+                  <v-icon class="mr-2">mdi mdi-text-box-outline</v-icon>
+                  {{ $t('challenge.dashboard.challengeDetails') }}
+                </div>
+                <div class="info-preview-label">
+                  {{ isLanguageAr() ? 'وصف مختصر' : 'Brief description' }}
+                </div>
+                <div class="challenge-details animate-slide-up">
+                  {{ challengeDashboardResponse.challengeDetails }}
+                </div>
+              </div>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+
+      <!-- Right Side: Main Content + Controls -->
+      <v-col v-if="!challengeDashboardResponse.isFinal" v-show="!challengeDashboardResponse.isFinal" cols="12" lg="4">
+        <v-card class="dp-card enhanced-card main-content-card main-section-height p-5" elevation="4">
+          <!-- Moderator Controls Section -->
+          <template v-if="isTheChallengeModerator && !challengeDashboardResponse.isFinal">
+            <v-card-title class="enhanced-title control-panel-title">
+              <v-icon color="white">mdi-account-cog</v-icon>
+              <div class="control-card-title-block">
+                <div class="control-card-heading">{{ $t('common.votingControl') }}</div>
+                <div class="control-card-subtitle">
+                  {{ isLanguageAr() ? 'إدارة الجولة الحالية ومتابعة حالة التصويت بشكل مباشر' : 'Manage the current round and monitor voting status in real time'
+                  }}
+                </div>
+              </div>
+            </v-card-title>
+
+            <v-card-text class="content-scroll">
+              <div class="moderator-control-panel">
+                <div class="control-info-grid">
+                  <div class="control-info-card">
+                    <span class="control-info-label">{{ isLanguageAr() ? 'الحالة الحالية' : 'Current status' }}</span>
+                    <v-chip class="challenge-status-chip challenge-status-chip--compact"
+                            :style="challengeStatusChipStyle">
+                      <v-icon start :icon="challengeStatusIcon" size="16"></v-icon>
+                      <span class="challenge-status-chip__text">{{ titleBasedOnStatus }}</span>
+                    </v-chip>
+                  </div>
+                  <div class="control-info-card">
+                    <span class="control-info-label">{{ isLanguageAr() ? 'الجولة الحالية' : 'Current round' }}</span>
+                    <strong>{{ challengeDashboardResponse.queLevel || 1 }}</strong>
+                  </div>
+                </div>
+
+                <div class="control-description-box">
+                  {{ isLanguageAr() ? 'استخدم هذه الأدوات لإيقاف الجولة مؤقتاً أو إنهائها بعد مراجعة الحلول الحالية.' : 'Use these controls to pause the round or end it after reviewing the current solutions.'
+                  }}
+                </div>
+
+                <div class="voting-btn-div large-control-buttons">
+                  <v-btn density="comfortable" variant="elevated" prepend-icon="mdi mdi-timer-play-outline"
+                         @click="toggleTimer" :class="{ 'bg-primary': timerButtonLabel !== 'Stop Timer' }"
+                         class="enhanced-btn voting-btn-style">
+                    {{ timerButtonLabel }}
+                  </v-btn>
+
+                  <v-btn v-if="!isSolutionStage" color="dark" density="comfortable" variant="elevated"
+                         prepend-icon="mdi mdi-timer-off" @click="finishRound=true"
+                         :disabled="isClosedStage" class="enhanced-btn  voting-btn-style">
+                    {{ $t('challenge.dashboard.stop') }}
+                  </v-btn>
+                </div>
+              </div>
+            </v-card-text>
+          </template>
+
+          <!-- Waiting Screen for Non-Moderators -->
+          <template v-if="!isTheChallengeModerator && !challengeDashboardResponse.isFinal">
+            <v-card-title class="enhanced-title d-flex ga-3">
+              <v-icon color="white">mdi-clock-outline</v-icon>
+              {{ $t('common.waitingScreen') }}
+            </v-card-title>
+
+            <v-card-text class="content-scroll">
+              <div class="text-center">
+                <div class="mb-3 ch-dashboard-main"
+                     :style="{ color: isPausedStage ? '#b45309' : isVotingStage ? '#0f766e' : isClosedStage ? '#b91c1c' : '#2563eb', fontWeight: 'bold' }">
+                  {{ participantStatusTitle }}
+                </div>
+
+                <div class="text-caption ch-dashboard-notes mb-4">
+                  {{ participantStatusDescription }}
+                </div>
+
+                <div class="text-caption ch-dashboard-notes" v-if="currentDubaiTime < startTimeDubai">
+                  {{ $t('Messages.challengeDashboard.remainingTimeToStartVotingNote') }}
+                </div>
+
+                <div class="mb-1 ch-dashboard-main" v-if="currentDubaiTime < startTimeDubai"
+                     style="color: blue; font-weight: bold">
+                  {{ $t('Messages.challengeDashboard.remainingTimeToStartVotingMain') }}
+                </div>
+
+                <div class="text-caption ch-dashboard-notes"
+                     v-else-if="currentDubaiTime >= startTimeDubai && currentDubaiTime < endTimeDubai">
+                  {{ $t('Messages.challengeDashboard.remainingTimeToFinishVotingNote') }}
+                </div>
+
+                <div class="mb-1 ch-dashboard-main"
+                     v-if="currentDubaiTime >= startTimeDubai && currentDubaiTime < endTimeDubai">
+                  {{ $t('Messages.challengeDashboard.remainingTimeToFinishVotingMain') }}
+                </div>
+
+                <div class="mb-1 ch-dashboard-main" v-if="currentDubaiTime > endTimeDubai"
+                     style="color: red; font-weight: bold">
+                  {{ $t('Messages.challengeDashboard.votingTimeEndedManualControl') }}
+                </div>
+
+                <!-- Countdown Components -->
+                <div class="countdown-container mt-3" v-if="!isPausedStage && !isClosedStage">
+                  <Countdown v-if="currentDubaiTime < startTimeDubai" :deadline="challengeDashboardResponse.startTime"
+                             :labels="{ days: $t('common.days'), hours: $t('common.hours'), minutes: $t('common.minutes'), seconds: $t('common.seconds'), }"
+                             countdownSize="1.5rem" labelSize=".8rem" mainColor="red" secondFlipColor="orange"
+                             labelColor="blue"
+                             class="enhanced-countdown"></Countdown>
+
+                  <Countdown v-else-if="currentDubaiTime > startTimeDubai && currentDubaiTime <= endTimeDubai"
+                             :deadline="challengeDashboardResponse.endTime"
+                             :labels="{ days: $t('common.days'), hours: $t('common.hours'), minutes: $t('common.minutes'), seconds: $t('common.seconds'), }"
+                             countdownSize="1.5rem" labelSize=".8rem" labelColor="green" mainColor="#bbff62"
+                             secondFlipColor="#ffffff" mainFlipBackgroundColor="#a70000"
+                             secondFlipBackgroundColor="#000"
+                             class="enhanced-countdown"></Countdown>
+
+                  <Countdown v-else :deadline="challengeDashboardResponse.endTime"
+                             :labels="{ days: $t('common.days'), hours: $t('common.hours'), minutes: $t('common.minutes'), seconds: $t('common.seconds'), }"
+                             countdownSize="1.5rem" labelSize=".8rem" labelColor="red" mainColor="red"
+                             secondFlipColor="red"
+                             mainFlipBackgroundColor="#000" secondFlipBackgroundColor="#000" class="enhanced-countdown">
+                  </Countdown>
+                </div>
+              </div>
+            </v-card-text>
+          </template>
+        </v-card>
+      </v-col>
+    </div>
+  </div>
+
+  <!-- Bottom Section: Solutions/Voting + Chat -->
+  <v-row class="solutions-voting-chat-row">
+    <!-- Solutions/Voting Section -->
+    <v-col v-show="!challengeDashboardResponse.isFinal" cols="12" :lg="currentEmployee.chatContents ? 6 : 12"
+           class="solutions-col">
+      <!-- Full Width Solution Input Section -->
+      <v-card v-if="isSolutionStage"
+              class="dp-card enhanced-card full-width-solutions-card" elevation="4">
+        <v-card-title class="px-2 py-2 sub-title enhanced-title d-flex ga-3">
+          <v-icon>mdi-lightbulb-group</v-icon>
+          {{ $t('challenge.dashboard.solutionMenu') }}
+        </v-card-title>
+
+
+        <v-list ref="solutionsList" class="answers_voting_area enhanced-list">
+          <!-- Empty state -->
+          <template v-if="!challengeDashboardResponse?.challengeSolutions?.length">
+            <EmptyDataTable :image-size="70" :message="$t('Messages.common.empty.solutions')"></EmptyDataTable>
+          </template>
+
+          <!-- Solutions list -->
+          <template v-else>
+            <v-list-item v-for="solution in challengeDashboardResponse.challengeSolutions" :key="solution.id"
+                         class="border-bottom-1 enhanced-list-item" v-show="isTheChallengeModerator ||
+                        Number(currentUserGrpNumber) === Number(solution.createdBy) || 
+                        (solution.initPublic !== null && solution.initPublic)">
+              <template v-slot:default>
+                <div class="flex-grow-1 text-body-2 solution-text">{{ solution.solutionText }}</div>
+              </template>
+              <template v-slot:append>
+                <v-btn icon variant="plain" @click="showSolutionEditDialog(solution)" class="action-btn">
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
+            </v-list-item>
+          </template>
+        </v-list>
+
+        <v-card-actions class="d-flex justify-space-between align-center enhanced-actions"
+                        v-if="!challengeDashboardResponse.isFinal">
+          <v-text-field variant="outlined" density="compact" :clearable="true" hide-details="auto" clearable
+                        class="challenge-text-field enhanced-input" :label="$t('challenge.dashboard.newSolution')"
+                        v-model="newAnswer" :disabled="!canAnswer || !isSolutionStage"
+                        @keyup.enter="submitAnswer"></v-text-field>
+
+          <v-btn :icon="true" :disabled="!canAnswer || !isSolutionStage" @click="submitAnswer"
+                 class="enhanced-btn ml-2 voting-send-btn"
+                 variant="elevated">
+            <v-icon class="icon-flip-horizontal">mdi-send</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+
+      <!-- Full Width Voting Section -->
+      <v-card v-if="isVotingBoardVisible" class="dp-card enhanced-card full-width-voting-card p-0"
+              elevation="4">
+        <v-card-title
+          class="voting-section-challenge-dashboard-card-title enhanced-title d-flex justify-space-between align-center">
+
+          <div class="right-div">
+            <v-icon>mdi-vote</v-icon>
+            {{ $t('challenge.dashboard.voting') }}
+          </div>
+
+          <div class="left-div">
+            <v-card-subtitle v-if="!challengeDashboardResponse.isFinal && isTheChallengeModerator"
+                             class="d-flex justify-space-between px-1 py-2 remaining-time-div ">
+              <div class="left-title"><i class="mdi mdi-timer"></i>
+                <!-- {{$t('challenge.dashboard.remainingTime') }} --></div>
+              <div class="countdown-txt">{{ countdown }}</div>
+            </v-card-subtitle>
+          </div>
+        </v-card-title>
+
+        <v-alert
+          v-if="isPausedStage"
+          type="warning"
+          variant="tonal"
+          density="comfortable"
+          class="mx-4 mt-3"
+        >
+          {{ isLanguageAr() ? 'تم إيقاف التصويت مؤقتاً. يمكنك رؤية الحلول الحالية لكن لا يمكنك التصويت الآن.' : 'Voting is temporarily paused. You can still view the current solutions, but voting is disabled for now.'
+          }}
+        </v-alert>
+
+
+        <v-list class="voting_area enhanced-list">
+          <v-list-item v-for="solution in sortedSolutions" :key="solution.id"
+                       class="border-bottom-1 enhanced-list-item"
+                       :style="{ padding: '0 20px', maxWidth: 'calc(100% - 35px)', backgroundColor: isTheChallengeModerator ? solution.voteColor : 'inherit' }">
+            <template v-slot:append>
+              <v-col :cols="isTheChallengeModerator ? 4 : 6">
+                <v-btn variant="text" :color="solution.isCurrentUserVoted ? 'green' : 'red'"
+                       class="pl-0 pr-0 rounded-pill action-btn" @click="openVoteDialog(solution)"
+                       :disabled="!isVotingStage">
+                  <v-icon>mdi mdi-thumb-up</v-icon>
+                  <v-tooltip activator="parent" location="top">{{ $t('common.vote') }}</v-tooltip>
+                  <span class="dashboard-number-of-votes-view" v-if="isTheChallengeModerator">
+                    {{ solution.voteCount }}
+                  </span>
+                </v-btn>
+              </v-col>
+              <v-col :cols="!isTheChallengeModerator ? 6 : 4">
+                <v-btn variant="text" @click="openRatingPopup(solution.id)" class="pl-0 pr-0 rounded-pill action-btn"
+                       rounded>
+                  <v-icon prepend>mdi mdi-comment-quote</v-icon>
+                  <v-tooltip activator="parent" location="top">{{ $t('rating.rate') }}</v-tooltip>
+                </v-btn>
+              </v-col>
+              <v-col v-if="isTheChallengeModerator" cols="4">
+                <v-btn variant="text" v-if="isTheChallengeModerator" @click="openModeratorRatingListPopup(solution)"
+                       class="pl-0 pr-0 rounded-pill action-btn" rounded>
+                  <v-icon prepend>mdi mdi-comment-text-multiple</v-icon>
+                  <v-tooltip activator="parent" location="top">
+                    {{ $t('rating.moderatorRatingView.rates') }}
+                  </v-tooltip>
+                </v-btn>
+              </v-col>
+            </template>
+            <template v-slot:default>
+              <div class="text-body-2 solution-text" style="white-space: pre-line"> {{ solution.solutionText }}</div>
+            </template>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-col>
+
+    <!-- Chat Section -->
+    <v-col v-if="currentEmployee.chatContents" cols="12" :lg="challengeDashboardResponse.isFinal ? 12: 6"
+           class="chat-col"
+           :class="{ 'chat-area-in-final-board': challengeDashboardResponse.isFinal }">
+      <v-card class="dp-card enhanced-card full-width-chat-card p-0">
+        <SolutionChat :isFinalDecision="Boolean(challengeDashboardResponse.isFinal)" />
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <!-- Attendees List -->
+  <v-col cols="12">
+    <!-- Attendance Bubble -->
+    <div class="attendance-bubble-wrapper">
+      <v-btn class="attendance-bubble" color="white" rounded="pill" elevation="3"
+             :disabled="!canToggleAttendees"
+             @click="toggleAttendeesPanel">
+        <div class="bubble-content">
+          <div class="attendance-counts">
+            <div class="count-item">
+              <v-icon color="success" size="large">mdi-account-check</v-icon>
+              <span class="count online">{{ onlineCount }}</span>
+            </div>
+            <v-divider vertical class="mx-2"></v-divider>
+            <div class="count-item">
+              <v-icon color="error" size="large">mdi-account-off</v-icon>
+              <span class="count offline">{{ offlineCount }}</span>
+            </div>
+          </div>
+          <v-icon v-if="canToggleAttendees" :class="{ 'rotate-icon': showAttendees }">
+            {{ showAttendees ? 'mdi-chevron-down' : 'mdi-chevron-up' }}
+          </v-icon>
+        </div>
+      </v-btn>
+
+      <!-- Expandable Attendees List -->
+      <v-expand-transition>
+        <div v-if="canToggleAttendees && showAttendees" class="attendees-expanded-list">
+          <v-card class="attendees-card" elevation="0">
+            <Attendees :is-the-challenge-moderator="isTheChallengeModerator"></Attendees>
+          </v-card>
+        </div>
+      </v-expand-transition>
+    </div>
+  </v-col>
+
+  <!-- Right Side: Search -->
+  <v-col cols="12" lg="4" v-show="false" :hidden="true" v-if="currentEmployee.internalDocuments">
+    <v-card class="dp-card enhanced-card search-card" elevation="4">
+      <search-component v-if="dataLoaded" :initialSearchType="initialSearchType"
+                        :initialSearchQuery="initialSearchQuery"
+                        :isCurrentUserChallengeModerator="isTheChallengeModerator"
+                        :challengeId="challengeId"
+                        :isFinalDecision="!!challengeDashboardResponse.isFinal"></search-component>
+    </v-card>
+  </v-col>
+
+
+  <!-- Dialogs and Popups -->
+  <RatingPopup :isOpen="isRatingPopupOpen" :challengeId="challengeId" :solutionId="String(selectedSolutionIdForRating)"
+               @submit-rating="handleRatingSubmit" @close-popup="handleCloseRatingPopup"
+               :initialData="ratingInitialData">
+  </RatingPopup>
+
+  <SolutionRateDetails :isOpen="isRatingFullSolutionPopupDetailsOpen" :solutionsRateList="ratingSolutionList"
+                       :solution="solutionForModeratorRateView" @update:isOpen="handleUpdateIsOpenForAllRateDetails"
+                       @close-popup="handleClosePopupAllRateDetails"></SolutionRateDetails>
+
+  <v-dialog width="40%" v-model="modifySolution" v-if="isAdminOrModerator() && selectedSolution"
+            :close-on-content-click="false" @click:outside="handleOutsideClick" persistent class="enhanced-dialog">
+    <SolutionDetail :selectedSolution="selectedSolution" @close="modifySolution = false"
+                    @delete-solution="removeSolutionFromList"></SolutionDetail>
+  </v-dialog>
+
+  <v-dialog max-width="700px" v-model="finishRound" v-if="!challengeDashboardResponse.isFinal"
+            :disabled="Boolean(challengeDashboardResponse.isFinal)" persistent class="enhanced-dialog dp-modal">
+    <v-card class="enhanced-card custom-end-round-card">
+      <v-card-title class="text-h5 custom-end-round-title">{{ $t('challenge.dashboard.endRound') }}
+        <v-btn icon @click="finishRound = false" aria-label="Close dialog" class="modal-close-btn">
+          <span class="mdi mdi-close"></span>
+        </v-btn>
+
+      </v-card-title>
+      <v-card-text class="dash-board-dialog-content">
+        <voting-round :answers="answers" :challengeId="challengeId" @close="finishRound = false"
+                      @update-answers="handleUpdateAnswersAfterMergeSolutions"></voting-round>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
+
+  <!-- Final Solutions Dialog -->
+  <MemberFinalSolutionsDialog v-model:modelValue="isFinalSolutionsDialogOpen" :finalSolutions="finalSolutions"
+                              :challengeId="challengeId" :challengeStatus="challengeStatus"
+                              @update:modelValue="isFinalSolutionsDialogOpen = $event"></MemberFinalSolutionsDialog>
+
+  <ConfirmationDialog v-if="isConfirmationDialogVisible" :title="dialogTitle" :message="dialogMsg"
+                      @confirmed="handleConfirmation" @cancel="handleCloseConfirmation"
+                      @update:is-confirmation-dialog-visible="handleCloseConfirmation"></ConfirmationDialog>
+</v-container>

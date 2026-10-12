@@ -1,0 +1,134 @@
+<!-- Authorization Popup -->
+<v-dialog v-if="!isAuthorized" v-model="authDialog" persistent max-width="600">
+  <AccessSurveyCard :grp-number="grpNumber || null" :access-key="accessKey" :password-visible="passwordVisible"
+                    :is-has-any-role="isHasAnyRole" @update:grp-number="grpNumber = $event"
+                    @update:access-key="accessKey = $event"
+                    @update:password-visible="passwordVisible = $event" @user-not-authorized="userNotAuthorized"
+                    @user-authorized="authorizedUser" @close-popup="handleCloseAccessSurveyCard" />
+</v-dialog>
+<v-container v-if="isAuthorized">
+  <DubaiPoliceLoader
+    :is-loading="isLoading"
+    variant="badge"
+    :heading="$t('common.loader.surveyPortalHeading')"
+    :message="$t('common.loader.surveyPortal')"
+    :description="$t('common.loader.surveyPortalDescription')"
+  />
+  <AppHeader :is-sdss-user-authorized="isHasAnyRole()"></AppHeader>
+  <BannerView :banner-image="bannerImg" home-type="survey"
+              :home-main-title-ar="$t('common.delphiXAr')"
+              :home-main-title-en="$t('common.delphiXEn')"
+  ></BannerView>
+  <div class="dashboard-section animate-fade-in">
+    <div class="home-services-block">
+      <div class="home-services-block-heading animate-bounce">
+        <img :src="appsIconUrl" class="img-1" alt="apps-icon" />
+        <h3> {{ $t('home.myServices') }} </h3>
+        <v-tooltip location="top">
+          <template v-slot:activator="{ props }">
+            <span v-bind="props">
+              <img :src="infoIconUrl" class="img-2" alt="info-icon" />
+            </span>
+          </template>
+          <span>{{ $t('home.servicesInfo') }}</span>
+        </v-tooltip>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="card animate-slide-up">
+          <div class="home-services-block-grid">
+            <router-link v-for="(category, index) in authorizedCategories" :key="index" :to="category.route">
+              <div class="home-services-block-list animate-fade-in">
+                <div class="home-services-block-list-icon animate-bounce">
+                  <v-icon v-if="category.icon" :color="category.color || 'primary'"
+                          :size="category.iconSize || 'default'">
+                    {{ category.icon }}
+                  </v-icon>
+                  <AppActivityIndicator
+                    v-else-if="category.activityIndicator"
+                    :color="category.activityIndicatorColor || 'primary'"
+                    :size="category.activityIndicatorSize || 30"
+                    aria-label="Active surveys"
+                  />
+                </div>
+                <div class="home-services-block-list-title">
+                  {{ category.title }}
+                  <!-- Add a premium star icon if the item is premium -->
+                  <v-icon class="premium-icon" v-if="category.isPremium">mdi-star</v-icon>
+                </div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-dashboard-block" v-if="isHasAnyRole()">
+      <div class="home-dashboard-block-heading animate-bounce">
+        <img :src="statsIconUrl" class="img-1" alt="auto_graph-icon" />
+        <h3> {{ $t('home.statistics') }} </h3>
+        <v-tooltip location="top">
+          <template v-slot:activator="{ props }">
+            <span v-bind="props">
+              <img :src="infoIconUrl" class="img-2" alt="info-icon" />
+            </span>
+          </template>
+          <span>{{ $t('home.statisticsInfo') }}</span>
+        </v-tooltip>
+      </div>
+      <div class="card-wrapper">
+        <div class="home-dashboard-grid">
+          <div class="home-dashboard-card paid-fines animate-slide-up">
+            <div class="card-content">
+              <div class="home-dashboard-card-title">
+                <v-icon color="#008755">mdi-checkbox-multiple-outline</v-icon>
+                {{ $t('common.totalSurveysCount') }}
+              </div>
+              <div class="home-dashboard-card-stats">
+
+                <div class="card-icon animate-bounce">
+                  <span>{{ mainHomeScreenResponse.totalSurveysCount }}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="home-dashboard-card pending-fines animate-slide-up">
+            <div class="card-content">
+              <div class="home-dashboard-card-title">
+                <v-icon color="#1570EF">mdi-account-tie</v-icon>
+                {{
+                  $t('common.allInternalUsersCount') }}
+              </div>
+              <div class="home-dashboard-card-stats">
+
+                <div class="card-icon animate-bounce">
+                  <span>{{ mainHomeScreenResponse.totalSurveysUsersOnTheSystemCount }}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <v-row v-if="isHasAnyRole()" v-show="isHasAnyRole()" class="live-survey-card-back-btn-div" justify="center"
+         align="center">
+    <v-col cols="12" class="d-flex justify-center">
+      <div class="mt-3">
+        <BackButton :title="backButtonForHomePageTitle" />
+      </div>
+    </v-col>
+  </v-row>
+  <FooterComponent class="survey-home-page-footer" />
+</v-container>
+<v-container v-else-if="hasAttempted">
+  <!-- Access Denied View -->
+  <AccessDeniedView v-if="!isAuthorized || hasAttempted" :back-icon="backButtonIcon" :back-title="backButtonTitle"
+                    :back-color="backColor" :back-redirect-path="redirectToPage"></AccessDeniedView>
+  <!-- Footer -->
+  <FooterComponent :justify-content="'justify-content-start'"></FooterComponent>
+</v-container>

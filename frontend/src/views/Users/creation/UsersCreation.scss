@@ -1,0 +1,306 @@
+@use '../../../assets/css/_variables' as *;
+
+.custom-user-creation-screen-card-style {
+  padding-bottom: 2% !important;
+  border-radius: 2rem;
+  margin: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.custom-user-creation-headline-title {
+  background-color: $sdss-primary-color;
+  color: $white-color;
+  border-radius: 2rem 2rem 0 0;
+  padding: 1.5rem;
+
+  h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+}
+
+.custom-permissions-user-creation-screen-card-style-title {
+  background-color: $sdss-questions-color;
+  color: $white-color;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem;
+
+  h3 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}
+
+.custom-permissions-user-creation-screen-card-style {
+  width: 97%;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.custom-permissions-user-creation-screen-card-style-row {
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.custom-user-creation-body-card-text {
+  margin-top: 2rem;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.custom-expert-user-creation-screen-card-style {
+  margin-top: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.custom-expert-user-creation-card-title {
+  background-color: $sdss-questions-color;
+  color: $white-color;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem;
+
+  h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}
+
+.cancel-icon {
+  width: 50%;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// Form field enhancements
+.v-text-field,
+.v-select,
+.v-autocomplete {
+  .v-field {
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &.v-field--focused {
+      box-shadow: 0 0 0 2px rgba(0, 88, 69, 0.2);
+    }
+  }
+}
+
+// Checkbox enhancements
+.v-checkbox {
+  .v-selection-control {
+    .v-selection-control__input {
+      .v-selection-control__wrapper {
+        .v-selection-control__ripple {
+          border-radius: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+// Button enhancements
+.v-btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-transform: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &.v-btn--elevated {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Data table enhancements
+.v-data-table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .v-data-table__wrapper {
+    border-radius: 0.5rem;
+  }
+}
+
+// Pagination enhancements
+.v-pagination {
+  justify-content: center;
+  margin-top: 1rem;
+
+  .v-pagination__list {
+    .v-pagination__item {
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// Validation error styling
+.v-alert {
+  border-radius: 0.5rem;
+
+  &.v-alert--error {
+    border-left: 4px solid #f44336;
+  }
+}
+
+.v-chip {
+  border-radius: 0.5rem;
+  font-weight: 500;
+
+  &.v-chip--error {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+}
+
+// Responsive design improvements
+@media (max-width: 1200px) {
+  .custom-permissions-user-creation-screen-card-style {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-user-creation-screen-card-style {
+    margin: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .custom-user-creation-headline-title {
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .custom-user-creation-body-card-text {
+    padding: 0 1rem 1rem;
+  }
+
+  .custom-permissions-user-creation-screen-card-style-row {
+    margin: 1rem 0;
+  }
+
+  .v-col {
+    margin-bottom: 1rem;
+  }
+
+  // Stack form fields vertically on mobile
+  .v-row {
+    .v-col {
+      flex-basis: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-user-creation-screen-card-style {
+    margin: 0.25rem;
+    border-radius: 0.75rem;
+  }
+
+  .custom-user-creation-headline-title {
+    border-radius: 0.75rem 0.75rem 0 0;
+    padding: 0.75rem;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .custom-user-creation-body-card-text {
+    padding: 0 0.75rem 0.75rem;
+  }
+
+  .v-btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .v-text-field,
+  .v-select,
+  .v-autocomplete {
+    .v-field {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// RTL support
+[dir='rtl'] {
+  .custom-user-creation-headline-title,
+  .custom-permissions-user-creation-screen-card-style-title,
+  .custom-expert-user-creation-card-title {
+    text-align: right;
+  }
+
+  .v-alert--error {
+    border-left: none;
+    border-right: 4px solid #f44336;
+  }
+}
+
+// Loading states
+.v-skeleton-loader {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+// Focus states for accessibility
+.v-text-field:focus-within,
+.v-select:focus-within,
+.v-autocomplete:focus-within {
+  .v-field {
+    box-shadow: 0 0 0 2px rgba(0, 88, 69, 0.3);
+  }
+}
+
+// Print styles
+@media print {
+  .custom-user-creation-screen-card-style {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .v-btn {
+    display: none;
+  }
+}

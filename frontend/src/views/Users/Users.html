@@ -1,0 +1,56 @@
+<div class="users-container" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <DubaiPoliceLoader :is-loading="loading" />
+
+  <GenericDashboardHeaderView
+    :title-en="$t('user.search.main-title')"
+    :title-ar="$t('user.search.main-title')"
+    subtitle-en="Review users, roles, status, and department assignments from one administrative table."
+    subtitle-ar="راجع المستخدمين والأدوار والحالة والارتباطات الإدارية من خلال جدول إداري موحد."
+    icon="mdi-account-group-outline"
+    :show-back-button="true"
+    back-route-name="home"
+    :total-value="totalItems"
+  />
+
+  <!-- Enhanced Data Table -->
+  <EnhancedDataTable :title="$t('user.search.main-title')" :items="safeRecords" :headers="headers"
+                     :total-items="totalItems" :loading="loading" :skeleton-loading="skeletonLoading"
+                     :basic-search-fields="basicSearchFields" :advanced-search-fields="advancedSearchFields"
+                     :search-values="searchValues" :actions="actions" :column-templates="columnTemplates"
+                     :items-per-page="itemsPerPage"
+                     :show-stats-chip="false"
+                     stats-icon="mdi-account-group" table-icon="mdi-table" empty-state-icon="mdi-account-group-outline"
+                     :empty-state-message="$t('user.noUsersFound')" :search-on-input="false"
+                     :loader-message="$t('common.loader.userDirectory')"
+                     :loader-description="$t('common.loader.userDirectoryDescription')"
+                     @search="onSearch"
+                     @clear-search="onClearSearch" @refresh="onRefresh" @export="onExport" @action="onAction"
+                     @column-action="onColumnAction" @table-update="onTableUpdate"
+                     @update:items-per-page="onItemsPerPageUpdate">
+    <!-- Custom table actions slot -->
+    <template #table-actions>
+      <v-btn variant="tonal" size="small" class="action-btn" :loading="exportLoading" @click="exportUserExcelFile">
+        <v-icon start>mdi-microsoft-excel</v-icon>
+        {{ $t('common.export') }}
+      </v-btn>
+    </template>
+  </EnhancedDataTable>
+
+  <!-- User Detail Dialog -->
+  <v-dialog v-model="displayUserDetail" max-height="70vh">
+    <UsersView @close="closeUserDetail" :grp-number="String(selectUserGrpNumber)" :show-close-button="true"></UsersView>
+  </v-dialog>
+
+  <!-- Delete Confirmation Dialog -->
+  <ConfirmationDialog
+    v-if="deleteDialog"
+    :title="$t('common.deletionTitle')"
+    :message="$t('common.deleteConfirmation')"
+    icon="mdi-trash-can-outline"
+    icon-color="error"
+    confirm-button-color="error"
+    :confirm-text="$t('common.delete')"
+    @confirmed="confirmUserDeletion"
+    @cancel="cancelUserDeletion"
+  ></ConfirmationDialog>
+</div>

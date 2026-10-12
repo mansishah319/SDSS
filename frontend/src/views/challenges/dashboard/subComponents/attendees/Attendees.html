@@ -1,0 +1,38 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-card class="attendees-container" elevation="0">
+  <v-card-title class="d-flex justify-space-between spacing-side">
+    <div class="custom-attendees-main-title">{{ $t('challenge.dashboard.attendees') }}</div>
+    <div>
+      <v-chip class="me-2" color="green" x-small>
+        {{ $t('challenge.dashboard.online') }} {{ countOnlineAttendees }}
+      </v-chip>
+      <v-chip color="red" x-small>{{ $t('challenge.dashboard.offline') }} {{ countOfflineAttendees }}</v-chip>
+      <v-btn class="showInvitePopup" @click="showInvitePopup = true" v-if="isModerator" icon size="x-small">
+        <v-icon color="green">mdi-account-plus</v-icon>
+      </v-btn>
+    </div>
+  </v-card-title>
+  <v-card-subtitle>
+    <!-- Possibly dynamic content here -->
+  </v-card-subtitle>
+  <v-list class="scrollable-list spacing-side chat-list-div" v-if="isModerator" max-height="500px">
+    <v-list-item v-for="(attendee, index) in allAttendeesUsers" :key="index" class="spacing-side">
+      <template v-slot:prepend>
+        <v-avatar size="32">
+          <v-icon :color="attendee.onlineStatus ? 'green' : 'red'">
+            {{ attendee.onlineStatus ? 'mdi-account' : 'mdi-account-off' }}
+          </v-icon>
+        </v-avatar>
+      </template>
+      <v-list-item-title>{{ attendee.fullName }}</v-list-item-title>
+    </v-list-item>
+  </v-list>
+  <InviteUserDialog v-model:showInvitePopup="showInvitePopup"></InviteUserDialog>
+</v-card>

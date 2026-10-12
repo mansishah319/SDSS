@@ -1,0 +1,1574 @@
+{
+  "Messages": {
+    "challengeDashboard": {
+      "VotingEndSoon": "Hurry up! Voting will close soon.",
+      "VotingTimeEnded": "Voting time has ended.",
+      "remainingTimeToFinishVotingMain": "Voting is in progress. Time remaining before voting ends:",
+      "remainingTimeToFinishVotingNote": "You can submit your vote and rate now before the validator review.",
+      "remainingTimeToStartVotingMain": "Voting will start soon. Time remaining before voting begins:",
+      "remainingTimeToStartVotingNote": "You can submit solutions until this time or the moderator may start the voting manually.",
+      "votingComingSoon": "Get ready to participate - voting will begin soon.",
+      "votingTimeEndedManualControl": "Voting time should have ended, but it is waiting for manual control by the moderator."
+    },
+    "common": {
+      "created": "Created successfully",
+      "deleted": "Deleted successfully",
+      "downloaded": "File Downloaded successfully",
+      "empty": {
+        "documents": "No documents have been added yet.",
+        "solutions": "No Solutions have been added yet.",
+        "teamMembers": "No team members found matching your search criteria.",
+        "validators": "No validators found matching your search criteria.",
+        "validator": "No Validators have been added yet."
+      },
+      "langUpdated": "User Language Updated Successfully.",
+      "updated": "Updated successfully",
+      "time": "Time",
+      "noData": "No data available",
+      "noDataToExport": "No data available to export",
+      "loadFailed": "Failed to load data. Please try again later.",
+      "uploaded": "Documents uploaded successfully!",
+      "all": "All",
+      "clearAll": "Clear All"
+    },
+    "error": {
+      "challenge": {
+        "maxReminders": "You can only add up to two reminders."
+      },
+      "data": {
+        "refreshFailed": "Failed to refresh data",
+        "fetchFailed": "Failed to fetch data"
+      },
+      "export": {
+        "failed": "Failed to export data"
+      },
+      "general": {
+        "serviceDown": "This service is currently down. Please contact support for assistance.",
+        "networkError": "Unable to connect to the server. Please check your internet connection and try again. If the problem persists, contact support."
+      },
+      "user": {
+        "created_frontend": "Kindly Fill Required Data"
+      }
+    },
+    "messageForEmptyEmployeeList": "No employees found.",
+    "messageForEmptySurveyQuestionsIssue": "The published survey has no questions. Please close it to avoid issues.",
+    "messageForEmptyUserQuestionAnswers": "No Text answers available yet.",
+    "success": {
+      "SurveyRoundQuestion": {
+        "created": "New Survey Round Question created successfully",
+        "deleted": "Survey Round Question deleted successfully",
+        "updated": "Survey Round Question updated successfully"
+      },
+      "challenge": {
+        "created": "Challenge created successfully",
+        "deleted": "Challenge deleted successfully",
+        "updated": "Challenge updated successfully"
+      },
+      "challengeSettings": {
+        "created": "Challenge Setting created successfully",
+        "deleted": "Challenge Setting deleted successfully",
+        "updated": "Challenge Setting updated successfully"
+      },
+      "data": {
+        "refreshed": "Data refreshed successfully",
+        "fetched": "Data fetched successfully",
+        "fetchFailed": "Failed to fetch data"
+      },
+      "emailTemplate": {
+        "created": "Email Template created successfully",
+        "deleted": "Email Template deleted successfully",
+        "updated": "Email Template updated successfully"
+      },
+      "export": {
+        "completed": "Data exported successfully"
+      },
+      "expertise": {
+        "created": "New Area of Expertise created successfully",
+        "deleted": "Area of Expertise deleted successfully",
+        "updated": "Area of Expertise updated successfully"
+      },
+      "futureStrategicDirection": {
+        "created": "New Future Priorities created successfully",
+        "deleted": "Future Priorities deleted successfully",
+        "updated": "Future Priorities updated successfully"
+      },
+      "futureStrategicGoals": {
+        "created": "New Future Challenges created successfully",
+        "deleted": "Future Challenges deleted successfully",
+        "updated": "Future Challenges updated successfully"
+      },
+      "questionOptions": {
+        "created": "New Option created successfully",
+        "deleted": "Option deleted successfully",
+        "updated": "Option updated successfully"
+      },
+      "sdssSurvey": {
+        "created": "New Survey created successfully",
+        "deleted": "Survey deleted successfully",
+        "updated": "Survey updated successfully"
+      },
+      "sdssSurveyRound": {
+        "created": "New Survey Round created successfully",
+        "deleted": "Survey Round deleted successfully",
+        "published": "The survey round has been successfully published.",
+        "updated": "Survey Round updated successfully"
+      },
+      "solution": {
+        "Confirm": {
+          "DeleteMessage": "Are you sure you want to delete this solution?",
+          "DeleteTitle": "Delete Solution",
+          "No": "No",
+          "Yes": "Yes"
+        },
+        "commentConfirm": {
+          "DeleteMessage": "Are you sure you want to delete this Comment?",
+          "DeleteTitle": "Delete Comment",
+          "No": "No",
+          "Yes": "Yes"
+        },
+        "created": "Solution created successfully",
+        "createdComment": "Comment created successfully",
+        "deleted": "Solution deleted successfully",
+        "deletedComment": "Comment deleted successfully",
+        "updated": "Solution updated successfully",
+        "updatedComment": "Comment updated successfully"
+      },
+      "strategicDirection": {
+        "created": "New Strategic Direction created successfully",
+        "deleted": "Strategic Direction deleted successfully",
+        "updated": "Strategic Direction updated successfully"
+      },
+      "strategicGoals": {
+        "created": "New Strategic Goals created successfully",
+        "deleted": "Strategic Goals deleted successfully",
+        "updated": "Strategic Goals updated successfully"
+      },
+      "templateType": {
+        "created": "Template Type created successfully",
+        "deleted": "Template Type deleted successfully",
+        "updated": "Template Type updated successfully"
+      },
+      "user": {
+        "created": "User created successfully",
+        "deleted": "User deleted successfully",
+        "statusUpdated": "User Status updated successfully",
+        "updated": "User updated successfully"
+      }
+    }
+  },
+  "adminDashboard": {
+    "title": "Admin Dashboard",
+    "userHeader": {
+      "titleEn": "User Dashboard",
+      "titleAr": "لوحة تحكم المستخدم",
+      "subtitleEn": "Track the latest indicators, action status, and department insights from one unified dashboard.",
+      "subtitleAr": "متابعة المؤشرات الحديثة وحالة الإجراءات وتحليلات الإدارات من خلال لوحة موحدة."
+    },
+    "totalChallenges": "Total Challenges",
+    "recentOpen": "Recently Opened",
+    "totalInternalUsers": "Total Internal Users",
+    "totalUsers": "Total Users",
+    "challengeStatusDistribution": "Challenge Status Distribution",
+    "commanderDecisions": "Commander Decisions",
+    "strategicGoals": "Strategic Goals",
+    "strategicDirections": "Strategic Directions",
+    "challengeDepartmentHistory": "Department Challenges History",
+    "challengeHistory": "Challenges History",
+    "decision": {
+      "closed": "Closed-No Decision",
+      "completed": "Decision Made",
+      "revisedByValidator": "Decision Revised By Validator"
+    },
+    "dialog": {
+      "challenge": {
+        "description": "Description",
+        "id": "CH ID",
+        "status": "Status",
+        "title": "Title"
+      },
+      "users": {
+        "dialog": {
+          "active": "Active",
+          "deleted": "Deleted",
+          "external": "External",
+          "internal": "Internal",
+          "notActive": "Not active"
+        },
+        "email": "Email",
+        "grpNumber": "GRP Number",
+        "name": "Full Name"
+      }
+    }
+  },
+  "adminRequests": {
+    "approvedDialogDescription": "Are you sure that you accept all these challenge Decisions?",
+    "approvedDialogTitle": "Decision Acceptance",
+    "challengeDescription": "Challenge Description",
+    "challengeID": "Challenge ID",
+    "challengeTitle": "Challenge Title",
+    "closedDialogDescription": "Are you sure that you reject all these challenge Decisions?",
+    "closedDialogTitle": "Decision Rejection",
+    "dialog": {
+      "accept": {
+        "confirm": "Send to admin review",
+        "message": "Approve this review step to move the challenge forward to the admin review Round.",
+        "note": "This confirmation updates the challenge workflow immediately and makes it available for the next review Round.",
+        "title": "Approve review decision"
+      },
+      "reject": {
+        "confirm": "Close challenge request",
+        "message": "Reject this review step to close the challenge request at the validator Round.",
+        "note": "Closing the request stops this review flow and keeps the decision clear for everyone tracking the challenge.",
+        "title": "Reject review decision"
+      }
+    },
+    "title": "Challenges Requests Under Review"
+  },
+  "app": {
+    "title": "SDSS",
+    "welcomeUser": "Welcome"
+  },
+  "auth": {
+    "logout": "Logout"
+  },
+  "profile": {
+    "title": "Profile",
+    "settingsTitle": "Profile Settings",
+    "personalInfo": "Personal Info",
+    "contactInfo": "Contact Info",
+    "fullName": "Full Name",
+    "grpNumber": "Group Number",
+    "nationality": "Nationality",
+    "mobile": "Mobile",
+    "email": "Email",
+    "grade": "Grade",
+    "department": "Department",
+    "invalidMobile": "Invalid mobile number",
+    "invalidEmail": "Invalid email",
+    "updateSuccess": "Profile updated successfully!",
+    "updateFail": "Failed to update profile."
+  },
+  "challenge": {
+    "add": "Add New Challenge",
+    "update": "Update Challenge",
+    "saving": "Saving challenge...",
+    "updating": "Updating challenge...",
+    "loading": "Loading data... Please wait",
+    "challengeDashboard": "Challenge Central",
+    "challengeDetails": "Session Details",
+    "createdAt": "Created Date",
+    "dashboard": {
+      "start": "Start",
+      "challengeTitle": "Challenge Title",
+      "challengeDetails": "Challenge Details",
+      "finalStage": "Final Stage",
+      "answerStage": "Solutions Stage",
+      "attendees": "Attendees",
+      "chatClosedMessage": "The chat is closed because we have made the final decision for this challenge. The solutions are currently under review.",
+      "close": "Close",
+      "closedStage": "The result of the discussion was rejected",
+      "comment": "Comment",
+      "completeStage": "The result of the challenge discussion has been accepted",
+      "confirmVoteMessage": "Are you sure you want to confirm this action for this challenge: [ {solutionText} ]?",
+      "deleteSolution": "Delete",
+      "discussionChat": "Chat",
+      "endRound": "The End Of Round",
+      "endTime": "Voting End Time: ",
+      "enterSolutionText": "Solution Text",
+      "finalDecision": "Take the Final Decision Now",
+      "finalDecisionWarning": "Selecting this checkbox confirms the final decision before final review",
+      "google": "Google",
+      "internal": "Internal",
+      "inviteUser": "Invite User",
+      "merge": {
+        "mergeInstructions": "Please provide the new solution text for select solutions to merge it.",
+        "newSolutionTitle": "New Solution",
+        "title": "Merge Solutions"
+      },
+      "newSolution": "Add new Solution",
+      "offline": "Offline-",
+      "online": "Online-",
+      "pause": "Pause",
+      "remainingTime": "Remaining Time: ",
+      "research": "Researches",
+      "researchText": "Search",
+      "resume": "Resume",
+      "round": "Round: ",
+      "roundMsg": {
+        "confirmationDialogTitle": "Submitting Answers",
+        "submitAnswersDialogMsg": "Are you sure you want to submit these answers?"
+      },
+      "searchUser": "Search User",
+      "solutionActions": "Solution Actions",
+      "solutionMenu": "Solutions for the challenge",
+      "solutionsNextRound": "Select the Solutions for the Next Round",
+      "solutionsRateList": "Solutions",
+      "enterSolutionAndPressEnter": "Type solution and press Enter to add new solution",
+      "addedSolutions": "Added Solutions",
+      "noSolutionsAdded": "No solutions added yet",
+      "startAddingSolutions": "Start adding proposed solutions for the challenge",
+      "startTime": "Start Time",
+      "strategicDirection": "Strategic Direction",
+      "stop": "End Round",
+      "title": "Decision making",
+      "totalVotes": "Total Votes: ",
+      "typeYourMessage": "Type your message......",
+      "underAdminReviewStage": "Under Admin Review Stage",
+      "underValidatorReviewStage": "Under Validator Review Stage",
+      "updateSolution": "Update",
+      "videoFeed": "Youtube Videos",
+      "voting": "Voting",
+      "votingConfirmation": "Voting Confirmation",
+      "votingStage": "Voting Stage",
+      "yourAnswer": "Write New Solution",
+      "youtube": "Youtube",
+      "finalSolutions": "Final Solutions"
+    },
+    "department": "Department",
+    "description": "Description",
+    "edit": "Edit Challenge",
+    "finalSolutions": {
+      "closed": {
+        "endMessage": "Thank you for your participation.",
+        "mainMessage": "No solutions were deemed suitable for this challenge. If you need to see the current report, click here.",
+        "subMessage": "The process has been closed.",
+        "title": "Closed"
+      },
+      "completed": {
+        "endMessage": "Congratulations to everyone on successfully completing the challenge! Your solutions have been accepted, and the outstanding effort from the entire team has been greatly appreciated. The quality of your work reflects the high level of professionalism and commitment from all involved. Well done, team!",
+        "mainMessage": "The challenge has been successfully completed with fitting solutions. If you need to see the current report, click here.",
+        "subMessage": "Thank you for your contribution.",
+        "title": "Completed"
+      },
+      "finalRateForInvitedUsers": "Final Rate for Invited Users",
+      "finalRateForManager": "Final Rate for Manager",
+      "finalRateForValidators": "Final Rate for Validators",
+      "title": "Final Solutions",
+      "underManagerReview": {
+        "endMessage": "You will be notified once the review is complete.",
+        "mainMessage": "The data is under review by the manager. If you need to see the current report, click here.",
+        "subMessage": "Please wait until the review is complete.",
+        "title": "Under Manager Review"
+      },
+      "underValidatorReview": {
+        "endMessage": "You will be notified once the review is complete.",
+        "mainMessage": "The data is under review by validators. If you need to see the current report, click here.",
+        "subMessage": "Please wait until the review is complete.",
+        "title": "Under Validator Review"
+      },
+      "voteCount": "Vote Count",
+      "votePercentage": "Vote Percentage"
+    },
+    "guestInvitation": "Guest Experts Members",
+    "info": {
+      "addReminder": "Add Reminder",
+      "allowImmediateAccess": "Allow Immediate Access",
+      "assistantModerator": "Assistant Moderator",
+      "challengeDetails": "Challenge Details",
+      "challengeSettings": "Challenge Settings",
+      "committee": "Committee",
+      "department": "Department",
+      "descriptionAr": "Challenge Description Arabic",
+      "descriptionEn": "Challenge Description English",
+      "docsResources": "Documents",
+      "documentsMax": "Documents (Maximum 5)",
+      "endTime": "End Time",
+      "field": "field",
+      "fileUpload": "File Upload",
+      "futureStrategicGoal": "Future Challenges",
+      "hashTag": "HashTag",
+      "impact": "impact",
+      "impactOfDecision": "Importance of Decision",
+      "isUrgent": "Urgent Challenge (Ready For Publishing Directly)",
+      "levelOfDecision": "Level Of Decision",
+      "moderator": "Moderator",
+      "reminder": "Reminders",
+      "resources": "Resources",
+      "sector": "Sector",
+      "selectFromLib": "Select From Library",
+      "solutionsRateList": "Solutions",
+      "enterSolutionAndPressEnter": "Type the solution and press Enter to add a new one",
+      "addedSolutions": "Added Solutions",
+      "noSolutionsAdded": "No solutions added yet",
+      "startAddingSolutions": "Start adding proposed solutions for the challenge",
+      "startTime": "Start Time",
+      "strategicDirection": "Strategic Direction",
+      "strategicGoal": "Strategic Goal",
+      "teamMember": "Team Member",
+      "titleAr": "Challenge Title Arabic",
+      "titleEn": "Challenge Title English",
+      "topicClassification": "Topic Classification",
+      "validators": "Validators",
+      "visibility": "Visibility",
+      "youtubeLinks": "Youtube Links",
+      "youtubeResources": "Youtube",
+      "youtubeUrl": "Youtube URL",
+      "youtubeLinkAlreadyAdded": "This YouTube link was already added.",
+      "invalidYoutubeUrl": "Please enter a valid YouTube URL.",
+      "reminderMustBeFuture": "Reminder date and time must be in the future.",
+      "enterYoutubeUrl": "Enter YouTube URL and press Enter",
+      "addedYoutubeLinks": "Added YouTube Links",
+      "noYoutubeLinksAdded": "No YouTube links have been added yet",
+      "startUploadingFiles": "Start uploading files to add them to your challenge",
+      "requiredTooltip": "This field is required",
+      "selectAll": "Select All",
+      "clearAll": "Clear All",
+      "addNew": "Add New",
+      "remove": "Remove",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "next": "Next",
+      "previous": "Previous",
+      "back": "Back",
+      "forward": "Forward",
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "warning": "Warning",
+      "info": "Information",
+      "basicInfo": "Basic Information",
+      "departmentInfo": "Department Information",
+      "visibilityAndDates": "Visibility & Dates",
+      "strategicInfo": "Strategic and Foresight Alignment",
+      "moderatorsAndCommittee": "Moderators",
+      "accessControl": "Access Control",
+      "descriptions": "Descriptions",
+      "futureStrategicDirection": "Future Priorities",
+      "futureStrategicGoals": "Future Challenges",
+      "solutionText": "Suggestion Solution",
+      "uploadDocuments": "Upload Documents",
+      "dragDropFiles": "Drag and drop files here or click to upload",
+      "supportedFormats": "Supported formats: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, Images",
+      "maxFileSize": "Maximum file size: 10MB",
+      "chooseFilesNo": "Choose files – No file chosen",
+      "chooseFiles": "Choose Files",
+      "uploadedFiles": "Uploaded Files",
+      "hashtags": "Hashtags",
+      "addHashtag": "Add Hashtag",
+      "reminders": "Reminders",
+      "noFilesUploaded": "No files uploaded"
+    },
+    "invitationSection": "Invitation Section",
+    "list": "Challenges",
+    "moderator": "Moderator",
+    "name": "Challenge",
+    "solutionText": "Solution Text",
+    "solutionsPerStage": "Final Solutions Per Stage",
+    "stageNumber": "Stage Number: ",
+    "status": {
+      "active": "Active",
+      "deleted": "Deleted",
+      "inactive": "Inactive",
+      "completed": {
+        "description": "Challenge has been completed and final decision has been made"
+      },
+      "open": {
+        "description": "Challenge is open for solutions and participation"
+      },
+      "closed": {
+        "description": "Challenge has been closed and is no longer accepting submissions"
+      },
+      "voting": {
+        "description": "Challenge is currently in voting phase"
+      },
+      "revised": {
+        "description": "Challenge has been revised and updated"
+      },
+      "paused": {
+        "description": "Challenge has been temporarily paused"
+      },
+      "validator_review": {
+        "description": "Challenge is under review by validators"
+      },
+      "admin_review": {
+        "description": "Challenge is under administrative review"
+      },
+      "new": {
+        "description": "Newly created challenge awaiting activation"
+      },
+      "urgent": {
+        "description": "Urgent challenge requiring immediate attention"
+      }
+    },
+    "noChallengesFound": "No challenges found",
+    "title": "Challenges",
+    "view": "Challenge Details",
+    "viewInfo": {
+      "ValidatorUsers": "Validator List",
+      "actions": "Actions",
+      "challengeDetails": "Challenge Details",
+      "chatHistory": "Chat History",
+      "department": "Department",
+      "description": "Description",
+      "documentList": "Document List",
+      "documentName": "Document Name",
+      "endTime": "End Time",
+      "invitationAccepted": "Invitation Accepted",
+      "invitationPending": "Invitation Pending",
+      "invitationRejected": "Invitation Rejected",
+      "invitedGuestUsers": "Invited Guest Users",
+      "invitedInternalUsers": "Invited Internal Users",
+      "invitedUsersCount": "Invited Users",
+      "moderator": "Moderator",
+      "numberOfVotes": "Number of Votes",
+      "participantsInformation": "Participants Information",
+      "section": "Section",
+      "solution": "Solution",
+      "solutionFrequency": "Solution Chart with Voting",
+      "solutionList": "Solution List",
+      "startTime": "Start Time",
+      "subDepartment": "SubDepartment",
+      "title": "Title",
+      "visibility": "Visibility"
+    },
+    "visibility": "Visibility",
+    "votingTime": "Voting Time",
+    "startTime": "Start Time",
+    "strategicDirection": "Strategic Direction",
+    "error": {
+      "startTimeMustBeAfterCurrent": "Start time must be after the current time",
+      "endTimeMustBeAfterCurrent": "End time must be after the current time",
+      "endTimeMustBeAfterStartTime": "End time must be after the start time"
+    }
+  },
+  "common": {
+    "editRound": "Edit Round",
+    "deleteRound": "Delete Round",
+    "deleteSurvey": "Delete Survey",
+    "editSurvey": "Edit Survey",
+    "viewSurveyDetails": "View Survey Details",
+    "sendEmail": "Send Email",
+    "invitedUsers": "Invited Users",
+    "sent": "Sent",
+    "missed": "Missed",
+    "sendAllMissedEmails":  "Send all unsent invitations",
+    "emailSentStatusTitle": "Email Sent Status",
+    "delphiXEn": "برنامج دلفاي X",
+    "delphiXAr": "Delphi X",
+    "masterHomeMainTitleEn": "دعم اتخاذ القرار الذكي",
+    "masterHomeMainTitleAr": "Smart Decision Support System",
+    "home-main-title-en": "دعم اتخاذ القرار SDSS",
+    "home-main-title-ar": "Smart Decision Support System",
+    "myProfile": "My Profile",
+    "profileSettings": "Profile Settings",
+    "signOut": "Sign Out",
+    "all": "All",
+    "update": "Update",
+    "download": "Download",
+    "preview": "Preview",
+    "searchName": "Search",
+    "collapse": "Collapse",
+    "total": "Total",
+    "refresh": "refresh",
+    "expand": "Expand",
+    "view": "View Details",
+    "next": "Next",
+    "previous": "Previous",
+    "actions": "Actions",
+    "active": "Active",
+    "add": "add",
+    "allChallengesCount": "Total SDSS Challenges",
+    "allExternalUsersCount": "External Users",
+    "allInternalUsersCount": "Internal Users",
+    "allPages": "All",
+    "answer": "Answer",
+    "answered": "Answered",
+    "answeredStatus": "Survey Status",
+    "ar": "Arabic",
+    "arabic": "Arabic",
+    "attachmentPreview": "Attachment Preview",
+    "auth": {
+      "accessDeniedMsg": "Access Denied: You do not have the required permissions to view this page.",
+      "accessDeniedNote": "Please contact the administrator if you believe this is an error."
+    },
+    "back": "Back",
+    "banner": "Application Banner",
+    "bannerImage": "Banner Background Image",
+    "bannerShow": "Show Banner",
+    "cancel": "Cancel",
+    "challengeTimeFromTo": "Challenge Time [FROM - TO]",
+    "clear": "Clear",
+    "clearAll": "Clear All",
+    "close": "Close",
+    "comingSoon": "Coming Soon!",
+    "comingSoonText": "We're working hard to bring you this feature. Stay tuned for updates!",
+    "confirm": "Confirm",
+    "copywriter": "© 1956-2024 Dubai Police. All rights reserved.",
+    "create": "Create",
+    "createdAt": "Created On",
+    "createdBy": "Created By",
+    "dashboard": "Main Dashboard",
+    "date": "Date",
+    "days": "Days",
+    "default": "Default",
+    "delete": "Delete",
+    "deleteConfirmation": "Are you sure you want to delete?",
+    "deletionTitle": "Confirm Deletion",
+    "department": "Department",
+    "downloadPdf": "Download the PDF version of this report for access or sharing.",
+    "edit": "Edit",
+    "email": "Email",
+    "empty": "Empty",
+    "en": "English",
+    "endTime": "Voting End Time",
+    "english": "English",
+    "expertLevels": {
+      "basic": "Basic",
+      "expert": "Expert",
+      "intermediate": "Intermediate",
+      "none": "None"
+    },
+    "expired": "Expired",
+    "export": "Export",
+    "exportToExcel": "Export the report data to an Excel file for analysis and sharing.",
+    "exportToCSV": "Export the report data to a CSV file.",
+    "false": "False",
+    "fileName": "File Name",
+    "fileSize": "File Size",
+    "finalDecision": "Final Decision",
+    "footer": {
+      "aiDepMessage": "© 2024 All rights reserved to the Design and Development Department & Artificial Intelligence Management & Dubai Police",
+      "copyright": "Copyright by Dubai Police General Headquarter. All Right Reserved.",
+      "newHomeScreenCopyright": "All rights reserved to the Design and Development Department & Artificial Intelligence Management & Dubai Police",
+      "note": "NOTICE: All information contained herein is a property of DubaiPolice."
+    },
+    "fullName": "Full Name",
+    "grade": "Grade",
+    "grpNumber": "GRP Number",
+    "hide": "Hide",
+    "hours": "Hours",
+    "id": "ID",
+    "impactSeverityPercentage": "Impact Severity (%)",
+    "insertYourAnswer": "Insert Your Answer...",
+    "items_per_page": "Items per page",
+    "jobTitle": "Job Title",
+    "joinRequests": "Join Requests [SDSS System]",
+    "filters": "Filters",
+    "labels": {
+      "closed": "Closed",
+      "completed": "Completed",
+      "new": "New",
+      "open": "Open",
+      "paused": "Paused",
+      "revised": "Revised",
+      "underReview": "Validator Review",
+      "urgent": "Admin Review",
+      "voting": "Voting"
+    },
+    "loader": {
+      "content": "Loading content",
+      "sectionContent": "Loading section content",
+      "listItems": "Loading list items",
+      "sectionDescription": "Preparing cards and supporting details for this screen.",
+      "tableDescription": "Preparing filters, actions, and table rows for this page.",
+      "challengeWorkspaceHeading": "Challenge workspace",
+      "challengeSetup": "Loading challenge setup",
+      "challengeSetupDescription": "Preparing steps, participants, resources, and form fields for this challenge workflow.",
+      "surveyDashboardHeading": "Survey dashboard",
+      "surveyAnalytics": "Loading survey analytics",
+      "surveyAnalyticsDescription": "Preparing metrics, charts, panels, and recent survey activity for this dashboard.",
+      "surveyPortalHeading": "Survey platform",
+      "surveyPortal": "Loading survey portal",
+      "surveyPortalDescription": "Preparing survey services, categories, and participation statistics for this portal.",
+      "liveSurveysHeading": "Live surveys",
+      "liveSurveys": "Loading live surveys",
+      "liveSurveysDescription": "Preparing active survey rounds, countdowns, and participation details.",
+      "surveyReportsHeading": "Survey reports",
+      "surveyReports": "Loading survey reports",
+      "surveyReportsDescription": "Preparing search, report cards, and survey round reporting results.",
+      "surveyReportDetailsHeading": "Survey report details",
+      "surveyReportDetails": "Loading survey report details",
+      "surveyReportDetailsDescription": "Preparing round details, answers, participants, and export actions for this report.",
+      "surveyCreateHeading": "Create survey",
+      "surveyCreate": "Loading survey creation workspace",
+      "surveyCreateDescription": "Preparing departments, jobs, and round settings for a new survey.",
+      "surveyUpdateHeading": "Update survey",
+      "surveyUpdate": "Loading survey update workspace",
+      "surveyUpdateDescription": "Preparing existing survey data, assignments, and round settings for editing.",
+      "userRecord": "Loading user record",
+      "userProfileHeading": "User profile",
+      "userUpdateForm": "Loading user update form",
+      "userUpdateFormDescription": "Preparing profile details, roles, expertise, and editable account settings.",
+      "challengePortfolio": "Loading your challenge portfolio",
+      "challengePortfolioDescription": "Preparing statuses, filters, and quick actions for your assigned challenge records.",
+      "challengeRecords": "Loading challenge records",
+      "challengeRecordsDescription": "Preparing filters, moderation actions, and the latest challenge table rows.",
+      "userDirectory": "Loading user directory",
+      "userDirectoryDescription": "Preparing roles, departments, and account actions for the administrative user table."
+    },
+    "language": {
+      "ar": "Arabic",
+      "en": "English"
+    },
+    "loading": "Loading... Please wait",
+    "logo": "SDSS Logo",
+    "merge": "Merge",
+    "new": "New",
+    "minutes": "Minutes",
+    "months": "Months",
+    "myDashboard": "My Dashboard",
+    "no": "No",
+    "notActive": "Not active",
+    "notAnswered": "Not Answered",
+    "notifyMe": "Notify Me",
+    "online": "Online",
+    "pagination": {
+      "of": "of",
+      "page": "Page"
+    },
+    "platform": "Platform",
+    "position": "Position",
+    "primary": "Primary",
+    "probabilityOfOccurrencePercentage": "Probability Of Occurrence (%)",
+    "question": "Question",
+    "reason": "Reason (optional)",
+    "reasonHint": "Provide a reason for cancellation (optional)",
+    "reasonName": "Reason (optional)",
+    "reasonPlaceHolder": "Enter your reason",
+    "reminderList": "Selected Reminder List",
+    "requests": "Requests",
+    "response": "Response",
+    "responseRate": "Response Rate",
+    "search": "Search",
+    "seconds": "Seconds",
+    "selected": "selected",
+    "send": "Send",
+    "saved": "Saved",
+    "show": "Show",
+    "srNo": "SrNo.",
+    "srNo2": "SrNo.",
+    "startTime": "Voting Start Time",
+    "status": {
+      "active": "Active",
+      "deleted": "Deleted",
+      "inactive": "Inactive",
+      "open": {
+        "description": "Challenge is open for solutions and participation"
+      },
+      "closed": {
+        "description": "Challenge has been closed and is no longer accepting submissions"
+      },
+      "voting": {
+        "description": "Challenge is currently in voting phase"
+      },
+      "paused": {
+        "description": "Challenge has been temporarily paused"
+      }
+    },
+    "statusName": "Status",
+    "submit": "Submit",
+    "save": "Save",
+    "time": "Time",
+    "toWithSpace": " To ",
+    "totalSurveysCount": "Total Delphi X",
+    "totalUsersOnTheSystemCount": "Users on the System",
+    "true": "True",
+    "updatedAt": "Updated On",
+    "updatedBy": "Updated By",
+    "variety": {
+      "details": "Name",
+      "email": "Email",
+      "expertLevel": "Expert Level",
+      "expertisesTitle": "Area of expertise",
+      "grpNumber": "GRP Number",
+      "name": "Name",
+      "permissions": "Permissions"
+    },
+    "viewDetails": "View Details",
+    "viewReport": "View Report",
+    "viewRequests": "Manage Requests",
+    "visibility": {
+      "private": "خاص",
+      "public": "عام"
+    },
+    "vote": "Vote",
+    "noMessages": "No messages yet",
+    "startConversation": "Start the conversation by sending a message",
+    "messages": "messages",
+    "attachFile": "Attach file",
+    "votingControl": "Manual Voting Control",
+    "waitingScreen": "Waiting Screen",
+    "years": "Years",
+    "yes": "Yes",
+    "select": "Select",
+    "selectedUsers": "Selected Users",
+    "selectedValidators": "Selected Validators",
+    "validationErrors": "Validation Errors",
+    "complete": "Complete",
+    "progress": "Progress",
+    "noData": "No data available",
+    "noDataTitle": "Nothing to show yet",
+    "noDataDescription": "No records match the current criteria. Try adjusting your filters or refresh to load new data.",
+    "noDataToExport": "No data available to export",
+    "statistics": "Statistics",
+    "challenges": "Challenges",
+    "generatedOn": "Generated on",
+    "totalResults": "Total Results",
+    "searchResults": "Search Results",
+    "showing": "Showing",
+    "of": "of",
+    "showLess": "Show Less",
+    "showMore": "Show More",
+    "notAvailable": "Not Available",
+    "unknown": "Unknown",
+    "completed": "Completed",
+    "pending": "Pending",
+    "responses": "Responses",
+    "messageStatus": {
+      "sent": "Sent",
+      "delivered": "Delivered",
+      "read": "Read"
+    },
+    "typing": "typing...",
+    "messageReactions": "Message reactions"
+  },
+  "error": {
+    "challengeChatAllowedFiles": "Only One file are allowed per message.",
+    "chatMessageBlank": "You should write some words before submitting!",
+    "mandatory": "This field is mandatory",
+    "mandatoryFields": "Please fill the required fields",
+    "roundsOfSurveyZero": "Please specify a valid number of rounds greater than 0.",
+    "submissionFailed": "We could not save the challenge. Please review the form and try again.",
+    "uploadFailed": "We could not upload the selected files. Please check the files and try again.",
+    "unknownError": "Unknown error occurred Kindly contact Admin Team Or IT Team"
+  },
+  "fileUpload": {
+    "browse": "Browse",
+    "clear": "Clear",
+    "completed": "Completed",
+    "pending": "Pending",
+    "upload": "Upload"
+  },
+  "futurePoll": {
+    "main-title": "Future Poll"
+  },
+  "home": {
+    "backButton": "Back to Home Page",
+    "content": {
+      "details": "A program affiliated with Foreseeing the Future to link issues with specialists to review them and conduct sessions.",
+      "download-tooltip": "Click here to download the user manual and explore detailed information about our system.",
+      "download-user-manual": "User Manual",
+      "home": "Home",
+      "main-home-title": "Smart Decision Support System",
+      "main-page-description": "Empowering Dubai Police to make smart, informed decisions by analyzing survey data and perspectives from various stakeholders. This system ensures organized and effective decision making to enhance productivity and organizational performance.",
+      "main_title": "Administrative System",
+      "system-title-shortcut": "SDSS",
+      "title": "Smart Decision Support System Platform"
+    },
+    "mainTitles": {
+      "adminPanel": "Admin Panel",
+      "delphiSurvey": "Delphi X",
+      "sdssSystem": "SDSS System",
+      "futurePoll": "Future Poll",
+      "impact": "Impact",
+      "invitationRequests": "Invitation Requests",
+      "myChallenges": "My Challenges SDSS",
+      "myDashboardPage": "My Dashboard"
+    },
+    "myServices": "My Services",
+    "servicesInfo": "Information about available services and features",
+    "sid-bar-title": "SDSS Platform",
+    "statistics": "Statistics",
+    "statisticsInfo": "Overview of system statistics and metrics",
+    "surveyMainTitles": {
+      "activeSurveys": "Active Surveys",
+      "archiveSurveys": "Archive Surveys",
+      "dashboard": "My Dashboard",
+      "surveysReports": "Survey Reports"
+    }
+  },
+  "impactScreen": {
+    "main-title": "Impact"
+  },
+  "login": {
+    "appName": "Smart Decision Support System",
+    "appShortcutName": "SDSS",
+    "grpNumber": "GRP Number",
+    "login": "Login Page",
+    "loginMsg": "Login",
+    "loginSubMessage": "Enter your login details",
+    "password": "Password",
+    "username": "Username"
+  },
+  "myChallenges": {
+    "title": "My Challenges",
+    "noChallengesFound": "No challenges found"
+  },
+  "myDashboard": {
+    "acceptedInvitations": "Accepted Invitations",
+    "actions": {
+      "accept": "Accept invitation",
+      "reject": "Reject invitation",
+      "viewDashboard": "Open challenge dashboard"
+    },
+    "approvedDialogDescription": "Are you sure that you accept this Invitation?",
+    "approvedDialogTitle": "Accept The Invitation",
+    "closedDialogDescription": "Are you sure that you Reject this Invitation?",
+    "closedDialogTitle": "Reject The Invitation",
+    "dialog": {
+      "accept": {
+        "confirm": "Accept invitation",
+        "message": "Confirm this invitation to join the challenge workflow and continue to the next stage when needed.",
+        "note": "Accepting this invitation grants you access to the challenge dashboard and related participation steps.",
+        "title": "Accept invitation"
+      },
+      "reject": {
+        "confirm": "Reject invitation",
+        "message": "Reject this invitation if you cannot participate. You can add a note that will be recorded with the rejection.",
+        "note": "This note will be saved with the rejection so the request owner can understand why the invitation was declined.",
+        "reasonHint": "Add a rejection note if you want to explain the reason.",
+        "reasonLabel": "Rejection note",
+        "reasonPlaceholder": "Write a short note for this rejection",
+        "title": "Reject invitation"
+      }
+    },
+    "pendingInvitations": "Pending Invitations",
+    "rejectedInvitations": "Rejected Invitations",
+    "table": {
+      "actions": "Actions",
+      "endDate": "End Date",
+      "finalDecision": "Final Decision",
+      "name": "Challenge Name",
+      "sr": "Sr No",
+      "startDate": "Start Date"
+    },
+    "totalAcceptedInvitations": "Total Accepted",
+    "totalInvitations": "Total Invitations",
+    "totalPendingInvitations": "Total Pending",
+    "totalRejectedInvitations": "Total Rejected",
+    "totalVotingNotParticipated": "Voting Not Participated",
+    "totalVotingParticipated": "Voting Participated",
+    "validatorDashboardDescription": "This section displays information specific to validators.",
+    "validatorDashboardTitle": "Dashboard for Managing Invitations",
+    "votingCompleted": "Voting Completed",
+    "votingNotParticipated": "Voting Not Participated",
+    "votingParticipated": "Voting Participated"
+  },
+  "nav": {
+    "about": "About",
+    "home": "Home",
+    "search": "Search from here"
+  },
+  "rating": {
+    "applicableMsg": "Applicable",
+    "challengeIdMsg": "under Challenge ID:",
+    "commentMsg": "What are the reasons that prompted you to give this rating?",
+    "howToApply": "How can this solution be implemented in practice? (Suggestions)",
+    "moderatorRatingView": {
+      "rates": "Solution Users Feedback",
+      "title": "Solution Feedback Details"
+    },
+    "noFeedbackOrRatings": "This solution has not received any feedback or ratings.",
+    "noSolutionExistsMsg": "No solution is currently available.",
+    "rate": "Feedback",
+    "solutionAllRates": "All Ratings related to this Solution",
+    "solutionIdMsg": "Rating for Solution ID:",
+    "solutionText": "With Solution Text:",
+    "title": "Solution Rate"
+  },
+  "sdssSurvey": {
+    "accessKeyRequired": "Access Key is required.",
+    "add": "Add new Survey",
+    "automatic": {
+      "endTime": "End Time",
+      "roundCreationFirstHint": "This process is automatic and will be handled by the system.",
+      "roundCreationSecondHint": "New survey rounds will be started automatically based on this above pre-configured schedule Information.",
+      "roundDescriptionAr": "Description (Arabic)",
+      "roundDescriptionEn": "Description (English)",
+      "roundTitleAr": "Round Title (Arabic)",
+      "roundTitleEn": "Round Title (English)",
+      "startTime": "Start Time",
+      "title": "Automatic Survey Round Information"
+    },
+    "backButton": "Back to Survey Home Page",
+    "bothAccessAndGrpRequired": "Both GRP Number and Access Key are required.",
+    "createNewRound": "Create a New Round",
+    "currentSurveyDescription": "Current Survey Description",
+    "description": "Description",
+    "descriptionAr": "Survey Description (Arabic)",
+    "descriptionEn": "Survey Description (English)",
+    "edit": "Edit Survey",
+    "endTime": "End Time",
+    "endUserMessage": "Help us improve Dubai Police services by answering this quick survey. Your feedback matters. Thank you!",
+    "errorAccessLoginHint": "Please check your GRP Number or Access Key and try again.",
+    "find": "Find Specific Survey",
+    "grpNumberRequired": "GRP Number is required.",
+    "history": {
+      "main-title": "Survey History",
+      "noHistoryTillNow": "You haven't any surveys completed till now.",
+      "surveyDetails": {
+        "currentUserGrpNumber": "Your GRP Number",
+        "currentUserName": "Your Name",
+        "main-title": "Survey Details & Your Responses",
+        "roundDescription": "Round Description",
+        "roundTitle": "Round Title",
+        "surveyDescription": "Survey Description",
+        "surveyTitle": "Survey Title",
+        "title": "Your Details & Survey Details",
+        "yourPrimaryEmail": "Your Primary Email",
+        "yourPrimaryPhoneNumber": "Your Primary Phone Number"
+      }
+    },
+    "id": "Survey ID ",
+    "invitationsWarning": "If you do not select specific jobs or departments, invitations will be sent to all users registered to the system.",
+    "live": {
+      "backButton": "Back To Your Live Surveys",
+      "mainTitle": "Live Surveys",
+      "noActiveSurveys": "No active surveys are available at the moment.",
+      "takeSurvey": "Take Survey",
+      "timeBoard": {
+        "subTitleInCaseDynamicSurvey": "Participate now! You have until the countdown ends to submit your answers and make your voice heard.",
+        "subTitleInCaseManualSurvey": "This survey is under manual review by the moderator. Please complete it as soon as possible before the moderator makes a decision to close it. Your feedback is important to us and helps improve our services.",
+        "titleInCaseDynamicSurvey": "Complete Your Survey Before Time Runs Out!",
+        "titleInCaseManualSurvey": "Your Feedback Is Awaited!"
+      }
+    },
+    "mainTitle": "Delphi X Information",
+    "manualHandle": "Manual Handle",
+    "mode": "Mode",
+    "name": "Survey Title",
+    "nameAr": "Survey Title (Arabic)",
+    "nameEn": "Survey Title (English)",
+    "noQuestionsExistForLive": "No questions are available. Please contact the moderator or wait for this round to close.",
+    "numberOfRounds": "Number Of Rounds",
+    "report": {
+      "additionQuestionAnalysis": "Additional Questions Analysis",
+      "employeeDetails": "Employee Details",
+      "impactMainTitle": "Impact Severity Analysis (Per User)",
+      "impactTitle": "Average impact severity",
+      "impactTooltip": "Press For Impact Severity Details",
+      "main-title": "Survey Reports",
+      "noReportTillNow": "You don't have any survey reports at the moment.",
+      "participantsPercentageAnalysis": "Response Rate Analysis",
+      "percentageTitle": "Survey Participation Rate",
+      "probabilityMainTitle": "Probability of Occurrence Analysis (Per User)",
+      "probabilityTitle": "Average probability of occurrence",
+      "probabilityTooltip": "Press for Probability of Occurrence Details",
+      "totalEmployeesTooltip": "Total number of invited employees.",
+      "answeredCountTooltip": "Number of employees who have answered.",
+      "pendingCountTooltip": "Number of employees who are still pending.",
+      "questionAnalysis": {
+        "title": "Question Analysis Report",
+        "subtitle": "Comprehensive analysis and insights for survey questions",
+        "questionOverview": "Question Overview",
+        "totalResponses": "Total Responses",
+        "questionType": "Question Type",
+        "responseDistribution": "Response Distribution",
+        "responseDistributionSubtitle": "Visual breakdown of participant responses",
+        "averageMetricsSubtitle": "Probability and impact analysis metrics",
+        "additionalAverageQuestions": "Probability and Impact Scale",
+        "answersCount": "Total Number of Responses",
+        "averageImpact": "Average severity of impact",
+        "averageProbability": "Average likelihood of occurrence",
+        "textAnswers": "Participant Text Responses",
+        "viewAllAnswers": "View All Text Responses",
+        "responseRate": {
+          "countJobTitles": "Job Titles",
+          "departmentsCount": "Departments",
+          "nationalitiesCount": "Nationalities",
+          "qualificationsCount": "Qualifications",
+          "responseRateAnalysisBasedOnDepartment": "Response Rate Analysis Based on Department",
+          "responseRateAnalysisBasedOnJob": "Response Rate Analysis Based on Job Title",
+          "responseRateAnalysisBasedOnNationality": "Response Rate Analysis Based on Nationality",
+          "responseRateAnalysisBasedOnQualification": "Response Rate Analysis Based on Qualification",
+          "responseRateAnalysisBasedOnMaritalStatus": "Response Rate Analysis Based on Marital Status",
+          "responseRateAnalysisBasedOnGender": "Response Rate Analysis Based on Gender"
+        }
+      },
+      "questionAnswersAnalysis": "Analysis of Available Answers For this Question",
+      "questionDetails": "Question Insights & Analysis",
+      "roundDescription": "Round Description",
+      "surveyDescription": "Survey Description",
+      "surveyDetails": {
+        "currentUserGrpNumber": "Your GRP Number",
+        "currentUserName": "Your Name",
+        "main-title": "The Final Report for the Survey",
+        "questionDetails": "Survey Questions Details",
+        "roundDescription": "Round Description",
+        "roundTitle": "Round Title",
+        "surveyDescription": "Survey Description",
+        "surveyTitle": "Survey Title",
+        "title": "Your Details & Survey Details",
+        "totalMultiSelectQuestions": "Total Multi-Select Questions",
+        "totalQuestions": "Total Questions",
+        "totalSingleSelectQuestions": "Total Single-Select Questions",
+        "totalTextQuestions": "Total Text Questions",
+        "totalTrueFalseQuestions": "Total True/False Questions",
+        "yourPrimaryEmail": "Your Primary Email",
+        "yourPrimaryPhoneNumber": "Your Primary Phone Number"
+      },
+      "totalNumbersTitle": "Survey Participants Count",
+      "userPercentageMessage": "Percentage of users who participated in the survey for this Question",
+      "userQuestionAnswer": "Responses to Text-Based Question",
+      "userQuestionAnswers": "User Responses to Text-Based Questions with Details",
+      "userTotalNumbersMessage": "Number of users who participated in the survey for this Question",
+      "viewQuestionAnalysisDetailsTooltip": "Click to view detailed analysis of this question"
+    },
+    "round": "Round: ",
+    "roundNumber": "Round Number",
+    "roundNumberHint": "Check last round and enter the next number For the next.",
+    "roundNumberUpdateRoundHint": "Round Number not applicable to update in the update Round process",
+    "selectDepartment": "Select Department",
+    "selectJobs": "Select jobs",
+    "selectSubDepartment": "Select SubDepartment",
+    "showPublicQuestions": "Display Public Questions",
+    "startTime": "Start Time",
+    "status": "Status",
+    "surveyDashboardTitle": "My Survey Dashboard",
+    "surveyRounds": {
+      "currentRoundDescription": "Current Survey Round Description",
+      "description": "Description",
+      "endRound": "End Delphi X Round",
+      "mainTitle": "Delphi X Rounds",
+      "publish": "Publish",
+      "questions": {
+        "add": "Add New Question",
+        "delete": "Delete Question",
+        "descriptionAr": "Question Description (Arabic)",
+        "descriptionEn": "Question Description (English)",
+        "edit": "Edit Question",
+        "publicQuestions": {
+          "impactSeverity": "Impact Severity",
+          "mainTitle": "Additional Related Questions",
+          "probabilityOfOccurrenceQuestion": "Probability of Occurrence"
+        },
+        "questionOptions": {
+          "create": "Create New Option",
+          "delete": "Delete Current Option",
+          "title": "Question Options",
+          "titleAr": "Option Text (Arabic)",
+          "titleEn": "Option Text (English)",
+          "update": "Update Current Option"
+        },
+        "section-title": "Round Questions",
+        "selectQuestionType": "Select Question Type",
+        "titleAr": "Question Text (Arabic)",
+        "titleEn": "Question Text (English)",
+        "type-hint-primary": "You Selected --> ",
+        "type-hint-secondary": "Pick your question type"
+      }
+    },
+    "updateRound": "Update Survey Round",
+    "userAnswers": {
+      "goToHome": "Go to Survey Home Page",
+      "snackbarMessage": "Survey submitted successfully!",
+      "surveyMessage": "Your survey has been successfully submitted. Thank you for your feedback!",
+      "surveySubmitted": "Survey Submitted!",
+      "updateHint": "You can update your survey until the moderator closes it."
+    },
+    "userInvitations": "User Invitations",
+    "userView": {
+      "accessHint": "Please check your survey invitation Email to find your access key, which is required to access your survey.",
+      "accessKey": "Access Key",
+      "accessPlaceHolder": "Enter your Access Key",
+      "accessTitle": "Check Your Survey Authority",
+      "grpHint": "Please enter your GRP number.",
+      "grpNumber": "GRP Number",
+      "grpPlaceHolder": "Enter your GrpNumber"
+    },
+    "enterSolutionAndPressEnter": "Type solution and press Enter to add new solution",
+    "addedSolutions": "Added Solutions",
+    "noSolutionsAdded": "No solutions added yet",
+    "startAddingSolutions": "Start adding proposed solutions for the challenge"
+  },
+  "settings": {
+    "challengeSettings": {
+      "add": "Add New Challenge Setting",
+      "challengeSettingsType": "Challenge Setting Type",
+      "edit": "Edit Challenge Setting",
+      "find": "Find specific Challenge Setting",
+      "id": "ID ",
+      "name": "Title",
+      "nameAr": "Title (Arabic)",
+      "nameEn": "Title (English)",
+      "settingsType": {
+        "field": "Field",
+        "impact": "Impact",
+        "importanceOfDecision": "Importance of Decision",
+        "levelOfDecision": "Level of Decision",
+        "topicClassification": "Topic Classification"
+      }
+    },
+    "emailTemplate": {
+      "add": "Add New Email Template",
+      "contentAr": "Content (Arabic)",
+      "contentEn": "Content (English)",
+      "contentTitle": "Template Content",
+      "default": "Set as Default Template",
+      "edit": "Edit Email Template",
+      "find": "Find Specific Email Template",
+      "id": "Email Template ID: ",
+      "localContent": "Content",
+      "localSubject": "Subject",
+      "snippetsAr": "Content Snippets (Arabic)",
+      "snippetsEn": "Content Snippets (English)",
+      "snippetsNote": "Note: These snippets are mandatory for your content based on the template type you selected.",
+      "snippetsTitle": "Email Content Snippets",
+      "subjectAr": "Subject (Arabic)",
+      "subjectEn": "Subject (English)",
+      "subjectTitle": "Template Subject",
+      "templateTypeLabel": "Choose Your Template Type",
+      "templateTypeTitle": "Template Type"
+    },
+    "expertise": {
+      "add": "Add new Area of Expertise",
+      "edit": "Edit area of expertise",
+      "find": "Find an Expertise Area",
+      "id": "Area of Expertise ID ",
+      "name": "Area of Expertise Name",
+      "nameAr": "Area of Expertise Name (Arabic)",
+      "nameEn": "Area of Expertise Name (English)"
+    },
+    "futureStrategicDirection": {
+      "add": "Add new Future Priorities",
+      "edit": "Edit Future Priorities",
+      "find": "Find specific Future Priorities",
+      "id": "Future Priorities ID ",
+      "name": "Future Priorities name",
+      "nameAr": "Future Priorities name (Arabic)",
+      "nameEn": "Future Priorities name (English)"
+    },
+    "futureStrategicGoals": {
+      "add": "Add new Future Challenges",
+      "edit": "Edit Future Challenges",
+      "find": "Find specific Future Challenge",
+      "id": "Future Challenges ID ",
+      "name": "Future Challenges name",
+      "nameAr": "Future Challenges name (Arabic)",
+      "nameEn": "Future Challenges name (English)"
+    },
+    "strategicDirection": {
+      "add": "Add new Strategic direction",
+      "edit": "Edit Strategic Direction",
+      "find": "Find specific Strategic direction",
+      "id": "Strategic direction ID ",
+      "name": "Strategic Direction name",
+      "nameAr": "Strategic Direction name (Arabic)",
+      "nameEn": "Strategic Direction name (English)"
+    },
+    "strategicGoals": {
+      "add": "Add new Strategic Goal",
+      "edit": "Edit Strategic Goals",
+      "find": "Find specific Strategic Goal",
+      "id": "Strategic Goals ID ",
+      "name": "Strategic Goals name",
+      "nameAr": "Strategic Goals name (Arabic)",
+      "nameEn": "Strategic Goals name (English)"
+    },
+    "templateType": {
+      "add": "Add New Template Type",
+      "default": "Set as Default Template",
+      "edit": "Edit Template Type",
+      "find": "Find Specific Template Type",
+      "id": "Email Template ID: ",
+      "snippetsAr": "Content Snippets (Arabic)",
+      "snippetsEn": "Content Snippets (English)",
+      "snippetsNote": "Note: These snippets are mandatory for your content based on the template type you selected.",
+      "snippetsTitle": "Email Content Snippets",
+      "templateTypeKey": "Template Key",
+      "templateTypeKeyLabel": "Choose Your Type Key",
+      "title": "Template Type Title",
+      "titleAr": "Template Title (Arabic)",
+      "titleEn": "Template Title (English)"
+    }
+  },
+  "side_bar": {
+    "controlPanel": {
+      "title": "Main Control Panel"
+    },
+    "adminRequests": {
+      "title": "Admin Dashboard"
+    },
+    "challenges": {
+      "child": {
+        "add_challenge": "Add New Challenge",
+        "list": "Challenges"
+      },
+      "title": "Challenges"
+    },
+    "myChallenges": {
+      "title": "My Challenges"
+    },
+    "sdssSurvey": {
+      "controlTitle": "Delphi Xs",
+      "title": "Surveys"
+    },
+    "settings": {
+      "challengeSettings": {
+        "title": "Challenge Setting"
+      },
+      "emailTemplate": {
+        "emailSettings": "Email Settings",
+        "title": "Templates Settings"
+      },
+      "expertise": {
+        "title": "Area Of Expertise"
+      },
+      "futureStrategicDirection": {
+        "title": "Future Priorities"
+      },
+      "futureStrategicGoals": {
+        "title": "Future Challenges"
+      },
+      "strategicDirection": {
+        "title": "Strategic Direction"
+      },
+      "strategicGoals": {
+        "title": "Strategic Goals"
+      },
+      "templateType": {
+        "settings": "Template Type",
+        "title": "Template Type"
+      },
+      "title": "Settings"
+    },
+    "users": {
+      "child": {
+        "add": "Add User",
+        "all": "User List"
+      },
+      "title": "Users"
+    },
+    "validatorRequests": {
+      "title": "Validator Dashboard"
+    }
+  },
+  "surveyHome": {
+    "content": {
+      "main-description": "Your feedback helps us improve the Dubai Police Organization. Share your ideas with us through this survey platform to contribute to our growth and development.",
+      "main-title": "Welcome to Our Delphi X Platform"
+    }
+  },
+  "user": {
+    "noUsersFound": "No users found",
+    "add": {
+      "Submit": "Submit",
+      "alternativeEmail": "Alternative Email",
+      "alternativeMobile": "Alternative Mobile Number",
+      "basicInformation": "Basic Information",
+      "chatContents": "Chat contents",
+      "contactInformation": "Contact Information",
+      "decision": "Decision",
+      "defaultExpertises": "Default",
+      "department": "Department",
+      "expertLevel": "Expert Level",
+      "expertisesMainTitle": "Expertise",
+      "expertisesTitle": "Area of expertise",
+      "expertiseAlreadyExists": "This expertise has already been added.",
+      "expertiseAdded": "Expertise added successfully",
+      "expertiseRemoved": "Expertise removed successfully",
+      "fillRequiredExpertiseFields": "Please fill in the required fields (area of expertise and expert level)",
+      "primaryExpertiseRequired": "At least one expertise must be marked as primary when expertises are selected",
+      "firstName": "First Name",
+      "fullName": "Full Name",
+      "gradeName": "Grade Name",
+      "internalDocuments": "Internal Documents",
+      "isDelphiModerator": "Delphi Moderator",
+      "jobName": "Job Name",
+      "language": "Language",
+      "lastName": "Last Name",
+      "middleName": "Middle Name",
+      "permissionDetails": "Permission Details",
+      "userGroups": "User Groups",
+      "questionView": "Question View",
+      "requiredFields": "Required Fields",
+      "scrollingText": "Scrolling Text",
+      "selectAll": "Select All",
+      "settings": "Settings",
+      "socialMediaFeeds": "Social Media Feeds",
+      "title": "New User Registration"
+    },
+    "createdAt": "Created At",
+    "departmentType": "Department Type",
+    "grade": "Grade",
+    "profileImage": "Profile Image",
+    "search": {
+      "email": "Email",
+      "expert_level": "Expert Level",
+      "fullName": "Full Name",
+      "grpNumber": "Grp Number",
+      "jobName": "Job Name",
+      "list": {
+        "SrNo": "Sr No.",
+        "action": "Action",
+        "departmentName": "Department",
+        "email": "Email",
+        "expert_level": "Expert Level",
+        "full_name": "Full Name",
+        "grpNumber": "GRP Number",
+        "language": "Language",
+        "mobile": "Mobile",
+        "role": "Role",
+        "sector": "Sector",
+        "status": "Status",
+        "title": "Title",
+        "user_type": "User Type"
+      },
+      "main-title": "Users",
+      "mobile": "Mobile Number",
+      "role": "Role",
+      "grpNumberSearchHint": "Enter employee number (GRP) to search and add them to the system."
+    },
+    "sector": "Sector",
+    "sectorShortName": "Sector Short Name",
+    "update": {
+      "title": "Edit User"
+    },
+    "userDetails": "User Details",
+    "creation": {
+      "resetAndSearch": "Reset and search for another user"
+    }
+  },
+  "validation": {
+    "percentageRange": "The percentage must be between 0 and 100",
+    "email": "Please enter a valid email",
+    "password": "Password is required",
+    "required": "This field is required",
+    "maxLength": "The answer must not exceed {max} characters",
+    "username": "Username is required",
+    "dangerousContent": "Input contains potentially dangerous script or command content",
+    "htmlNotAllowed": "Input contains HTML or special characters that are not allowed"
+  },
+  "validatorDashboard": {
+    "accepted": "Accepted Challenge Applications",
+    "closedChallenges": "Closed Challenges",
+    "completedChallenges": "Completed Challenges",
+    "pending": "Pending Challenge Applications",
+    "rejected": "Rejected Challenge Applications",
+    "reviewedByMe": "Challenges Reviewed By Me",
+    "underReview": "Challenges Under My Review"
+  },
+  "العناصر لكل صفحة": "Items Per Page",
+  "الكل": "All",
+  "جاري تحميل البيانات... الرجاء الإنتظار": "Loading data... Please wait",
+  "All": "All",
+  "selectedUsers": "Selected Users",
+  "select": "Select",
+  "selectedValidators": "Selected Validators",
+  "validationErrors": "Validation Errors",
+  "complete": "Complete",
+  "progress": "Progress",
+  "noData": "No data available",
+  "noDataToExport": "No data available to export",
+  "notActive": "Not active",
+  "statistics": "Statistics",
+  "challenges": "Challenges",
+  "generatedOn": "Generated on",
+  "totalResults": "Total Results",
+  "searchResults": "Search Results",
+  "showing": "Showing",
+  "of": "of",
+  "showLess": "Show less",
+  "showMore": "show more",
+  "notAvailable": "Not available",
+  "unknown": "Unknown",
+  "completed": "Completed",
+  "pending": "Pending",
+  "responses": "Responses",
+  "messageStatus": {
+    "sent": "Sent",
+    "delivered": "Delivered",
+    "read": "Read"
+  },
+  "typing": "Typing...",
+  "time": "Time",
+  "messageReactions": "Message reactions",
+  "$vuetify": {
+    "badge": "Badge",
+    "close": "Close",
+    "dataIterator": {
+      "noResultsText": "No matching records found",
+      "loadingText": "Loading items..."
+    },
+    "dataTable": {
+      "itemsPerPageText": "Rows per page:",
+      "ariaLabel": {
+        "sortDescending": "Sorted descending.",
+        "sortAscending": "Sorted ascending.",
+        "sortNone": "Not sorted.",
+        "activateNone": "Activate to remove sorting."
+      },
+      "sortBy": "Sort by"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Items per page:",
+      "itemsPerPageAll": "All",
+      "nextPage": "Next page",
+      "prevPage": "Previous page",
+      "firstPage": "First page",
+      "lastPage": "Last page",
+      "pageText": "{0}-{1} of {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "{0} selected",
+      "nextMonthAriaLabel": "Next month",
+      "nextYearAriaLabel": "Next year",
+      "prevMonthAriaLabel": "Previous month",
+      "prevYearAriaLabel": "Previous year"
+    },
+    "noDataText": "No data available",
+    "carousel": {
+      "prev": "Previous visual",
+      "next": "Next visual",
+      "ariaLabel": {
+        "delimiter": "Carousel slide {0} of {1}"
+      }
+    },
+    "calendar": {
+      "moreEvents": "{0} more"
+    },
+    "fileInput": {
+      "counter": "{0} files",
+      "counterSize": "{0} files ({1} in total)"
+    },
+    "timePicker": {
+      "am": "AM",
+      "pm": "PM"
+    },
+    "pagination": {
+      "of": "of",
+      "ariaLabel": {
+        "wrapper": "Pagination Navigation",
+        "next": "Next page",
+        "previous": "Previous page",
+        "page": "Go to page {0}",
+        "currentPage": "Page {0}, Current page"
+      }
+    },
+    "rating": {
+      "ariaLabel": {
+        "item": "Rating {0} of {1}"
+      }
+    }
+  },
+  "admin": {
+    "welcome": {
+      "title": "Admin Control Panel",
+      "subtitle": "Manage and control all system services from one place. Select a module below to get started."
+    },
+    "modules": {
+      "users": "User Management",
+      "challenges": "Challenge Control",
+      "surveys": "Survey Management",
+      "reports": "Analytics & Reports",
+      "settings": "System Settings",
+      "notifications": "Notifications",
+      "explore": "Explore Module"
+    },
+    "moduleDescriptions": {
+      "users": "Manage user accounts, roles, and permissions",
+      "challenges": "Create and monitor challenges and competitions",
+      "surveys": "Create and analyze surveys and feedback",
+      "reports": "View detailed analytics and generate reports",
+      "settings": "Configure system settings and preferences",
+      "notifications": "Manage system notifications and alerts"
+    },
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeChallenge": "Active Challenges",
+      "satisfaction": "User Satisfaction"
+    }
+  }
+}

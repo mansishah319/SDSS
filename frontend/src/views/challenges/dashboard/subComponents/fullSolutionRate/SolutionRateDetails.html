@@ -1,0 +1,137 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-dialog v-model="dialogModel" width="90%" max-width="1500px" @click:outside="handleOutsideClick" persistent
+          class="all-solutions-rate-dialog solution-rate-details-popup dp-modal">
+  <v-card class="centered-card solution-rate-div2">
+    <v-card-title class="text-h5 centered-card-rating-card-title">
+      <div class="dialog-title-content">
+        <div class="dialog-title-row">
+          <div class="dialog-title-main">{{ $t('rating.solutionAllRates') }}</div>
+          <v-chip class="dialog-title-chip" size="small" variant="flat" color="success">
+            {{ solutionsRateList?.length || 0 }} {{ $t('common.messages') }}
+          </v-chip>
+        </div>
+        <div class="dialog-title-sub">{{ $i18n.locale === 'ar' ? 'ملخص تقييمات الحل' : 'Solution rating summary' }}
+        </div>
+      </div>
+      <v-btn icon @click="dialogModel = false" aria-label="Close dialog" class="modal-close-btn">
+        <span class="mdi mdi-close"></span>
+      </v-btn>
+    </v-card-title>
+
+    <!-- Show subtitle if solution is null -->
+    <v-card-subtitle class="text-center" v-if="!solution">
+      <strong>{{ $t('rating.noSolutionExistsMsg') }}</strong>
+    </v-card-subtitle>
+
+    <!-- Show subtitle if solutionsRateList has items -->
+    <v-card-subtitle class="text-center" v-else-if="solutionsRateList.length === 0 || solutionsRateList.length < 0">
+      <strong>{{ $t('rating.noFeedbackOrRatings') }}</strong>
+    </v-card-subtitle>
+
+    <!-- Show solution details if solution exists and solutionsRateList has items -->
+    <v-card-subtitle class="text-center rate-details-section solution-summary pa-4" v-else>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-label">{{ $i18n.locale === 'ar' ? 'رقم الحل | Solution ID' : 'Solution ID | رقم الحل' }}
+          </div>
+          <div class="summary-value">{{ solution.id }}</div>
+        </div>
+        <div class="summary-item summary-item-wide">
+          <div class="summary-label">
+            {{ $i18n.locale === 'ar' ? 'نص الحل | Solution text' : 'Solution text | نص الحل' }}
+          </div>
+          <div class="summary-value summary-text">{{ solution.solutionText }}</div>
+        </div>
+      </div>
+    </v-card-subtitle>
+
+    <v-divider></v-divider>
+
+    <!-- Check if solution is not null before rendering content -->
+    <v-card-text v-if="solution" class="ratings-scroll-area">
+      <!-- Check if solutionsRateList has items -->
+      <v-row v-if="solutionsRateList && solutionsRateList.length > 0" class="justify-center rating-cards-grid">
+        <v-col v-for="(rate, index) in solutionsRateList" :key="index" cols="12" md="6" lg="4" class="d-flex">
+          <v-card outlined class="mb-4 text-center rate-details-section rate-card-item">
+            <v-card-title class="rated-user-id">
+              <div class="rated-user-meta">
+                <div class="rated-user-chip">
+                  <v-icon class="me-1 pb-1" color="green" icon="mdi-account" size="18"></v-icon>
+                  {{ rate.user.grpNumber }}
+                </div>
+                <div class="rated-user-caption">
+                  {{ $i18n.locale === 'ar' ? 'مقيم الحل | Reviewer' : 'Reviewer | مقيم الحل' }}
+                </div>
+              </div>
+            </v-card-title>
+            <v-card-text class="rate-card-content">
+              <div class="rate-card-section rating-score-box">
+                <div class="section-mini-label">{{ $i18n.locale === 'ar' ? 'التقييم | Rating' : 'Rating | التقييم' }}
+                </div>
+                <v-rating :model-value="rate.rating" color="yellow" density="compact" size="small" half-increments
+                          active-color="blue" readonly></v-rating>
+                <div class="text-grey rate-score-value">({{ rate.rating }})</div>
+              </div>
+
+              <div class="rate-card-section comment-box">
+                <div class="section-mini-label">
+                  {{ $i18n.locale === 'ar' ? 'الملاحظات | Comment' : 'Comment | الملاحظات' }}
+                </div>
+                <p>{{ rate.comments || ($i18n.locale === 'ar' ? 'لا توجد ملاحظات' : 'No comment provided') }}</p>
+              </div>
+
+              <div class="rate-card-section apply-box">
+                <div class="section-mini-label">
+                  {{ $i18n.locale === 'ar' ? 'حالة التطبيق | Applicability' : 'Applicability | حالة التطبيق' }}
+                </div>
+                <div class="apply-state" :class="{ 'is-applicable': rate.applicableToApply }">
+                  <v-icon size="18">{{ rate.applicableToApply ? 'mdi-check-circle' : 'mdi-close-circle-outline' }}
+                  </v-icon>
+                  <span>
+                    {{
+                      rate.applicableToApply
+                        ? ($i18n.locale === 'ar' ? 'قابل للتطبيق' : 'Applicable')
+                        : ($i18n.locale === 'ar' ? 'غير قابل للتطبيق' : 'Not applicable')
+                    }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="rate-card-section how-to-apply-box">
+                <div class="section-mini-label">
+                  {{ $i18n.locale === 'ar' ? 'آلية التطبيق | How to apply' : 'How to apply | آلية التطبيق' }}
+                </div>
+                <div v-if="rate.applicableToApply && rate.howToApply" class="how-to-apply-content"
+                     v-html="rate.howToApply"></div>
+                <p v-else class="empty-apply-text">
+                  {{ $i18n.locale === 'ar' ? 'لا توجد تعليمات تطبيق إضافية' : 'No additional implementation instructions'
+                  }}
+                </p>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <!-- Show EmptyDataTable if solutionsRateList is empty -->
+      <v-row v-else align="center" justify="center">
+        <EmptyDataTable :imageSize="128" :message="$t('common.empty')"></EmptyDataTable>
+      </v-row>
+    </v-card-text>
+
+    <!-- Show empty state if solution is null -->
+    <v-card-text v-else class="ratings-scroll-area empty-scroll-area">
+      <div>
+        <EmptyDataTable :imageSize="128" :message="$t('common.empty')"></EmptyDataTable>
+      </div>
+    </v-card-text>
+  </v-card>
+
+</v-dialog>

@@ -1,0 +1,441 @@
+.header-start-block {
+  align-items: center;
+  direction: ltr;
+  gap: 14px !important;
+  flex-shrink: 0;
+
+  .future-foresight-logo-header {
+    display: block;
+    width: 138px;
+    height: 44px;
+    object-fit: contain;
+  }
+
+  .header-logo-divider {
+    width: 1px;
+    height: 50px;
+    flex: 0 0 1px;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+
+  .dp-logo-header {
+    display: block;
+  }
+}
+
+.header-block.ltr {
+  flex-direction: row-reverse;
+
+  .header-start-block {
+    justify-content: flex-end;
+  }
+
+  .header-end-block {
+    justify-content: flex-start;
+  }
+}
+
+.header-block.rtl {
+  flex-direction: row;
+}
+
+@media (max-width: 1200px) {
+  .header-start-block {
+    gap: 10px !important;
+
+    .future-foresight-logo-header {
+      width: 118px;
+      height: 38px;
+    }
+
+    .header-logo-divider {
+      height: 42px;
+    }
+
+    .dp-logo-header {
+      max-width: 112px;
+    }
+  }
+}
+
+.user-profile {
+  position: relative;
+  z-index: 2 !important;
+
+  .profile-image {
+    z-index: 3 !important;
+    cursor: pointer;
+
+    img {
+      box-shadow: none !important;
+    }
+  }
+
+  .profile-block {
+    transition: all 0.3 ease-in-out;
+    position: absolute;
+    top: -10px;
+    z-index: -1;
+    width: 370px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px -2px #1018281a;
+    border-radius: 22px;
+
+    .profile-block-header {
+      background: #ffffff;
+      border-radius: 22px 22px 0 0;
+      padding: 20px;
+
+      .profile-block-header-title {
+        font-family: BukraBold, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        // gap: 5px
+        text-align: end;
+
+        span {
+          font-family: BukraRegular, sans-serif;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 18px;
+        }
+      }
+
+      .profile-block-close {
+        position: absolute;
+        color: #b5b6b7;
+        font-size: 20px;
+
+        &:hover {
+          color: #727272;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .profile-block-body {
+      .profile-tabs {
+        margin-bottom: 20px;
+
+        .profile-tab {
+          min-width: 50px;
+          width: 90px;
+          padding-left: 5px;
+          padding-right: 5px;
+
+          &.v-tab--selected {
+            .profile-icon {
+              background-color: #008755;
+
+              img {
+                filter: invert(100%) sepia(00%) saturate(0%) hue-rotate(0deg) brightness(150%) contrast(150%);
+              }
+            }
+          }
+
+          .profile-icon {
+            font-size: 20px;
+            width: 64px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            // margin-bottom: 5px
+          }
+
+          span {
+            font-family: BukraRegular, sans-serif;
+            font-size: 10px !important;
+            font-weight: 700;
+            // line-height: 17px
+            text-align: center;
+            letter-spacing: normal;
+          }
+        }
+      }
+
+      .profile-tab-window {
+        background: #f1f2f8;
+        // padding: 16px
+
+        .profile-tab-window-item {
+          padding: 24px;
+          gap: 24px;
+          display: block;
+          height: 350px;
+          overflow-y: scroll;
+        }
+      }
+    }
+
+    .notification-card {
+      padding: 16px !important;
+      gap: 12px !important;
+      border-radius: 11px !important;
+      box-shadow: 0px 1px 2px 0px #1018280f;
+      margin-top: 24px;
+
+      &:first-child {
+        margin-top: 0px;
+      }
+
+      .v-card-title {
+        font-family: BukraBold, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 18px;
+        text-align: right;
+        padding: 0;
+      }
+
+      .v-card-text {
+        font-family: DubaiRegular, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 19.5px;
+        text-align: right;
+        color: #00000099;
+        letter-spacing: normal;
+        padding: 12px 0 0 0;
+      }
+    }
+
+    .applications-block {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      .applications-block-service {
+        max-width: 65px;
+
+        .applications-block-service-icon {
+          width: 64px;
+          height: 64px;
+          gap: 14px;
+          border-radius: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // border: 0.5px solid #00000026
+          background: linear-gradient(240.28deg, #17ed83 -2.98%, #008755 100%);
+          margin-bottom: 5px;
+        }
+
+        .applications-block-service-text {
+          font-family: DubaiRegular, sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 18px;
+          text-align: center;
+          color: #121212;
+        }
+      }
+    }
+
+    .profile-info-block {
+      .profile-info-card {
+        padding: 16px !important;
+        gap: 12px !important;
+        border-radius: 11px !important;
+        box-shadow: 0px 1px 2px 0px #1018280f;
+        margin-top: 24px;
+
+        &:first-child {
+          margin-top: 0px;
+        }
+
+        .profile-info-card-icon {
+          margin-inline-end: 10px;
+        }
+
+        .profile-info-card-title {
+          font-family: BukraBold, sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 20px;
+          margin-bottom: 5px;
+        }
+
+        .profile-info-card-details {
+          font-family: DubaiRegular, sans-serif;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 20px;
+          gap: 10px;
+        }
+      }
+    }
+
+    .profile-setting-card {
+      padding: 16px !important;
+      border-radius: 11px !important;
+      box-shadow: 0 1px 2px 0 #1018280f;
+
+      .profile-setting-card-group {
+        .profile-setting-card-list {
+          font-family: BukraBold, sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 21px;
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 0.5px solid var(--system-border-divider, #b5b6b7);
+          padding: 5px 0;
+
+          &:last-child {
+            border-bottom: 0;
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+
+    .profile-block-footer {
+      background: #ffffff;
+      border-radius: 0 0 22px 22px;
+      padding: 20px;
+
+      .v-btn {
+        letter-spacing: normal;
+      }
+    }
+  }
+}
+
+.wheelchair-block {
+  position: relative;
+
+  .wheelchair-block-icon {
+    z-index: 2;
+  }
+}
+
+.accessibility-block {
+  transition: all .3 ease-in-out;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: -1;
+  width: 340px;
+  // box-shadow: 0px 2px 4px -2px #1018280F
+  background: #ffffff;
+  box-shadow: 0 4px 8px -2px #1018281a;
+  border-radius: 22px;
+
+  .accessibility-block-header {
+    background: #ffffff;
+    border-radius: 22px 22px 0 0;
+    padding: 20px;
+  }
+
+  .accessibility-block-title {
+    font-family: BukraBold, sans-serif;
+    // position: absolute
+    display: flex;
+    justify-content: end;
+    padding: 5px 5px 5px 50px;
+    gap: 5px;
+  }
+
+  .accessibility-block-close {
+    position: absolute;
+    color: #b5b6b7;
+    font-size: 20px;
+
+    &:hover {
+      color: #727272;
+      cursor: pointer;
+    }
+  }
+
+  .accessibility-block-body {
+    background: #f1f2f8;
+    padding: 16px;
+
+    .accessibility-block-card {
+      margin-top: 16px;
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px -2px #1018281a;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      .accessibility-block-card-title {
+        font-family: BukraBold, sans-serif;
+        font-size: 14px;
+        padding-bottom: 10px;
+      }
+
+      .accessibility-block-card-subtitle {
+        font-family: DubaiRegular, sans-serif;
+        font-size: 15px;
+        line-height: 22.5px;
+        padding-bottom: 15px;
+      }
+
+      .accessibility-block-card-buttons {
+        display: flex;
+        gap: 10px;
+
+        .font-size-button {
+          display: flex;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 12px !important;
+          border: 1px solid #56bd9a;
+          box-shadow: 0 1px 2px 0 #1018280d;
+          color: #006c44;
+          cursor: pointer;
+          align-items: center;
+          font-family: BukraBold, sans-serif;
+
+          &.font-17 {
+            font-size: 17px;
+            // padding: 10px
+          }
+
+          &.font-14 {
+            font-size: 14px;
+          }
+
+          &.font-12 {
+            font-size: 12px;
+          }
+
+          &.active {
+            color: #ffffff;
+            background: linear-gradient(0deg, #006c44 0%, #19844e 100%);
+          }
+        }
+      }
+    }
+  }
+
+  .accessibility-block-footer {
+    background: #ffffff;
+    border-radius: 0 0 22px 22px;
+    padding: 20px;
+
+    .v-btn {
+      letter-spacing: normal;
+    }
+  }
+}
+
+.rtl .profile-block {
+  left: -10px;
+  padding: 0 5px 5px 55px;
+}
+
+.ltr .profile-block {
+  right: -10px;
+  padding: 0 55px 5px 5px;
+}

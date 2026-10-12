@@ -1,0 +1,186 @@
+<div class="challenge-creation-container challenge-form-shell" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <DubaiPoliceLoader :is-loading="showSkeleton" />
+  <template v-if="showSkeleton">
+    <ChallengeSkeletonLoader />
+  </template>
+  <template v-else>
+    <GenericDashboardHeaderView
+      :title-en="$t('challenge.add')"
+      :title-ar="$t('challenge.add')"
+      subtitle-en="Configure challenge details, participants, and resources, then return to the challenge list anytime."
+      subtitle-ar="قم بإعداد تفاصيل التحدي والمشاركين والموارد، ثم ارجع إلى قائمة التحديات في أي وقت."
+      icon="mdi-lightbulb-on-outline"
+      :show-back-button="true"
+      back-route-name="ChallengeList"
+    />
+    <ChallengeProgressIndicator
+      :tabs="tabs"
+      :current-tab="currentTab"
+      :progress="progress"
+      :is-submitting="isSubmitting"
+      :can-proceed="canProceed"
+      :is-first-tab="isFirstTab"
+      :is-last-tab="isLastTab"
+      :validation-errors="validationErrors"
+      :completed-tabs="completedTabs"
+      :pending-tabs="pendingTabs"
+      @next="goToNextTab"
+      @previous="goToPreviousTab"
+      @submit="submitForm"
+      @tab-click="goToTab"
+      @field-click="handleFieldClick"
+    />
+    <div class="form-content">
+      <v-card class="dp-card common-challenge-card-container challenge-form-card">
+        <ContentLoader
+          v-if="isSubmitting"
+          variant="badge"
+          :overlay="true"
+          :compact-badge="true"
+          :heading="$t('challenge.saving')"
+          :message="$t('common.loading')"
+        />
+        <v-window v-model="currentTab">
+          <v-window-item value="one">
+            <TeamMembersTab
+              :selected-users="selectedUsers"
+              :team-members="teamMembersLookupResponse"
+              :selected-items="selectedTeamMembersItems"
+              :filter-department="selectedDepartmentForSearch"
+              :selected-expert-level="selectedExpertLevel"
+              :selected-expertise="selectedExpertise"
+              :expertises="expertisesResponseListLookupResponse"
+              :departments="departmentDtoResponseList"
+              :validation-errors="validationErrors"
+              :loading="isTeamMembersLoading"
+              :current-page="teamMembersPagination.page"
+              :page-size="teamMembersPagination.size"
+              :total-items="teamMembersPagination.totalElements"
+              @update:selected-users="(val) => (selectedUsers = val)"
+              @update:filter-department="(val) => (selectedDepartmentForSearch = val)"
+              @update:selected-expert-level="(val) => (selectedExpertLevel = val)"
+              @update:selected-expertise="(val) => (selectedExpertise = val)"
+              @update:page="(val) => (teamMembersPagination.page = val)"
+              @update:page-size="(val) => (teamMembersPagination.size = val)"
+              @fetch-team-members="fetchTeamMembers"
+            />
+          </v-window-item>
+          <v-window-item value="two">
+            <ValidatorsTab
+              :selected-validator-users="selectedValidatorUsers"
+              :validators="validatorsLookupResponse"
+              :selected-department="selectedDepartmentForValidators"
+              :selected-expert-level="selectedExpertLevelForValidators"
+              :selected-expertise="selectedExpertiseForValidators"
+              :expertises="expertisesResponseListLookupResponse"
+              :departments="departmentDtoResponseList"
+              :selected-validators-items="selectedValidatorsItems"
+              :validation-errors="validationErrors"
+              :loading="isValidatorsLoading"
+              :current-page="validatorsPagination.page"
+              :page-size="validatorsPagination.size"
+              :total-items="validatorsPagination.totalElements"
+              @update:selected-validator-users="(val) => (selectedValidatorUsers = val)"
+              @update:selected-department="(val) => (selectedDepartmentForValidators = val)"
+              @update:selected-expert-level="(val) => (selectedExpertLevelForValidators = val)"
+              @update:selected-expertise="(val) => (selectedExpertiseForValidators = val)"
+              @update:page="(val) => (validatorsPagination.page = val)"
+              @update:page-size="(val) => (validatorsPagination.size = val)"
+              @fetch-validators="fetchValidators"
+            />
+          </v-window-item>
+          <v-window-item value="three">
+            <GuestInvitationTab
+              :guest-users="guestUsers"
+              :selected-guest-users="selectedGuestUsers"
+              :is-all-guest-users-selected="isAllGuestUsersSelected"
+              @update:selected-guest-users="(val) => (selectedGuestUsers = val)"
+            />
+          </v-window-item>
+          <v-window-item value="four">
+            <ChallengeInfoTab
+              :challenge-request="challengeRequest"
+              :selected-department="selectedDepartment"
+              :selected-sub-department="selectedSubDepartment"
+              :selected-section="selectedSection"
+              :department-dto-response-list="departmentDtoResponseList"
+              :sub-department-dto-response-list="subDepartmentDtoResponseList"
+              :sections-dto-response-list="sectionsDtoResponseList"
+              :moderators-lookup-response="moderatorsLookupResponse"
+              :is-moderators-loading="isModeratorsLoading"
+              :moderators-search-term="moderatorsSearchTerm"
+              :has-more-moderators="hasMoreModerators"
+              :committee-list-drop-list-response="committeeListDropListResponse"
+              :strategic-direction-response-list-lookup-response="strategicDirectionResponseListLookupResponse"
+              :strategic-goals-response-list-lookup-response="strategicGoalsResponseListLookupResponse"
+              :future-strategic-direction-response-list-lookup-response="
+                  futureStrategicDirectionResponseListLookupResponse
+                "
+              :future-strategic-goals-response-list-lookup-response="futureStrategicGoalsResponseListLookupResponse"
+              :rules="rules"
+              :selected-committee="selectedCommittee"
+              @update:challenge-request="(val) => (challengeRequest = val)"
+              @update:selected-department="(val) => (selectedDepartment = val)"
+              @update:selected-sub-department="(val) => (selectedSubDepartment = val)"
+              @update:selected-section="(val) => (selectedSection = val)"
+              @update:selected-committee="(val) => (selectedCommittee = val)"
+              @update:moderators-search-term="(val) => (moderatorsSearchTerm = val)"
+              @retrieve-all-sub-departments-by-department-id="retrieveAllSubDepartmentsByDepartmentId"
+              @find-all-section-by-sub-department-id="findAllSectionBySubDepartmentId"
+              @on-strategic-direction-change="onStrategicDirectionChange"
+              @fetch-moderators="fetchModerators"
+            />
+          </v-window-item>
+          <v-window-item value="five">
+            <SolutionsTab
+              :solutions-texts="solutionsTexts"
+              :rules="rules"
+              @update:solutions-texts="(val) => (solutionsTexts = val)"
+            />
+          </v-window-item>
+          <v-window-item value="six">
+            <ChallengeSettingsTab
+              :challenge-request="challengeRequest"
+              :topic-classification-list-lookup-response="topicClassificationListLookupResponse"
+              :level-of-decision-list-lookup-response="levelOfDecisionListLookupResponse"
+              :importance-of-decision-list-lookup-response="importanceOfDecisionListLookupResponse"
+              :impact-list-lookup-response="impactListLookupResponse"
+              :field-list-lookup-response="fieldListLookupResponse"
+              :rules="rules"
+              @update:challenge-request="(val) => (challengeRequest = val)"
+            />
+          </v-window-item>
+          <v-window-item value="seven">
+            <ResourcesTab
+              :files-model="filesModel"
+              :uploaded-files="safeUploadedFiles"
+              :total-size="totalSize"
+              :input-text="inputText"
+              :hashtag-texts="hashtagTexts"
+              :new-reminder="newReminder"
+              :challenge-request="challengeRequest"
+              :rules="rules"
+              :get-file-icon="getFileIcon"
+              :get-file-color="getFileColor"
+              :format-size="formatSize"
+              v-model:youtubeLinks="youtubeLinks"
+              @update:files-model="(val) => (filesModel = [...val])"
+              @update:youtube-link-input="(val) => (youtubeLinkInput = val)"
+              @add-youtube-link="addYoutubeLink"
+              @remove-youtube-link="removeYoutubeLink"
+              @clear-all-files="clearAllFiles"
+              @remove-file="removeFile"
+              @update:input-text="(val) => (inputText = val)"
+              @add-hashtag="addHashtag"
+              @remove-hashtag="removeHashtag"
+              @update:new-reminder="(val) => (newReminder = val)"
+              @add-reminder="addReminder"
+              @clear-reminders="clearReminders"
+              @update:challenge-request="(val) => (challengeRequest = val)"
+            />
+          </v-window-item>
+        </v-window>
+      </v-card>
+    </div>
+  </template>
+</div>

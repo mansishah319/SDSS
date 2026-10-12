@@ -1,0 +1,83 @@
+@use '../../../assets/css/_variables' as *;
+
+
+.main-user-survey-access-key-title-style {
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.mb-5 {
+  margin-bottom: 20px;
+}
+
+.main-user-survey-access-key-title-style,
+.custom-user-survey-title-style {
+  background-color: #fff;
+}
+
+.main-user-survey-access-key-title-style-h1 {
+  color: #000;
+  font-size: 1.2rem !important;
+  font-family: 'BukraBold', sans-serif;
+}
+
+.custom-survey-end-user-card-title-view {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.custom-survey-end-user-card-subtitle-view {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.custom-end-user-survey-subtitle-style {
+  margin: 1%;
+}
+
+.error-message {
+  color: $error-message-color;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.login-modal2 {
+  border-radius: 12px !important;
+  padding: 30px;
+
+  .v-field-label {
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'bukrabold', serif;
+    font-size: 12px;
+    color: #000 !important;
+  }
+
+  .language-switcher .language-button {
+    align-items: center;
+    padding: 7px !important;
+    border-radius: 9px !important;
+    height: 34px !important;
+  }
+
+  .error-message {
+    font-family: 'bukraregular', serif;
+    font-size: 11px;
+  }
+
+}
+
+.alert-info-div {
+  padding: 7px;
+  border-radius: 12px;
+  font-family: 'bukraregular', serif;
+  font-size: 12px;
+  line-height: 20px;
+  margin-top: 8px !important;
+  box-shadow: none !important;
+}

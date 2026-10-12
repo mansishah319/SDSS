@@ -1,0 +1,69 @@
+// MyChallenges Component Styles
+.my-challenges-container {
+  margin: 0 auto;
+  //max-width: 1400px
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+}
+
+// Custom styles for MyChallenges specific elements
+.custom-my-challenges-main-row {
+  margin-bottom: 24px;
+}
+
+.custom-my-challenges-main-title {
+  color: #1976d2;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+// RTL Support
+[dir='rtl'] {
+  .my-challenges-container {
+    .custom-my-challenges-main-title {
+      text-align: center;
+    }
+  }
+}
+
+// Dark Theme Support
+.v-theme--dark {
+  .my-challenges-container {
+    .custom-my-challenges-main-title {
+      color: #90caf9;
+    }
+  }
+}
+
+.my-challenges-go-back-button {
+  margin-bottom: 20%;
+}
+
+.p-datatable-frozen-tbody {
+  font-weight: bold;
+}
+
+.p-datatable-scrollable .p-frozen-column {
+  font-weight: bold;
+}
+
+.my-challenges-container .moderator-highlight-row > td {
+  //  background:#FFECB3;
+}
+
+.my-challenges-container .moderator-highlight-row > td:first-child {
+  border-inline-start: 5px solid #FDD835;
+}
+
+.my-challenges-container .moderator-highlight-row:hover > td {
+  background: #FFFDE7 !important;
+  cursor: pointer;
+}

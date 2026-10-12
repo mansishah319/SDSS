@@ -1,0 +1,157 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+@use '../../../../../assets/css/_variables' as *;
+
+.fixed-title {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+.scrollable-list {
+  max-height: calc(300px - 48px);
+  overflow-y: auto;
+}
+
+.spacing-side {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.v-list-item--one-line {
+  min-height: auto;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.list-group-div {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .v-col {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .v-list-item-title {
+      font-size: 14px;
+    }
+  }
+}
+
+.attendees-container {
+  max-height: 1000px;
+  height: 600px;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.custom-attendees-main-title {
+  margin-top: 2%;
+}
+
+// Enhanced Header with Main Color
+.attendees-container .v-card-title {
+  background: linear-gradient(135deg, $sdss-primary-color 0%, #004d32 100%) !important;
+  color: white !important;
+  padding: 20px 24px;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 1.1rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  // Enhanced chips styling
+  .v-chip {
+    background: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px);
+    }
+  }
+
+  // Enhanced invite button
+  .showInvitePopup {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3) !important;
+      transform: scale(1.1);
+    }
+
+    .v-icon {
+      color: white !important;
+    }
+  }
+}
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+.showInvitePopup {
+  margin: 5px;
+}
+
+
+.chat-list-div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+
+  .spacing-side {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ebebeb;
+
+    &:hover {
+      background: #ebebeb;
+    }
+  }
+
+}

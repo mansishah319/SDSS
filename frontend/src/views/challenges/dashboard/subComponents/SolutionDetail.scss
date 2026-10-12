@@ -1,0 +1,176 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.dp-modal-2 {
+  background-color: #f9f9f9;
+  border-radius: 16px !important;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dp-primary {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+.challenge-text-field {
+  width: calc(100% - 50px);
+  height: 48px !important;
+
+  .v-input__control {
+    .v-field {
+      height: 48px !important;
+    }
+  }
+
+
+}
+
+.v-card {
+  margin-bottom: 16px;
+}
+
+.v-card-title {
+  font-weight: 600;
+  color: #3f51b5;
+}
+
+.v-btn {
+  min-width: 120px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.v-card-actions {
+  padding: 8px 16px;
+}
+
+.v-textarea {
+  border-color: #3f51b5;
+}
+
+.v-btn.error {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+.v-btn.warning {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
+
+.v-text-field input {
+  color: #333;
+}
+
+.v-text-field .v-label {
+  color: #3f51b5 !important;
+}
+
+.v-text-field .v-input__icon--clear {
+  color: #757575;
+}
+
+.comments-list {
+  margin-top: 16px;
+}
+
+.comment-item {
+  padding: 8px 16px;
+  width: 100%;
+  border-bottom: 1px solid #d1d1d16b;
+
+
+}
+
+.v-list-item-avatar {
+  padding: 10px;
+}
+
+.v-list-item-action {
+  margin-left: auto;
+}
+
+.comment-author,
+.comment-text,
+.comment-date {
+  margin: 0;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-text {
+  margin: 4px 0;
+}
+
+.comment-date {
+  color: #757575;
+}
+
+.v-list-item-content-solution-details-view {
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-buttons .small-btn {
+}
+
+.action-buttons .small-btn:last-child {
+  margin-bottom: 0;
+}
+
+.small-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  margin-inline-start: 8px;
+}
+
+.v-btn .v-icon {
+  margin: 0;
+}
+
+.comment-text-field {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.comment-text-field input {
+  color: #333 !important;
+  font-size: 16px;
+}
+
+.comment-section-div {
+  overflow: scroll;
+  max-height: 400px;
+  margin-bottom: 0;
+}

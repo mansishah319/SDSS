@@ -1,0 +1,91 @@
+{
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "src/types/shims.d.ts",
+    "src/types/router.d.ts"
+  ],
+  "exclude": [
+    ".nuxt",
+    "node_modules",
+    "dist",
+    "**/.sass-cache/**",
+    "**/*.css.map"
+  ],
+  "compilerOptions": {
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    /* Bundler mode */
+    //    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "forceConsistentCasingInFileNames": false,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowImportingTsExtensions": true,
+    "strictFunctionTypes": false,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "allowJs": true,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "node_modules/@types",
+      "src/types",
+      "./src/types",
+      "./types",
+      "./src"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "~~/*": [
+        "./*"
+      ],
+      "/#/*": [
+        "types/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost",
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

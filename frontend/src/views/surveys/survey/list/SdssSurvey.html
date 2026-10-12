@@ -1,0 +1,98 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2023 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div>
+  <GenericDashboardHeaderView
+    :title-en="$t('side_bar.sdssSurvey.title')"
+    :title-ar="$t('side_bar.sdssSurvey.title')"
+    subtitle-en="Review survey records, open details, and manage publishing actions from one list."
+    subtitle-ar="راجع سجلات الاستبيانات وافتح التفاصيل وأدر إجراءات النشر من خلال قائمة واحدة."
+    icon="mdi-poll-box-outline"
+    :show-back-button="true"
+    back-route-name="home"
+    :total-value="dtoResponse.length"
+  />
+  <v-card flat class="table-section-border">
+    <v-card-title class="d-flex align-center pe-2 table-heading-vcard">
+      <v-icon icon="mdi-video-input-component"></v-icon>
+      &nbsp; {{ $t('sdssSurvey.find') }}
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" density="compact" :label="$t('common.search')" prepend-inner-icon="mdi-magnify"
+                    variant="solo-filled" flat hide-details single-line></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn class="ml-2 oval-button" color="green" @click="createNew">
+        <v-icon left>mdi-plus</v-icon>
+        {{ $t('common.create') }}
+      </v-btn>
+    </v-card-title>
+
+    <v-data-table :headers="headers" :items="dtoResponse" :search="search" :loading="isLoading"
+                  :loading-text="$t('common.loading')" item-value="name"
+                  :items-per-page-text="$t('common.items_per_page')"
+                  :items-per-page-options="[
+                                                  {value: 10, title: '10'},
+                                                  {value: 25, title: '25'},
+                                                  {value: 50, title: '50'},
+                                                  {value: 100, title: '100'},
+                                                  {value: -1, title: $t('common.allPages')}
+                                                ]" class="elevation-0 survey-table-2" @click:row="handleRowClick">
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex justify-end">
+          <v-tooltip :text="$t('common.viewSurveyDetails')" location="top">
+            <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" class="me-1 table-btn-style" density="default" color="blue" variant="tonal"
+                     @click="(event) => { event.stopPropagation(); viewSurveyDetails(item.id); }">
+                <v-icon color="primary">mdi-eye</v-icon>
+              </v-btn>
+            </template>
+          </v-tooltip>
+
+          <v-tooltip :text="$t('common.editSurvey')" location="top">
+            <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" class="me-1 table-btn-style"
+                     v-show="isModeratorAndAllowedToUpdateOrDeleteThisSurvey(item)" density="default" color="yellow"
+                     variant="tonal" @click="(event) => { event.stopPropagation(); openEditDialog(item.id); }">
+                <i class="mdi mdi-pencil"></i>
+              </v-btn>
+            </template>
+          </v-tooltip>
+
+          <v-tooltip :text="$t('common.deleteSurvey')" location="top">
+            <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" class="me-1 table-btn-style" density="default" color="red" variant="tonal"
+                     v-show="isModeratorAndAllowedToUpdateOrDeleteThisSurvey(item)"
+                     @click="(event) => { event.stopPropagation(); openDeleteDialog(item.id); }">
+                <i class="mdi mdi-trash-can"></i>
+              </v-btn>
+            </template>
+          </v-tooltip>
+        </div>
+      </template>
+      <!-- Empty State Message -->
+      <template v-slot:body v-if="!(dtoResponse.length > 0)">
+        <tr>
+          <td :colspan="headers.length" class="text-center">
+            <EmptyDataTable :imageSize="128" :message="$t('common.empty')" />
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+
+    <ConfirmationDialog
+      v-if="deleteDialog"
+      :title="$t('common.deletionTitle')"
+      :message="$t('common.deleteConfirmation')"
+      icon="mdi-trash-can-outline"
+      icon-color="error"
+      confirm-button-color="error"
+      :confirm-text="$t('common.delete')"
+      @confirmed="confirmDeletion"
+      @cancel="cancelDeletion"
+    />
+  </v-card>
+</div>

@@ -1,0 +1,90 @@
+@use '../../../../assets/css/_variables' as *;
+
+.custom-end-user-questions-and-options-card-title {
+  background-color: #006c44;
+  color: $white-color;
+  margin-bottom: 1%;
+  font-family: bukrabold, serif;
+  font-size: 16px;
+  padding: 15px 10px;
+}
+
+.custom-end-user-questions-and-options-card-subtitle {
+  font-family: bukrabold, serif;
+  padding: 0;
+  color: #000;
+  font-size: 0.7rem;
+
+}
+
+.custom-end-user-survey-text-question-text-area {
+  font-family: DubaiRegular, sans-serif;
+  padding: 2% 2% 0;
+}
+
+.custom-end-user-survey-true-false-question-radio-group,
+.custom-end-user-survey-multiple-choice-question-checkbox,
+.custom-end-user-survey-single-choice-question-radio-button {
+  font-family: DubaiRegular, sans-serif;
+  font-size: 0.9rem;
+  padding: 0 2%;
+}
+
+.custom-end-user-questions-and-options-public-additional-questions-card {
+  // background-color: $light-green-color;
+  box-shadow: none;
+}
+
+.custom-end-user-questions-and-options-public-additional-questions-card-title {
+  margin-bottom: 1%;
+  font-family: bukrabold, serif;
+  font-size: 14px;
+}
+
+.mdi-checkbox-marked::before {
+  color: #0da06e;
+}
+
+.mdi-radiobox-marked::before {
+  color: #0da06e;
+}
+
+.rtl .question-ans-div {
+  border-right: 2px solid #0da06e;
+}
+
+.ltr .question-ans-div {
+  border-left: 2px solid #0da06e;
+}
+
+.question-ans-div {
+  background-color: #fff !important;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.05), 0 4px 8px -2px rgba(16, 24, 40, 0.10), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+
+
+  .custom-end-user-questions-and-options-card-title {
+    background-color: transparent;
+    color: #000;
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-end-user-questions-and-options-card-subtitle {
+    margin: 0;
+  }
+
+  .font-bukra-regular {
+    padding: 0;
+  }
+
+  .v-card--variant-elevated {
+    box-shadow: none !important;
+  }
+}
+
+.custom-end-user-survey-single-choice-question-autocomplete {
+  max-width: 100%;
+  font-family: DubaiRegular, sans-serif;
+}

@@ -1,0 +1,84 @@
+<!--
+  - * ***************************************************************
+  - * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  - * ——————————————————————————————————
+  - * NOTICE: All information contained herein is a property of DubaiPolice.
+  - * ***************************************************************
+  -->
+
+<template>
+  <AppDialogShell
+    v-model="dialog"
+    :title="mainTitle"
+    :subtitle="subtitle"
+    icon="mdi-table-eye"
+    tone="primary"
+    :max-width="1100"
+    content-class="dashboard-list-dialog__content"
+    @close="emitCloseDialog"
+  >
+    <template #meta>
+      <v-chip color="white" size="small" variant="flat">{{ items?.length || 0 }}</v-chip>
+    </template>
+
+    <v-table
+      class="common-table-border dp-primary-table modal-table1 table-style-2 custom-admin-portal-table-align-center">
+      <thead class="common-sticky-header">
+      <tr>
+        <th scope="col">{{ headers[0] }}</th>
+        <th scope="col">{{ headers[1] }}</th>
+        <th scope="col">{{ headers[2] }}</th>
+        <th v-if="appearActions || appearJustViewActions" scope="col">{{ $t('common.actions') }}</th>
+      </tr>
+      </thead>
+      <tbody v-if="items && items.length > 0" class="common-scrollable-tbody custom-admin-portal-table-body">
+      <tr v-for="item in items" :key="item.name">
+        <td>{{ item.head1 }}</td>
+        <td>{{ item.head2 }}</td>
+        <td>{{ item.head3 }}</td>
+        <td v-if="appearActions || appearJustViewActions">
+          <v-row justify="center" align="center">
+            <v-col cols="4">
+              <v-btn
+                v-if="appearJustViewActions || appearActions"
+                variant="text"
+                icon="mdi-monitor-dashboard"
+                color="blue"
+                @click="viewItem(item)"
+              ></v-btn>
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                v-if="appearActions"
+                density="compact"
+                class="accept-icon"
+                icon="mdi-check"
+                @click="approveItem(item)"
+              ></v-btn>
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                v-if="appearActions"
+                density="compact"
+                icon="mdi-close"
+                class="cancel-icon"
+                @click="rejectItem(item)"
+              ></v-btn>
+            </v-col>
+          </v-row>
+        </td>
+      </tr>
+      </tbody>
+    </v-table>
+
+    <template v-if="!(items && items.length)">
+      <EmptyDataTable :imageSize="128" :message="$t(itemsEmptyMessage)"></EmptyDataTable>
+    </template>
+
+    <template #actions>
+      <div class="dashboard-list-dialog__actions">
+        <FooterComponent :justify-content="'justify-content-start'"></FooterComponent>
+      </div>
+    </template>
+  </AppDialogShell>
+</template>

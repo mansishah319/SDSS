@@ -1,0 +1,95 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+:root .v-main {
+  --v-layout-top: 0px !important;
+}
+
+.v-main {
+  margin-top: 80px !important;
+}
+
+.app-lang {
+  padding-top: 0.5%;
+}
+
+.header-brand-lockup {
+  display: flex;
+  align-items: center;
+  direction: ltr;
+  gap: 12px;
+  height: 64px;
+  justify-self: start;
+
+  .future-foresight-header-logo {
+    display: block;
+    width: 126px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .header-brand-divider {
+    width: 1px;
+    height: 44px;
+    flex: 0 0 1px;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+
+  .header-logo {
+    display: block;
+    width: 118px;
+    margin-top: 0 !important;
+  }
+}
+
+.header-block.ltr {
+  :deep(.v-toolbar__content) {
+    flex-direction: row-reverse;
+  }
+
+  :deep(.v-toolbar-title) {
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+    flex: 0 0 auto;
+  }
+
+  .header-brand-lockup {
+    justify-content: flex-end;
+  }
+}
+
+.header-block.rtl {
+  :deep(.v-toolbar__content) {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 1100px) {
+  .header-brand-lockup {
+    gap: 9px;
+
+    .future-foresight-header-logo {
+      width: 108px;
+      height: 35px;
+    }
+
+    .header-brand-divider {
+      height: 38px;
+    }
+
+    .header-logo {
+      width: 104px;
+    }
+  }
+}
+
+.custom-login-content {
+  background-color: #005844 !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}

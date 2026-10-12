@@ -1,0 +1,276 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2024 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+
+.invite-user-dialog {
+  .invite-dialog-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+
+    .invite-dialog-title {
+      background: linear-gradient(135deg, #006c44 0%, #004d32 100%);
+      color: white;
+      padding: 20px;
+
+      .headline {
+        font-size: 1.25rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+
+        .v-icon {
+          animation: rotateIcon 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
+
+      .dialog-logo {
+        animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .invite-dialog-content {
+      padding: 24px;
+
+      .search-field-container {
+        margin-bottom: 16px;
+        animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .search-input {
+          .v-field {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+
+            &:hover {
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            &.v-field--focused {
+              box-shadow: 0 0 0 2px rgba(0, 108, 68, 0.2);
+            }
+          }
+        }
+      }
+
+      .selected-users-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+        min-height: 40px;
+
+        .user-chip {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          .user-id {
+            opacity: 0.8;
+            margin-left: 4px;
+          }
+        }
+      }
+
+      .invite-user-scrollable-list {
+        max-height: 300px;
+        overflow-y: auto;
+        border-radius: 12px;
+        padding: 8px;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba(0, 108, 68, 0.05);
+          border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba(0, 108, 68, 0.2);
+          border-radius: 3px;
+
+          &:hover {
+            background: rgba(0, 108, 68, 0.3);
+          }
+        }
+
+        .user-suggestion-item {
+          margin-bottom: 8px;
+
+          .suggestion-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              border-color: rgba(0, 108, 68, 0.2);
+            }
+
+            .user-info {
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+
+    .invite-dialog-actions {
+      padding: 16px 24px;
+      background: rgba(248, 249, 250, 0.8);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+      .action-btn {
+        min-width: 120px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Transitions
+.dialog-transition-enter-active,
+.dialog-transition-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.dialog-transition-enter-from,
+.dialog-transition-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.chip-transition-enter-active,
+.chip-transition-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chip-transition-enter-from,
+.chip-transition-leave-to {
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+}
+
+.list-transition-enter-active,
+.list-transition-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 300px;
+}
+
+.list-transition-enter-from,
+.list-transition-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+
+.list-item-transition-enter-active,
+.list-item-transition-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.list-item-transition-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.list-item-transition-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+// Keyframe Animations
+@keyframes rotateIcon {
+  from {
+    transform: rotate(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .invite-user-dialog {
+    .invite-dialog-card {
+      margin: 16px;
+
+      .invite-dialog-title {
+        padding: 16px;
+
+        .headline {
+          font-size: 1.1rem;
+        }
+      }
+
+      .invite-dialog-content {
+        padding: 16px;
+      }
+
+      .invite-dialog-actions {
+        padding: 12px 16px;
+        flex-direction: column-reverse;
+        gap: 8px;
+
+        .action-btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.rtl {
+  .custom-send-icon {
+    transform: scaleX(-1);
+  }
+
+  .custom-invite-user-text-title-header-name {
+    margin-right: 5%;
+  }
+}

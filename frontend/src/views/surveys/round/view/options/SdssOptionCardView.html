@@ -1,0 +1,35 @@
+<v-card class="option-card">
+  <v-card-text>
+    <template v-if="questionType === 'true-false'">
+      <v-col cols="12" class="option-true-false">
+        <v-icon class="option-icon">mdi-radiobox-blank</v-icon>
+        <span class="font-dubai-regular option-text"> {{ $t('common.true') }} </span>
+      </v-col>
+      <v-col cols="12" class="option-true-false">
+        <v-icon class="font-dubai-regular option-icon">mdi-radiobox-blank</v-icon>
+        <span class="option-text"> {{ $t('common.false') }} </span>
+      </v-col>
+    </template>
+    <template v-else>
+      <span class="font-dubai-regular option-text">{{ option.localOption }}</span>
+    </template>
+  </v-card-text>
+  <v-card-actions v-if="questionType !== 'true-false'">
+    <v-tooltip location="top" v-if="isAllowedToUpdateOrDelete">
+      <template #activator="{ props }">
+        <v-btn icon small v-bind="props" @click="emitEditOption">
+          <v-icon class="edit-option-button-in-card">mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t('sdssSurvey.surveyRounds.questions.questionOptions.update') }}</span>
+    </v-tooltip>
+    <v-tooltip location="top" v-if="isAllowedToUpdateOrDelete">
+      <template #activator="{ props }">
+        <v-btn icon small v-bind="props" color="red" @click="emitDeleteOption">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t('sdssSurvey.surveyRounds.questions.questionOptions.delete') }}</span>
+    </v-tooltip>
+  </v-card-actions>
+</v-card>

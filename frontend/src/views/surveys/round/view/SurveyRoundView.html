@@ -1,0 +1,393 @@
+<v-container fluid>
+  <!-- Survey Information Card -->
+  <v-row>
+    <v-col cols="12">
+      <v-card class="mb-4">
+        <v-card-title
+          class="custom-survey-information-round-view-card-title d-flex align-center text-h5 justify-space-between"
+        >
+          {{ $t('sdssSurvey.surveyRounds.mainTitle') }}
+          <div>
+            <v-btn
+              icon="mdi-presentation"
+              variant="outlined"
+              class="survey-round-preview-action-btn"
+              @click="showPreviewScreenDialog"
+            >
+            </v-btn>
+            <CustomGoBackButton
+              :is-arabic="isLanguageAr()"
+              class="custom-generic-go-back-button"
+              route-to="SdssSurveyView"
+            ></CustomGoBackButton>
+          </div>
+        </v-card-title>
+        <v-card-text class="justify-space-between">
+          <v-row>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.name') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.localTitle }}</span>
+              </v-col>
+            </v-col>
+            <v-col v-show="round.localDescription" cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.description') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.localDescription }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.status') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <v-chip :color="round.active ? 'green' : 'red'">
+                  <span class="font-dubai-regular">
+                    {{ round.active ? $t('common.active') : $t('common.notActive') }}
+                  </span>
+                </v-chip>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('sdssSurvey.mode') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.localStatus }}</span>
+              </v-col>
+            </v-col>
+          </v-row>
+          <v-divider :thickness="2" color="info"></v-divider>
+          <v-row>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-bold">
+                  <strong>{{ $t('common.createdBy') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.createdBy }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.createdAt') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.createdAt }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.updatedBy') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.updatedBy }}</span>
+              </v-col>
+            </v-col>
+            <v-col cols="3">
+              <v-col cols="12">
+                <span class="font-dubai-regular">
+                  <strong>{{ $t('common.updatedAt') }}</strong>
+                </span>
+              </v-col>
+              <v-col cols="12">
+                <span class="font-dubai-regular">{{ round.updatedAt }}</span>
+              </v-col>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <!-- Questions List -->
+  <v-row>
+    <v-col cols="12">
+      <v-card>
+        <v-card-title class="text-h5 survey-round-questions-list-card-title-enhanced">
+          <span>{{ $t('sdssSurvey.surveyRounds.questions.section-title') }}</span>
+          <v-spacer></v-spacer>
+          <v-btn class="survey-round-add-question-btn-enhanced" @click="showAddQuestionDialog"
+                 v-if="isModeratorAndAllowedToUpdateOrDelete()" v-show="isModeratorAndAllowedToUpdateOrDelete()">
+            <v-icon left>mdi-plus</v-icon>
+            {{ $t('sdssSurvey.surveyRounds.questions.add') }}
+          </v-btn>
+        </v-card-title>
+        <v-card-text class="survey-round-view-card-text">
+          <v-row class="survey-round-questions-list-card-row">
+            <template v-if="questions.length > 0">
+              <v-col v-for="question in questions" :key="question.id" cols="12" md="6" lg="4" xl="3">
+                <v-card class="rounded-lg elevation-2 question-card">
+                  <v-card-title
+                    class="custom-questions-and-options-card-title d-flex align-items-center justify-content-between"
+                  >
+                    <span class="font-dubai-bold sdss-custom-options-text flex-grow-1">
+                      {{ question.localTitle }}
+                    </span>
+                    <v-icon v-if="question.questionTypeKey === 'single-choice'" class="custom-color-based-on-type ml-2">
+                      mdi-radiobox-marked
+                    </v-icon>
+                    <v-icon
+                      v-else-if="question.questionTypeKey === 'multiple-choice'"
+                      class="custom-color-based-on-type ml-2"
+                    >
+                      mdi-checkbox-multiple-marked
+                    </v-icon>
+                    <v-icon
+                      v-else-if="question.questionTypeKey === 'true-false'"
+                      class="custom-color-based-on-type ml-2"
+                    >
+                      mdi-check-circle
+                    </v-icon>
+                    <v-icon v-else-if="question.questionTypeKey === 'text'" class="custom-color-based-on-type ml-2">
+                      mdi-text-box
+                    </v-icon>
+                  </v-card-title>
+                  <v-card-subtitle
+                    class="d-flex justify-between align-center survey-round-questions-list-card-subtitle"
+                  >
+                    <v-chip
+                      :color="getQuestionTypeColor(question.questionTypeKey)"
+                      text-color="white"
+                      class="font-dubai-bold"
+                    >
+                      {{ question.localQuestionType }}
+                    </v-chip>
+                    <v-tooltip location="top" v-if="isModeratorAndAllowedToUpdateOrDelete()">
+                      <template v-slot:activator="{ props }">
+                        <v-btn
+                          v-if="['single-choice', 'multiple-choice'].includes(question.questionTypeKey)"
+                          v-bind="props"
+                          icon
+                          color="primary"
+                          class="ml-2"
+                          @click="addOption(question.id)"
+                        >
+                          <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('sdssSurvey.surveyRounds.questions.questionOptions.create') }}</span>
+                    </v-tooltip>
+                  </v-card-subtitle>
+                  <v-card-text class="content-area">
+                    <v-row>
+                      <v-col>
+                        <div v-if="question.questionTypeKey === 'single-choice'" class="single-choice-options-view">
+                          <v-autocomplete
+                            v-model="selectedSingleChoiceOptionIds[question.id]"
+                            :items="question.options || []"
+                            item-title="localOption"
+                            item-value="id"
+                            :label="$t('common.select')"
+                            :placeholder="$t('common.search')"
+                            prepend-inner-icon="mdi-magnify"
+                            variant="outlined"
+                            clearable
+                            hide-details
+                          ></v-autocomplete>
+                          <div
+                            v-if="isModeratorAndAllowedToUpdateOrDelete() && getSelectedSingleChoiceOption(question)"
+                            class="d-flex justify-end mt-2"
+                          >
+                            <v-btn
+                              icon
+                              size="small"
+                              variant="text"
+                              @click="editSelectedSingleChoiceOption(question)"
+                            >
+                              <v-icon class="edit-option-button-in-card">mdi-pencil</v-icon>
+                            </v-btn>
+                            <v-btn
+                              icon
+                              size="small"
+                              variant="text"
+                              color="red"
+                              @click="removeSelectedSingleChoiceOption(question)"
+                            >
+                              <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                          </div>
+                        </div>
+                        <v-list v-else-if="question.questionTypeKey !== 'text'" class="options-list">
+                          <v-list-item-group>
+                            <OptionCard
+                              v-if="question.options.length > 0"
+                              v-for="option in question.options"
+                              :key="option.id"
+                              :option="option"
+                              :question-type="question.questionTypeKey"
+                              :is-allowed-to-update-or-delete="isModeratorAndAllowedToUpdateOrDelete()"
+                              @on-edit="openEditOptionDialog(option)"
+                              @on-delete="removeOption"
+                            />
+                            <OptionCard
+                              v-if="question.questionTypeKey === 'true-false'"
+                              :question-type="question.questionTypeKey"
+                              :is-allowed-to-update-or-delete="isModeratorAndAllowedToUpdateOrDelete()"
+                            />
+                          </v-list-item-group>
+                        </v-list>
+                        <v-text-field v-else :label="question.localTitle" disabled></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                  <v-card-actions class="mt-auto">
+                    <v-tooltip location="top" v-if="isModeratorAndAllowedToUpdateOrDelete()">
+                      <template #activator="{ props }">
+                        <v-btn color="orange" v-bind="props" @click="editQuestion(question)">
+                          <v-icon left>mdi-pencil</v-icon>
+                          {{ $t('common.edit') }}
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('sdssSurvey.surveyRounds.questions.edit') }}</span>
+                    </v-tooltip>
+                    <v-tooltip location="top" v-if="isModeratorAndAllowedToUpdateOrDelete()">
+                      <template #activator="{ props }">
+                        <v-btn color="red" v-bind="props" @click="deleteQuestion(question.id)">
+                          <v-icon left>mdi-delete</v-icon>
+                          {{ $t('common.delete') }}
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('sdssSurvey.surveyRounds.questions.delete') }}</span>
+                    </v-tooltip>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </template>
+            <!-- Show empty table component when dtoResponse is empty -->
+            <template v-else>
+              <div class="centered-container">
+                <EmptyDataTable :imageSize="128" :message="$t('common.empty')"></EmptyDataTable>
+              </div>
+            </template>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <AppDialogShell
+    :model-value="dialog"
+    :title="$t('sdssSurvey.surveyRounds.questions.add')"
+    subtitle="Build a new round question with bilingual wording and the right answer structure."
+    icon="mdi-comment-plus-outline"
+    :max-width="1240"
+    content-class="pt-0"
+    @update:modelValue="dialog = $event"
+    @close="handleCancellation"
+  >
+    <QuestionForm
+      :card-title="$t('sdssSurvey.surveyRounds.questions.add')"
+      :isEditing="isEditing"
+      :question="currentQuestion"
+      :questionTypes="questionTypes"
+      @submit="saveQuestion"
+      @cancel="handleCancellation"
+    ></QuestionForm>
+  </AppDialogShell>
+
+  <AppDialogShell
+    :model-value="updateDialog"
+    :title="$t('sdssSurvey.surveyRounds.questions.edit')"
+    subtitle="Adjust the selected question text and visibility without leaving the round workspace."
+    icon="mdi-comment-edit-outline"
+    :max-width="1240"
+    content-class="pt-0"
+    @update:modelValue="updateDialog = $event"
+    @close="handleCancellationUpdate"
+  >
+    <QuestionForm
+      :isEditing="isEditing"
+      :question="currentUpdateQuestionRequest"
+      :questionTypes="questionTypes"
+      @submit="updateQuestion"
+      @cancel="handleCancellationUpdate"
+      :card-title="$t('sdssSurvey.surveyRounds.questions.edit')"
+    ></QuestionForm>
+  </AppDialogShell>
+
+  <ConfirmationDialog
+    v-if="deleteQuestionDialog"
+    :title="$t('common.deletionTitle')"
+    :message="$t('common.deleteConfirmation')"
+    icon="mdi-trash-can-outline"
+    icon-color="error"
+    confirm-button-color="error"
+    :confirm-text="$t('common.delete')"
+    @confirmed="confirmQuestionDeletion"
+    @cancel="cancelQuestionDeletion"
+  />
+
+  <AppDialogShell
+    :model-value="showCreateNewOptionDialog"
+    :title="$t('sdssSurvey.surveyRounds.questions.questionOptions.create')"
+    subtitle="Add a new localized answer option for the selected question."
+    icon="mdi-format-list-bulleted-square"
+    :max-width="720"
+    content-class="pt-0"
+    @update:modelValue="showCreateNewOptionDialog = $event"
+    @close="handleCloseCreationOptionActionView"
+  >
+    <QuestionOptionsForm
+      @close="handleCloseCreationOptionActionView"
+      @submit="handleCreateNewOption"
+      :title="$t('sdssSurvey.surveyRounds.questions.questionOptions.create')"
+    ></QuestionOptionsForm>
+  </AppDialogShell>
+
+  <AppDialogShell
+    :model-value="showUpdateOptionDialog"
+    :title="$t('sdssSurvey.surveyRounds.questions.questionOptions.update')"
+    subtitle="Refine the selected answer option while staying inside the active round context."
+    icon="mdi-format-list-checks"
+    :max-width="720"
+    content-class="pt-0"
+    @update:modelValue="showUpdateOptionDialog = $event"
+    @close="handleUpdateOrRemoveOptionActionView"
+  >
+    <QuestionOptionsForm
+      @close="handleUpdateOrRemoveOptionActionView"
+      @submit="handleUpdateOption"
+      :option-request="optionsRequestForUpdate"
+      :title="$t('sdssSurvey.surveyRounds.questions.questionOptions.update')"
+    ></QuestionOptionsForm>
+  </AppDialogShell>
+
+  <ConfirmationDialog
+    v-if="deleteOptionDialog"
+    :title="$t('common.deletionTitle')"
+    :message="$t('common.deleteConfirmation')"
+    icon="mdi-trash-can-outline"
+    icon-color="error"
+    confirm-button-color="error"
+    :confirm-text="$t('common.delete')"
+    @confirmed="confirmOptionDeletion"
+    @cancel="cancelOptionDeletion"
+  />
+
+  <v-dialog
+    v-model="showPreviewDialog"
+    max-width="1000"
+    @close="handlePreviewScreenDialogClose"
+    @click:outside="handlePreviewScreenDialogClose"
+  >
+    <SurveyPreview :round-id="roundId"></SurveyPreview>
+  </v-dialog>
+</v-container>

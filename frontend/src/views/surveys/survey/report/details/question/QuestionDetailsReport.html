@@ -1,0 +1,182 @@
+<div class="survey-question-analysis">
+  <section class="question-page-header">
+    <div class="question-page-header__copy"
+         style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;">
+      <div>
+        <p class="question-page-header__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+        <h2 class="question-page-header__title font-bukra-bold">{{ questionData.localTitle }}</h2>
+        <p class="question-page-header__subtitle">
+          {{ questionData.localDescription || questionData.localQuestionType || questionData.questionTypeKey }}
+        </p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <v-tooltip location="bottom">
+          <template #activator="{ props }">
+            <v-chip
+              v-bind="props"
+              color="info"
+              size="small"
+              variant="flat"
+              class="question-header__answers-chip"
+              style="font-weight: 600; cursor: pointer;"
+            >
+              <v-icon start icon="mdi-format-list-numbered"></v-icon>
+              {{ $t('sdssSurvey.report.questionAnalysis.totalResponses') }}: {{ totalResponses }}
+            </v-chip>
+          </template>
+          <span>{{ $t('sdssSurvey.report.questionAnalysis.totalResponses') }}: {{ totalResponses }}</span>
+        </v-tooltip>
+        <v-tooltip location="bottom">
+          <template #activator="{ props }">
+            <v-btn
+              v-bind="props"
+              icon
+              color="primary"
+              variant="flat"
+              size="small"
+              style="margin-left: 0.25rem;"
+              @click="showAllTextResponses"
+              class="question-header__view-all-btn"
+            >
+              <v-icon icon="mdi-eye"></v-icon>
+            </v-btn>
+          </template>
+          <span>{{ $t('sdssSurvey.report.questionAnalysis.viewAllAnswers') }}</span>
+        </v-tooltip>
+      </div>
+    </div>
+  </section>
+
+  <section class="analysis-grid insight-panels">
+
+    <v-card v-if="hasQualificationData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnQualification') }}</h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ qualificationCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="bar" :options="qualificationChartOptions" :series="qualificationSeries" width="100%"
+                   height="320" @data-point-selection="handleQualificationSelection"></apexchart>
+      </v-card-text>
+    </v-card>
+
+    <v-card v-if="hasNationalityData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnNationality') }}</h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ nationalityCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="treemap" :options="nationalityChartOptions" :series="nationalitySeries" width="100%"
+                   height="320" @data-point-selection="handleNationalitySelection"></apexchart>
+      </v-card-text>
+    </v-card>
+
+    <v-card v-if="hasJobData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnJob') }}</h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ jobCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="bar" :options="jobChartOptions" :series="jobSeries" width="100%" height="320"
+                   @data-point-selection="handleJobSelection"></apexchart>
+      </v-card-text>
+    </v-card>
+
+    <v-card v-if="hasDepartmentData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnDepartment') }}</h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ departmentCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="bar" :options="departmentChartOptions" :series="departmentSeries" width="100%" height="320"
+                   @data-point-selection="handleDepartmentSelection"></apexchart>
+      </v-card-text>
+    </v-card>
+
+    <v-card v-if="hasMaritalStatusData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnMaritalStatus') }}
+          </h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ maritalStatusCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="bar" :options="maritalStatusChartOptions" :series="maritalStatusSeries" width="100%"
+                   height="320" @data-point-selection="handleMaritalStatusSelection"></apexchart>
+      </v-card-text>
+    </v-card>
+
+    <v-card v-if="hasGenderData" class="analysis-card insight-panel">
+      <div class="analysis-card__header">
+        <div>
+          <p class="analysis-card__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+          <h3 class="analysis-card__title">
+            {{ $t('sdssSurvey.report.questionAnalysis.responseRate.responseRateAnalysisBasedOnGender') }}
+          </h3>
+          <p class="analysis-card__subtitle">{{ $t('common.responseRate') }}</p>
+        </div>
+        <v-chip size="small" variant="flat">{{ genderCount }}</v-chip>
+      </div>
+      <v-card-text class="analysis-card__body">
+        <apexchart type="bar" :options="genderChartOptions" :series="genderSeries" width="100%" height="320"
+                   @data-point-selection="handleGenderSelection"></apexchart>
+      </v-card-text>
+    </v-card>
+  </section>
+
+  <v-dialog v-model="detailsDialog" max-width="700" class="details-dialog">
+    <v-card class="details-dialog__card">
+      <v-card-title class="details-dialog__title">
+        <p class="details-dialog__eyebrow">{{ $t('sdssSurvey.report.questionAnalysis.title') }}</p>
+        <span>{{ detailsDialogTitle }}</span>
+      </v-card-title>
+      <v-card-text class="details-dialog__content">
+        <div class="details-list">
+          <article v-for="(item, index) in detailsDialogItems" :key="index" class="details-list__item">
+            <div class="details-list__text">
+              <span class="details-list__label">{{ item.label }}</span>
+              <span v-if="item.value" class="details-list__value">{{ item.value }}</span>
+            </div>
+            <v-chip color="primary" size="small" variant="flat">{{ item.count }}</v-chip>
+          </article>
+        </div>
+      </v-card-text>
+      <v-card-actions class="details-dialog__actions">
+        <v-spacer></v-spacer>
+        <v-btn color="primary" variant="flat" @click="detailsDialog = false">{{ $t('common.close') }}</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <DialogDashboardScreen
+    :main-title="mainDialogTitle"
+    :dialogValue="dialog"
+    :items="dialogItems"
+    :headers="dialogHeaders"
+    @closeDialog="handleCloseDialog"
+  ></DialogDashboardScreen>
+</div>

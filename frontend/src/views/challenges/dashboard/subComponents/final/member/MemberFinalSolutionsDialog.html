@@ -1,0 +1,113 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-dialog v-model:modelValue="localIsOpen" max-width="60%" persistent
+          v-if="finalSolutions.length > 0 && challengeStatus !== undefined && challengeStatus !== null"
+          @click:outside="handleClose" class="member-final-solutions-dialog ">
+  <v-card :class="dialogClass">
+    <v-sheet class="enhanced-sheet final-status-header" elevation="12" width="100%">
+      <div class="sheet-content">
+        <!-- <div class="icon-container">
+          <div class="icon-background">
+            <v-icon :color="iconColor" :icon="icon" size="112" class="animated-icon"></v-icon>
+          </div>
+        </div>
+        -->
+
+        <div class="final-status-header__top">
+          <h2 class="font-weight-bold gradient-text review-heading-text">{{ title }}</h2>
+
+          <v-btn icon @click="handleClose" aria-label="Close dialog" class="modal-close-btn modal-close-btn2">
+            <span class="mdi mdi-close"></span>
+          </v-btn>
+        </div>
+
+
+        <div class="message-container final-status-header__content">
+
+          <p class="final-status-header__main-message" v-if="mainMessage">
+            <v-icon icon="mdi-information" color="primary" class="mr-2"></v-icon>
+            {{ mainMessage }}
+          </p>
+
+          <div class="action-container final-status-header__action">
+            <v-btn class="view-report-btn" color="primary" variant="elevated" @click="viewChallengeDashboard()">
+              <template v-slot:prepend>
+                <v-icon icon="mdi-monitor-dashboard"></v-icon>
+              </template>
+              {{ $t('common.viewReport') }}
+              <template v-slot:append>
+                <v-icon icon="mdi-chevron-right"></v-icon>
+              </template>
+            </v-btn>
+          </div>
+
+          <div class="additional-messages final-status-header__messages" v-if="subMessage || endMessage">
+            <v-slide-y-transition group>
+              <div class="message-card" v-if="subMessage" key="sub">
+                <v-icon icon="mdi-text-box-outline" color="grey" class="mr-2"></v-icon>
+                <p class="sub-message text-body-2">{{ subMessage }}</p>
+              </div>
+
+              <div class="message-card" v-if="endMessage" key="end">
+                <v-icon icon="mdi-flag-checkered" color="success" class="mr-2"></v-icon>
+                <p class="end-message text-body-2">{{ endMessage }}</p>
+              </div>
+            </v-slide-y-transition>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </v-sheet>
+
+    <div class="text-h5 final-solutions-dashboard-screen pb-0">
+      <v-icon icon="mdi-trophy-variant" class="mr-2" color="amber-darken-2"></v-icon>
+      {{ $t('challenge.finalSolutions.title') }}
+    </div>
+
+    <v-card-text class="custom-finalSolutions-screen-dialog-text">
+
+      <v-row>
+        <v-col v-for="(solution, index) in finalSolutions" :key="solution.id">
+          <v-card class="solution-card d-flex flex-column" :style="{ animationDelay: index * 0.1 + 's' }">
+            <div class="d-flex align-center">
+              <v-icon icon="mdi-lightbulb" color="amber-darken-2" class="mr-2"></v-icon>
+              <span>{{ solution.solutionText }}</span>
+            </div>
+
+            <div class="d-flex align-center">
+              <v-icon icon="mdi-vote" color="primary" size="small" class="mr-2"></v-icon>
+              {{ $t('challenge.finalSolutions.voteCount') }}: {{ solution.voteCount }}
+            </div>
+
+            <v-card-text class="flex-grow-1">
+              <apexchart class="final-solutions-chart" type="radialBar" :options="chartOptions"
+                         :series="[solution.voteCount]" width="100%">
+              </apexchart>
+            </v-card-text>
+
+
+            <div class="text-center pa-4 d-flex align-center justify-center final-evaluation-txt">
+              <v-icon icon="mdi-star" color="amber-darken-2" class="mr-2"></v-icon>
+              {{ $t('challenge.finalSolutions.finalRateForInvitedUsers') }}:
+              <span class="font-weight-bold ml-1">{{ solution.finalRate.toFixed(2) }}%</span>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+
+    </v-card-text>
+
+    <v-card-actions>
+      <v-btn color="primary" @click="handleClose" prepend-icon="mdi-close-circle"> {{ $t('common.close') }}</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>

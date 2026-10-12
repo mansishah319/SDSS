@@ -1,0 +1,913 @@
+<!--
+  ~ ***************************************************************
+  ~ Copyright ©1956-2025 DubaiPolice. All rights reserved
+  ~ ——————————————————————————————————
+  ~ NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ ***************************************************************
+  -->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Survey Round Details</title>
+    <style type="text/css">
+        @font-face {
+            font-family: 'Arial';
+            src: url('fonts/arial.ttf') format('ttf');
+        }
+
+        body {
+            margin-top: 0;
+            margin-left: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .logo {
+            display: inline-block;
+            height: 60px;
+            width: auto;
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            padding: 1.5cm 30px 0 30px;
+            border: none;
+        }
+
+        .ft0 {
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 15px;
+        }
+
+        .ft0-english {
+            font: 14px "Verdana", sans-serif;
+            line-height: 15px;
+            direction: ltr;
+        }
+
+        .ft1 {
+            font: bold 14px "NotoNaskhArabic", "Verdana", "DubaiBold", sans-serif;
+            text-decoration: underline;
+            line-height: 15px;
+        }
+
+        .ft2 {
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", "DubaiBold", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft2-english {
+            font: bold 14px "Verdana", sans-serif;
+            line-height: 20px;
+            direction: ltr;
+        }
+
+        .ft4-english {
+            font: normal 8px "Verdana", sans-serif;
+            line-height: 20px;
+            direction: ltr;
+        }
+
+        .ft3 {
+            font: 10px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft4 {
+            font: 8px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        .ft01 {
+            font: bold 10px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+            line-height: 20px;
+        }
+
+        th.ft01 {
+            padding: 10px;
+            text-align: start;
+            border: 1px solid #ddd;
+            background-color: #065C4E;
+        }
+
+        .bold-font {
+            font-weight: bold;
+        }
+
+        .p0 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 800;
+        }
+
+        .p1 {
+            margin-top: 1px;
+            margin-bottom: 0;
+            color: #375096;
+        }
+
+        .p9 {
+            margin-top: 21px;
+            margin-bottom: 0;
+        }
+
+        .p10 {
+            margin-top: 2px;
+            margin-bottom: 0;
+        }
+
+        .p11 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .p12 {
+            margin-top: 1px;
+            margin-bottom: 0;
+        }
+
+        .td0 {
+            border-left: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-right: #000000 1px solid;
+            margin-top: 5px;
+            width: 281px;
+            vertical-align: center;
+        }
+
+        .td1 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            border-top: #000000 1px solid;
+            padding: 0;
+            margin: 0;
+            width: 281px;
+            margin-top: 1px;
+            vertical-align: center;
+        }
+
+        .td2 {
+            border-left: #000000 1px solid;
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0;
+            margin-top: 1px;
+            width: 281px;
+            vertical-align: center;
+        }
+
+        .td3 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0;
+            margin: 0;
+            width: 281px;
+            margin-top: 1px;
+            vertical-align: center;
+        }
+
+        .t1 {
+            width: 100%;
+            margin-top: 14px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .challenge-main-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .challenge-main-title h1 {
+            color: #333;
+            margin-bottom: 5px;
+            font: bold 16px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .challenge-main-title p {
+            color: #666;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .round-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .round-info h2 {
+            margin-top: 0;
+            color: #444;
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question h3 {
+            color: #333;
+            font: bold 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .question p {
+            color: #666;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .answer {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .answer p {
+            margin: 5px 0;
+            font: 14px "Arial", "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .user-info {
+            color: #595959;
+            font: italic 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .stats {
+            width: 100%;
+            display: table;
+            table-layout: fixed; /* Equal width columns */
+            border-spacing: 10px; /* Spacing between cells */
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            display: table-cell;
+            width: 33.33%; /* 3 equal columns */
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+            vertical-align: top; /* Align content to top */
+        }
+
+        .participants {
+            margin-top: 30px;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .stats-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        .stats-table th {
+            text-align: right;
+            padding: 10px;
+            color: #f5f5f5;
+        }
+
+        .stats-table td {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+            vertical-align: top;
+            width: 33.33%; /* Equal width columns */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+            font: 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        th {
+            background-color: #065C4E;
+            font: bold 14px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font: 12px "NotoNaskhArabic", "Verdana", sans-serif;
+        }
+
+        @page {
+            margin-top: 4.3cm;
+            size: A4 portrait;
+        }
+
+        .main-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            border-left: 4px solid #375096;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .demographic-card h5 {
+            color: #375096;
+            margin: 0 0 10px 0;
+            font-family: 'Arial Arabic', 'Segoe UI', sans-serif;
+            font-size: 14px;
+        }
+
+        /* Responsive Layout */
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .demographics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        /* Color Classes */
+        .text-primary {
+            color: #375096;
+        }
+
+        .text-secondary {
+            color: #666666;
+        }
+
+        .bg-light {
+            background-color: #f9f9f9;
+        }
+
+        .copyright {
+            font-family: Arial,
+            "Helvetica Neue",
+            Helvetica,
+            sans-serif;
+        }
+
+        /* Main Container Styling */
+        .participants-container {
+            margin: 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Section Title */
+        .section-title {
+            color: #2c3e50;
+            font-size: 12rem;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Table Styling */
+        .participants-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            page-break-inside: auto;
+            -fs-table-paginate: paginate;
+        }
+
+        .participants-table thead {
+            display: table-header-group;
+        }
+
+        .participants-table tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        /* Table Header */
+        .participants-table thead th {
+            background-color: #065C4E;
+            color: white;
+            padding: 12px 10px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Table Body */
+        .participants-table tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+        }
+
+        /* Alternate Row Coloring */
+        .participants-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hover Effect */
+        .participants-table tbody tr:hover {
+            background-color: #f1f5fd;
+        }
+
+        /* Status Badges */
+        .status-answered {
+            background-color: #2e7d32; /* Green for "مستجيب" */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 3rem;
+            display: inline-block;
+        }
+
+        .status-not-answered {
+            background-color: #c62828; /* Red for "لم يجب" */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 3rem;
+            display: inline-block;
+        }
+
+        .stats-list {
+            text-align: start;
+            direction: rtl;
+        }
+
+        .stat-item {
+            text-align: start;
+        }
+
+        .stat-label {
+            text-align: start;
+        }
+
+        .stats-table-header {
+            direction: rtl;
+            text-align: start;
+        }
+
+        .stat-value {
+            text-align: start;
+        }
+
+        /* Responsive Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .participants-table {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body dir="rtl" lang='ar'>
+<div id="page_1">
+    <div class="header">
+        <img src="src/main/resources/templates/reports/images/dubai-police.png" class="logo"
+             alt="Dubai Police Logo"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img
+                src="src/main/resources/templates/reports/images/government-of-dubai.png"
+                class="logo"
+                alt="Government of Dubai Logo"
+        />
+    </div>
+
+    <div class="challenge-main-title">
+        <h1 class="p0 ft2" style="color:#000000;">[[${data.titleAr}]]</h1>
+        <p class="p1 ft0" style="color:#000000;">[[${data.descriptionAr}]]</p>
+    </div>
+
+    <h2 class="bold-font p0 ft2"
+        style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;"
+    >
+        تفاصيل تحدي [SDSS]
+    </h2>
+
+    <div class="round-info">
+        <h2 class="p0 ft2" style="color:#000000;">
+            <span class="bold-font p0 ft2" style="color:#000000;">عنوان التحدي:</span>
+            [[${data.titleAr}]]
+        </h2>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">وصف التحدي:</span>
+            [[${data.descriptionAr}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">المُنسق:</span>
+            [[${data.moderator.grpNumber}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">مساعد المُنسق:</span>
+            [[${data.assistantModerator.grpNumber}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">الإدارة:</span>
+            [[${data.departmentName}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">وقت بدء التصويت:</span>
+            [[${data.startTime}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">وقت نهاية التصويت:</span>
+            [[${data.endTime}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">نوع الجلسة:</span>
+            [[${data.visibility}]]
+        </p>
+
+        <p>
+            <span class="bold-font p0 ft2" style="color:#000000;">تاريخ الإنشاء:</span>
+            <span class="ft0-english">
+                [[${#temporals.format(data.createdAt, 'dd/MM/yyyy HH:mm')}]]
+            </span> |
+            <span class="bold-font p0 ft2" style="color:#000000;">تاريخ التحديث:</span>
+            <span class="ft0-english">
+                [[${#temporals.format(data.updatedAt, 'dd/MM/yyyy HH:mm')}]]
+            </span>
+        </p>
+    </div>
+
+    <!-- Use actual HTML table instead of divs -->
+    <table class="stats-table">
+        <thead>
+        <tr class="stats-table-header">
+            <th scope="col" style="text-align: start;">المشاركون</th>
+            <th scope="col" style="text-align: start;">الحلول</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!-- Column 1: Participants -->
+            <td>
+                <ul class="stats-list">
+                    <li class="stat-item">
+                        <span class="stat-label">الأشخاص المدعوون:</span>
+                        <span class="stat-value">[[${data.userInvitationCountedResponse.countOfInvitationUsers}]]</span>
+                    </li>
+                    <li class="stat-item">
+                        <span class="stat-label">الدعوة المقبولة:</span>
+                        <span class="stat-value">[[${data.userInvitationCountedResponse.countOfInvitationAccepted}]]</span>
+                    </li>
+                    <li class="stat-item">
+                        <span class="stat-label">الدعوة المرفوضة:</span>
+                        <span class="stat-value">[[${data.userInvitationCountedResponse.countOfInvitationRejected}]]</span>
+                    </li>
+                    <li class="stat-item">
+                        <span class="stat-label">الدعوة المعلقة:</span>
+                        <span class="stat-value">[[${data.userInvitationCountedResponse.countOfInvitationPending}]]</span>
+                    </li>
+                </ul>
+            </td>
+
+            <!-- Column 2: Questions -->
+            <td>
+                <ul class="stats-list">
+                    <li class="stat-item">
+                        <span class="stat-label">عدد الأجوبة:</span>
+                        <span class="stat-value">
+                            [[${data.countOfSolutions}]] أجوبة
+                        </span>
+                    </li>
+                    <li class="stat-item">
+                        <span class="stat-label">عدد المراحل:</span>
+                        <span class="stat-value">
+                            [[${data.lastQueueLevel}]] أجوبة
+                        </span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Questions and Answers Card -->
+    <div class="main-card"
+         style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 30px;">
+        <h2 class="bold-font p0 ft2"
+            style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;"
+        >
+            الحلول
+        </h2>
+
+        <!-- Question Cards Container -->
+        <div class="questions-container" style="display: flex; flex-direction: column; gap: 20px;">
+
+            <!-- Answers Section -->
+            <div class="answers-table" style="margin-top: 15px;">
+                <table class="participants-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                    <tr style="background-color: #065C4E;">
+                        <th class="ft01" style="padding: 10px; text-align: start; border: 1px solid #ddd;">
+                            م
+                        </th>
+                        <th class="ft01" style="padding: 10px; text-align: start; border: 1px solid #ddd;">اسم
+                            نص الحل
+                        </th>
+                        <th class="ft01" style="padding: 10px; text-align: start; border: 1px solid #ddd;">
+                            تم الإنشاء بواسطة
+                        </th>
+                        <th class="ft01" style="padding: 10px; text-align: start; border: 1px solid #ddd;">
+                            رقم المرحلة
+                        </th>
+                        <th class="ft01" style="padding: 10px; text-align: start; border: 1px solid #ddd;">
+                            قرار نهائي
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Group answers by user -->
+                    <th:block
+                            th:each="solution : ${data.solutionFullResponseList}">
+                        <tr style="border-bottom: 1px solid #ddd; text-align: start;">
+                            <td style="padding: 10px; border: 1px solid #ddd;" class="ft4-english">
+                                [[${solution.id}]]
+                            </td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: start;"
+                                class="p10 ft4">
+                                [[${solution.solutionText}]]
+                            </td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: end;"
+                                class="ft4-english">
+                                [[${solution.createdBy}]]
+                            </td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: start;"
+                                class="p10 ft4">
+                                [[${solution.queLevel}]]
+                            </td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: start;" class="p10 ft4">
+                                [[${userAnswer?.isFinal != null and !userAnswer.isFinal} ? 'نعم' : 'لا']]
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- قائمة المدعوون (داخلي) -->
+        <div class="participants-container">
+            <h2 class="bold-font p0 ft2"
+                style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;">
+                قائمة المدعوون (داخلي)
+            </h2>
+            <div th:if="${data.userInvitationCountedResponse?.invitedInternalUserResponse == null or data.userInvitationCountedResponse.invitedInternalUserResponse.size() == 0}"
+                 class="empty-state"
+                 style="text-align: center; padding: 20px;">
+                <img src="src/main/resources/templates/reports/images/empty.png" alt="Nodata"
+                     class="logo"
+                />
+                <p class="p10 ft4" style="color: #666; font-size: 16px;">لا توجد بيانات متاحة</p>
+            </div>
+            <div th:unless="${data.userInvitationCountedResponse?.invitedInternalUserResponse == null or data.userInvitationCountedResponse.invitedInternalUserResponse.size() == 0}"
+                 class="table-responsive">
+                <table class="participants-table" style="page-break-inside: auto;">
+                    <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الاسم</th>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">البريد الإلكتروني</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${data.userInvitationCountedResponse.invitedInternalUserResponse}"
+                        style="page-break-inside: avoid; page-break-after: auto;">
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.fullName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.grpNumber}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.email}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- قائمة المدققين -->
+        <div class="participants-container">
+            <h2 class="bold-font p0 ft2"
+                style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;">
+                قائمة المدققين
+            </h2>
+            <div th:if="${data.validatorList == null or data.validatorList.size() == 0}"
+                 class="empty-state"
+                 style="text-align: center; padding: 20px;">
+                <img src="src/main/resources/templates/reports/images/empty.png" alt="Nodata"
+                     class="logo"
+                />
+                <p class="p10 ft4" style="color: #666; font-size: 16px;">لا توجد بيانات متاحة</p>
+            </div>
+            <div th:unless="${data.validatorList == null or data.validatorList.size() == 0}"
+                 class="table-responsive">
+                <table class="participants-table" style="page-break-inside: auto;">
+                    <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الاسم</th>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">البريد الإلكتروني</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${data.validatorList}"
+                        style="page-break-inside: avoid; page-break-after: auto;">
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.fullName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.grpNumber}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.email}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- الدعوات المقبولة -->
+        <div class="participants-container">
+            <h2 class="bold-font p0 ft2"
+                style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;">
+                الدعوات المقبولة
+            </h2>
+            <div th:if="${data.userInvitationCountedResponse?.acceptedUsersResponse == null or data.userInvitationCountedResponse.acceptedUsersResponse.size() == 0}"
+                 class="empty-state"
+                 style="text-align: center; padding: 20px;">
+                <img src="src/main/resources/templates/reports/images/empty.png" alt="Nodata"
+                     class="logo"
+                />
+                <p class="p10 ft4" style="color: #666; font-size: 16px;">لا توجد بيانات متاحة</p>
+            </div>
+            <div th:unless="${data.userInvitationCountedResponse?.acceptedUsersResponse == null or data.userInvitationCountedResponse.acceptedUsersResponse.size() == 0}"
+                 class="table-responsive">
+                <table class="participants-table" style="page-break-inside: auto;">
+                    <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الاسم</th>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">البريد الإلكتروني</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${data.userInvitationCountedResponse.acceptedUsersResponse}"
+                        style="page-break-inside: avoid; page-break-after: auto;">
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.fullName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.grpNumber}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.email}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- الدعوات المرفوضة -->
+        <div class="participants-container">
+            <h2 class="bold-font p0 ft2"
+                style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;">
+                الدعوات المرفوضة
+            </h2>
+            <div th:if="${not #lists.isEmpty(data.userInvitationCountedResponse.rejectedUsersResponse)}"
+                 class="table-responsive">
+                <table class="participants-table" style="page-break-inside: auto;">
+                    <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الاسم</th>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">البريد الإلكتروني</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${data.userInvitationCountedResponse.rejectedUsersResponse}"
+                        style="page-break-inside: avoid; page-break-after: auto;">
+                        <td class="p10 ft4" style="text-align: start;">[[${user.fullName}]]</td>
+                        <td class="p10 ft4" style="text-align: start;">[[${user.grpNumber}]]</td>
+                        <td class="p10 ft4" style="text-align: start;">[[${user.email}]]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Empty state -->
+            <div th:if="${#lists.isEmpty(data.userInvitationCountedResponse.rejectedUsersResponse)}" class="empty-state"
+                 style="text-align: center; padding: 20px;">
+                <img src="src/main/resources/templates/reports/images/empty.png" alt="Nodata"
+                     class="logo"
+                />
+                <p class="p10 ft4" style="color: #666; font-size: 16px;">لا توجد بيانات متاحة</p>
+            </div>
+        </div>
+
+        <!-- الدعوات المعلقة -->
+        <div class="participants-container">
+            <h2 class="bold-font p0 ft2"
+                style="color: #375096; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 15px; padding-top: 8px; margin-top: 15px;">
+                الدعوات المعلقة
+            </h2>
+
+            <div th:if="${data.userInvitationCountedResponse?.pendingUsersResponse != null and data.userInvitationCountedResponse.pendingUsersResponse.size() > 0}"
+                 class="table-responsive">
+                <table class="participants-table" style="page-break-inside: auto;">
+                    <thead style="display: table-header-group;">
+                    <tr>
+                        <th class="ft01" style="text-align: start;">الاسم</th>
+                        <th class="ft01" style="text-align: start;">الرقم الوظيفي</th>
+                        <th class="ft01" style="text-align: start;">البريد الإلكتروني</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${data.userInvitationCountedResponse.pendingUsersResponse}"
+                        style="page-break-inside: avoid; page-break-after: auto;">
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.fullName}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.grpNumber}]]
+                        </td>
+                        <td class="p10 ft4" style="text-align: start;">
+                            [[${user.email}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty state - reusable -->
+            <div th:if="${data.userInvitationCountedResponse?.pendingUsersResponse == null or data.userInvitationCountedResponse.pendingUsersResponse.size() == 0}"
+                 class="empty-state"
+                 style="text-align: center; padding: 20px;">
+                <img src="src/main/resources/templates/reports/images/empty.png" alt="Nodata"
+                     class="logo"
+                />
+                <p class="p10 ft4" style="color: #666; font-size: 16px;">لا توجد بيانات متاحة</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="p9 ft3"><span class="copyright">&copy; [[${data.getCurrentYear()}]] </span>جميع الحقوق محفوظة للقيادة
+            العامة لشرطة دبي</p>
+    </div>
+</div>
+</body>
+</html>

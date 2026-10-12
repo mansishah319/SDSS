@@ -1,0 +1,160 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<div>
+  <DubaiPoliceLoader :is-loading="isLoading" />
+  <v-row>
+    <v-col cols="12" md="4">
+      <v-card class="dp-card card-height">
+        <div class="top-status-div">
+          <h3 class="heading-1">{{ $t('adminDashboard.totalChallenges') }}</h3>
+          <p>{{ totalChallenges }}</p>
+        </div>
+        <div id="chart">
+          <apexchart type="donut" :options="chartOptions" :series="series" width="430"
+                     @data-point-selection="handleChallengeDataPointSelection"></apexchart>
+        </div>
+      </v-card>
+    </v-col>
+    <v-col cols="12" md="3">
+      <v-card class="dp-card card-height">
+        <v-row>
+          <v-col cols="12">
+            <h3 class="heading-1 v-heading">{{ $t('adminDashboard.recentOpen') }}</h3>
+          </v-col>
+          <v-col cols="12">
+            <div class="text-center">
+              <v-progress-circular :model-value="recentOpenPercentage" :rotate="360" :size="250" :width="50"
+                                   color="#008755">
+                <template #default>{{ recentOpenPercentage }}%</template>
+              </v-progress-circular>
+            </div>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-col>
+
+    <v-col cols="5">
+      <div class="list-card-div">
+        <v-card class="dp-card">
+          <div class="left-div">
+            <p>{{ completedDecisionValue }}</p>
+            <p>{{ $t('adminDashboard.decision.completed') }}</p>
+          </div>
+          <div class="right-div">
+            <v-progress-circular :model-value="completedDecisionValue" :rotate="360" :size="70" :width="9"
+                                 color="#388E3C">
+              <template #default>{{ completedDecision }}%</template>
+            </v-progress-circular>
+            <div class="icon mdi mdi-eye icon-btn-2" @click="handleCompletedDecisionsData"></div>
+          </div>
+        </v-card>
+        <v-card class="dp-card">
+          <div class="left-div">
+            <p>{{ validatorRevisedDecisionValue }}</p>
+            <p>{{ $t('adminDashboard.decision.revisedByValidator') }}</p>
+          </div>
+          <div class="right-div">
+            <v-progress-circular :model-value="validatorRevisedDecisionValue" :rotate="360" :size="70" :width="9"
+                                 color="#512DA8">
+              <template #default>{{ validatorRevisedDecision }}%</template>
+            </v-progress-circular>
+            <div class="icon mdi mdi-eye icon-btn-2" @click="handleValidatorRevisedDecisionsData"></div>
+          </div>
+        </v-card>
+        <v-card class="dp-card">
+          <div class="left-div">
+            <p>{{ closedDecisionValue }}</p>
+            <p>{{ $t('adminDashboard.decision.closed') }}</p>
+          </div>
+          <div class="right-div">
+            <v-progress-circular :model-value="closedDecisionValue" :rotate="360" :size="70" :width="9" color="#E53935">
+              <template #default>{{ closedDecision }}%</template>
+            </v-progress-circular>
+            <div class="icon mdi mdi-eye icon-btn-2" @click="handleClosedDecisionsData"></div>
+          </div>
+        </v-card>
+      </div>
+    </v-col>
+    <v-col cols="12" md="4">
+      <v-card class="dp-card">
+        <div class="top-status-div">
+          <h3 class="heading-1">{{ $t('adminDashboard.totalInternalUsers') }}</h3>
+          <p>{{ totalInternalUsers }}</p>
+        </div>
+        <div id="chart">
+          <apexchart type="donut" :options="chartOptions2" :series="internalUsersSeries" width="458"
+                     @data-point-selection="handleInternalUsersData"></apexchart>
+        </div>
+      </v-card>
+    </v-col>
+    <v-col cols="12" md="4">
+      <v-card class="dp-card">
+        <div class="top-status-div">
+          <h3 class="heading-1">{{ $t('adminDashboard.totalUsers') }}</h3>
+          <p>{{ totalUsers }}</p>
+        </div>
+        <div id="chart">
+          <apexchart type="donut" :options="chartOptions3" :series="allUsersTypesSeries" width="450"
+                     @data-point-selection="handleUsersTypesData"></apexchart>
+        </div>
+      </v-card>
+    </v-col>
+    <v-col cols="12" md="4">
+      <v-card class="dp-card">
+        <div class="top-status-div">
+          <h3 class="heading-1">{{ $t('adminDashboard.challengeHistory') }}</h3>
+          <p></p>
+        </div>
+        <div>
+          <div class="search-list-div">
+            <v-row>
+              <v-col cols="6">
+                <v-select ref="statusSelect" v-model="selectedStatus" density="compact"
+                          :label="$t('adminDashboard.dialog.challenge.status')" :items="[
+                                              $t('common.labels.completed'),
+                                              $t('common.labels.open'),
+                                              $t('common.labels.closed'),
+                                              $t('common.labels.voting'),
+                                              $t('common.labels.revised'),
+                                              $t('common.labels.paused'),
+                                              $t('common.labels.underReview'),
+                                              $t('common.labels.new'),
+                                              $t('common.labels.urgent'),
+                                              ]" variant="outlined" :clearable="true"></v-select>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field ref="dateInput" v-model="selectedDate" variant="outlined" density="compact" type="date"
+                              :label="$t('common.createdAt')" :clearable="true"></v-text-field>
+              </v-col>
+            </v-row>
+          </div>
+          <div class="status-list-date">
+            <div v-for="(item, index) in filteredStatusList" :key="index" class="list-date"
+                 @click="handleRowClick(item)">
+              <div class="left-div">
+                <p>{{ item.localTitle }}</p>
+                <p>
+                  <span class="mdi mdi-calendar-range"></span>
+                  {{ formatCreatedAt(item.createdAt) }}
+                </p>
+              </div>
+              <div class="right-div">
+                <span :style="{ color: getStatusColor(item.statusLocal) }">{{ item.statusLocal }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </v-card>
+    </v-col>
+    <UserDashboardDialogScreen :dialogValue="dialogFlag" :items="dialogItems" :headers="dialogHeaders"
+                               title="Custom Dialog Title" @closeDialog="handleCloseDialog" @approve="approveItem"
+                               @reject="rejectItem">
+    </UserDashboardDialogScreen>
+  </v-row>
+</div>

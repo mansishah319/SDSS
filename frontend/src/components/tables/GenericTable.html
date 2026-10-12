@@ -1,0 +1,42 @@
+<!--
+  ~ * ***************************************************************
+  ~ * Copyright ©1956-2024 DubaiPolice. All rights reserved
+  ~ * ——————————————————————————————————
+  ~ * NOTICE: All information contained herein is a property of DubaiPolice.
+  ~ * ***************************************************************
+  -->
+
+<v-data-table
+  :headers="headers"
+  :items="items"
+  :search="search"
+  :loading="loading"
+  :loading-text="loadingText"
+  item-value="name"
+  :items-per-page-text="itemsPerPageText"
+  :items-per-page-options="itemsPerPageOptions"
+  class="elevation-0"
+>
+  <template #item.actions="{ item }">
+    <v-btn
+      class="me-1"
+      density="default"
+      color="yellow"
+      variant="tonal"
+      v-show="showUpdateButton"
+      @click="handleEdit(item.id)"
+    >
+      <i class="mdi mdi-pencil"></i>
+    </v-btn>
+    <v-btn
+      class="me-1"
+      density="default"
+      color="red"
+      variant="tonal"
+      v-show="showDeleteButton"
+      @click="handleDelete(item.id)"
+    >
+      <i class="mdi mdi-trash-can"></i>
+    </v-btn>
+  </template>
+</v-data-table>

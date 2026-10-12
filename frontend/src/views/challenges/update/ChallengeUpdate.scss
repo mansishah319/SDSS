@@ -1,0 +1,247 @@
+/*!
+ *  ***************************************************************
+ *  Copyright ©1956-2023 DubaiPolice. All rights reserved
+ *  ——————————————————————————————————
+ *  NOTICE: All information contained herein is a property of DubaiPolice.
+ *  ***************************************************************
+ */
+@use '../ChallengeFormShared';
+
+.fixed {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.fixed th,
+.fixed td {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.fixed input[type='checkbox'] {
+  margin-top: 5px;
+}
+
+.border {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.small-width {
+  width: 40px;
+}
+
+.s-small-width {
+  width: 30px;
+}
+
+.bg-light,
+.table-header {
+  --v-theme-overlay-multiplier: var(--v-theme-light-overlay-multiplier);
+  background-color: rgb(var(--v-theme-light)) !important;
+  color: rgb(var(--v-theme-on-light)) !important;
+}
+
+.required label::after {
+  content: '*';
+}
+
+.youtube_urls,
+.resources {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.doc_files {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.h2,
+.h4 {
+  font-weight: bold;
+}
+
+.flexible-table-container {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.custom-checkbox {
+  transform: scale(0.7);
+}
+
+.upload-list {
+  /* Ensure that the card's content is contained within its boundaries */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.upload-list:hover {
+  transform: translateY(-5px);
+}
+
+.upload-img-div {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.upload-img-preview {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.file-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #555;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 2px;
+  transition: background-color 0.3s;
+  margin: 13px;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.image-size {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.upload-card.is-image .upload-img-div {
+  background-color: #f0f0f0;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.font-semibold {
+  word-wrap: break-word;
+  width: 80%;
+  font-size: x-small;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.rtl .custom-add-reminder-button {
+  margin-left: 10px;
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* even columns width , fix width of table too*/
+}
+
+.rtl td {
+  text-align: right;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+/* Field highlight effect for error navigation */
+.field-highlight {
+  animation: fieldPulse 2s ease-in-out;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.3) !important;
+  border-color: #f44336 !important;
+  transition: all 0.3s ease;
+}
+
+@keyframes fieldPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0.3);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+    transform: scale(1);
+  }
+}
+
+/* Ensure smooth scrolling for field navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+.challenge-form-card {
+  position: relative;
+}
+
+/* Focus styles for better accessibility */
+.field-highlight:focus,
+.field-highlight:focus-within {
+  outline: 2px solid #f44336 !important;
+  outline-offset: 2px !important;
+}
+
+.v-row {
+  margin: 2% !important;
+}
+
+.tab-title {
+  margin: 1%;
+}
+
+.resource-section {
+  margin: 2%;
+}
+
+
